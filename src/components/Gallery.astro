@@ -1,0 +1,105 @@
+---
+/**
+ * Galerie — déposez les visuels dans public/images/gallery/
+ * (voir chemins dans `items` ci-dessous ; modifiables en un seul endroit).
+ */
+const items = [
+	{ image: '/images/gallery/graduation-01.jpg', label: 'Toges de graduation' },
+	{ image: '/images/gallery/graduation-02.jpg', label: 'Toges de graduation' },
+	{ image: '/images/gallery/sport-01.jpg', label: 'Tenues de sport' },
+	{ image: '/images/gallery/sport-02.jpg', label: 'Tenues de sport' },
+	{ image: '/images/gallery/scolaire-01.jpg', label: 'Uniformes scolaires' },
+	{ image: '/images/gallery/scolaire-02.jpg', label: 'Uniformes scolaires' },
+	{ image: '/images/gallery/medical-01.jpg', label: 'Tenues médicales' },
+	{ image: '/images/gallery/medical-02.jpg', label: 'Tenues médicales' },
+	{ image: '/images/gallery/travail-01.jpg', label: 'Tenues de travail' },
+	{ image: '/images/gallery/travail-02.jpg', label: 'Tenues de travail' },
+];
+---
+
+<section
+	id="galerie"
+	class="relative scroll-mt-24 bg-background py-24 md:py-32"
+	lang="fr"
+	aria-labelledby="gallery-heading"
+>
+	<div class="mx-auto max-w-7xl px-6">
+		<div class="mb-12 max-w-2xl md:mb-16">
+			<p class="mb-3 text-[11px] font-semibold uppercase tracking-[0.35em] text-primary md:text-xs">Galerie</p>
+			<h2 id="gallery-heading" class="font-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl lg:text-6xl">
+				Nos créations en images
+			</h2>
+			<p class="mt-4 text-base leading-relaxed text-foreground/60 md:text-lg">
+				Aperçu de nos toges, uniformes scolaires, tenues de travail, de sport et tenues médicales — confectionnés avec
+				exigence.
+			</p>
+		</div>
+
+		<ul class="grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4">
+			{
+				items.map((item, i) => (
+					<li>
+						<a
+							href="/realisation"
+							class="gallery-tile group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-primary/15 bg-surface/50 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.4)] outline-none ring-offset-2 ring-offset-background transition focus-visible:ring-2 focus-visible:ring-primary md:aspect-[3/4] md:rounded-3xl"
+						>
+							<figure class="relative m-0 h-full w-full">
+							<img
+								src={item.image}
+								alt={item.label}
+								class="gallery-img h-full w-full object-cover will-change-transform"
+								width="600"
+								height="750"
+								loading={i < 5 ? 'eager' : 'lazy'}
+								decoding="async"
+							/>
+							<div
+								class="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-90 md:opacity-95"
+								aria-hidden="true"
+							/>
+							<figcaption class="absolute inset-x-0 bottom-0 z-10 p-5 md:p-6">
+								<span class="block text-[10px] font-semibold uppercase tracking-[0.28em] text-primary/90 md:text-[11px]">
+									Confection Univers
+								</span>
+								<span class="mt-1 block font-display text-lg font-semibold leading-tight text-paper md:text-xl">
+									{item.label}
+								</span>
+							</figcaption>
+						</figure>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>
+
+<style>
+	@media (prefers-reduced-motion: no-preference) {
+		.gallery-img {
+			transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+		}
+		.gallery-tile:hover .gallery-img,
+		.gallery-tile:focus-visible .gallery-img {
+			transform: scale(1.08);
+		}
+		.gallery-tile {
+			transition:
+				box-shadow 0.45s ease,
+				border-color 0.45s ease,
+				transform 0.45s ease;
+		}
+		.gallery-tile:hover,
+		.gallery-tile:focus-visible {
+			box-shadow: 0 28px 56px -16px rgba(0, 0, 0, 0.45);
+			border-color: rgba(198, 161, 95, 0.35);
+			transform: translateY(-4px);
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.gallery-tile:hover,
+		.gallery-tile:focus-visible {
+			transform: none;
+		}
+	}
+</style>

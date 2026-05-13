@@ -1,0 +1,22 @@
+---
+const LOGOS = ['Maison', 'Heritage', 'Atelier', 'Luxe', 'Edition', 'Studio', 'Confection', 'Univers'];
+---
+
+<section class="overflow-hidden border-y border-primary/15 bg-background py-20">
+	<div class="flex w-max animate-marquee-h whitespace-nowrap">
+		{
+			[0, 1, 2, 3].map(() => (
+				<div class="flex items-center gap-20 px-10">
+					{LOGOS.map((logo) => (
+						<div class="flex items-center gap-20">
+							<span class="cursor-default font-display text-5xl font-black uppercase tracking-tighter text-foreground/12 transition-colors hover:text-primary lg:text-7xl">
+								{logo}
+							</span>
+							<div class="h-2 w-2 rounded-full bg-primary/80" />
+						</div>
+					))}
+				</div>
+			))
+		}
+	</div>
+</section>

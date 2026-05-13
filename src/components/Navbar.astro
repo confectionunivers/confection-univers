@@ -1,0 +1,135 @@
+---
+const NAV_LINKS = ['Home', 'About', 'Service', 'Pages', 'Blog', 'Contact'];
+---
+
+<nav
+	id="site-nav"
+	class="fixed top-0 z-50 w-full py-6 transition-all duration-500"
+	data-scrolled="false"
+>
+	<div class="mx-auto flex max-w-7xl items-center justify-between px-6">
+		<a href="/" class="flex min-w-0 shrink-0 items-center" aria-label="Confection Univers — home">
+			<img
+				src="/img/logo.png"
+				alt="Confection Univers"
+				class="h-8 w-auto max-w-[min(100%,10.5rem)] object-contain object-left sm:h-9 sm:max-w-[12rem] md:h-10 md:max-w-[14rem] lg:h-11"
+				width="200"
+				height="56"
+				loading="eager"
+				decoding="async"
+			/>
+		</a>
+
+		<div class="hidden gap-10 text-[13px] font-bold uppercase tracking-[0.15em] lg:flex">
+			{
+				NAV_LINKS.map((link) => (
+					<a href="#" class="nav-link-hover text-foreground/90">
+						<span>{link}</span>
+						<span class="nav-link-hover__dup">{link}</span>
+					</a>
+				))
+			}
+		</div>
+
+		<div class="flex items-center gap-6">
+			<button
+				type="button"
+				id="nav-menu-btn"
+				class="p-2 text-foreground lg:hidden"
+				aria-expanded="false"
+				aria-controls="nav-mobile-panel"
+			>
+				<span class="sr-only">Menu</span>
+				<svg id="nav-icon-open" class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"
+					></path>
+				</svg>
+				<svg id="nav-icon-close" class="hidden h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"
+					></path>
+				</svg>
+			</button>
+
+			<a
+				href="#"
+				class="hidden items-center gap-2 border border-primary/35 bg-primary/10 px-7 py-3.5 text-[12px] font-bold uppercase tracking-widest text-primary transition hover:bg-primary hover:text-background md:flex"
+			>
+				Get started
+				<svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"></path>
+				</svg>
+			</a>
+		</div>
+	</div>
+
+	<div id="nav-mobile-panel" class="nav-mobile-panel overflow-hidden border-b border-primary/15 bg-background lg:hidden">
+		<div class="flex flex-col gap-6 px-6 py-10">
+			{
+				NAV_LINKS.map((link) => (
+					<a href="#" class="font-display text-2xl font-bold uppercase text-foreground">
+						{link}
+					</a>
+				))
+			}
+			<a
+				href="#"
+				class="mt-4 bg-primary py-4 text-center text-sm font-bold uppercase tracking-widest text-background"
+			>
+				Get started
+			</a>
+		</div>
+	</div>
+</nav>
+
+<script>
+	const nav = document.getElementById('site-nav');
+	const btn = document.getElementById('nav-menu-btn');
+	const panel = document.getElementById('nav-mobile-panel');
+	const iconOpen = document.getElementById('nav-icon-open');
+	const iconClose = document.getElementById('nav-icon-close');
+
+	const onScroll = () => {
+		if (!nav) return;
+		const scrolled = window.scrollY > 50;
+		nav.dataset.scrolled = scrolled ? 'true' : 'false';
+		if (scrolled) {
+			nav.classList.add('glass-header', 'py-3');
+			nav.classList.remove('py-6');
+		} else {
+			nav.classList.remove('glass-header', 'py-3');
+			nav.classList.add('py-6');
+		}
+	};
+	onScroll();
+	window.addEventListener('scroll', onScroll, { passive: true });
+
+	btn?.addEventListener('click', () => {
+		const open = btn.getAttribute('aria-expanded') === 'true';
+		const next = !open;
+		btn.setAttribute('aria-expanded', next ? 'true' : 'false');
+		panel?.classList.toggle('is-open', next);
+		iconOpen?.classList.toggle('hidden', next);
+		iconClose?.classList.toggle('hidden', !next);
+	});
+</script>
+
+<style>
+	.nav-mobile-panel {
+		max-height: 0;
+		transition: max-height 0.45s ease;
+	}
+	.nav-mobile-panel.is-open {
+		max-height: 28rem;
+	}
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+</style>

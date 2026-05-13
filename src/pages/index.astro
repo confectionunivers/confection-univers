@@ -1,188 +1,32 @@
 ---
-const siteTitle = "Confection Univers";
+import Layout from '../layouts/Layout.astro';
+import Preloader from '../components/Preloader.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import WhyChoose from '../components/WhyChoose.astro';
+import Services from '../components/Services.astro';
+import Gallery from '../components/Gallery.astro';
+import BrandMarquee from '../components/BrandMarquee.astro';
+import Projects from '../components/Projects.astro';
+import Pricing from '../components/Pricing.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<html lang="fr">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
-		<title>{siteTitle} | Habillez votre réussite</title>
-		<style>
-			:root {
-				--marine: #000055;
-				--gold: #d4af37;
-				--black: #0a0a0a;
-				--white: #ffffff;
-				--glass: rgba(255, 255, 255, 0.05);
-			}
-
-			body {
-				font-family: 'Inter', sans-serif;
-				margin: 0;
-				background-color: var(--white);
-				color: var(--black);
-				overflow-x: hidden;
-			}
-
-			h1, h2, .premium-font { font-family: 'Playfair Display', serif; }
-
-			/* NAVIGATION */
-			nav {
-				background: rgba(0, 0, 85, 0.95);
-				backdrop-filter: blur(10px);
-				padding: 1.5rem 8%;
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				position: sticky;
-				top: 0;
-				z-index: 1000;
-				border-bottom: 1px solid var(--gold);
-			}
-
-			.nav-links a {
-				color: var(--white);
-				text-decoration: none;
-				margin-left: 35px;
-				font-size: 0.9rem;
-				letter-spacing: 1px;
-				transition: 0.4s;
-			}
-			.nav-links a:hover { color: var(--gold); }
-
-			/* HERO SECTION 3D EFFECT */
-			.hero {
-				height: 85vh;
-				background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
-				display: flex;
-				align-items: center;
-				padding: 0 10%;
-				position: relative;
-			}
-
-			.hero-content { flex: 1; color: var(--white); z-index: 2; }
-			.hero h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 20px; }
-			.hero span { color: var(--gold); }
-			
-			.btn-gold {
-				background: var(--gold);
-				color: var(--marine);
-				padding: 18px 40px;
-				border-radius: 4px;
-				text-decoration: none;
-				font-weight: bold;
-				display: inline-block;
-				margin-right: 20px;
-				transition: 0.3s;
-			}
-
-			/* PRODUITS CARDS */
-			.section-padding { padding: 100px 10%; }
-			.product-grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-				gap: 40px;
-				margin-top: 50px;
-			}
-			.product-card {
-				background: var(--white);
-				padding: 30px;
-				border-radius: 15px;
-				box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-				transition: 0.5s;
-				border: 1px solid #eee;
-				text-align: center;
-			}
-			.product-card:hover { transform: translateY(-15px); border-color: var(--gold); }
-
-			/* EXPERTISE SECTION */
-			.expertise-bg { background: var(--marine); color: var(--white); text-align: center; }
-			.icon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 40px; }
-			.icon-box { padding: 30px; background: var(--glass); border-radius: 10px; border: 1px solid rgba(212, 175, 55, 0.2); }
-
-			/* CTA BANNER */
-			.cta-banner {
-				background: var(--gold);
-				padding: 80px 10%;
-				text-align: center;
-				color: var(--marine);
-			}
-
-			footer { background: var(--black); color: white; padding: 60px 10% 20px; text-align: center; }
-		</style>
-	</head>
-	<body>
-
-		<nav>
-			<div style="font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--gold); font-weight: bold;">CU</div>
-			<div class="nav-links">
-				<a href="/">ACCUEIL</a>
-				<a href="/apropos">À PROPOS</a>
-				<a href="/services">PRODUITS</a>
-				<a href="/realisation">RÉALISATIONS</a>
-				<a href="/contact">CONTACT</a>
-			</div>
-		</nav>
-
-		<section class="hero">
-			<div class="hero-content">
-				<h1>Habillez votre <span>Réussite</span></h1>
-				<p style="font-size: 1.2rem; margin-bottom: 40px; opacity: 0.8;">L'excellence de la confection haut de gamme au Sénégal.</p>
-				<a href="/contact" class="btn-gold">Demander un devis</a>
-				<a href="/realisation" style="color: white; text-decoration: none; border-bottom: 1px solid var(--gold);">Voir nos réalisations</a>
-			</div>
-			<div style="flex: 1; text-align: right; animation: float 6s ease-in-out infinite;">
-				<div style="width: 350px; height: 500px; background: rgba(212, 175, 55, 0.05); border: 2px solid var(--gold); border-radius: 20px; display: inline-block; box-shadow: 0 0 50px rgba(212, 175, 55, 0.1);">
-					<p style="color: var(--gold); padding-top: 50%; text-align: center; font-style: italic;">Mockup 3D Premium</p>
-				</div>
-			</div>
-		</section>
-
-		<section class="section-padding">
-			<h2 style="font-size: 3rem; text-align: center; margin-bottom: 10px;">Nos Collections</h2>
-			<p style="text-align: center; color: var(--gold); margin-bottom: 50px;">QUALITÉ • PRÉCISION • ÉLÉGANCE</p>
-			<div class="product-grid">
-				<div class="product-card">
-					<h3 class="premium-font">Uniformes Scolaires</h3>
-					<p>Pour les établissements d'excellence au Sénégal.</p>
-				</div>
-				<div class="product-card">
-					<h3 class="premium-font">Tenues de Travail</h3>
-					<p>L'image professionnelle de votre entreprise.</p>
-				</div>
-				<div class="product-card">
-					<h3 class="premium-font">Toges de Graduation</h3>
-					<p>Célébrez le succès avec prestige.</p>
-				</div>
-			</div>
-		</section>
-
-		<section class="section-padding expertise-bg">
-			<h2>Nos Techniques de Marquage</h2>
-			<div class="icon-grid">
-				<div class="icon-box"><h4>Sérigraphie</h4></div>
-				<div class="icon-box"><h4>Broderie Or</h4></div>
-				<div class="icon-box"><h4>DTF & Flocage</h4></div>
-				<div class="icon-box"><h4>Sublimation</h4></div>
-			</div>
-		</section>
-
-		<section class="cta-banner">
-			<h2 style="font-size: 2.5rem;">Lancez votre projet aujourd'hui</h2>
-			<a href="/contact" class="btn-gold" style="background: var(--marine); color: white; margin-top: 20px;">Contactez nos experts</a>
-		</section>
-
-		<footer>
-			<p>&copy; 2026 Confection Univers - Sénégal</p>
-			<p style="color: var(--gold); font-size: 0.8rem; margin-top: 10px;">HABILLEZ VOTRE RÉUSSITE</p>
-		</footer>
-
-		<style>
-			@keyframes float {
-				0%, 100% { transform: translateY(0); }
-				50% { transform: translateY(-20px); }
-			}
-		</style>
-	</body>
-</html>
+<Layout title="Confection Univers | Digital Atelier">
+	<main class="relative">
+		<Preloader />
+		<Navbar />
+		<Hero />
+		<About />
+		<WhyChoose />
+		<Services />
+		<Gallery />
+		<BrandMarquee />
+		<Projects />
+		<Pricing />
+		<Contact />
+		<Footer />
+	</main>
+</Layout>

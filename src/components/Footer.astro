@@ -1,0 +1,113 @@
+---
+---
+
+<footer class="relative overflow-hidden bg-background pb-12 pt-32">
+	<div
+		class="pointer-events-none absolute bottom-0 left-1/2 -z-10 h-[400px] w-[1000px] -translate-x-1/2 rounded-full bg-primary/8 blur-[120px]"
+	>
+	</div>
+
+	<div class="mx-auto max-w-7xl px-6">
+		<div class="mb-32 grid grid-cols-1 gap-20 md:grid-cols-2 lg:grid-cols-4">
+			<div class="space-y-10 lg:col-span-2">
+				<a href="/" class="inline-flex max-w-full" aria-label="Confection Univers — home">
+					<img
+						src="/img/logo.png"
+						alt="Confection Univers"
+						class="h-10 w-auto max-w-full object-contain object-left sm:h-11 md:h-12 lg:h-14"
+						width="240"
+						height="64"
+						loading="lazy"
+						decoding="async"
+					/>
+				</a>
+				<p class="max-w-md text-xl font-medium leading-relaxed text-foreground/55">
+					Together, we create meaningful experiences & digital solutions that drive lasting business growth for
+					discerning brands.
+				</p>
+				<div class="flex gap-4">
+					{
+						['Li', 'Ig', 'X', 'Fb'].map((label, i) => (
+							<a
+								href="#"
+								class="flex h-12 w-12 items-center justify-center rounded-full border border-primary/20 text-sm font-bold text-foreground transition hover:-translate-y-1 hover:border-primary hover:bg-primary hover:text-background"
+								aria-label={`Social ${i}`}
+							>
+								{label}
+							</a>
+						))
+					}
+				</div>
+			</div>
+
+			<div>
+				<h4 class="mb-10 text-sm font-black uppercase tracking-[0.2em] text-foreground/40">Quick Links</h4>
+				<ul class="space-y-6 text-[13px] font-bold uppercase tracking-widest text-foreground">
+					{
+						['About Us', 'Our Services', 'Recent Projects', 'Pricing Plans', 'Contact Us'].map((item) => (
+							<li>
+								<a href="#" class="group flex items-center gap-2 transition-colors hover:text-primary">
+									{item}
+									<svg
+										class="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M7 7h10v10" />
+									</svg>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+
+			<div>
+				<h4 class="mb-10 text-sm font-black uppercase tracking-[0.2em] text-foreground/40">Contact</h4>
+				<div class="space-y-8">
+					<div>
+						<div class="mb-2 text-[10px] font-black uppercase tracking-widest text-primary">Email Us</div>
+						<a href="mailto:hello@confectionunivers.com" class="font-display text-xl font-bold text-foreground hover:underline">
+							hello@confectionunivers.com
+						</a>
+					</div>
+					<div>
+						<div class="mb-2 text-[10px] font-black uppercase tracking-widest text-primary">Office</div>
+						<p class="font-medium text-foreground/50">123 Digital Avenue, Creative Suite 404, NY 10001</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="flex flex-col items-center justify-between gap-8 border-t border-primary/10 pt-12 md:flex-row">
+			<div class="text-[11px] font-black uppercase tracking-[0.3em] text-foreground/40">
+				© 2026 Confection Univers. All Rights Reserved.
+			</div>
+
+			<div class="flex gap-10 text-[11px] font-black uppercase tracking-[0.3em] text-foreground/40">
+				<a href="#" class="transition-colors hover:text-primary">Privacy Policy</a>
+				<a href="#" class="transition-colors hover:text-primary">Terms of Service</a>
+			</div>
+
+			<button
+				type="button"
+				id="footer-scroll-top"
+				class="group flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.3em] text-foreground"
+			>
+				Back to top
+				<span
+					class="flex h-10 w-10 items-center justify-center rounded-full border border-primary/25 transition group-hover:border-primary group-hover:bg-primary group-hover:text-background"
+				>
+					↑
+				</span>
+			</button>
+		</div>
+	</div>
+</footer>
+
+<script>
+	document.getElementById('footer-scroll-top')?.addEventListener('click', () => {
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	});
+</script>
