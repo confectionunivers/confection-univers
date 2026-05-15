@@ -1,5 +1,5 @@
 ---
-const NAV_LINKS = ['Home', 'About', 'Service', 'Pages', 'Blog', 'Contact'];
+const NAV_LINKS = ['Accueil', 'À propos', 'Services', 'Produits', 'Projets', 'Contact'];
 ---
 
 <nav
@@ -8,7 +8,7 @@ const NAV_LINKS = ['Home', 'About', 'Service', 'Pages', 'Blog', 'Contact'];
 	data-scrolled="false"
 >
 	<div class="mx-auto flex max-w-7xl items-center justify-between px-6">
-		<a href="/" class="flex min-w-0 shrink-0 items-center" aria-label="Confection Univers — home">
+		<a href="/" class="flex min-w-0 shrink-0 items-center" aria-label="Confection Univers — accueil">
 			<img
 				src="/img/logo.png"
 				alt="Confection Univers"
@@ -23,7 +23,7 @@ const NAV_LINKS = ['Home', 'About', 'Service', 'Pages', 'Blog', 'Contact'];
 		<div class="hidden gap-10 text-[13px] font-bold uppercase tracking-[0.15em] lg:flex">
 			{
 				NAV_LINKS.map((link) => (
-					<a href="#" class="nav-link-hover text-foreground/90">
+					<a href={`#${link.toLowerCase()}`} class="nav-link-hover text-foreground/90">
 						<span>{link}</span>
 						<span class="nav-link-hover__dup">{link}</span>
 					</a>
@@ -51,10 +51,10 @@ const NAV_LINKS = ['Home', 'About', 'Service', 'Pages', 'Blog', 'Contact'];
 			</button>
 
 			<a
-				href="#"
+				href="#contact"
 				class="hidden items-center gap-2 border border-primary/35 bg-primary/10 px-7 py-3.5 text-[12px] font-bold uppercase tracking-widest text-primary transition hover:bg-primary hover:text-background md:flex"
 			>
-				Get started
+				Demander un devis
 				<svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"></path>
 				</svg>
@@ -66,16 +66,16 @@ const NAV_LINKS = ['Home', 'About', 'Service', 'Pages', 'Blog', 'Contact'];
 		<div class="flex flex-col gap-6 px-6 py-10">
 			{
 				NAV_LINKS.map((link) => (
-					<a href="#" class="font-display text-2xl font-bold uppercase text-foreground">
+					<a href={`#${link.toLowerCase()}`} class="font-display text-2xl font-bold uppercase text-foreground">
 						{link}
 					</a>
 				))
 			}
 			<a
-				href="#"
+				href="#contact"
 				class="mt-4 bg-primary py-4 text-center text-sm font-bold uppercase tracking-widest text-background"
 			>
-				Get started
+				Demander un devis
 			</a>
 		</div>
 	</div>

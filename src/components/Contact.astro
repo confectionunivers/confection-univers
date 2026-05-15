@@ -30,10 +30,10 @@ const formNext = siteBase ? `${siteBase}/contact?envoye=1` : undefined;
 		<div class="mx-auto mb-14 max-w-2xl text-center md:mb-16">
 			<p class="mb-3 text-[11px] font-semibold uppercase tracking-[0.35em] text-primary md:text-xs">Contact</p>
 			<h2 id="contact-heading" class="font-display text-4xl font-semibold tracking-tight md:text-5xl lg:text-6xl">
-				Parlons de votre projet
+				Demander un devis
 			</h2>
 			<p class="mt-4 text-base leading-relaxed text-ink/65 md:text-lg">
-				Devis, échantillons ou questions sur nos tenues : notre équipe vous répond avec soin et rapidité.
+				Devis, échantillons ou questions sur nos vêtements : notre équipe répond avec soin et efficacité.
 			</p>
 		</div>
 
@@ -55,7 +55,7 @@ const formNext = siteBase ? `${siteBase}/contact?envoye=1` : undefined;
 							</svg>
 						</span>
 						<div>
-							<p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-ink/45">Téléphone</p>
+							<p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-ink/45">Phone</p>
 							<a
 								href={`tel:${contact.phoneTel}`}
 								class="mt-1 block font-display text-lg font-semibold text-ink transition hover:text-primary"
@@ -79,7 +79,7 @@ const formNext = siteBase ? `${siteBase}/contact?envoye=1` : undefined;
 							</svg>
 						</span>
 						<div>
-							<p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-ink/45">Courriel</p>
+							<p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-ink/45">Email</p>
 							<a
 								href={`mailto:${contact.email}`}
 								class="mt-1 block break-all font-display text-lg font-semibold text-ink transition hover:text-primary"
@@ -100,7 +100,7 @@ const formNext = siteBase ? `${siteBase}/contact?envoye=1` : undefined;
 							</svg>
 						</span>
 						<div>
-							<p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-ink/45">Adresse</p>
+							<p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-ink/45">Address</p>
 							<address class="mt-1 not-italic leading-relaxed text-ink/85">
 								{contact.addressLines.map((line) => (
 									<span class="block font-medium">{line}</span>
@@ -112,7 +112,7 @@ const formNext = siteBase ? `${siteBase}/contact?envoye=1` : undefined;
 								target="_blank"
 								rel="noopener noreferrer"
 							>
-								Ouvrir dans Google Maps
+								Open in Google Maps
 							</a>
 						</div>
 					</li>
@@ -129,13 +129,13 @@ const formNext = siteBase ? `${siteBase}/contact?envoye=1` : undefined;
 							d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
 						/>
 					</svg>
-					Écrire sur WhatsApp
+					Chat on WhatsApp
 				</a>
 
 				<div class="overflow-hidden rounded-2xl border border-ink/10 bg-surface/30 shadow-inner ring-1 ring-primary/10 md:rounded-3xl">
 					<div class="aspect-[16/11] w-full min-h-[220px] sm:aspect-[16/10] sm:min-h-[260px]">
 						<iframe
-							title="Emplacement Confection Univers sur Google Maps"
+							title="Confection Univers location on Google Maps"
 							class="h-full w-full border-0"
 							src={mapsEmbedUrl}
 							loading="lazy"
@@ -152,7 +152,7 @@ const formNext = siteBase ? `${siteBase}/contact?envoye=1` : undefined;
 			>
 				<h3 class="font-display text-2xl font-semibold text-ink md:text-3xl">Envoyez-nous un message</h3>
 				<p class="mt-2 text-sm text-ink/55 md:text-base">
-					Réponse habituelle sous 1 à 2 jours ouvrables. Les champs marqués d’une astérisque sont obligatoires.
+					Réponse habituelle sous 1 à 2 jours ouvrables. Les champs marqués d'une astérisque sont obligatoires.
 				</p>
 
 				<form
@@ -210,16 +210,66 @@ const formNext = siteBase ? `${siteBase}/contact?envoye=1` : undefined;
 					</div>
 
 					<div class="flex flex-col gap-2">
+						<label for="contact-clothing-type" class="text-xs font-semibold uppercase tracking-wider text-ink/55">
+							Type de vêtement <span class="text-primary">*</span>
+						</label>
+						<select
+							id="contact-clothing-type"
+							name="clothing_type"
+							required
+							class="rounded-xl border border-ink/15 bg-paper px-4 py-3.5 text-ink outline-none ring-primary/30 transition placeholder:text-ink/35 focus:border-primary/50 focus:ring-2"
+						>
+							<option value="">Sélectionner le type de vêtement</option>
+							<option value="graduation-gowns">Toges de graduation</option>
+							<option value="school-uniforms">Uniformes scolaires</option>
+							<option value="corporate-workwear">Tenues d'entreprise</option>
+							<option value="industrial-workwear">Tenues de travail industrielles</option>
+							<option value="medical-scrubs">Blouses médicales</option>
+							<option value="lab-coats">Blouses de laboratoire</option>
+							<option value="healthcare-uniforms">Uniformes de santé</option>
+							<option value="custom-manufacturing">Confection personnalisée</option>
+							<option value="other">Autre</option>
+						</select>
+					</div>
+
+					<div class="flex flex-col gap-2">
+						<label for="contact-quantity" class="text-xs font-semibold uppercase tracking-wider text-ink/55">
+							Quantité <span class="text-primary">*</span>
+						</label>
+						<input
+							id="contact-quantity"
+							name="quantity"
+							type="number"
+							required
+							min="1"
+							placeholder="Nombre de vêtements"
+							class="rounded-xl border border-ink/15 bg-paper px-4 py-3.5 text-ink outline-none ring-primary/30 transition placeholder:text-ink/35 focus:border-primary/50 focus:ring-2"
+						/>
+					</div>
+
+					<div class="flex flex-col gap-2">
+						<label for="contact-customization" class="text-xs font-semibold uppercase tracking-wider text-ink/55">
+							Détails de personnalisation
+						</label>
+						<textarea
+							id="contact-customization"
+							name="customization"
+							rows="3"
+							placeholder="Décrivez vos besoins de personnalisation (couleurs, logos, tailles, etc.)"
+							class="min-h-[100px] resize-y rounded-xl border border-ink/15 bg-paper px-4 py-3.5 text-ink outline-none ring-primary/30 transition placeholder:text-ink/35 focus:border-primary/50 focus:ring-2"
+						></textarea>
+					</div>
+
+					<div class="flex flex-col gap-2">
 						<label for="contact-message" class="text-xs font-semibold uppercase tracking-wider text-ink/55">
-							Message <span class="text-primary">*</span>
+							Message additionnel
 						</label>
 						<textarea
 							id="contact-message"
 							name="message"
-							required
-							rows="5"
-							placeholder="Décrivez votre besoin (type de tenue, quantités, échéance…)"
-							class="min-h-[140px] resize-y rounded-xl border border-ink/15 bg-paper px-4 py-3.5 text-ink outline-none ring-primary/30 transition placeholder:text-ink/35 focus:border-primary/50 focus:ring-2"
+							rows="4"
+							placeholder="Tout autre détail ou question"
+							class="min-h-[120px] resize-y rounded-xl border border-ink/15 bg-paper px-4 py-3.5 text-ink outline-none ring-primary/30 transition placeholder:text-ink/35 focus:border-primary/50 focus:ring-2"
 						></textarea>
 					</div>
 
