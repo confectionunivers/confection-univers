@@ -13,7 +13,7 @@ const contact = {
 
 const addressForMaps = encodeURIComponent(contact.addressLines.join(', '));
 const mapsEmbedUrl = `https://maps.google.com/maps?q=${addressForMaps}&z=15&output=embed`;
-const whatsappUrl = `https://wa.me/${contact.whatsappDigits}?text=${encodeURIComponent('Bonjour Confection Univers, je souhaite obtenir des informations.')}`;
+const whatsappUrl = `https://wa.me/${contact.whatsappDigits}?text=${encodeURIComponent('Hello Confection Univers, I would like to get information.')}`;
 
 const formAction = `https://formsubmit.co/${contact.email}`;
 const siteBase = import.meta.env.SITE?.replace(/\/$/, '');
@@ -23,17 +23,24 @@ const formNext = siteBase ? `${siteBase}/contact?envoye=1` : undefined;
 <section
 	id="contact"
 	class="relative scroll-mt-24 border-t border-primary/10 bg-paper py-24 text-ink md:py-32"
-	lang="fr"
+	lang="en"
 	aria-labelledby="contact-heading"
 >
 	<div class="mx-auto max-w-7xl px-6">
 		<div class="mx-auto mb-14 max-w-2xl text-center md:mb-16">
 			<p class="mb-3 text-[11px] font-semibold uppercase tracking-[0.35em] text-primary md:text-xs">Contact</p>
 			<h2 id="contact-heading" class="font-display text-4xl font-semibold tracking-tight md:text-5xl lg:text-6xl">
+<<<<<<< HEAD
 				Demander un devis
 			</h2>
 			<p class="mt-4 text-base leading-relaxed text-ink/65 md:text-lg">
 				Devis, échantillons ou questions sur nos vêtements : notre équipe répond avec soin et efficacité.
+=======
+				Request a Quote
+			</h2>
+			<p class="mt-4 text-base leading-relaxed text-ink/65 md:text-lg">
+				Quotes, samples, or questions about our garments: our team responds with care and efficiency.
+>>>>>>> 21fe952583bdfe80f2d550ddb5949ee769c0b852
 			</p>
 		</div>
 
@@ -150,9 +157,13 @@ const formNext = siteBase ? `${siteBase}/contact?envoye=1` : undefined;
 			<div
 				class="rounded-[1.75rem] border border-ink/10 bg-paper p-6 shadow-[0_20px_60px_-24px_rgba(5,10,20,0.12)] md:rounded-3xl md:p-8 lg:col-span-7 xl:col-span-7"
 			>
-				<h3 class="font-display text-2xl font-semibold text-ink md:text-3xl">Envoyez-nous un message</h3>
+				<h3 class="font-display text-2xl font-semibold text-ink md:text-3xl">Send us a message</h3>
 				<p class="mt-2 text-sm text-ink/55 md:text-base">
+<<<<<<< HEAD
 					Réponse habituelle sous 1 à 2 jours ouvrables. Les champs marqués d'une astérisque sont obligatoires.
+=======
+					Usual response within 1-2 business days. Fields marked with an asterisk are required.
+>>>>>>> 21fe952583bdfe80f2d550ddb5949ee769c0b852
 				</p>
 
 				<form
@@ -160,14 +171,14 @@ const formNext = siteBase ? `${siteBase}/contact?envoye=1` : undefined;
 					action={formAction}
 					method="POST"
 				>
-					<input type="hidden" name="_subject" value="Message depuis confectionunivers.com" />
+					<input type="hidden" name="_subject" value="Message from confectionunivers.com" />
 					{formNext && <input type="hidden" name="_next" value={formNext} />}
 					<input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="absolute -left-[9999px] h-0 w-0 opacity-0" aria-hidden="true" />
 
 					<div class="grid gap-5 sm:grid-cols-2">
 						<div class="flex flex-col gap-2">
 							<label for="contact-name" class="text-xs font-semibold uppercase tracking-wider text-ink/55">
-								Nom complet <span class="text-primary">*</span>
+								Full Name <span class="text-primary">*</span>
 							</label>
 							<input
 								id="contact-name"
@@ -175,13 +186,13 @@ const formNext = siteBase ? `${siteBase}/contact?envoye=1` : undefined;
 								type="text"
 								required
 								autocomplete="name"
-								placeholder="Jean Dupont"
+								placeholder="John Smith"
 								class="rounded-xl border border-ink/15 bg-paper px-4 py-3.5 text-ink outline-none ring-primary/30 transition placeholder:text-ink/35 focus:border-primary/50 focus:ring-2"
 							/>
 						</div>
 						<div class="flex flex-col gap-2">
 							<label for="contact-email" class="text-xs font-semibold uppercase tracking-wider text-ink/55">
-								Courriel <span class="text-primary">*</span>
+								Email <span class="text-primary">*</span>
 							</label>
 							<input
 								id="contact-email"
@@ -189,7 +200,7 @@ const formNext = siteBase ? `${siteBase}/contact?envoye=1` : undefined;
 								type="email"
 								required
 								autocomplete="email"
-								placeholder="vous@exemple.com"
+								placeholder="you@example.com"
 								class="rounded-xl border border-ink/15 bg-paper px-4 py-3.5 text-ink outline-none ring-primary/30 transition placeholder:text-ink/35 focus:border-primary/50 focus:ring-2"
 							/>
 						</div>
@@ -197,7 +208,7 @@ const formNext = siteBase ? `${siteBase}/contact?envoye=1` : undefined;
 
 					<div class="flex flex-col gap-2">
 						<label for="contact-phone" class="text-xs font-semibold uppercase tracking-wider text-ink/55">
-							Téléphone
+							Phone
 						</label>
 						<input
 							id="contact-phone"
@@ -211,7 +222,11 @@ const formNext = siteBase ? `${siteBase}/contact?envoye=1` : undefined;
 
 					<div class="flex flex-col gap-2">
 						<label for="contact-clothing-type" class="text-xs font-semibold uppercase tracking-wider text-ink/55">
+<<<<<<< HEAD
 							Type de vêtement <span class="text-primary">*</span>
+=======
+							Type of Clothing <span class="text-primary">*</span>
+>>>>>>> 21fe952583bdfe80f2d550ddb5949ee769c0b852
 						</label>
 						<select
 							id="contact-clothing-type"
@@ -219,6 +234,7 @@ const formNext = siteBase ? `${siteBase}/contact?envoye=1` : undefined;
 							required
 							class="rounded-xl border border-ink/15 bg-paper px-4 py-3.5 text-ink outline-none ring-primary/30 transition placeholder:text-ink/35 focus:border-primary/50 focus:ring-2"
 						>
+<<<<<<< HEAD
 							<option value="">Sélectionner le type de vêtement</option>
 							<option value="graduation-gowns">Toges de graduation</option>
 							<option value="school-uniforms">Uniformes scolaires</option>
@@ -229,12 +245,28 @@ const formNext = siteBase ? `${siteBase}/contact?envoye=1` : undefined;
 							<option value="healthcare-uniforms">Uniformes de santé</option>
 							<option value="custom-manufacturing">Confection personnalisée</option>
 							<option value="other">Autre</option>
+=======
+							<option value="">Select clothing type</option>
+							<option value="graduation-gowns">Graduation Gowns</option>
+							<option value="school-uniforms">School Uniforms</option>
+							<option value="corporate-workwear">Corporate Workwear</option>
+							<option value="industrial-workwear">Industrial Workwear</option>
+							<option value="medical-scrubs">Medical Scrubs</option>
+							<option value="lab-coats">Lab Coats</option>
+							<option value="healthcare-uniforms">Healthcare Uniforms</option>
+							<option value="custom-manufacturing">Custom Manufacturing</option>
+							<option value="other">Other</option>
+>>>>>>> 21fe952583bdfe80f2d550ddb5949ee769c0b852
 						</select>
 					</div>
 
 					<div class="flex flex-col gap-2">
 						<label for="contact-quantity" class="text-xs font-semibold uppercase tracking-wider text-ink/55">
+<<<<<<< HEAD
 							Quantité <span class="text-primary">*</span>
+=======
+							Quantity <span class="text-primary">*</span>
+>>>>>>> 21fe952583bdfe80f2d550ddb5949ee769c0b852
 						</label>
 						<input
 							id="contact-quantity"
@@ -242,33 +274,53 @@ const formNext = siteBase ? `${siteBase}/contact?envoye=1` : undefined;
 							type="number"
 							required
 							min="1"
+<<<<<<< HEAD
 							placeholder="Nombre de vêtements"
+=======
+							placeholder="Number of garments"
+>>>>>>> 21fe952583bdfe80f2d550ddb5949ee769c0b852
 							class="rounded-xl border border-ink/15 bg-paper px-4 py-3.5 text-ink outline-none ring-primary/30 transition placeholder:text-ink/35 focus:border-primary/50 focus:ring-2"
 						/>
 					</div>
 
 					<div class="flex flex-col gap-2">
 						<label for="contact-customization" class="text-xs font-semibold uppercase tracking-wider text-ink/55">
+<<<<<<< HEAD
 							Détails de personnalisation
+=======
+							Customization Details
+>>>>>>> 21fe952583bdfe80f2d550ddb5949ee769c0b852
 						</label>
 						<textarea
 							id="contact-customization"
 							name="customization"
 							rows="3"
+<<<<<<< HEAD
 							placeholder="Décrivez vos besoins de personnalisation (couleurs, logos, tailles, etc.)"
+=======
+							placeholder="Describe your customization needs (colors, logos, sizes, etc.)"
+>>>>>>> 21fe952583bdfe80f2d550ddb5949ee769c0b852
 							class="min-h-[100px] resize-y rounded-xl border border-ink/15 bg-paper px-4 py-3.5 text-ink outline-none ring-primary/30 transition placeholder:text-ink/35 focus:border-primary/50 focus:ring-2"
 						></textarea>
 					</div>
 
 					<div class="flex flex-col gap-2">
 						<label for="contact-message" class="text-xs font-semibold uppercase tracking-wider text-ink/55">
+<<<<<<< HEAD
 							Message additionnel
+=======
+							Additional Message
+>>>>>>> 21fe952583bdfe80f2d550ddb5949ee769c0b852
 						</label>
 						<textarea
 							id="contact-message"
 							name="message"
 							rows="4"
+<<<<<<< HEAD
 							placeholder="Tout autre détail ou question"
+=======
+							placeholder="Any additional details or questions"
+>>>>>>> 21fe952583bdfe80f2d550ddb5949ee769c0b852
 							class="min-h-[120px] resize-y rounded-xl border border-ink/15 bg-paper px-4 py-3.5 text-ink outline-none ring-primary/30 transition placeholder:text-ink/35 focus:border-primary/50 focus:ring-2"
 						></textarea>
 					</div>
@@ -277,7 +329,7 @@ const formNext = siteBase ? `${siteBase}/contact?envoye=1` : undefined;
 						type="submit"
 						class="mt-2 inline-flex min-h-[3.25rem] w-full items-center justify-center rounded-xl bg-ink px-8 py-4 text-[13px] font-semibold uppercase tracking-[0.18em] text-paper transition hover:bg-primary hover:text-background focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary sm:w-auto sm:min-w-[12rem]"
 					>
-						Envoyer le message
+						Send Message
 					</button>
 				</form>
 			</div>
