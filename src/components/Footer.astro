@@ -10,20 +10,17 @@
 	<div class="mx-auto max-w-7xl px-6">
 		<div class="mb-32 grid grid-cols-1 gap-20 md:grid-cols-2 lg:grid-cols-4">
 			<div class="space-y-10 lg:col-span-2">
-				<a href="/" class="inline-flex max-w-full" aria-label="Confection Univers — home">
+				<a href="/" class="inline-flex max-w-full" aria-label="Confection Univers — accueil">
 					<img
-						src="/img/logo.png"
+						src="/images/logo.png"
 						alt="Confection Univers"
 						class="h-10 w-auto max-w-full object-contain object-left sm:h-11 md:h-12 lg:h-14"
 						width="240"
 						height="64"
-						loading="lazy"
-						decoding="async"
 					/>
 				</a>
 				<p class="max-w-md text-xl font-medium leading-relaxed text-foreground/55">
-					Together, we create meaningful experiences & digital solutions that drive lasting business growth for
-					discerning brands.
+					Confection professionnelle de vêtements offrant des uniformes de qualité et des solutions de vêtements personnalisés pour les institutions à travers le Sénégal.
 				</p>
 				<div class="flex gap-4">
 					{
@@ -41,12 +38,12 @@
 			</div>
 
 			<div>
-				<h4 class="mb-10 text-sm font-black uppercase tracking-[0.2em] text-foreground/40">Quick Links</h4>
+				<h4 class="mb-10 text-sm font-black uppercase tracking-[0.2em] text-foreground/40">Liens rapides</h4>
 				<ul class="space-y-6 text-[13px] font-bold uppercase tracking-widest text-foreground">
 					{
-						['About Us', 'Our Services', 'Recent Projects', 'Pricing Plans', 'Contact Us'].map((item) => (
+						['À propos', 'Services', 'Produits', 'Projets', 'Contact'].map((item) => (
 							<li>
-								<a href="#" class="group flex items-center gap-2 transition-colors hover:text-primary">
+								<a href={`#${item.toLowerCase().replace(' ', '')}`} class="group flex items-center gap-2 transition-colors hover:text-primary">
 									{item}
 									<svg
 										class="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100"
@@ -67,14 +64,14 @@
 				<h4 class="mb-10 text-sm font-black uppercase tracking-[0.2em] text-foreground/40">Contact</h4>
 				<div class="space-y-8">
 					<div>
-						<div class="mb-2 text-[10px] font-black uppercase tracking-widest text-primary">Email Us</div>
-						<a href="mailto:hello@confectionunivers.com" class="font-display text-xl font-bold text-foreground hover:underline">
-							hello@confectionunivers.com
+						<div class="mb-2 text-[10px] font-black uppercase tracking-widest text-primary">Courriel</div>
+						<a href="mailto:confectionunivers@gmail.com" class="font-display text-xl font-bold text-foreground hover:underline">
+							confectionunivers@gmail.com
 						</a>
 					</div>
 					<div>
-						<div class="mb-2 text-[10px] font-black uppercase tracking-widest text-primary">Office</div>
-						<p class="font-medium text-foreground/50">123 Digital Avenue, Creative Suite 404, NY 10001</p>
+						<div class="mb-2 text-[10px] font-black uppercase tracking-widest text-primary">Bureau</div>
+						<p class="font-medium text-foreground/50">Zac nguinth<br />Thiès<br />Sénégal</p>
 					</div>
 				</div>
 			</div>
@@ -82,12 +79,12 @@
 
 		<div class="flex flex-col items-center justify-between gap-8 border-t border-primary/10 pt-12 md:flex-row">
 			<div class="text-[11px] font-black uppercase tracking-[0.3em] text-foreground/40">
-				© 2026 Confection Univers. All Rights Reserved.
+				© 2026 Confection Univers. Tous droits réservés.
 			</div>
 
 			<div class="flex gap-10 text-[11px] font-black uppercase tracking-[0.3em] text-foreground/40">
-				<a href="#" class="transition-colors hover:text-primary">Privacy Policy</a>
-				<a href="#" class="transition-colors hover:text-primary">Terms of Service</a>
+				<a href="#" class="transition-colors hover:text-primary">Politique de confidentialité</a>
+				<a href="#" class="transition-colors hover:text-primary">Conditions d'utilisation</a>
 			</div>
 
 			<button
@@ -95,7 +92,7 @@
 				id="footer-scroll-top"
 				class="group flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.3em] text-foreground"
 			>
-				Back to top
+				Retour en haut
 				<span
 					class="flex h-10 w-10 items-center justify-center rounded-full border border-primary/25 transition group-hover:border-primary group-hover:bg-primary group-hover:text-background"
 				>
