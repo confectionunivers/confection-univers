@@ -1,14 +1,40 @@
 ---
+<<<<<<< HEAD
 const NAV_LINKS = ['Accueil', 'À propos', 'Services', 'Produits', 'Projets', 'Contact'];
+=======
+<<<<<<< HEAD
+const NAV_LINKS = ['Accueil', 'À propos', 'Services', 'Produits', 'Projets', 'Contact'];
+=======
+<<<<<<< HEAD
+const NAV_LINKS = ['Accueil', 'À propos', 'Services', 'Produits', 'Projets', 'Contact'];
+=======
+const NAV_LINKS = ['Home', 'About', 'Services', 'Products', 'Projects', 'Contact'];
+>>>>>>> 21fe952583bdfe80f2d550ddb5949ee769c0b852
+>>>>>>> cd3700a5e03a05aa33723830e40156cdb9f68c7f
+>>>>>>> 5f8e89174430226218a4c89ee60945eadbb1590c
 ---
 
 <nav
 	id="site-nav"
-	class="fixed top-0 z-50 w-full py-6 transition-all duration-500"
+	class="fixed top-0 z-50 w-full bg-white py-6 shadow-lg transition-all duration-500 rounded-b-lg"
 	data-scrolled="false"
 >
 	<div class="mx-auto flex max-w-7xl items-center justify-between px-6">
 		<a href="/" class="flex min-w-0 shrink-0 items-center" aria-label="Confection Univers — accueil">
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+			<img 
+  src="/images/logo.png"
+  alt="Confection Univers"
+  class="h-8 w-auto max-w-[min(100%,10.5rem)] object-contain object-left sm:h-9 sm:max-w-[12rem] md:h-10 md:max-w-[14rem] lg:h-11"
+  width="200"
+  height="76"
+  loading="eager"
+  decoding="async"
+/>
+=======
+>>>>>>> 5f8e89174430226218a4c89ee60945eadbb1590c
 			<img
 				src="/img/logo.png"
 				alt="Confection Univers"
@@ -18,12 +44,21 @@ const NAV_LINKS = ['Accueil', 'À propos', 'Services', 'Produits', 'Projets', 'C
 				loading="eager"
 				decoding="async"
 			/>
+>>>>>>> cd3700a5e03a05aa33723830e40156cdb9f68c7f
 		</a>
 
 		<div class="hidden gap-10 text-[13px] font-bold uppercase tracking-[0.15em] lg:flex">
 			{
 				NAV_LINKS.map((link) => (
+<<<<<<< HEAD
 					<a href={`#${link.toLowerCase()}`} class="nav-link-hover text-foreground/90">
+=======
+<<<<<<< HEAD
+					<a href={`#${link.toLowerCase()}`} class="nav-link-hover text-gray-800 transition-colors duration-200 hover:text-gray-900">
+=======
+					<a href={`#${link.toLowerCase()}`} class="nav-link-hover text-foreground/90">
+>>>>>>> cd3700a5e03a05aa33723830e40156cdb9f68c7f
+>>>>>>> 5f8e89174430226218a4c89ee60945eadbb1590c
 						<span>{link}</span>
 						<span class="nav-link-hover__dup">{link}</span>
 					</a>
@@ -35,7 +70,7 @@ const NAV_LINKS = ['Accueil', 'À propos', 'Services', 'Produits', 'Projets', 'C
 			<button
 				type="button"
 				id="nav-menu-btn"
-				class="p-2 text-foreground lg:hidden"
+				class="p-2 text-gray-800 transition-colors duration-200 hover:text-gray-900 lg:hidden"
 				aria-expanded="false"
 				aria-controls="nav-mobile-panel"
 			>
@@ -52,9 +87,25 @@ const NAV_LINKS = ['Accueil', 'À propos', 'Services', 'Produits', 'Projets', 'C
 
 			<a
 				href="#contact"
+<<<<<<< HEAD
 				class="hidden items-center gap-2 border border-primary/35 bg-primary/10 px-7 py-3.5 text-[12px] font-bold uppercase tracking-widest text-primary transition hover:bg-primary hover:text-background md:flex"
 			>
 				Demander un devis
+=======
+<<<<<<< HEAD
+				class="hidden items-center gap-2 border border-gray-300 bg-gray-50 px-7 py-3.5 text-[12px] font-bold uppercase tracking-widest text-gray-900 transition-all duration-200 hover:bg-gray-900 hover:text-white md:flex"
+			>
+				Demander un devis
+=======
+				class="hidden items-center gap-2 border border-primary/35 bg-primary/10 px-7 py-3.5 text-[12px] font-bold uppercase tracking-widest text-primary transition hover:bg-primary hover:text-background md:flex"
+			>
+<<<<<<< HEAD
+				Demander un devis
+=======
+				Request Quote
+>>>>>>> 21fe952583bdfe80f2d550ddb5949ee769c0b852
+>>>>>>> cd3700a5e03a05aa33723830e40156cdb9f68c7f
+>>>>>>> 5f8e89174430226218a4c89ee60945eadbb1590c
 				<svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"></path>
 				</svg>
@@ -62,20 +113,44 @@ const NAV_LINKS = ['Accueil', 'À propos', 'Services', 'Produits', 'Projets', 'C
 		</div>
 	</div>
 
-	<div id="nav-mobile-panel" class="nav-mobile-panel overflow-hidden border-b border-primary/15 bg-background lg:hidden">
+	<div id="nav-mobile-panel" class="nav-mobile-panel overflow-hidden border-b border-gray-200 bg-white lg:hidden">
 		<div class="flex flex-col gap-6 px-6 py-10">
 			{
 				NAV_LINKS.map((link) => (
+<<<<<<< HEAD
 					<a href={`#${link.toLowerCase()}`} class="font-display text-2xl font-bold uppercase text-foreground">
+=======
+<<<<<<< HEAD
+					<a href={`#${link.toLowerCase()}`} class="font-display text-2xl font-bold uppercase text-gray-900 transition-colors duration-200 hover:text-gray-700">
+=======
+					<a href={`#${link.toLowerCase()}`} class="font-display text-2xl font-bold uppercase text-foreground">
+>>>>>>> cd3700a5e03a05aa33723830e40156cdb9f68c7f
+>>>>>>> 5f8e89174430226218a4c89ee60945eadbb1590c
 						{link}
 					</a>
 				))
 			}
 			<a
 				href="#contact"
+<<<<<<< HEAD
 				class="mt-4 bg-primary py-4 text-center text-sm font-bold uppercase tracking-widest text-background"
 			>
 				Demander un devis
+=======
+<<<<<<< HEAD
+				class="mt-4 bg-gray-900 py-4 text-center text-sm font-bold uppercase tracking-widest text-white transition-all duration-200 hover:bg-gray-800"
+			>
+				Demander un devis
+=======
+				class="mt-4 bg-primary py-4 text-center text-sm font-bold uppercase tracking-widest text-background"
+			>
+<<<<<<< HEAD
+				Demander un devis
+=======
+				Request Quote
+>>>>>>> 21fe952583bdfe80f2d550ddb5949ee769c0b852
+>>>>>>> cd3700a5e03a05aa33723830e40156cdb9f68c7f
+>>>>>>> 5f8e89174430226218a4c89ee60945eadbb1590c
 			</a>
 		</div>
 	</div>
@@ -93,11 +168,11 @@ const NAV_LINKS = ['Accueil', 'À propos', 'Services', 'Produits', 'Projets', 'C
 		const scrolled = window.scrollY > 50;
 		nav.dataset.scrolled = scrolled ? 'true' : 'false';
 		if (scrolled) {
-			nav.classList.add('glass-header', 'py-3');
-			nav.classList.remove('py-6');
+			nav.classList.add('shadow-xl', 'py-3');
+			nav.classList.remove('shadow-lg', 'py-6');
 		} else {
-			nav.classList.remove('glass-header', 'py-3');
-			nav.classList.add('py-6');
+			nav.classList.remove('shadow-xl', 'py-3');
+			nav.classList.add('shadow-lg', 'py-6');
 		}
 	};
 	onScroll();
