@@ -1,22 +1,25 @@
 ---
 const PROJECTS = [
 	{
-		title: 'Social Media Engagement Growth',
-		img: 'pro1.webp',
-		cat: 'Growth Strategy',
-		year: '2026',
-	},
-	{
-		title: 'Complete Branding & Strategy',
-		img: 'pro2.webp',
-		cat: 'Branding',
+		title: 'School Uniform Supply Project',
+		img: 'project-school-uniforms.jpg',
+		cat: 'School Uniforms',
 		year: '2025',
+		description: 'Nous avons fabriqué 5 000 uniformes personnalisés pour la commission scolaire, livrés à temps avec une qualité constante dans toutes les tailles.',
 	},
 	{
-		title: 'Multi-Channel Performance Marketing',
-		img: 'pro3.webp',
-		cat: 'Marketing',
+		title: 'Graduation Ceremony Outfits',
+		img: 'project-graduation.jpg',
+		cat: 'Graduation Gowns',
+		year: '2025',
+		description: 'Produit 2 000 toges de graduation et tenues académiques pour les cérémonies universitaires avec des tissus premium et un artisanat précis.',
+	},
+	{
+		title: 'Corporate Uniform Contract',
+		img: 'project-corporate.jpg',
+		cat: 'Corporate Workwear',
 		year: '2026',
+		description: 'Conçu et fabriqué 3 500 uniformes d\'entreprise pour une compagnie nationale, assurant la cohérence de la marque et le confort des employés.',
 	},
 ];
 ---
@@ -26,9 +29,9 @@ const PROJECTS = [
 		<div
 			class="mb-24 flex flex-col items-center justify-between gap-8 border-b border-primary/15 pb-16 md:flex-row"
 		>
-			<div class="text-sm font-black uppercase tracking-[0.3em] text-primary">{'{ 05 }'} # Our Works</div>
+			<div class="text-sm font-black uppercase tracking-[0.3em] text-primary">{'{ 05 }'} # Nos projets</div>
 			<div class="font-display text-4xl font-bold uppercase italic tracking-tighter text-foreground md:text-6xl">
-				Stories We've Told
+				Projets de fabrication
 			</div>
 		</div>
 
@@ -38,7 +41,7 @@ const PROJECTS = [
 					<div class="sticky top-32 grid items-center gap-16 border-t border-primary/10 bg-background py-16 lg:grid-cols-2">
 						<div class="group relative aspect-[16/10] overflow-hidden rounded-[3.5rem] shadow-2xl ring-1 ring-primary/10">
 							<img
-								src={`https://themexriver.com/wp/noryx/wp-content/uploads/2026/03/${p.img}`}
+								src={`/images/projects/${p.img}`}
 								class="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
 								alt={p.title}
 							/>
@@ -54,14 +57,13 @@ const PROJECTS = [
 								{p.title}
 							</h3>
 							<p class="max-w-md text-lg font-medium text-foreground/50">
-								We helped our clients achieve a 300% increase in organic reach through data-driven content
-								strategies.
+								{p.description}
 							</p>
 							<button
 								type="button"
 								class="rounded-full border border-primary/30 bg-paper px-12 py-5 text-[11px] font-black uppercase tracking-widest text-ink transition hover:scale-105 hover:bg-primary hover:text-background"
 							>
-								View Details
+								Voir les détails
 							</button>
 						</div>
 					</div>
