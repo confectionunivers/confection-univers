@@ -3,11 +3,14 @@
  * Galerie — déposez les visuels dans public/images/gallery/
  * (voir chemins dans `items` ci-dessous ; modifiables en un seul endroit).
  */
-const items = [
+const baseItems = [
 	{ image: '/images/gallery1.jpg', label: 'Toges de graduation' },
 	{ image: '/images/gallery2.jpg', label: 'Uniformes scolaires' },
 	{ image: '/images/gallery3.jpg', label: 'Tenues d\'entreprise' },
 ];
+
+// Duplicate to create 20 items for the marquee
+const items = Array.from({ length: 20 }, (_, i) => baseItems[i % baseItems.length]);
 ---
 
 <section
@@ -28,47 +31,66 @@ const items = [
 			</p>
 		</div>
 
-		<ul class="grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6 xl:grid-cols-4">
-			{
-				items.map((item, i) => (
-					<li>
-						<a
-							href="/products"
-							class="gallery-tile group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-primary/15 bg-surface/50 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.4)] outline-none ring-offset-2 ring-offset-background transition focus-visible:ring-2 focus-visible:ring-primary md:aspect-[3/4] md:rounded-3xl"
-						>
-							<figure class="relative m-0 h-full w-full">
-							<img
-								src={item.image}
-								alt={item.label}
-								class="gallery-img h-full w-full object-contain will-change-transform"
-								width="600"
-								height="750"
-								loading={i < 5 ? 'eager' : 'lazy'}
-								decoding="async"
-							/>
-							<div
-								class="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-90 md:opacity-95"
-								aria-hidden="true"
-							/>
-							<figcaption class="absolute inset-x-0 bottom-0 z-10 p-5 md:p-6">
-								<span class="block text-[10px] font-semibold uppercase tracking-[0.28em] text-primary/90 md:text-[11px]">
-									Confection Univers
-								</span>
-								<span class="mt-1 block font-display text-lg font-semibold leading-tight text-paper md:text-xl">
-									{item.label}
-								</span>
-							</figcaption>
-						</figure>
-						</a>
-					</li>
-				))
-			}
-		</ul>
+		<div class="gallery-marquee-container overflow-hidden">
+			<div class="gallery-marquee-track flex gap-4 sm:gap-5 lg:gap-6 xl:gap-8">
+				{
+					[...items, ...items].map((item, i) => (
+						<li class="flex-shrink-0 w-[calc(100vw-3rem)] sm:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1rem)]">
+							<a
+								href="/products"
+								class="gallery-tile group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-primary/15 bg-surface/50 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.4)] outline-none ring-offset-2 ring-offset-background transition focus-visible:ring-2 focus-visible:ring-primary md:aspect-[3/4] md:rounded-3xl"
+							>
+								<figure class="relative m-0 h-full w-full">
+								<img
+									src={item.image}
+									alt={item.label}
+									class="gallery-img h-full w-full object-contain will-change-transform"
+									width="600"
+									height="750"
+									loading={i < 5 ? 'eager' : 'lazy'}
+									decoding="async"
+								/>
+								<div
+									class="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-90 md:opacity-95"
+									aria-hidden="true"
+								/>
+								<figcaption class="absolute inset-x-0 bottom-0 z-10 p-5 md:p-6">
+									<span class="block text-[10px] font-semibold uppercase tracking-[0.28em] text-primary/90 md:text-[11px]">
+										Confection Univers
+									</span>
+									<span class="mt-1 block font-display text-lg font-semibold leading-tight text-paper md:text-xl">
+										{item.label}
+									</span>
+								</figcaption>
+							</figure>
+							</a>
+						</li>
+					))
+				}
+			</div>
+		</div>
 	</div>
 </section>
 
 <style>
+	@keyframes marquee-scroll {
+		0% {
+			transform: translateX(0);
+		}
+		100% {
+			transform: translateX(-50%);
+		}
+	}
+
 	@media (prefers-reduced-motion: no-preference) {
+		.gallery-marquee-track {
+			animation: marquee-scroll 40s linear infinite;
+		}
+
+		.gallery-marquee-container:hover .gallery-marquee-track {
+			animation-play-state: paused;
+		}
+
 		.gallery-img {
 			transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
 		}
@@ -90,6 +112,9 @@ const items = [
 		}
 	}
 	@media (prefers-reduced-motion: reduce) {
+		.gallery-marquee-track {
+			animation: none;
+		}
 		.gallery-tile:hover,
 		.gallery-tile:focus-visible {
 			transform: none;

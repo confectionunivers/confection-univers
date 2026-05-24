@@ -1,0 +1,217 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="À Propos | Confection Univers">
+	<main class="relative">
+		<Navbar />
+		
+		<!-- Hero Section -->
+		<section class="relative flex min-h-[60vh] flex-col justify-center overflow-hidden pb-20 pt-32 md:pt-40">
+			<div class="pointer-events-none absolute inset-0 -z-20 bg-background"></div>
+			<div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_85%_60%_at_100%_0%,rgba(198,161,95,0.14),transparent_55%),radial-gradient(ellipse_70%_50%_at_0%_100%,rgba(91,127,166,0.08),transparent_50%)]"></div>
+			
+			<div class="mx-auto max-w-7xl px-6">
+				<p class="mb-5 text-[11px] font-semibold uppercase tracking-[0.38em] text-primary md:text-xs">
+					Notre histoire
+				</p>
+				<h1 class="font-display text-[clamp(2.5rem,6vw,4.75rem)] font-semibold leading-[1.05] tracking-tight text-foreground md:leading-[1.02]">
+					<span class="block text-foreground">À Propos de</span>
+					<span class="mt-1 block bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
+						Confection Univers
+					</span>
+				</h1>
+				<p class="mt-8 max-w-2xl text-base font-normal leading-relaxed text-foreground/72 md:text-lg md:leading-relaxed">
+					Depuis plus de deux décennies, nous sommes le partenaire de confiance des institutions sénégalaises pour la confection de vêtements professionnels de qualité exceptionnelle.
+				</p>
+			</div>
+		</section>
+
+		<!-- About Content Section -->
+		<section class="relative z-10 -mt-10 rounded-[4rem] bg-paper py-32 text-ink shadow-[0_-20px_80px_-20px_rgba(5,10,20,0.15)]">
+			<div class="mx-auto max-w-7xl px-6">
+				<div class="flex flex-col gap-24 lg:flex-row">
+					<div class="lg:w-1/3">
+						<div class="sticky top-32 space-y-16">
+							<div class="text-sm font-black uppercase tracking-[0.3em] text-primary">
+								Notre engagement
+							</div>
+
+							<div class="space-y-12">
+								<div class="border-b border-ink/10 pb-10">
+									<div class="mb-6 flex items-center justify-between text-[11px] font-black uppercase tracking-widest text-ink/40">
+										<span>Années d'expérience</span>
+										<span class="text-primary">★</span>
+									</div>
+									<div class="font-display text-7xl font-bold tracking-tighter text-ink">20+</div>
+									<p class="mt-4 max-w-[200px] text-sm font-medium text-ink/60">
+										D'expertise en confection professionnelle au Sénégal
+									</p>
+								</div>
+
+								<div class="border-b border-ink/10 pb-10">
+									<div class="mb-6 flex items-center justify-between text-[11px] font-black uppercase tracking-widest text-ink/40">
+										<span>Clients satisfaits</span>
+										<span class="text-primary">★</span>
+									</div>
+									<div class="font-display text-7xl font-bold tracking-tighter text-ink">500+</div>
+									<p class="mt-4 max-w-[200px] text-sm font-medium text-ink/60">
+										Institutions et entreprises nous font confiance
+									</p>
+								</div>
+
+								<div class="border-b border-ink/10 pb-10">
+									<div class="mb-6 flex items-center justify-between text-[11px] font-black uppercase tracking-widest text-ink/40">
+										<span>Vêtements produits</span>
+										<span class="text-primary">★</span>
+									</div>
+									<div class="font-display text-7xl font-bold tracking-tighter text-ink">250K+</div>
+									<p class="mt-4 max-w-[200px] text-sm font-medium text-ink/60">
+										Uniformes et vêtements fabriqués annuellement
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="lg:w-2/3">
+						<h2 class="reveal-view mb-12 font-display text-3xl font-bold leading-[1.2] tracking-tight text-ink lg:text-4xl">
+							Confection Univers : fabricant professionnel de vêtements pour les institutions au Sénégal.
+						</h2>
+
+						<div class="grid gap-16 md:grid-cols-2">
+							<div class="about-parallax-img aspect-[3/4] overflow-hidden rounded-[3rem] bg-surface/10 shadow-2xl ring-1 ring-primary/10">
+								<img
+									src="/images/about-facility.jpg"
+									class="h-full w-full object-cover"
+									alt="Installation de confection de vêtements"
+								/>
+							</div>
+
+							<div class="space-y-12 pt-12">
+								<div class="space-y-6">
+									<div class="flex items-center gap-5">
+										<div class="flex h-14 w-14 items-center justify-center rounded-full bg-primary/12 text-2xl text-primary">
+											🎯
+										</div>
+										<h4 class="text-sm font-black uppercase tracking-widest text-ink">Notre mission</h4>
+									</div>
+									<p class="text-lg font-medium leading-relaxed text-ink/65">
+										Délivrer une confection de vêtements exceptionnelle avec un artisanat de précision, une capacité de production fiable, et un engagement inébranlable envers la qualité pour chaque commande client.
+									</p>
+								</div>
+
+								<div class="space-y-6">
+									<div class="flex items-center gap-5">
+										<div class="flex h-14 w-14 items-center justify-center rounded-full bg-primary/12 text-2xl text-primary">
+											💎
+										</div>
+										<h4 class="text-sm font-black uppercase tracking-widest text-ink">Nos valeurs</h4>
+									</div>
+									<p class="text-lg font-medium leading-relaxed text-ink/65">
+										Qualité irréprochable, respect des délais, innovation constante, et partenariat durable avec nos clients. Chaque vêtement que nous produisons reflète notre engagement envers l'excellence.
+									</p>
+								</div>
+
+								<div class="space-y-6">
+									<div class="flex items-center gap-5">
+										<div class="flex h-14 w-14 items-center justify-center rounded-full bg-primary/12 text-2xl text-primary">
+											🏭
+										</div>
+										<h4 class="text-sm font-black uppercase tracking-widest text-ink">Notre expertise</h4>
+									</div>
+									<p class="text-lg font-medium leading-relaxed text-ink/65">
+										De la conception à la livraison finale, nous maîtrisons chaque étape de la confection. Notre équipe de couturiers expérimentés utilise des techniques traditionnelles combinées aux technologies modernes pour garantir des résultats impeccables.
+									</p>
+								</div>
+
+								<div class="flex items-center gap-6 border-t border-ink/10 pt-12">
+									<div class="relative">
+										<img
+											src="/images/logo.png"
+											class="h-16 w-16 rounded-full border-2 border-primary/35 object-cover"
+											alt="Marie Therese Youm"
+										/>
+										<div class="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-[10px] text-background">
+											✓
+										</div>
+									</div>
+									<div>
+										<div class="text-xl font-bold text-ink">Marie Therese Youm</div>
+										<div class="text-[11px] font-black uppercase tracking-[0.2em] text-ink/45">
+											Chargée de la clientèle
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Story Section -->
+		<section class="relative z-10 -mt-10 rounded-[4rem] bg-background py-32 text-foreground">
+			<div class="mx-auto max-w-7xl px-6">
+				<div class="mx-auto mb-16 max-w-3xl text-center md:mb-20">
+					<p class="mb-4 text-[11px] font-semibold uppercase tracking-[0.35em] text-primary md:text-xs">Notre parcours</p>
+					<h2 class="font-display text-4xl font-semibold leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
+						Une histoire de passion et d'artisanat
+					</h2>
+				</div>
+
+				<div class="grid gap-12 md:grid-cols-3">
+					<div class="space-y-6 rounded-3xl border border-primary/15 bg-surface/30 p-8">
+						<div class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/20 text-3xl">
+							🌱
+						</div>
+						<h3 class="font-display text-2xl font-semibold text-foreground">Les débuts</h3>
+						<p class="text-base leading-relaxed text-foreground/65">
+							Fondé avec une vision simple : offrir aux institutions sénégalaises des vêtements de qualité supérieure, conçus localement avec passion et expertise.
+						</p>
+					</div>
+
+					<div class="space-y-6 rounded-3xl border border-primary/15 bg-surface/30 p-8">
+						<div class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/20 text-3xl">
+							📈
+						</div>
+						<h3 class="font-display text-2xl font-semibold text-foreground">La croissance</h3>
+						<p class="text-base leading-relaxed text-foreground/65">
+							De petit atelier à manufacture reconnue, nous avons étendu nos capacités tout en maintenant notre engagement envers la qualité et le service personnalisé.
+						</p>
+					</div>
+
+					<div class="space-y-6 rounded-3xl border border-primary/15 bg-surface/30 p-8">
+						<div class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/20 text-3xl">
+							🌍
+						</div>
+						<h3 class="font-display text-2xl font-semibold text-foreground">L'avenir</h3>
+						<p class="text-base leading-relaxed text-foreground/65">
+							Nous continuons d'innover et d'investir dans les technologies modernes tout en préservant l'artisanat traditionnel qui fait notre réputation.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<Footer />
+	</main>
+</Layout>
+
+<style>
+	@media (prefers-reduced-motion: no-preference) {
+		.reveal-view {
+			animation: fade-up linear both;
+			animation-timeline: view();
+			animation-range: entry 5% cover 35%;
+		}
+
+		.about-parallax-img {
+			animation: about-parallax linear both;
+			animation-timeline: view();
+			animation-range: entry 0% exit 100%;
+		}
+	}
+</style>

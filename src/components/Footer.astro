@@ -40,23 +40,71 @@
 			<div>
 				<h4 class="mb-10 text-sm font-black uppercase tracking-[0.2em] text-foreground/40">Liens rapides</h4>
 				<ul class="space-y-6 text-[13px] font-bold uppercase tracking-widest text-foreground">
-					{
-						['À propos', 'Services', 'Produits', 'Projets', 'Contact'].map((item) => (
-							<li>
-								<a href={`#${item.toLowerCase().replace(' ', '')}`} class="group flex items-center gap-2 transition-colors hover:text-primary">
-									{item}
-									<svg
-										class="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100"
-										fill="none"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
-									>
-										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M7 7h10v10" />
-									</svg>
-								</a>
-							</li>
-						))
-					}
+					<li>
+						<a href="/about" class="group flex items-center gap-2 transition-colors hover:text-primary">
+							À propos
+							<svg
+								class="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M7 7h10v10" />
+							</svg>
+						</a>
+					</li>
+					<li>
+						<a href="/services" class="group flex items-center gap-2 transition-colors hover:text-primary">
+							Services
+							<svg
+								class="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M7 7h10v10" />
+							</svg>
+						</a>
+					</li>
+					<li>
+						<a href="/products" class="group flex items-center gap-2 transition-colors hover:text-primary">
+							Produits
+							<svg
+								class="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M7 7h10v10" />
+							</svg>
+						</a>
+					</li>
+					<li>
+						<a href="/projects" class="group flex items-center gap-2 transition-colors hover:text-primary">
+							Projets
+							<svg
+								class="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M7 7h10v10" />
+							</svg>
+						</a>
+					</li>
+					<li>
+						<a href="/contact" class="group flex items-center gap-2 transition-colors hover:text-primary">
+							Contact
+							<svg
+								class="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100"
+								fill="none"
+								stroke="currentColor"
+								viewBox="0 0 24 24"
+							>
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M7 7h10v10" />
+							</svg>
+						</a>
+					</li>
 				</ul>
 			</div>
 

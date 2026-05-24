@@ -1,5 +1,12 @@
 ---
-const NAV_LINKS = ['Accueil', 'À propos', 'Services', 'Produits', 'Projets', 'Contact'];
+const NAV_LINKS = [
+	{ label: 'Accueil', href: '/' },
+	{ label: 'À propos', href: '/about' },
+	{ label: 'Services', href: '/services' },
+	{ label: 'Produits', href: '/products' },
+	{ label: 'Projets', href: '/projects' },
+	{ label: 'Contact', href: '/contact' },
+];
 ---
 
 <nav
@@ -23,9 +30,9 @@ const NAV_LINKS = ['Accueil', 'À propos', 'Services', 'Produits', 'Projets', 'C
 		<div class="hidden gap-10 text-[13px] font-bold uppercase tracking-[0.15em] lg:flex">
 			{
 				NAV_LINKS.map((link) => (
-					<a href={`#${link.toLowerCase()}`} class="nav-link-hover text-gray-800 transition-colors duration-200 hover:text-gray-900">
-						<span>{link}</span>
-						<span class="nav-link-hover__dup">{link}</span>
+					<a href={link.href} class="nav-link-hover text-gray-800 transition-colors duration-200 hover:text-gray-900">
+						<span>{link.label}</span>
+						<span class="nav-link-hover__dup">{link.label}</span>
 					</a>
 				))
 			}
@@ -51,7 +58,7 @@ const NAV_LINKS = ['Accueil', 'À propos', 'Services', 'Produits', 'Projets', 'C
 			</button>
 
 			<a
-				href="#contact"
+				href="/contact"
 				class="hidden items-center gap-2 border border-gray-300 bg-gray-50 px-7 py-3.5 text-[12px] font-bold uppercase tracking-widest text-gray-900 transition-all duration-200 hover:bg-gray-900 hover:text-white md:flex"
 			>
 				Demander un devis
@@ -66,13 +73,13 @@ const NAV_LINKS = ['Accueil', 'À propos', 'Services', 'Produits', 'Projets', 'C
 		<div class="flex flex-col gap-6 px-6 py-10">
 			{
 				NAV_LINKS.map((link) => (
-					<a href={`#${link.toLowerCase()}`} class="font-display text-2xl font-bold uppercase text-gray-900 transition-colors duration-200 hover:text-gray-700">
-						{link}
+					<a href={link.href} class="font-display text-2xl font-bold uppercase text-gray-900 transition-colors duration-200 hover:text-gray-700">
+						{link.label}
 					</a>
 				))
 			}
 			<a
-				href="#contact"
+				href="/contact"
 				class="mt-4 bg-gray-900 py-4 text-center text-sm font-bold uppercase tracking-widest text-white transition-all duration-200 hover:bg-gray-800"
 			>
 				Demander un devis

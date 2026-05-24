@@ -18,7 +18,7 @@
 	--font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
 
 	--animate-marquee-v: marquee-v 20s linear infinite;
-	--animate-marquee-h: marquee-h 30s linear infinite;
+	--animate-marquee-h: marquee-h 15s linear infinite;
 	--animate-spin-slow: spin 12s linear infinite;
 	--animate-preloader-spin: preloader-spin 2s linear infinite;
 }
