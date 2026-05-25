@@ -14,13 +14,13 @@ const contactInfo = {
 };
 ---
 
-<header class="fixed top-0 left-0 right-0 z-[60]">
-	<!-- Top Bar -->
-	<div class="top-bar">
+<header id="premium-header" class="fixed top-0 left-0 right-0 z-[60]">
+	<!-- Top Bar - Deep Navy Blue -->
+	<div id="top-bar" class="top-bar">
 		<div class="flex items-center gap-6">
 			<a
 				href={`mailto:${contactInfo.email}`}
-				class="flex items-center gap-2 text-xs font-medium tracking-wide transition-colors hover:text-gray-300"
+				class="contact-link flex items-center gap-2 text-xs font-medium tracking-wide text-white/90 transition-all duration-300 hover:text-white"
 			>
 				<svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -29,7 +29,7 @@ const contactInfo = {
 			</a>
 			<a
 				href={`tel:${contactInfo.phone.replace(/\s/g, '')}`}
-				class="flex items-center gap-2 text-xs font-medium tracking-wide transition-colors hover:text-gray-300"
+				class="contact-link flex items-center gap-2 text-xs font-medium tracking-wide text-white/90 transition-all duration-300 hover:text-white"
 			>
 				<svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -42,7 +42,7 @@ const contactInfo = {
 				href="https://wa.me/221772960776"
 				target="_blank"
 				rel="noopener noreferrer"
-				class="flex items-center gap-2 text-xs font-medium tracking-wide transition-colors hover:text-gray-300"
+				class="contact-link flex items-center gap-2 text-xs font-medium tracking-wide text-white/90 transition-all duration-300 hover:text-white"
 			>
 				<svg class="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor">
 					<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
@@ -52,79 +52,81 @@ const contactInfo = {
 		</div>
 	</div>
 
-	<!-- Main Navbar -->
-	<div class="main-navbar">
-		<!-- Logo (Left) -->
-		<div class="nav-logo">
-			<a href="/" aria-label="Confection Univers — accueil">
-				<img 
-					src="/images/logo.png"
-					alt="Confection Univers"
-					class="h-16 w-auto max-w-[min(100%,18rem)] object-contain object-left sm:h-18 sm:max-w-[20rem] md:h-20 md:max-w-[22rem] lg:h-22 lg:max-w-[24rem]"
-					width="200"
-					height="76"
-					loading="eager"
-					decoding="async"
-				/>
-			</a>
-		</div>
+	<!-- Main Floating Navbar -->
+	<div id="main-navbar" class="main-navbar-container">
+		<div id="floating-navbar" class="floating-navbar">
+			<!-- Logo (Left) -->
+			<div class="nav-logo">
+				<a href="/" aria-label="Confection Univers — accueil">
+					<img 
+						src="/images/logo.png"
+						alt="Confection Univers"
+						class="logo-img h-12 w-auto max-w-[180px] object-contain object-left md:h-14 md:max-w-[200px] lg:h-16 lg:max-w-[220px]"
+						width="200"
+						height="76"
+						loading="eager"
+						decoding="async"
+					/>
+				</a>
+			</div>
 
-		<!-- Navigation Links (Center) -->
-		<nav class="nav-links">
-			{
-				NAV_LINKS.map((link) => (
-					<a href={link.href} class="text-[13px] font-bold uppercase tracking-[0.15em] text-gray-800 transition-colors duration-200 hover:text-gray-900">
-						{link.label}
-					</a>
-				))
-			}
-		</nav>
+			<!-- Navigation Links (Center) -->
+			<nav class="nav-links hidden lg:flex">
+				{
+					NAV_LINKS.map((link) => (
+						<a href={link.href} class="nav-link group flex items-center gap-1 text-xs font-bold uppercase tracking-[0.2em] text-[#00002a] transition-all duration-300 hover:text-primary">
+							<span>{link.label}</span>
+							<svg class="h-2.5 w-2.5 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+							</svg>
+						</a>
+					))
+				}
+			</nav>
 
-		<!-- Quote Button (Right) -->
-		<div class="nav-actions">
-			<button
-				type="button"
-				id="nav-menu-btn"
-				class="p-2 text-gray-800 transition-colors duration-200 hover:text-gray-900 lg:hidden"
-				aria-expanded="false"
-				aria-controls="nav-mobile-panel"
-			>
-				<span class="sr-only">Menu</span>
-				<svg id="nav-icon-open" class="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"
-					></path>
-				</svg>
-				<svg id="nav-icon-close" class="hidden h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"
-					></path>
-				</svg>
-			</button>
+			<!-- Quote Button (Right) -->
+			<div class="nav-actions flex items-center gap-4">
+				<button
+					type="button"
+					id="nav-menu-btn"
+					class="burger-btn p-2 text-[#00002a] transition-all duration-300 hover:text-primary lg:hidden"
+					aria-expanded="false"
+					aria-controls="nav-mobile-panel"
+				>
+					<span class="sr-only">Menu</span>
+					<div class="burger-icon">
+						<span class="burger-line"></span>
+						<span class="burger-line"></span>
+						<span class="burger-line"></span>
+					</div>
+				</button>
 
-			<a
-				href="/contact"
-				class="hidden items-center gap-2 rounded-lg border-2 border-gray-900 bg-gray-900 px-8 py-3 text-[12px] font-bold uppercase tracking-widest text-white transition-all duration-200 hover:bg-gray-800 hover:border-gray-800 md:flex"
-			>
-				Demander un devis
-				<svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"></path>
-				</svg>
-			</a>
+				<a
+					href="/contact"
+					class="cta-button hidden items-center gap-2 rounded-full bg-black px-6 py-3 text-xs font-medium text-white transition-transform duration-300 hover:scale-105 lg:flex"
+				>
+					<span>Demander un devis</span>
+					<svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+					</svg>
+				</a>
+			</div>
 		</div>
 	</div>
 
 	<!-- Mobile Panel -->
-	<div id="nav-mobile-panel" class="nav-mobile-panel overflow-hidden border-b border-gray-200 bg-white lg:hidden">
+	<div id="nav-mobile-panel" class="nav-mobile-panel overflow-hidden bg-white/95 backdrop-blur-xl lg:hidden">
 		<div class="flex flex-col gap-6 px-6 py-10">
 			{
 				NAV_LINKS.map((link) => (
-					<a href={link.href} class="font-display text-2xl font-bold uppercase text-gray-900 transition-colors duration-200 hover:text-gray-700">
+					<a href={link.href} class="mobile-nav-link font-display text-2xl font-bold uppercase text-[#00002a] transition-all duration-300 hover:text-primary hover:translate-x-2">
 						{link.label}
 					</a>
 				))
 			}
 			<a
 				href="/contact"
-				class="mt-4 rounded-lg bg-gray-900 py-4 text-center text-sm font-bold uppercase tracking-widest text-white transition-all duration-200 hover:bg-gray-800"
+				class="mobile-cta mt-4 rounded-full bg-black py-4 text-center text-sm font-medium text-white transition-all duration-300 hover:scale-105"
 			>
 				Demander un devis
 			</a>
@@ -133,61 +135,212 @@ const contactInfo = {
 </header>
 
 <script>
+	// Mobile menu toggle
 	const btn = document.getElementById('nav-menu-btn');
 	const panel = document.getElementById('nav-mobile-panel');
-	const iconOpen = document.getElementById('nav-icon-open');
-	const iconClose = document.getElementById('nav-icon-close');
+	const burgerIcon = btn?.querySelector('.burger-icon');
 
 	btn?.addEventListener('click', () => {
 		const open = btn.getAttribute('aria-expanded') === 'true';
 		const next = !open;
 		btn.setAttribute('aria-expanded', next ? 'true' : 'false');
 		panel?.classList.toggle('is-open', next);
-		iconOpen?.classList.toggle('hidden', next);
-		iconClose?.classList.toggle('hidden', !next);
+		burgerIcon?.classList.toggle('is-active', next);
+	});
+
+	// Smart sticky transformation
+	const header = document.getElementById('premium-header');
+	const topBar = document.getElementById('top-bar');
+	const floatingNavbar = document.getElementById('floating-navbar');
+	const mainNavbarContainer = document.getElementById('main-navbar');
+	let lastScroll = 0;
+
+	window.addEventListener('scroll', () => {
+		const currentScroll = window.pageYOffset;
+		
+		if (currentScroll > 50) {
+			// Hide top bar, enhance navbar glassmorphism
+			topBar?.classList.add('top-bar-hidden');
+			floatingNavbar?.classList.add('navbar-scrolled');
+			mainNavbarContainer?.classList.add('container-scrolled');
+		} else {
+			// Show top bar, restore navbar
+			topBar?.classList.remove('top-bar-hidden');
+			floatingNavbar?.classList.remove('navbar-scrolled');
+			mainNavbarContainer?.classList.remove('container-scrolled');
+		}
+		
+		lastScroll = currentScroll;
 	});
 </script>
 
 <style>
+	/* Top Bar - Deep Navy Blue */
 	.top-bar {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		background-color: #0b0f19;
+		background-color: #00002a;
 		color: white;
 		padding: 8px 4%;
 		width: 100%;
+		transform: translateY(0);
+		transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 	}
 
-	.main-navbar {
+	.top-bar-hidden {
+		transform: translateY(-100%);
+	}
+
+	/* Main Navbar Container - 3D Floating */
+	.main-navbar-container {
+		width: 100%;
+		padding: 16px 4%;
+		transition: padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.container-scrolled {
+		padding: 12px 4%;
+	}
+
+	/* Floating Navbar - Pill Shape with Glassmorphism */
+	.floating-navbar {
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		background-color: white;
-		padding: 15px 4%;
-		width: 100%;
-		box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+		background-color: rgba(255, 255, 255, 0.95);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border-radius: 9999px;
+		border: 1px solid rgba(198, 161, 95, 0.6);
+		box-shadow: 
+			0 15px 35px rgba(0, 0, 0, 0.15),
+			0 0 0 1px rgba(198, 161, 95, 0.3),
+			inset 0 0 20px rgba(198, 161, 95, 0.1);
+		padding: 16px 32px;
+		max-width: 1400px;
+		margin: 0 auto;
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
+	.navbar-scrolled {
+		background-color: rgba(255, 255, 255, 0.98);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		border: 1px solid rgba(198, 161, 95, 0.8);
+		box-shadow: 
+			0 20px 40px rgba(0, 0, 0, 0.2),
+			0 0 0 1px rgba(198, 161, 95, 0.5),
+			inset 0 0 25px rgba(198, 161, 95, 0.15);
+		padding: 12px 28px;
+	}
+
+	/* Logo */
+	.nav-logo {
+		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.logo-img {
+		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	/* Navigation Links */
 	.nav-links {
 		display: flex;
-		gap: 24px;
+		gap: 40px;
 		align-items: center;
 	}
 
-	.nav-links a {
+	.nav-link {
 		position: relative;
 	}
 
+	/* CTA Button - Black Pill */
+	.cta-button {
+		position: relative;
+		overflow: hidden;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+	}
+
+	.cta-button:hover {
+		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+	}
+
+	/* Burger Menu */
+	.burger-btn {
+		position: relative;
+		z-index: 10;
+	}
+
+	.burger-icon {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+		width: 24px;
+	}
+
+	.burger-line {
+		width: 100%;
+		height: 2px;
+		background-color: #00002a;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		transform-origin: center;
+	}
+
+	.burger-icon.is-active .burger-line:nth-child(1) {
+		transform: rotate(45deg) translate(5px, 5px);
+	}
+
+	.burger-icon.is-active .burger-line:nth-child(2) {
+		opacity: 0;
+		transform: translateX(-10px);
+	}
+
+	.burger-icon.is-active .burger-line:nth-child(3) {
+		transform: rotate(-45deg) translate(5px, -5px);
+	}
+
+	/* Mobile Panel */
 	.nav-mobile-panel {
 		max-height: 0;
-		transition: max-height 0.45s ease;
+		transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	.nav-mobile-panel.is-open {
-		max-height: 28rem;
+		max-height: 32rem;
 	}
 
+	.mobile-nav-link {
+		position: relative;
+	}
+
+	.mobile-cta {
+		transition: all 0.3s ease;
+	}
+
+	/* Contact Links */
+	.contact-link {
+		position: relative;
+	}
+
+	.contact-link::after {
+		content: '';
+		position: absolute;
+		bottom: -2px;
+		left: 0;
+		width: 0;
+		height: 1px;
+		background-color: white;
+		transition: width 0.3s ease;
+	}
+
+	.contact-link:hover::after {
+		width: 100%;
+	}
+
+	/* Screen Reader Only */
 	.sr-only {
 		position: absolute;
 		width: 1px;
@@ -200,16 +353,18 @@ const contactInfo = {
 		border: 0;
 	}
 
-	/* Hide nav-links on mobile, show on desktop */
-	@media (max-width: 1023px) {
-		.nav-links {
-			display: none;
+	/* Reduced Motion */
+	@media (prefers-reduced-motion: reduce) {
+		.top-bar,
+		.floating-navbar,
+		.main-navbar-container {
+			transition: none;
 		}
-	}
 
-	@media (min-width: 1024px) {
-		.nav-links {
-			display: flex;
+		.burger-line,
+		.cta-button,
+		.contact-link::after {
+			transition: none;
 		}
 	}
 </style>

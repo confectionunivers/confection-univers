@@ -1,123 +1,214 @@
 ---
-/**
- * Galerie — déposez les visuels dans public/images/gallery/
- * (voir chemins dans `items` ci-dessous ; modifiables en un seul endroit).
- */
-const baseItems = [
+// Gallery items with uniform height
+const galleryItems = [
 	{ image: '/images/gallery1.jpg', label: 'Toges de graduation' },
-	{ image: '/images/gallery2.jpg', label: 'Uniformes scolaires' },
-	{ image: '/images/gallery3.jpg', label: 'Tenues d\'entreprise' },
+	{ image: '/images/gallery2.jpg', label: 'Tenue de travail' },
+	{ image: '/images/gallery3.jpg', label: 'Toges de graduation' },
+	{ image: '/images/gallery4.jpg', label: 'Uniorme scolaire' },
+	{ image: '/images/gallery5.jpg', label: 'Uniorme scolaire' },
+	{ image: '/images/gallery6.jpg', label: 'Toges pour enfants' },
+	{ image: '/images/gallery7.jpg', label: 'Toge de graduation' },
+	{ image: '/images/gallery8.jpg', label: 'Kimono' },
+	{ image: '/images/gallery9.jpg', label: 'Kimono' },
+	{ image: '/images/gallery10.jpg', label: 'Blouse sage femme' },
+	{ image: '/images/gallery11.jpg', label: 'Blouse medicale' },
+	{ image: '/images/gallery12.jpg', label: 'Tenue de travail' },
+	{ image: '/images/gallery13.jpg', label: 'Tenue de travail' },
+	{ image: '/images/gallery14.jpg', label: 'Tenue de travail' },
+	{ image: '/images/gallery15.jpg', label: 'Uniorme scolaire' },
+	{ image: '/images/gallery16.jpg', label: 'Uniorme scolaire' },
 ];
-
-// Duplicate to create 20 items for the marquee
-const items = Array.from({ length: 20 }, (_, i) => baseItems[i % baseItems.length]);
 ---
 
-<section
-	id="galerie"
-	class="relative scroll-mt-24 bg-background py-24 md:py-32"
-	lang="fr"
-	aria-labelledby="gallery-heading"
->
-	<div class="mx-auto max-w-7xl px-6">
-		<div class="mb-12 max-w-2xl md:mb-16">
-			<p class="mb-3 text-[11px] font-semibold uppercase tracking-[0.35em] text-primary md:text-xs">Galerie</p>
-			<h2 id="gallery-heading" class="font-display text-4xl font-semibold tracking-tight text-foreground md:text-5xl lg:text-6xl">
-				Nos créations vestimentaires
+<section class="marquee-section relative overflow-hidden bg-background py-24">
+	<!-- Cinematic Background Gradient -->
+	<div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(198,161,95,0.08),transparent_70%),radial-gradient(ellipse_70%_40%_at_50%_100%,rgba(0,0,42,0.12),transparent_60%)]"></div>
+	
+	<!-- Content Container -->
+	<div class="relative z-10 w-full px-6">
+		<!-- Header -->
+		<div class="mb-16 text-center">
+			<p class="mb-4 text-[11px] font-semibold uppercase tracking-[0.35em] text-primary md:text-xs">
+				Nos Réalisations
+			</p>
+			<h2 class="font-display text-4xl font-semibold leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
+				Galerie Premium
 			</h2>
-			<p class="mt-4 text-base leading-relaxed text-foreground/60 md:text-lg">
-				Aperçu de nos toges, uniformes scolaires, tenues de travail et vêtements médicaux — confectionnés avec
-				précision et qualité.
+			<p class="mt-6 max-w-2xl mx-auto text-base font-normal leading-relaxed text-foreground/60 md:text-lg">
+				Découvrez notre savoir-faire à travers une sélection de nos créations les plus emblématiques.
 			</p>
 		</div>
 
-		<div class="gallery-marquee-container overflow-hidden">
-			<div class="gallery-marquee-track flex gap-4 sm:gap-5 lg:gap-6 xl:gap-8">
+		<!-- Infinite Marquee Carousel -->
+		<div class="marquee-container relative overflow-hidden perspective-1000">
+			<!-- Single Row - Left to Right -->
+			<div class="marquee-track marquee-track-left flex gap-6 transform-style-3d">
 				{
-					[...items, ...items].map((item, i) => (
-						<li class="flex-shrink-0 w-[calc(100vw-3rem)] sm:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1rem)] xl:w-[calc(25%-1rem)]">
-							<a
-								href="/products"
-								class="gallery-tile group relative block aspect-[4/5] overflow-hidden rounded-2xl border border-primary/15 bg-surface/50 shadow-[0_8px_32px_-12px_rgba(0,0,0,0.4)] outline-none ring-offset-2 ring-offset-background transition focus-visible:ring-2 focus-visible:ring-primary md:aspect-[3/4] md:rounded-3xl"
-							>
-								<figure class="relative m-0 h-full w-full">
+					galleryItems.map((item, index) => (
+						<div
+							class={`marquee-card group relative flex-shrink-0 w-64 h-80 rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 ease-out border border-primary/30`}
+							style={`animation-delay: ${index * 0.1}s`}
+						>
+							<!-- Image Container -->
+							<div class="relative h-full w-full">
 								<img
 									src={item.image}
 									alt={item.label}
-									class="gallery-img h-full w-full object-contain will-change-transform"
-									width="600"
-									height="750"
-									loading={i < 5 ? 'eager' : 'lazy'}
+									class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+									loading="lazy"
 									decoding="async"
 								/>
-								<div
-									class="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-90 md:opacity-95"
-									aria-hidden="true"
+								<!-- Cinematic Overlay -->
+								<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-40"></div>
+								<!-- Gold Accent Border -->
+								<div class="absolute inset-0 rounded-3xl border border-primary/0 transition-all duration-500 group-hover:border-primary/30"></div>
+								<!-- 3D Lighting Effect -->
+								<div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+							</div>
+							<!-- Label -->
+							<div class="absolute bottom-0 left-0 right-0 p-6">
+								<p class="text-sm font-semibold uppercase tracking-wider text-foreground transition-colors duration-300 group-hover:text-primary">
+									{item.label}
+								</p>
+							</div>
+						</div>
+					))
+				}
+				<!-- Duplicate for seamless loop -->
+				{
+					galleryItems.map((item, index) => (
+						<div
+							class={`marquee-card group relative flex-shrink-0 w-64 h-80 rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 ease-out border border-primary/30`}
+							style={`animation-delay: ${(index + galleryItems.length) * 0.1}s`}
+						>
+							<div class="relative h-full w-full">
+								<img
+									src={item.image}
+									alt={item.label}
+									class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+									loading="lazy"
+									decoding="async"
 								/>
-								<figcaption class="absolute inset-x-0 bottom-0 z-10 p-5 md:p-6">
-									<span class="block text-[10px] font-semibold uppercase tracking-[0.28em] text-primary/90 md:text-[11px]">
-										Confection Univers
-									</span>
-									<span class="mt-1 block font-display text-lg font-semibold leading-tight text-paper md:text-xl">
-										{item.label}
-									</span>
-								</figcaption>
-							</figure>
-							</a>
-						</li>
+								<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-40"></div>
+								<div class="absolute inset-0 rounded-3xl border border-primary/0 transition-all duration-500 group-hover:border-primary/30"></div>
+								<div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+							</div>
+							<div class="absolute bottom-0 left-0 right-0 p-6">
+								<p class="text-sm font-semibold uppercase tracking-wider text-foreground transition-colors duration-300 group-hover:text-primary">
+									{item.label}
+								</p>
+							</div>
+						</div>
 					))
 				}
 			</div>
 		</div>
 	</div>
+
+	<!-- Bottom Fade for Sharp Transition -->
+	<div class="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent"></div>
 </section>
 
 <style>
-	@keyframes marquee-scroll {
+	/* 3D Perspective Container */
+	.perspective-1000 {
+		perspective: 1000px;
+	}
+
+	.transform-style-3d {
+		transform-style: preserve-3d;
+	}
+
+	/* Marquee Track Animation - Left to Right (Smoother) */
+	.marquee-track-left {
+		animation: scrollLeft 50s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+		will-change: transform;
+	}
+
+	/* Pause on hover */
+	.marquee-container:hover .marquee-track-left {
+		animation-play-state: paused;
+	}
+
+	/* Card Base Styles */
+	.marquee-card {
+		transform-style: preserve-3d;
+		transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+		backface-visibility: hidden;
+	}
+
+	/* Card Hover Effects - 3D */
+	.marquee-card:hover {
+		transform: scale(1.08) translateY(-12px) rotateX(5deg) rotateY(-5deg);
+		box-shadow: 
+			0 30px 80px -20px rgba(0, 0, 42, 0.6),
+			0 15px 40px -10px rgba(198, 161, 95, 0.4),
+			0 5px 15px -5px rgba(198, 161, 95, 0.2),
+			inset 0 2px 0 rgba(255, 255, 255, 0.15);
+		z-index: 20;
+	}
+
+	/* Image 3D Effect */
+	.marquee-card img {
+		transform: translateZ(0);
+		transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+	}
+
+	.marquee-card:hover img {
+		transform: translateZ(20px) scale(1.1);
+	}
+
+	/* Label 3D Effect */
+	.marquee-card p {
+		transform: translateZ(30px);
+		transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), color 0.3s ease;
+	}
+
+	.marquee-card:hover p {
+		transform: translateZ(40px);
+	}
+
+	/* Keyframes - Smoother scrolling */
+	@keyframes scrollLeft {
 		0% {
-			transform: translateX(0);
+			transform: translateX(0) translateZ(0);
 		}
 		100% {
-			transform: translateX(-50%);
+			transform: translateX(-50%) translateZ(0);
 		}
 	}
 
-	@media (prefers-reduced-motion: no-preference) {
-		.gallery-marquee-track {
-			animation: marquee-scroll 40s linear infinite;
-		}
-
-		.gallery-marquee-container:hover .gallery-marquee-track {
-			animation-play-state: paused;
-		}
-
-		.gallery-img {
-			transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
-		}
-		.gallery-tile:hover .gallery-img,
-		.gallery-tile:focus-visible .gallery-img {
-			transform: scale(1.08);
-		}
-		.gallery-tile {
-			transition:
-				box-shadow 0.45s ease,
-				border-color 0.45s ease,
-				transform 0.45s ease;
-		}
-		.gallery-tile:hover,
-		.gallery-tile:focus-visible {
-			box-shadow: 0 28px 56px -16px rgba(0, 0, 0, 0.45);
-			border-color: rgba(198, 161, 95, 0.35);
-			transform: translateY(-4px);
-		}
-	}
+	/* Reduced Motion */
 	@media (prefers-reduced-motion: reduce) {
-		.gallery-marquee-track {
+		.marquee-track-left {
 			animation: none;
 		}
-		.gallery-tile:hover,
-		.gallery-tile:focus-visible {
+
+		.marquee-card:hover {
 			transform: none;
+		}
+
+		.marquee-card:hover img {
+			transform: none;
+		}
+
+		.marquee-card:hover p {
+			transform: none;
+		}
+	}
+
+	/* Mobile Optimization */
+	@media (max-width: 768px) {
+		.marquee-card {
+			width: 48vw !important;
+		}
+
+		.marquee-track-left {
+			animation-duration: 35s;
+		}
+
+		.marquee-card:hover {
+			transform: scale(1.05) translateY(-8px);
 		}
 	}
 </style>

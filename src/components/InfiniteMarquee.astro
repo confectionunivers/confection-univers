@@ -1,0 +1,241 @@
+---
+// Gallery items with alternating heights for asymmetrical effect
+const galleryItems = [
+	{ image: '/images/gallery1.jpg', height: 'h-64', label: 'Toges de graduation' },
+	{ image: '/images/gallery2.jpg', height: 'h-80', label: 'Tenue de travail' },
+	{ image: '/images/gallery3.jpg', height: 'h-72', label: 'Toges de graduation' },
+	{ image: '/images/gallery4.jpg', height: 'h-96', label: 'Uniorme scolaire' },
+	{ image: '/images/gallery5.jpg', height: 'h-64', label: 'Uniorme scolaire' },
+	{ image: '/images/gallery6.jpg', height: 'h-80', label: 'Toges pour enfants' },
+	{ image: '/images/gallery7.jpg', height: 'h-72', label: 'Toge de graduation' },
+	{ image: '/images/gallery8.jpg', height: 'h-96', label: 'Kimono' },
+	{ image: '/images/gallery9.jpg', height: 'h-64', label: 'Kimono' },
+	{ image: '/images/gallery10.jpg', height: 'h-80', label: 'Blouse sage femme' },
+	{ image: '/images/gallery11.jpg', height: 'h-72', label: 'Blouse medicale' },
+	{ image: '/images/gallery12.jpg', height: 'h-96', label: 'Tenue de travail' },
+	{ image: '/images/gallery13.jpg', height: 'h-64', label: 'Tenue de travail' },
+	{ image: '/images/gallery14.jpg', height: 'h-80', label: 'Tenue de travail' },
+	{ image: '/images/gallery15.jpg', height: 'h-72', label: 'Uniorme scolaire' },
+	{ image: '/images/gallery16.jpg', height: 'h-96', label: 'Uniorme scolaire' },
+];
+---
+
+<section class="marquee-section relative overflow-hidden bg-background py-24">
+	<!-- Cinematic Background Gradient -->
+	<div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(198,161,95,0.08),transparent_70%),radial-gradient(ellipse_70%_40%_at_50%_100%,rgba(0,0,42,0.12),transparent_60%)]"></div>
+	
+	<!-- Content Container -->
+	<div class="relative z-10 mx-auto max-w-7xl px-6">
+		<!-- Header -->
+		<div class="mb-16 text-center">
+			<p class="mb-4 text-[11px] font-semibold uppercase tracking-[0.35em] text-primary md:text-xs">
+				Nos Réalisations
+			</p>
+			<h2 class="font-display text-4xl font-semibold leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
+				Galerie Premium
+			</h2>
+			<p class="mt-6 max-w-2xl mx-auto text-base font-normal leading-relaxed text-foreground/60 md:text-lg">
+				Découvrez notre savoir-faire à travers une sélection de nos créations les plus emblématiques.
+			</p>
+		</div>
+
+		<!-- Infinite Marquee Carousel -->
+		<div class="marquee-container relative overflow-hidden">
+			<!-- First Row - Left to Right -->
+			<div class="marquee-track marquee-track-left mb-8 flex gap-6">
+				{
+					galleryItems.map((item, index) => (
+						<div
+							class={`marquee-card group relative flex-shrink-0 w-64 ${item.height} rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 ease-out`}
+							style={`animation-delay: ${index * 0.1}s`}
+						>
+							<!-- Image Container -->
+							<div class="relative h-full w-full">
+								<img
+									src={item.image}
+									alt={item.label}
+									class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+									loading="lazy"
+									decoding="async"
+								/>
+								<!-- Cinematic Overlay -->
+								<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-40"></div>
+								<!-- Gold Accent Border -->
+								<div class="absolute inset-0 rounded-3xl border border-primary/0 transition-all duration-500 group-hover:border-primary/30"></div>
+								<!-- 3D Lighting Effect -->
+								<div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+							</div>
+							<!-- Label -->
+							<div class="absolute bottom-0 left-0 right-0 p-6">
+								<p class="text-sm font-semibold uppercase tracking-wider text-foreground transition-colors duration-300 group-hover:text-primary">
+									{item.label}
+								</p>
+							</div>
+						</div>
+					))
+				}
+				<!-- Duplicate for seamless loop -->
+				{
+					galleryItems.map((item, index) => (
+						<div
+							class={`marquee-card group relative flex-shrink-0 w-64 ${item.height} rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 ease-out`}
+							style={`animation-delay: ${(index + galleryItems.length) * 0.1}s`}
+						>
+							<div class="relative h-full w-full">
+								<img
+									src={item.image}
+									alt={item.label}
+									class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+									loading="lazy"
+									decoding="async"
+								/>
+								<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-40"></div>
+								<div class="absolute inset-0 rounded-3xl border border-primary/0 transition-all duration-500 group-hover:border-primary/30"></div>
+								<div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+							</div>
+							<div class="absolute bottom-0 left-0 right-0 p-6">
+								<p class="text-sm font-semibold uppercase tracking-wider text-foreground transition-colors duration-300 group-hover:text-primary">
+									{item.label}
+								</p>
+							</div>
+						</div>
+					))
+				}
+			</div>
+
+			<!-- Second Row - Right to Left (Reversed Order) -->
+			<div class="marquee-track marquee-track-right flex gap-6">
+				{
+					[...galleryItems].reverse().map((item, index) => (
+						<div
+							class={`marquee-card group relative flex-shrink-0 w-64 ${item.height} rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 ease-out`}
+							style={`animation-delay: ${index * 0.1}s`}
+						>
+							<div class="relative h-full w-full">
+								<img
+									src={item.image}
+									alt={item.label}
+									class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+									loading="lazy"
+									decoding="async"
+								/>
+								<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-40"></div>
+								<div class="absolute inset-0 rounded-3xl border border-primary/0 transition-all duration-500 group-hover:border-primary/30"></div>
+								<div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+							</div>
+							<div class="absolute bottom-0 left-0 right-0 p-6">
+								<p class="text-sm font-semibold uppercase tracking-wider text-foreground transition-colors duration-300 group-hover:text-primary">
+									{item.label}
+								</p>
+							</div>
+						</div>
+					))
+				}
+				<!-- Duplicate for seamless loop -->
+				{
+					[...galleryItems].reverse().map((item, index) => (
+						<div
+							class={`marquee-card group relative flex-shrink-0 w-64 ${item.height} rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 ease-out`}
+							style={`animation-delay: ${(index + galleryItems.length) * 0.1}s`}
+						>
+							<div class="relative h-full w-full">
+								<img
+									src={item.image}
+									alt={item.label}
+									class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+									loading="lazy"
+									decoding="async"
+								/>
+								<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-40"></div>
+								<div class="absolute inset-0 rounded-3xl border border-primary/0 transition-all duration-500 group-hover:border-primary/30"></div>
+								<div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+							</div>
+							<div class="absolute bottom-0 left-0 right-0 p-6">
+								<p class="text-sm font-semibold uppercase tracking-wider text-foreground transition-colors duration-300 group-hover:text-primary">
+									{item.label}
+								</p>
+							</div>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</div>
+
+	<!-- Bottom Fade for Sharp Transition -->
+	<div class="pointer-events-none absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent"></div>
+</section>
+
+<style>
+	/* Marquee Track Animation - Left to Right */
+	.marquee-track-left {
+		animation: scrollLeft 40s linear infinite;
+	}
+
+	/* Marquee Track Animation - Right to Left */
+	.marquee-track-right {
+		animation: scrollRight 45s linear infinite;
+	}
+
+	/* Pause on hover */
+	.marquee-container:hover .marquee-track-left,
+	.marquee-container:hover .marquee-track-right {
+		animation-play-state: paused;
+	}
+
+	/* Card Hover Effects */
+	.marquee-card:hover {
+		transform: scale(1.05) translateY(-8px);
+		box-shadow: 
+			0 20px 60px -12px rgba(0, 0, 42, 0.5),
+			0 8px 24px -8px rgba(198, 161, 95, 0.3),
+			inset 0 1px 0 rgba(255, 255, 255, 0.1);
+		z-index: 10;
+	}
+
+	/* Keyframes */
+	@keyframes scrollLeft {
+		0% {
+			transform: translateX(0);
+		}
+		100% {
+			transform: translateX(-50%);
+		}
+	}
+
+	@keyframes scrollRight {
+		0% {
+			transform: translateX(-50%);
+		}
+		100% {
+			transform: translateX(0);
+		}
+	}
+
+	/* Reduced Motion */
+	@media (prefers-reduced-motion: reduce) {
+		.marquee-track-left,
+		.marquee-track-right {
+			animation: none;
+		}
+
+		.marquee-card:hover {
+			transform: none;
+		}
+	}
+
+	/* Mobile Optimization */
+	@media (max-width: 768px) {
+		.marquee-card {
+			width: 48vw !important;
+		}
+
+		.marquee-track-left {
+			animation-duration: 30s;
+		}
+
+		.marquee-track-right {
+			animation-duration: 35s;
+		}
+	}
+</style>
