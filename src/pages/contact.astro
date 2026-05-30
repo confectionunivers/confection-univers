@@ -90,7 +90,7 @@ import Footer from '../components/Footer.astro';
 					<!-- Contact Form -->
 					<div class="rounded-3xl border border-ink/10 bg-surface/10 p-8 md:p-12">
 						<h3 class="font-display text-2xl font-semibold text-ink mb-8">Demande de devis</h3>
-						<form class="space-y-6" action="#" method="POST">
+						<form id="contact-form" class="space-y-6">
 							<div class="grid gap-6 md:grid-cols-2">
 								<div class="space-y-2">
 									<label for="name" class="text-sm font-semibold uppercase tracking-widest text-ink/60">
@@ -200,6 +200,7 @@ import Footer from '../components/Footer.astro';
 
 							<button
 								type="submit"
+								id="submit-button"
 								class="w-full rounded-full bg-primary px-8 py-4 text-[13px] font-semibold uppercase tracking-[0.18em] text-background shadow-[0_8px_32px_-8px_rgba(198,161,95,0.45)] transition duration-500 hover:shadow-[0_12px_40px_-6px_rgba(198,161,95,0.55)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
 							>
 								Envoyer ma demande
@@ -213,3 +214,137 @@ import Footer from '../components/Footer.astro';
 		<Footer />
 	</main>
 </Layout>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const form = document.getElementById('contact-form') as HTMLFormElement;
+		const submitButton = form?.querySelector('#submit-button') as HTMLButtonElement;
+
+		if (form) {
+			form.addEventListener('submit', async (e) => {
+				e.preventDefault();
+
+				// Disable submit button and show loading state
+				if (submitButton) {
+					submitButton.disabled = true;
+					submitButton.textContent = 'Envoi en cours...';
+				}
+
+				// Collect form data
+				const formData = new FormData(form);
+				const data = {
+					name: formData.get('name'),
+					email: formData.get('email'),
+					phone: formData.get('phone'),
+					company: formData.get('company'),
+					service: formData.get('service'),
+					quantity: formData.get('quantity'),
+					message: formData.get('message'),
+				};
+
+				try {
+					const response = await fetch('/api/send-devis', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify(data),
+					});
+
+					console.log('Response status:', response.status);
+					console.log('Response ok:', response.ok);
+					console.log('Content-Type:', response.headers.get('content-type'));
+
+					// Check content-type before parsing JSON
+					const contentType = response.headers.get('content-type');
+					const isJson = contentType && contentType.includes('application/json');
+
+					// Check if response is ok before parsing JSON
+					if (!response.ok) {
+						let errorMessage = 'Erreur lors de l\'envoi du message';
+						if (isJson) {
+							try {
+								const errorData = await response.json();
+								errorMessage = errorData.error || errorData.details || errorMessage;
+								console.error('API Error:', errorData);
+							} catch (e) {
+								console.error('Failed to parse error response as JSON:', e);
+							}
+						} else {
+							// If not JSON, read as text to see the actual error
+							const errorText = await response.text();
+							console.error('Non-JSON error response:', errorText);
+							errorMessage = `Erreur HTTP ${response.status}: ${errorText || response.statusText}`;
+						}
+						showNotification(`Erreur: ${errorMessage}`, 'error');
+						return;
+					}
+
+					let result;
+					if (isJson) {
+						result = await response.json();
+						console.log('API Response:', result);
+					} else {
+						// If not JSON, read as text
+						const responseText = await response.text();
+						console.error('Non-JSON response:', responseText);
+						showNotification('Erreur: Le serveur a renvoyé une réponse invalide', 'error');
+						return;
+					}
+
+					if (result.success) {
+						// Show success notification
+						showNotification('Message envoyé avec succès ! Nous vous répondrons sous 1 à 2 jours ouvrables.', 'success');
+						form.reset();
+					} else {
+						// Show error notification with details
+						const errorMessage = result.error || result.details || 'Erreur lors de l\'envoi du message. Veuillez réessayer.';
+						showNotification(`Erreur: ${errorMessage}`, 'error');
+						console.error('API Error:', result);
+					}
+				} catch (error) {
+					console.error('Fetch Error:', error);
+					showNotification('Erreur de connexion. Veuillez vérifier votre internet et réessayer.', 'error');
+				} finally {
+					// Re-enable submit button
+					if (submitButton) {
+						submitButton.disabled = false;
+						submitButton.textContent = 'Envoyer ma demande';
+					}
+				}
+			});
+		}
+
+		function showNotification(message: string, type: 'success' | 'error') {
+			// Remove existing notification if any
+			const existingNotification = document.getElementById('contact-notification');
+			if (existingNotification) {
+				existingNotification.remove();
+			}
+
+			// Create notification element
+			const notification = document.createElement('div');
+			notification.id = 'contact-notification';
+			notification.className = `fixed top-4 right-4 z-50 px-6 py-4 rounded-xl shadow-lg text-white font-medium transition-all transform ${
+				type === 'success' ? 'bg-green-600' : 'bg-red-600'
+			}`;
+			notification.textContent = message;
+
+			// Add to DOM
+			document.body.appendChild(notification);
+
+			// Animate in
+			requestAnimationFrame(() => {
+				notification.style.opacity = '1';
+				notification.style.transform = 'translateY(0)';
+			});
+
+			// Remove after 5 seconds
+			setTimeout(() => {
+				notification.style.opacity = '0';
+				notification.style.transform = 'translateY(-20px)';
+				setTimeout(() => notification.remove(), 300);
+			}, 5000);
+		}
+	});
+</script>

@@ -1,14 +1,40 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(import.meta.env.RESEND_API_KEY);
-
 export async function POST({ request }) {
+  console.log('=== API send-devis called ===');
+  
+  // Global try-catch to ensure we always return JSON
   try {
-    const body = await request.json();
-    const { name, email, phone, clothing_type, quantity, customization, message } = body;
+    console.log('Step 1: Checking environment variables');
+    
+    // Use Astro's standard way to access environment variables
+    const apiKey = import.meta.env.RESEND_API_KEY;
+    console.log('API Key found:', !!apiKey);
+    console.log('API Key length:', apiKey?.length);
+    
+    // Check if API key is available
+    if (!apiKey || apiKey === 'ta_nouvelle_cle_ici') {
+      console.error('RESEND_API_KEY is not properly configured');
+      return new Response(
+        JSON.stringify({ error: 'Server configuration error: API key missing or not configured' }),
+        { status: 500, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
 
-    // Validate required fields
-    if (!name || !email || !clothing_type || !quantity) {
+    console.log('Step 2: Initializing Resend client');
+    const resend = new Resend(apiKey);
+    console.log('Resend client initialized successfully');
+
+    console.log('Step 3: Parsing request body');
+    const body = await request.json();
+    const { name, email, phone, clothing_type, service, company, quantity, customization, message } = body;
+
+    console.log('Received form data:', { name, email, itemType: clothing_type || service });
+
+    // Validate required fields (support both form types)
+    const itemType = clothing_type || service;
+    if (!name || !email || !itemType) {
+      console.error('Missing required fields:', { name: !!name, email: !!email, itemType: !!itemType });
       return new Response(
         JSON.stringify({ error: 'Missing required fields' }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
@@ -92,9 +118,16 @@ export async function POST({ request }) {
           </div>
           ` : ''}
           
+          ${company ? `
           <div class="field">
-            <div class="label">Type de vêtement</div>
-            <div class="value">${clothing_type}</div>
+            <div class="label">Entreprise / Institution</div>
+            <div class="value">${company}</div>
+          </div>
+          ` : ''}
+          
+          <div class="field">
+            <div class="label">Type de service</div>
+            <div class="value">${clothing_type || service}</div>
           </div>
           
           <div class="field">
@@ -124,6 +157,10 @@ export async function POST({ request }) {
     `;
 
     // Send email via Resend
+    console.log('Attempting to send email via Resend...');
+    console.log('API Key exists:', !!import.meta.env.RESEND_API_KEY);
+    console.log('API Key length:', import.meta.env.RESEND_API_KEY?.length);
+    
     const data = await resend.emails.send({
       from: 'onboarding@resend.dev',
       to: 'confectionunivers@gmail.com',
@@ -132,14 +169,24 @@ export async function POST({ request }) {
       replyTo: email,
     });
 
+    console.log('Email sent successfully:', data);
     return new Response(
       JSON.stringify({ success: true, data }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   } catch (error) {
     console.error('Error sending email:', error);
+    console.error('Error details:', {
+      message: error.message,
+      name: error.name,
+      stack: error.stack,
+    });
     return new Response(
-      JSON.stringify({ error: 'Failed to send email', details: error.message }),
+      JSON.stringify({ 
+        error: 'Failed to send email', 
+        details: error.message,
+        name: error.name 
+      }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
