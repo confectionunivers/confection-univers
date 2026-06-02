@@ -2,8 +2,8 @@
 const LOGOS = ['Maison', 'Heritage', 'Atelier', 'Luxe', 'Edition', 'Studio', 'Confection', 'Univers'];
 ---
 
-<section class="overflow-hidden border-y border-primary/15 bg-background py-20">
-	<div class="flex w-max animate-marquee-h whitespace-nowrap">
+<section class="overflow-hidden bg-background py-20 border-0 relative">
+	<div class="marquee-wrapper flex w-max whitespace-nowrap">
 		{
 			[0, 1, 2, 3].map(() => (
 				<div class="flex items-center gap-20 px-10">
@@ -20,3 +20,22 @@ const LOGOS = ['Maison', 'Heritage', 'Atelier', 'Luxe', 'Edition', 'Studio', 'Co
 		}
 	</div>
 </section>
+
+<style>
+	.marquee-wrapper {
+		animation: marquee-scroll 30s linear infinite;
+	}
+
+	.marquee-wrapper:hover {
+		animation-play-state: paused;
+	}
+
+	@keyframes marquee-scroll {
+		0% {
+			transform: translateX(0);
+		}
+		100% {
+			transform: translateX(-50%);
+		}
+	}
+</style>

@@ -1,0 +1,111 @@
+---
+// Magnetic Cursor Component - Noryx Style
+---
+
+<div id="magnetic-cursor" class="fixed pointer-events-none z-[9999] hidden md:block">
+	<div class="cursor-dot w-2 h-2 bg-primary rounded-full"></div>
+	<div class="cursor-outline w-8 h-8 border-2 border-primary/50 rounded-full transition-all duration-300 ease-out"></div>
+</div>
+
+<style>
+	#magnetic-cursor {
+		transition: transform 0.05s ease-out;
+		will-change: transform;
+	}
+	
+	.cursor-dot {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+	
+	.cursor-outline {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		            height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+		            border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.cursor-outline.hovered {
+		width: 48px;
+		height: 48px;
+		border-color: #c6a15f;
+		background-color: rgba(198, 161, 95, 0.1);
+	}
+
+	.cursor-outline.clicked {
+		width: 32px;
+		height: 32px;
+		border-color: #c6a15f;
+		background-color: rgba(198, 161, 95, 0.2);
+	}
+</style>
+
+<script>
+	import gsap from 'gsap';
+
+	// Magnetic Cursor Effect with Enhanced Inertia
+	const cursor = document.getElementById('magnetic-cursor');
+	const cursorDot = cursor.querySelector('.cursor-dot');
+	const cursorOutline = cursor.querySelector('.cursor-outline');
+
+	let mouseX = 0;
+	let mouseY = 0;
+	let cursorX = 0;
+	let cursorY = 0;
+	let outlineX = 0;
+	let outlineY = 0;
+
+	document.addEventListener('mousemove', (e) => {
+		mouseX = e.clientX;
+		mouseY = e.clientY;
+	});
+
+	// Animate cursor with enhanced inertia
+	function animateCursor() {
+		// Cursor dot follows quickly
+		const dotDx = mouseX - cursorX;
+		const dotDy = mouseY - cursorY;
+		cursorX += dotDx * 0.25;
+		cursorY += dotDy * 0.25;
+		
+		cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+		
+		// Cursor outline follows with more inertia (slower)
+		const outlineDx = mouseX - outlineX;
+		const outlineDy = mouseY - outlineY;
+		outlineX += outlineDx * 0.08;
+		outlineY += outlineDy * 0.08;
+		
+		cursorOutline.style.transform = `translate(${outlineX}px, ${outlineY}px)`;
+		
+		requestAnimationFrame(animateCursor);
+	}
+	
+	animateCursor();
+
+	// Enhanced magnetic effect on interactive elements
+	const magneticElements = document.querySelectorAll('a, button, .service-card, .about-block, .trust-badge');
+	
+	magneticElements.forEach(element => {
+		element.addEventListener('mouseenter', () => {
+			cursorOutline.classList.add('hovered');
+		});
+		
+		element.addEventListener('mouseleave', () => {
+			cursorOutline.classList.remove('hovered');
+		});
+
+		element.addEventListener('mousedown', () => {
+			cursorOutline.classList.add('clicked');
+		});
+
+		element.addEventListener('mouseup', () => {
+			cursorOutline.classList.remove('clicked');
+		});
+	});
+</script>

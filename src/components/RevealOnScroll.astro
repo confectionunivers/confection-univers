@@ -1,0 +1,195 @@
+---
+/**
+ * Generic RevealOnScroll component for premium scroll animations
+ * Uses GSAP + IntersectionObserver for performant scroll-triggered animations
+ * Supports multiple variants: fade-up, fade-left, fade-right, scale-in, clip-reveal
+ * Respects prefers-reduced-motion for accessibility
+ */
+interface Props {
+	variant?: 'fade-up' | 'fade-left' | 'fade-right' | 'scale-in' | 'clip-reveal';
+	delay?: number;
+	duration?: number;
+	stagger?: number;
+	children: any;
+	class?: string;
+}
+
+const { 
+	variant = 'fade-up', 
+	delay = 0, 
+	duration = 0.6, 
+	stagger = 0,
+	children,
+	class: className = '' 
+} = Astro.props;
+
+// Generate unique ID for this instance
+const revealId = `reveal-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div 
+	id={revealId}
+	class={`reveal-on-scroll ${variant} ${className}`}
+	data-variant={variant}
+	data-delay={delay}
+	data-duration={duration}
+	data-stagger={stagger}
+>
+	{children}
+</div>
+
+<style>
+	/* Initial states for different variants */
+	.reveal-on-scroll.fade-up {
+		opacity: 0;
+		transform: translateY(30px);
+		transition: none;
+	}
+
+	.reveal-on-scroll.fade-left {
+		opacity: 0;
+		transform: translateX(-40px);
+		transition: none;
+	}
+
+	.reveal-onScroll.fade-right {
+		opacity: 0;
+		transform: translateX(40px);
+		transition: none;
+	}
+
+	.reveal-on-scroll.scale-in {
+		opacity: 0;
+		transform: scale(0.95);
+		transition: none;
+	}
+
+	.reveal-on-scroll.clip-reveal {
+		clip-path: inset(0 100% 0 0);
+		transition: none;
+	}
+
+	/* Animated states */
+	.reveal-on-scroll.revealed.fade-up,
+	.reveal-on-scroll.revealed.fade-left,
+	.reveal-on-scroll.revealed.fade-right,
+	.reveal-on-scroll.revealed.scale-in {
+		opacity: 1;
+		transform: translateY(0) translateX(0) scale(1);
+	}
+
+	.reveal-on-scroll.revealed.clip-reveal {
+		clip-path: inset(0 0 0 0);
+	}
+
+	/* Respect prefers-reduced-motion */
+	@media (prefers-reduced-motion: reduce) {
+		.reveal-on-scroll {
+			opacity: 1 !important;
+			transform: none !important;
+			clip-path: none !important;
+			transition: none !important;
+		}
+	}
+</style>
+
+<script>
+	// Check for reduced motion preference
+	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	if (!prefersReducedMotion) {
+		import gsap from 'gsap';
+
+		// Intersection Observer for scroll-triggered animations
+		const observerOptions = {
+			threshold: 0.15,
+			rootMargin: '0px 0px -50px 0px'
+		};
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					const element = entry.target;
+					const variant = element.dataset.variant || 'fade-up';
+					const delay = parseFloat(element.dataset.delay) || 0;
+					const duration = parseFloat(element.dataset.duration) || 0.6;
+					const stagger = parseFloat(element.dataset.stagger) || 0;
+
+					// Add revealed class for CSS transitions
+					element.classList.add('revealed');
+
+					// GSAP animation for more control
+					const timeline = gsap.timeline({ delay });
+
+					switch (variant) {
+						case 'fade-up':
+							timeline.to(element, {
+								opacity: 1,
+								y: 0,
+								duration,
+								ease: 'power2.out',
+								clearProps: 'transform'
+							});
+							break;
+						case 'fade-left':
+							timeline.to(element, {
+								opacity: 1,
+								x: 0,
+								duration,
+								ease: 'power2.out',
+								clearProps: 'transform'
+							});
+							break;
+						case 'fade-right':
+							timeline.to(element, {
+								opacity: 1,
+								x: 0,
+								duration,
+								ease: 'power2.out',
+								clearProps: 'transform'
+							});
+							break;
+						case 'scale-in':
+							timeline.to(element, {
+								opacity: 1,
+								scale: 1,
+								duration,
+								ease: 'back.out(1.2)',
+								clearProps: 'transform'
+							});
+							break;
+						case 'clip-reveal':
+							timeline.to(element, {
+								clipPath: 'inset(0 0 0 0)',
+								duration: duration * 1.2,
+								ease: 'power2.inOut'
+							});
+							break;
+					}
+
+					// Handle stagger for child elements
+					if (stagger > 0) {
+						const children = element.children;
+						if (children.length > 0) {
+							gsap.from(Array.from(children), {
+								opacity: 0,
+								y: variant === 'fade-left' || variant === 'fade-right' ? 20 : 15,
+								duration: duration * 0.8,
+								ease: 'power2.out',
+								stagger,
+								clearProps: 'transform'
+							});
+						}
+					}
+
+					observer.unobserve(element);
+				}
+			});
+		}, observerOptions);
+
+		// Observe all reveal elements
+		document.querySelectorAll('.reveal-on-scroll').forEach((el) => {
+			observer.observe(el);
+		});
+	}
+</script>

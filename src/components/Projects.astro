@@ -24,13 +24,19 @@ const PROJECTS = [
 ];
 ---
 
-<section class="bg-background py-32">
+<section class="premium-section py-32 border-0">
+	<!-- Premium Golden Glow -->
+	<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+		<div class="absolute left-[15%] top-[30%] w-[600px] h-[500px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.12) 0%, transparent 70%); filter: blur(120px);"></div>
+		<div class="absolute right-[15%] bottom-[30%] w-[500px] h-[400px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.08) 0%, transparent 70%); filter: blur(100px);"></div>
+	</div>
+
 	<div class="mx-auto max-w-7xl px-6">
 		<div
-			class="mb-24 flex flex-col items-center justify-between gap-8 border-b border-primary/15 pb-16 md:flex-row"
+			class="mb-24 flex flex-col items-center justify-between gap-8 border-b border-[rgba(250,204,107,0.2)] pb-16 md:flex-row"
 		>
-			<div class="text-sm font-black uppercase tracking-[0.3em] text-primary">{'{ 05 }'} # Nos projets</div>
-			<div class="font-display text-4xl font-bold uppercase italic tracking-tighter text-foreground md:text-6xl">
+			<div class="text-sm font-black uppercase tracking-[0.2em] premium-subtitle">{'{ 05 }'} # Nos projets</div>
+			<div class="font-display text-4xl font-bold uppercase italic tracking-tighter text-[#F9FAFB] md:text-6xl">
 				Projets de fabrication
 			</div>
 		</div>
@@ -38,30 +44,30 @@ const PROJECTS = [
 		<div class="space-y-24">
 			{
 				PROJECTS.map((p) => (
-					<div class="sticky top-32 grid items-center gap-16 border-t border-primary/10 bg-background py-16 lg:grid-cols-2">
-						<div class="group relative aspect-[16/10] overflow-hidden rounded-[3.5rem] shadow-2xl ring-1 ring-primary/10">
+					<div class="sticky top-32 grid items-center gap-16 border-t border-[rgba(250,204,107,0.15)] py-16 lg:grid-cols-2">
+						<div class="group relative aspect-[16/10] overflow-hidden rounded-[1.5rem] premium-card ring-1 ring-[rgba(250,204,107,0.2)]">
 							<img
 								src={`/images/${p.img}`}
 								class="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
 								alt={p.title}
 							/>
-							<div class="pointer-events-none absolute inset-0 bg-background/25 transition-colors group-hover:bg-transparent" />
+							<div class="pointer-events-none absolute inset-0 bg-[#050816]/25 transition-colors group-hover:bg-transparent" />
 						</div>
 
 						<div class="reveal-view space-y-10">
-							<div class="flex gap-10 text-[11px] font-black uppercase tracking-[0.3em] text-foreground/45">
+							<div class="flex gap-10 text-[11px] font-black uppercase tracking-[0.2em] text-foreground/45">
 								<div>Année : {p.year}</div>
 								<div>Catégorie : {p.cat}</div>
 							</div>
-							<h3 class="font-display text-5xl font-bold uppercase leading-[0.9] tracking-tighter text-foreground lg:text-7xl">
+							<h3 class="font-display text-5xl font-bold uppercase leading-[0.9] tracking-tighter text-[#F9FAFB] lg:text-7xl">
 								{p.title}
 							</h3>
-							<p class="max-w-md text-lg font-medium text-foreground/50">
+							<p class="max-w-md text-lg font-medium text-foreground/70 leading-[1.6]">
 								{p.description}
 							</p>
 							<button
 								type="button"
-								class="rounded-full border border-primary/30 bg-paper px-12 py-5 text-[11px] font-black uppercase tracking-widest text-ink transition hover:scale-105 hover:bg-primary hover:text-background"
+								class="premium-button rounded-full px-12 py-5 text-[11px] font-black uppercase tracking-widest text-background transition"
 							>
 								Voir les détails
 							</button>
@@ -72,3 +78,41 @@ const PROJECTS = [
 		</div>
 	</div>
 </section>
+
+<script>
+	import gsap from 'gsap';
+
+	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	if (!prefersReducedMotion) {
+		const projectItems = document.querySelectorAll('.sticky');
+		
+		projectItems.forEach((item, index) => {
+			item.style.opacity = '0';
+			item.style.transform = index % 2 === 0 ? 'translateX(-50px)' : 'translateX(50px)';
+			item.style.clipPath = 'inset(0 100% 0 0)';
+			item.style.willChange = 'transform, opacity, clip-path';
+		});
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					const index = Array.from(projectItems).indexOf(entry.target);
+					
+					gsap.to(entry.target, {
+						opacity: 1,
+						x: 0,
+						clipPath: 'inset(0 0 0 0)',
+						duration: 0.9,
+						ease: 'power2.out',
+						clearProps: 'transform'
+					});
+					
+					observer.unobserve(entry.target);
+				}
+			});
+		}, { threshold: 0.2, rootMargin: '0px 0px -100px 0px' });
+
+		projectItems.forEach((item) => observer.observe(item));
+	}
+</script>

@@ -1,0 +1,62 @@
+---
+---
+
+<section class="relative bg-background py-20 border-0">
+	<div class="mx-auto max-w-7xl px-6">
+		<div class="grid grid-cols-2 gap-8 md:grid-cols-4">
+			<div class="text-center">
+				<div class="number-counter text-5xl md:text-6xl font-display font-bold text-primary mb-2" data-target="500">0</div>
+				<div class="text-sm font-medium text-foreground/70 uppercase tracking-wider">Projets Réalisés</div>
+			</div>
+			<div class="text-center">
+				<div class="number-counter text-5xl md:text-6xl font-display font-bold text-primary mb-2" data-target="98">0</div>
+				<div class="text-sm font-medium text-foreground/70 uppercase tracking-wider">Clients Satisfaits %</div>
+			</div>
+			<div class="text-center">
+				<div class="number-counter text-5xl md:text-6xl font-display font-bold text-primary mb-2" data-target="15">0</div>
+				<div class="text-sm font-medium text-foreground/70 uppercase tracking-wider">Années d'Expérience</div>
+			</div>
+			<div class="text-center">
+				<div class="number-counter text-5xl md:text-6xl font-display font-bold text-primary mb-2" data-target="50">0</div>
+				<div class="text-sm font-medium text-foreground/70 uppercase tracking-wider">Institutions Partenaires</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	import gsap from 'gsap';
+
+	// Number Counter Animation
+	const counters = document.querySelectorAll('.number-counter');
+	
+	const observerOptions = {
+		threshold: 0.5,
+		rootMargin: '0px 0px -100px 0px'
+	};
+
+	const counterObserver = new IntersectionObserver((entries) => {
+		entries.forEach((entry) => {
+			if (entry.isIntersecting) {
+				const counter = entry.target;
+				const target = parseInt(counter.getAttribute('data-target'));
+				
+				gsap.to(counter, {
+					innerHTML: target,
+					duration: 2,
+					ease: 'power2.out',
+					snap: { innerHTML: 1 },
+					onUpdate: function() {
+						counter.innerHTML = Math.round(this.targets()[0].innerHTML);
+					}
+				});
+				
+				counterObserver.unobserve(counter);
+			}
+		});
+	}, observerOptions);
+
+	counters.forEach(counter => {
+		counterObserver.observe(counter);
+	});
+</script>

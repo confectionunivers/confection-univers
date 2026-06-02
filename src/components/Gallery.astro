@@ -20,10 +20,7 @@ const galleryItems = [
 ];
 ---
 
-<section class="marquee-section relative overflow-hidden bg-background py-24">
-	<!-- Cinematic Background Gradient -->
-	<div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(198,161,95,0.08),transparent_70%),radial-gradient(ellipse_70%_40%_at_50%_100%,rgba(0,0,42,0.12),transparent_60%)]"></div>
-	
+<section class="marquee-section relative overflow-hidden bg-background py-24 border-0">
 	<!-- Content Container -->
 	<div class="relative z-10 w-full px-6">
 		<!-- Header -->
@@ -46,15 +43,15 @@ const galleryItems = [
 				{
 					galleryItems.map((item, index) => (
 						<div
-							class={`marquee-card group relative flex-shrink-0 w-64 h-80 rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 ease-out border border-primary/30`}
+							class={`marquee-card group relative flex-shrink-0 w-64 h-80 rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 ease-out border border-primary/30 hover:shadow-xl`}
 							style={`animation-delay: ${index * 0.1}s`}
 						>
 							<!-- Image Container -->
-							<div class="relative h-full w-full">
+							<div class="relative h-full w-full overflow-hidden">
 								<img
 									src={item.image}
 									alt={item.label}
-									class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+									class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
 									loading="lazy"
 									decoding="async"
 								/>
@@ -64,6 +61,12 @@ const galleryItems = [
 								<div class="absolute inset-0 rounded-3xl border border-primary/0 transition-all duration-500 group-hover:border-primary/30"></div>
 								<!-- 3D Lighting Effect -->
 								<div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+								<!-- Discover Button (appears on hover) -->
+								<div class="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
+									<span class="rounded-full bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#00002a] backdrop-blur-sm">
+										Découvrir la gamme
+									</span>
+								</div>
 							</div>
 							<!-- Label -->
 							<div class="absolute bottom-0 left-0 right-0 p-6">
@@ -78,20 +81,26 @@ const galleryItems = [
 				{
 					galleryItems.map((item, index) => (
 						<div
-							class={`marquee-card group relative flex-shrink-0 w-64 h-80 rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 ease-out border border-primary/30`}
+							class={`marquee-card group relative flex-shrink-0 w-64 h-80 rounded-3xl overflow-hidden cursor-pointer transition-all duration-500 ease-out border border-primary/30 hover:shadow-xl`}
 							style={`animation-delay: ${(index + galleryItems.length) * 0.1}s`}
 						>
-							<div class="relative h-full w-full">
+							<div class="relative h-full w-full overflow-hidden">
 								<img
 									src={item.image}
 									alt={item.label}
-									class="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+									class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
 									loading="lazy"
 									decoding="async"
 								/>
 								<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-40"></div>
 								<div class="absolute inset-0 rounded-3xl border border-primary/0 transition-all duration-500 group-hover:border-primary/30"></div>
 								<div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-primary/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+								<!-- Discover Button (appears on hover) -->
+								<div class="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-300 group-hover:opacity-100">
+									<span class="rounded-full bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-wider text-[#00002a] backdrop-blur-sm">
+										Découvrir la gamme
+									</span>
+								</div>
 							</div>
 							<div class="absolute bottom-0 left-0 right-0 p-6">
 								<p class="text-sm font-semibold uppercase tracking-wider text-foreground transition-colors duration-300 group-hover:text-primary">

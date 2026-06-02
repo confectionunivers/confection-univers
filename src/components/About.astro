@@ -1,74 +1,90 @@
 ---
 ---
+<section class="relative z-10 -mt-10 rounded-[4rem] bg-paper py-32 text-ink border-0">
+	<!-- Glow Effects -->
+	<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+		<div class="absolute left-[10%] top-[20%] w-[400px] h-[400px] rounded-full bg-primary/10 blur-[120px]"></div>
+		<div class="absolute right-[15%] bottom-[30%] w-[350px] h-[350px] rounded-full bg-primary-light/10 blur-[100px]"></div>
+	</div>
 
-<section class="relative z-10 -mt-10 rounded-[4rem] bg-paper py-32 text-ink shadow-[0_-20px_80px_-20px_rgba(5,10,20,0.15)]">
 	<div class="mx-auto max-w-7xl px-6">
 		<div class="flex flex-col gap-24 lg:flex-row">
-			<div class="lg:w-1/3">
-				<div class="sticky top-32 space-y-16">
-					<div class="text-sm font-black uppercase tracking-[0.3em] text-primary">
-						
-					</div>
-
-					<div class="space-y-12">
-						<div class="border-b border-ink/10 pb-10">
-							<div
-								class="mb-6 flex items-center justify-between text-[11px] font-black uppercase tracking-widest text-ink/40"
-							>
-								<span>Clients satisfaits</span>
-								<span class="text-primary">★</span>
+			<div class="lg:w-1/3 about-left">
+				<div class="sticky top-32 space-y-10">
+					<div class="space-y-10">
+						<!-- Bloc 1: Rigueur Technique -->
+						<div class="about-block group border-b border-ink/10 pb-8 transition-all duration-500 hover:border-primary/30 hover:pl-2 opacity-0 -translate-x-8">
+							<div class="flex items-center gap-3 mb-3">
+								<div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 transition-all duration-500 group-hover:bg-primary group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(198,161,95,0.3)]">
+									<svg class="w-5 h-5 text-primary transition-colors duration-500 group-hover:text-background" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+									</svg>
+								</div>
+								<h3 class="text-[#00002a] text-lg font-bold font-display transition-colors duration-500 group-hover:text-primary">Confection Normée & Certifiée</h3>
 							</div>
-							<div class="font-display text-7xl font-bold tracking-tighter text-ink">100%</div>
-							<p class="mt-4 max-w-[200px] text-sm font-medium text-ink/60">
-								Les institutions et entreprises font confiance à notre qualité
+							<p class="text-sm font-medium leading-relaxed text-ink/70">
+								Chaque pièce est coupée et assemblée selon des cahiers des charges rigoureux. De l'élégance solennelle d'une toge de graduation à la technicité d'une blouse médicale, nous maîtrisons les standards de chaque profession.
 							</p>
 						</div>
 
-						<div class="border-b border-ink/10 pb-10">
-							<div
-								class="mb-6 flex items-center justify-between text-[11px] font-black uppercase tracking-widest text-ink/40"
-							>
-								<span>Vêtements produits</span>
-								<span class="text-primary"></span>
+						<!-- Bloc 2: Capacité Industrielle -->
+						<div class="about-block group border-b border-ink/10 pb-8 transition-all duration-500 hover:border-primary/30 hover:pl-2 opacity-0 -translate-x-8">
+							<div class="flex items-center gap-3 mb-3">
+								<div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 transition-all duration-500 group-hover:bg-primary group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(198,161,95,0.3)]">
+									<svg class="w-5 h-5 text-primary transition-colors duration-500 group-hover:text-background" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+									</svg>
+								</div>
+								<h3 class="text-[#00002a] text-lg font-bold font-display transition-colors duration-500 group-hover:text-primary">Production Grand Volume</h3>
 							</div>
-							<div class="font-display text-7xl font-bold tracking-tighter text-ink">Qualité</div>
-							<p class="mt-4 max-w-[200px] text-sm font-medium text-ink/60">
-								Uniformes et vêtements avec qualité premium
+							<p class="text-sm font-medium leading-relaxed text-ink/70">
+								Grâce à un outil de production de pointe, notre atelier est calibré pour absorber les commandes de grande envergure. Nous habillons des promotions universitaires entières et des réseaux scolaires avec une régularité absolue.
+							</p>
+						</div>
+
+						<!-- Bloc 3: Excellence des Matériaux -->
+						<div class="about-block group border-b border-ink/10 pb-8 transition-all duration-500 hover:border-primary/30 hover:pl-2 opacity-0 -translate-x-8">
+							<div class="flex items-center gap-3 mb-3">
+								<div class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 transition-all duration-500 group-hover:bg-primary group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(198,161,95,0.3)]">
+									<svg class="w-5 h-5 text-primary transition-colors duration-500 group-hover:text-background" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+									</svg>
+								</div>
+								<h3 class="text-[#00002a] text-lg font-bold font-display transition-colors duration-500 group-hover:text-primary">Textiles Haute Résistance</h3>
+							</div>
+							<p class="text-sm font-medium leading-relaxed text-ink/70">
+								Nous sélectionnons des tissus spécifiques et éprouvés : robustesse extrême pour nos kimonos d'arts martiaux, textiles respirants pour les équipements sportifs et matières durables pour les tenues de travail.
 							</p>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="lg:w-2/3">
-				<h2
-					class="reveal-view mb-12 font-display text-3xl font-bold leading-[1.2] tracking-tight text-ink lg:text-4xl"
-				>
-					Confection Univers : fabricant professionnel de vêtements pour les institutions au Sénégal.
-				</h2>
-
+			<div class="lg:w-2/3 about-right">
 				<div class="grid gap-16 md:grid-cols-2">
-					<div class="about-parallax-img aspect-[3/4] overflow-hidden rounded-[3rem] bg-surface/10 shadow-2xl ring-1 ring-primary/10">
-						<img
-							src="/images/about-facility.jpg"
-							class="h-full w-full object-contain"
-							alt="Installation de confection de vêtements"
-						/>
+					<div class="relative w-full h-auto about-image opacity-0 translate-x-8">
+						<!-- Decorative Background -->
+						<div class="absolute inset-0 translate-x-4 translate-y-4 -z-10 rounded-[3rem] border border-primary/20 bg-primary/5"></div>
+						<!-- Image Container -->
+						<div class="relative w-full h-auto rounded-[3rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.12)]">
+							<img
+								src="/images/about-facility.jpg"
+								class="relative w-full h-auto rounded-2xl block"
+								alt="Installation de confection de vêtements"
+							/>
+						</div>
 					</div>
 
-					<div class="space-y-12 pt-12">
+					<div class="space-y-12 pt-12 about-text opacity-0 translate-x-8">
 						<div class="space-y-6">
-							<div class="flex items-center gap-5">
-								<div
-									class="flex h-14 w-14 items-center justify-center rounded-full bg-primary/12 text-2xl text-primary"
-								>
-									🪡
-								</div>
-								<h4 class="text-sm font-black uppercase tracking-widest text-ink">Notre mission</h4>
+							<div class="text-xs tracking-[0.2em] uppercase font-semibold text-slate-400 mb-3">
+								NOTRE ENGAGEMENT
 							</div>
+							<h3 class="text-[#00002a] text-3xl font-semibold leading-tight font-display mb-6">
+								L'excellence de la confection industrielle au service de votre image.
+							</h3>
 							<p class="text-lg font-medium leading-relaxed text-ink/65">
-								Délivrer une confection de vêtements exceptionnelle avec un artisanat de précision, une capacité de production fiable,
-								et un engagement inébranlable envers la qualité pour chaque commande client.
+								Chez Confection Univers, nous croyons que l'uniforme et la tenue professionnelle transcendent le simple vêtement : ils incarnent la rigueur, l'identité et la fierté d'une institution. Nous allions la précision technique de nos lignes de production à une sélection intransigeante de matériaux pour offrir des pièces d'une durabilité exceptionnelle.
 							</p>
 						</div>
 
@@ -77,18 +93,20 @@
 								<img
 									src="/images/logo.png"
 									class="h-16 w-16 rounded-full border-2 border-primary/35 object-cover"
-									alt="Marie Tremblay"
+									alt="Adja D. Faye"
 								/>
 								<div
-									class="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary text-[10px] text-background"
+									class="absolute -bottom-1 -right-1 flex h-6 w-6 items-center justify-center rounded-full bg-primary"
 								>
-									✓
+									<svg class="w-4 h-4 text-background" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+									</svg>
 								</div>
 							</div>
 							<div>
-								<div class="text-xl font-bold text-ink">Adja D.Faye</div>
+								<div class="text-xl font-bold text-ink">Adja D. Faye</div>
 								<div class="text-[11px] font-black uppercase tracking-[0.2em] text-ink/45">
-									C.E.O Confection Univers
+									Directrice Générale — Confection Univers
 								</div>
 							</div>
 						</div>
@@ -98,3 +116,100 @@
 		</div>
 	</div>
 </section>
+
+<script>
+	import gsap from 'gsap';
+
+	// Check for reduced motion preference
+	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	if (!prefersReducedMotion) {
+		// Intersection Observer for scroll-triggered animations
+		const observerOptions = {
+			threshold: 0.15,
+			rootMargin: '0px 0px -50px 0px'
+		};
+
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					const element = entry.target;
+					
+					// GSAP animation for premium reveal
+					gsap.to(element, {
+						opacity: 1,
+						y: 0,
+						x: 0,
+						duration: 0.8,
+						ease: 'power2.out',
+						clearProps: 'transform'
+					});
+					
+					observer.unobserve(element);
+				}
+			});
+		}, observerOptions);
+
+		// Animate about blocks from left with clip-path reveal
+		document.querySelectorAll('.about-block').forEach((block, index) => {
+			block.style.opacity = '0';
+			block.style.transform = 'translateY(40px) translateX(-40px)';
+			block.style.clipPath = 'inset(0 100% 0 0)';
+			
+			setTimeout(() => {
+				observer.observe(block);
+				
+				// Clip-path animation
+				gsap.to(block, {
+					clipPath: 'inset(0 0 0 0)',
+					duration: 1,
+					ease: 'power2.inOut',
+					delay: 0.2
+				});
+			}, index * 150);
+		});
+
+		// Animate about image from right with mask reveal
+		const aboutImage = document.querySelector('.about-image');
+		if (aboutImage) {
+			aboutImage.style.opacity = '0';
+			aboutImage.style.transform = 'translateY(40px) translateX(40px)';
+			aboutImage.style.clipPath = 'inset(0 0 0 100%)';
+			
+			observer.observe(aboutImage);
+			
+			// Clip-path animation
+			gsap.to(aboutImage, {
+				clipPath: 'inset(0 0 0 0)',
+				duration: 1.2,
+				ease: 'power2.inOut',
+				delay: 0.3
+			});
+		}
+
+		// Animate about text from right
+		const aboutText = document.querySelector('.about-text');
+		if (aboutText) {
+			aboutText.style.opacity = '0';
+			aboutText.style.transform = 'translateY(40px) translateX(40px)';
+			
+			setTimeout(() => {
+				observer.observe(aboutText);
+			}, 200);
+		}
+
+		// Parallax effect between image and text
+		const aboutSection = document.querySelector('#about');
+		if (aboutSection && aboutImage) {
+			gsap.to(aboutImage, {
+				y: -30,
+				scrollTrigger: {
+					trigger: aboutSection,
+					start: 'top bottom',
+					end: 'bottom top',
+					scrub: 1.5
+				}
+			});
+		}
+	}
+</script>

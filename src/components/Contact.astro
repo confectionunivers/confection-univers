@@ -19,7 +19,7 @@ const whatsappUrl = `https://wa.me/${contact.whatsappDigits}?text=${encodeURICom
 
 <section
 	id="contact"
-	class="relative scroll-mt-24 border-t border-primary/10 bg-paper py-24 text-ink md:py-32"
+	class="relative scroll-mt-24 border-0 bg-paper py-24 text-ink md:py-32"
 	lang="fr"
 	aria-labelledby="contact-heading"
 >
@@ -277,6 +277,56 @@ const whatsappUrl = `https://wa.me/${contact.whatsappDigits}?text=${encodeURICom
 		</div>
 	</div>
 </section>
+
+<script>
+	import gsap from 'gsap';
+
+	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	if (!prefersReducedMotion) {
+		const contactSection = document.querySelector('#contact');
+		if (contactSection) {
+			const contactElements = contactSection.querySelectorAll('h2, p, li, form > div, button');
+			contactElements.forEach((el) => {
+				el.style.opacity = '0';
+				el.style.transform = 'translateY(20px)';
+				el.style.willChange = 'transform, opacity';
+			});
+
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						gsap.to(contactElements, {
+							opacity: 1,
+							y: 0,
+							duration: 0.6,
+							ease: 'power2.out',
+							stagger: 0.08,
+							clearProps: 'transform'
+						});
+
+						const borderElement = contactSection.querySelector('.border-b');
+						if (borderElement) {
+							gsap.fromTo(borderElement, 
+								{ scaleX: 0, transformOrigin: 'center' },
+								{ 
+									scaleX: 1, 
+									duration: 0.8, 
+									ease: 'power2.out',
+									delay: 0.3
+								}
+							);
+						}
+
+						observer.unobserve(entry.target);
+					}
+				});
+			}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+			observer.observe(contactSection);
+		}
+	}
+</script>
 
 <script>
 	document.addEventListener('DOMContentLoaded', () => {

@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import MagneticCursor from '../components/MagneticCursor.astro';
+import ScrollProgress from '../components/ScrollProgress.astro';
 
 interface Props {
 	title: string;
@@ -10,7 +12,7 @@ const { title, description = 'Confection Univers — digital craft, strategy, an
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en" class="dark border-0 m-0 p-0 bg-[#00002a]" style="border: none !important; outline: none !important; box-shadow: none !important;">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -22,7 +24,9 @@ const { title, description = 'Confection Univers — digital craft, strategy, an
 			rel="stylesheet"
 		/>
 	</head>
-	<body class="bg-background font-sans text-foreground">
+	<body class="bg-background font-sans text-foreground border-0 m-0 p-0" style="border: none !important; outline: none !important; box-shadow: none !important;">
+		<ScrollProgress />
+		<MagneticCursor />
 		<slot />
 		<script>
 			import Lenis from '@studio-freight/lenis';

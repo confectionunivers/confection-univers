@@ -1,0 +1,46 @@
+---
+/**
+ * Scroll Progress Indicator
+ * Displays a thin progress bar at the top of the screen
+ * Syncs with scroll position for premium narrative feel
+ */
+---
+<div id="scroll-progress" class="scroll-progress"></div>
+
+<style>
+	.scroll-progress {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 0%;
+		height: 2px;
+		background: linear-gradient(90deg, #FACC6B, #F59E0B, #D97706);
+		z-index: 9999;
+		pointer-events: none;
+		transition: width 0.1s ease-out;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.scroll-progress {
+			display: none;
+		}
+	}
+</style>
+
+<script>
+	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+	if (!prefersReducedMotion) {
+		const scrollProgress = document.getElementById('scroll-progress');
+		
+		if (scrollProgress) {
+			window.addEventListener('scroll', () => {
+				const scrollTop = window.scrollY;
+				const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+				const scrollPercent = (scrollTop / docHeight) * 100;
+				
+				scrollProgress.style.width = scrollPercent + '%';
+			});
+		}
+	}
+</script>
