@@ -1,0 +1,58 @@
+---
+---
+
+<section class="rounded-2xl p-6 shadow-2xl" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);">
+	<h3 class="mb-6 font-display text-xl font-bold uppercase tracking-tight text-white">Laisser un commentaire</h3>
+	
+	<form class="space-y-6">
+		<div class="grid gap-6 md:grid-cols-2">
+			<div>
+				<label for="name" class="mb-2 block text-sm font-semibold uppercase tracking-wider" style="color: #A0ACC6;">
+					Nom
+				</label>
+				<input
+					type="text"
+					id="name"
+					name="name"
+					required
+					class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/40 transition-all duration-300 focus:border-[#F5B544] focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#F5B544]/20"
+					placeholder="Votre nom"
+				/>
+			</div>
+			<div>
+				<label for="email" class="mb-2 block text-sm font-semibold uppercase tracking-wider" style="color: #A0ACC6;">
+					Email
+				</label>
+				<input
+					type="email"
+					id="email"
+					name="email"
+					required
+					class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/40 transition-all duration-300 focus:border-[#F5B544] focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#F5B544]/20"
+					placeholder="votre@email.com"
+				/>
+			</div>
+		</div>
+
+		<div>
+			<label for="comment" class="mb-2 block text-sm font-semibold uppercase tracking-wider" style="color: #A0ACC6;">
+				Commentaire
+			</label>
+			<textarea
+				id="comment"
+				name="comment"
+				rows="5"
+				required
+				class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/40 transition-all duration-300 focus:border-[#F5B544] focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#F5B544]/20 resize-none"
+				placeholder="Partagez vos thoughts..."
+			></textarea>
+		</div>
+
+		<button
+			type="submit"
+			class="btn-hero-primary w-full justify-center"
+		>
+			<span>Envoyer le commentaire</span>
+		</button>
+	</form>
+</section>

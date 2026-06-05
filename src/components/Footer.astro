@@ -1,158 +1,253 @@
 ---
 ---
 
-<footer class="relative overflow-hidden bg-background pb-12 pt-32 border-0">
-	<div
-		class="pointer-events-none absolute bottom-0 left-1/2 -z-10 h-[400px] w-[1000px] -translate-x-1/2 rounded-full bg-primary/8 blur-[120px]"
-	>
+<footer class="relative overflow-hidden border-0" style="background: #00001C;">
+	<!-- Grain Texture Overlay -->
+	<div class="pointer-events-none absolute inset-0 -z-10 opacity-[0.05]" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22/%3E%3C/svg%3E');"></div>
+	
+	<!-- Premium Golden Glow Effects -->
+	<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+		<div class="absolute left-[5%] top-[10%] w-[400px] h-[400px] rounded-full bg-primary/15 blur-[100px] animate-pulse"></div>
+		<div class="absolute right-[10%] bottom-[20%] w-[300px] h-[300px] rounded-full bg-primary-light/10 blur-[80px] animate-pulse" style="animation-delay: 1s;"></div>
+		<div class="absolute left-[50%] top-[50%] w-[200px] h-[200px] rounded-full bg-primary/8 blur-[60px] animate-pulse" style="animation-delay: 2s;"></div>
 	</div>
 
-	<div class="mx-auto max-w-7xl px-6">
-		<div class="mb-32 grid grid-cols-1 gap-20 md:grid-cols-2 lg:grid-cols-4">
-			<div class="space-y-10 lg:col-span-2">
-				<a href="/" class="inline-flex max-w-full" aria-label="Confection Univers — accueil">
-					<img
-						src="/images/logo.png"
-						alt="Confection Univers"
-						class="h-10 w-auto max-w-full object-contain object-left sm:h-11 md:h-12 lg:h-14"
-						width="240"
-						height="64"
-					/>
-				</a>
-				<p class="max-w-md text-xl font-medium leading-relaxed text-foreground/55">
-					Confection professionnelle de vêtements offrant des uniformes de qualité et des solutions de vêtements personnalisés pour les institutions à travers le Sénégal.
+	<!-- SECTION SUPÉRIEURE: Newsletter & Liens -->
+	<div class="mx-auto max-w-7xl px-6 py-20">
+		<div class="grid grid-cols-1 gap-16 lg:grid-cols-2">
+			<!-- Newsletter Block -->
+			<div class="space-y-6">
+				<h3 class="font-display text-[clamp(1.75rem,4vw,2.5rem)] font-semibold leading-[1.1] tracking-tight text-[#F9FAFB]">
+					Restez connecté
+				</h3>
+				<p class="max-w-md text-base font-normal leading-[1.6] text-foreground/72">
+					Recevez nos dernières actualités, offres exclusives et nouveautés en matière de confection textile professionnelle.
 				</p>
-				<div class="flex gap-4">
-					{
-						['Li', 'Ig', 'X', 'Fb'].map((label, i) => (
-							<a
-								href="#"
-								class="flex h-12 w-12 items-center justify-center rounded-full border border-primary/20 text-sm font-bold text-foreground transition hover:-translate-y-1 hover:border-primary hover:bg-primary hover:text-background"
-								aria-label={`Social ${i}`}
-							>
-								{label}
-							</a>
-						))
-					}
+				<form id="newsletter-form" class="flex flex-col gap-4 sm:flex-row">
+					<div class="relative flex-1">
+						<div class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-foreground/40">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+							</svg>
+						</div>
+						<input
+							id="newsletter-email"
+							type="email"
+							placeholder="Votre adresse email"
+							class="w-full rounded-full border-2 border-[rgba(250,204,107,0.3)] bg-[rgba(0,0,0,0.3)] px-12 py-4 text-[#F9FAFB] placeholder-foreground/40 transition-all duration-400 focus:border-[rgba(250,204,107,0.5)] focus:bg-[rgba(0,0,0,0.5)] focus:outline-none"
+							required
+						/>
+					</div>
+					<button
+						type="submit"
+						class="btn-hero-primary"
+					>
+						<span>S'abonner</span>
+						<span class="cta-button-glow absolute inset-0 rounded-full border-2 border-primary/0 transition-all duration-500 group-hover:border-primary/50 group-hover:shadow-[0_0_30px_rgba(198,161,95,0.4)]"></span>
+					</button>
+				</form>
+			</div>
+
+			<!-- Navigation Columns -->
+			<div class="grid grid-cols-2 gap-12 sm:grid-cols-3">
+				<div>
+					<h4 class="mb-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-[rgba(250,204,107,0.7)]">Navigation</h4>
+					<ul class="space-y-4">
+						<li><a href="/about" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">À propos</a></li>
+						<li><a href="/services" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Services</a></li>
+						<li><a href="/products" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Produits</a></li>
+						<li><a href="/projects" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Projets</a></li>
+						<li><a href="/contact" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Contact</a></li>
+					</ul>
 				</div>
-			</div>
-
-			<div>
-				<h4 class="mb-10 text-sm font-black uppercase tracking-[0.2em] text-foreground/40">Liens rapides</h4>
-				<ul class="space-y-6 text-[13px] font-bold uppercase tracking-widest text-foreground">
-					<li>
-						<a href="/about" class="group flex items-center gap-2 transition-colors hover:text-primary">
-							À propos
-							<svg
-								class="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M7 7h10v10" />
-							</svg>
+				<div>
+					<h4 class="mb-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-[rgba(250,204,107,0.7)]">Légales</h4>
+					<ul class="space-y-4">
+						<li><a href="/privacy" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Politique de confidentialité</a></li>
+						<li><a href="/terms" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Conditions d'utilisation</a></li>
+						<li><a href="/legal" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Mentions légales</a></li>
+					</ul>
+				</div>
+				<div class="col-span-2 sm:col-span-1">
+					<h4 class="mb-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-[rgba(250,204,107,0.7)]">Suivez-nous</h4>
+					<div class="flex gap-3">
+						<a href="https://facebook.com/confectionunivers" target="_blank" rel="noopener noreferrer" class="cta-button-secondary group relative flex h-10 w-10 items-center justify-center rounded-full border-2 border-[rgba(250,204,107,0.3)] bg-[rgba(0,0,0,0.3)] text-[#F9FAFB] transition-all duration-400 hover:bg-[rgba(0,0,0,0.5)] hover:border-[rgba(250,204,107,0.5)]" aria-label="Facebook">
+							<span class="relative z-10 transition-all duration-300 group-hover:text-[#FACC6B] group-hover:scale-105">
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+							</span>
+							<span class="cta-button-glow absolute inset-0 rounded-full border-2 border-primary/0 transition-all duration-400 group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(198,161,95,0.3)]"></span>
 						</a>
-					</li>
-					<li>
-						<a href="/services" class="group flex items-center gap-2 transition-colors hover:text-primary">
-							Services
-							<svg
-								class="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M7 7h10v10" />
-							</svg>
+						<a href="https://instagram.com/confectionunivers" target="_blank" rel="noopener noreferrer" class="cta-button-secondary group relative flex h-10 w-10 items-center justify-center rounded-full border-2 border-[rgba(250,204,107,0.3)] bg-[rgba(0,0,0,0.3)] text-[#F9FAFB] transition-all duration-400 hover:bg-[rgba(0,0,0,0.5)] hover:border-[rgba(250,204,107,0.5)]" aria-label="Instagram">
+							<span class="relative z-10 transition-all duration-300 group-hover:text-[#FACC6B] group-hover:scale-105">
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+							</span>
+							<span class="cta-button-glow absolute inset-0 rounded-full border-2 border-primary/0 transition-all duration-400 group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(198,161,95,0.3)]"></span>
 						</a>
-					</li>
-					<li>
-						<a href="/products" class="group flex items-center gap-2 transition-colors hover:text-primary">
-							Produits
-							<svg
-								class="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M7 7h10v10" />
-							</svg>
+						<a href="https://linkedin.com/company/confectionunivers" target="_blank" rel="noopener noreferrer" class="cta-button-secondary group relative flex h-10 w-10 items-center justify-center rounded-full border-2 border-[rgba(250,204,107,0.3)] bg-[rgba(0,0,0,0.3)] text-[#F9FAFB] transition-all duration-400 hover:bg-[rgba(0,0,0,0.5)] hover:border-[rgba(250,204,107,0.5)]" aria-label="LinkedIn">
+							<span class="relative z-10 transition-all duration-300 group-hover:text-[#FACC6B] group-hover:scale-105">
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+							</span>
+							<span class="cta-button-glow absolute inset-0 rounded-full border-2 border-primary/0 transition-all duration-400 group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(198,161,95,0.3)]"></span>
 						</a>
-					</li>
-					<li>
-						<a href="/projects" class="group flex items-center gap-2 transition-colors hover:text-primary">
-							Projets
-							<svg
-								class="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M7 7h10v10" />
-							</svg>
-						</a>
-					</li>
-					<li>
-						<a href="/contact" class="group flex items-center gap-2 transition-colors hover:text-primary">
-							Contact
-							<svg
-								class="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100"
-								fill="none"
-								stroke="currentColor"
-								viewBox="0 0 24 24"
-							>
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M7 7h10v10" />
-							</svg>
-						</a>
-					</li>
-				</ul>
-			</div>
-
-			<div>
-				<h4 class="mb-10 text-sm font-black uppercase tracking-[0.2em] text-foreground/40">Contact</h4>
-				<div class="space-y-8">
-					<div>
-						<div class="mb-2 text-[10px] font-black uppercase tracking-widest text-primary">Courriel</div>
-						<a href="mailto:confectionunivers@gmail.com" class="font-display text-xl font-bold text-foreground hover:underline">
-							confectionunivers@gmail.com
+						<a href="https://wa.me/221771234567" target="_blank" rel="noopener noreferrer" class="cta-button-secondary group relative flex h-10 w-10 items-center justify-center rounded-full border-2 border-[rgba(250,204,107,0.3)] bg-[rgba(0,0,0,0.3)] text-[#F9FAFB] transition-all duration-400 hover:bg-[rgba(0,0,0,0.5)] hover:border-[rgba(250,204,107,0.5)]" aria-label="WhatsApp">
+							<span class="relative z-10 transition-all duration-300 group-hover:text-[#FACC6B] group-hover:scale-105">
+								<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+							</span>
+							<span class="cta-button-glow absolute inset-0 rounded-full border-2 border-primary/0 transition-all duration-400 group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(198,161,95,0.3)]"></span>
 						</a>
 					</div>
-					<div>
-						<div class="mb-2 text-[10px] font-black uppercase tracking-widest text-primary">Bureau</div>
-						<p class="font-medium text-foreground/50">Zac nguinth<br />Thiès<br />Sénégal</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Separator Line -->
+	<div class="mx-auto max-w-7xl px-6">
+		<div class="h-px bg-gradient-to-r from-transparent via-[rgba(250,204,107,0.2)] to-transparent"></div>
+	</div>
+
+	<!-- SECTION INFÉRIEURE: Identité & Contact -->
+	<div class="mx-auto max-w-7xl px-6 py-16">
+		<div class="grid grid-cols-1 gap-12 lg:grid-cols-3">
+			<!-- Brand Identity -->
+			<div class="lg:col-span-1">
+				<h2 class="font-display text-[clamp(2.5rem,6vw,4rem)] font-semibold leading-[1.05] tracking-tight">
+					<span class="block text-[#F9FAFB]">Confection</span>
+					<span class="mt-2 block font-bold animated-gradient-text">Univers</span>
+				</h2>
+				<p class="mt-6 max-w-md text-base font-normal leading-[1.6] text-foreground/72">
+					L'excellence du textile professionnel au Sénégal.
+				</p>
+			</div>
+
+			<!-- Contact Info -->
+			<div class="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:col-span-2">
+				<div>
+					<h4 class="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[rgba(250,204,107,0.7)]">Adresse Atelier</h4>
+					<p class="font-normal text-foreground/80 leading-[1.6]">
+						Zac Nguinth<br />
+						Thiès<br />
+						Sénégal
+					</p>
+				</div>
+				<div>
+					<h4 class="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-[rgba(250,204,107,0.7)]">Contactez-nous</h4>
+					<div class="space-y-3">
+						<a href="mailto:confectionunivers@gmail.com" class="block font-medium text-foreground/80 transition-colors hover:text-[#FACC6B]">
+							confectionunivers@gmail.com
+						</a>
+						<a href="tel:+221771234567" class="block font-medium text-foreground/80 transition-colors hover:text-[#FACC6B]">
+							+221 77 123 45 67
+						</a>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<div class="flex flex-col items-center justify-between gap-8 border-t border-primary/10 pt-12 md:flex-row">
-			<div class="text-[11px] font-black uppercase tracking-[0.3em] text-foreground/40">
-				© 2026 Confection Univers. Tous droits réservés.
+		<!-- Bottom Bar -->
+		<div class="mt-12 flex flex-col items-center justify-between gap-6 border-t border-[rgba(250,204,107,0.15)] pt-8 sm:flex-row">
+			<div class="text-[11px] font-semibold uppercase tracking-[0.2em] text-foreground/40">
+				© 2026 Confection Univers — Tous droits réservés.
 			</div>
-
-			<div class="flex gap-10 text-[11px] font-black uppercase tracking-[0.3em] text-foreground/40">
-				<a href="#" class="transition-colors hover:text-primary">Politique de confidentialité</a>
-				<a href="#" class="transition-colors hover:text-primary">Conditions d'utilisation</a>
-			</div>
-
 			<button
 				type="button"
 				id="footer-scroll-top"
-				class="group flex items-center gap-4 text-[11px] font-black uppercase tracking-[0.3em] text-foreground"
+				class="cta-button-secondary group relative inline-flex items-center gap-3 rounded-full border-2 border-[rgba(250,204,107,0.3)] bg-[rgba(0,0,0,0.3)] px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#F9FAFB] transition-all duration-400 hover:bg-[rgba(0,0,0,0.5)] hover:border-[rgba(250,204,107,0.5)]"
 			>
-				Retour en haut
-				<span
-					class="flex h-10 w-10 items-center justify-center rounded-full border border-primary/25 transition group-hover:border-primary group-hover:bg-primary group-hover:text-background"
-				>
+				<span class="relative z-10 transition-all duration-300 group-hover:text-[#FACC6B] group-hover:scale-105">Retour en haut</span>
+				<span class="relative z-10 flex h-8 w-8 items-center justify-center rounded-full border border-[rgba(250,204,107,0.3)] bg-[rgba(0,0,0,0.3)] transition-all duration-400 group-hover:border-[rgba(250,204,107,0.5)] group-hover:text-[#FACC6B]">
 					↑
 				</span>
+				<span class="cta-button-glow absolute inset-0 rounded-full border-2 border-primary/0 transition-all duration-400 group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(198,161,95,0.3)]"></span>
 			</button>
 		</div>
 	</div>
 </footer>
 
 <script>
+	// Scroll to top functionality
 	document.getElementById('footer-scroll-top')?.addEventListener('click', () => {
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 	});
+
+	// Newsletter form submission
+	document.getElementById('newsletter-form')?.addEventListener('submit', (e) => {
+		e.preventDefault();
+		const emailInput = document.getElementById('newsletter-email') as HTMLInputElement;
+		if (emailInput && emailInput.value) {
+			alert('Merci pour votre inscription ! Vous recevrez bientôt nos actualités à : ' + emailInput.value);
+			emailInput.value = '';
+		}
+	});
 </script>
+
+<style>
+	/* Animation du gradient sur le mot "Univers" */
+	.animated-gradient-text {
+		background: linear-gradient(135deg, #FACC6B 0%, #F59E0B 50%, #D97706 100%);
+		background-size: 200% auto;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		animation: gradient-shift 3s linear infinite;
+		will-change: background-position;
+	}
+
+	@keyframes gradient-shift {
+		0% {
+			background-position: 0% center;
+		}
+		100% {
+			background-position: 200% center;
+		}
+	}
+
+	/* CTA Button Premium Effects */
+	.cta-button-primary {
+		position: relative;
+		overflow: hidden;
+		box-shadow: 0 8px 32px -8px rgba(198, 161, 95, 0.45);
+		transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.cta-button-primary:hover {
+		box-shadow: 0 12px 40px -6px rgba(198, 161, 95, 0.55), 0 0 30px rgba(198, 161, 95, 0.3);
+		transform: translateY(-2px) scale(1.02);
+	}
+
+	.cta-button-secondary {
+		position: relative;
+		overflow: hidden;
+		box-shadow: 0 8px 32px -8px rgba(198, 161, 95, 0.45);
+		transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+	}
+
+	.cta-button-secondary:hover {
+		transform: translateY(-2px) scale(1.02);
+		box-shadow: 0 8px 24px -8px rgba(198, 161, 95, 0.3);
+	}
+
+	.cta-button-glow {
+		pointer-events: none;
+	}
+
+	/* Optimisation des performances avec will-change */
+	.cta-button-primary,
+	.cta-button-secondary {
+		will-change: transform, box-shadow;
+	}
+
+	.animated-gradient-text {
+		will-change: background-position;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.animated-gradient-text {
+			animation: none;
+		}
+		.cta-button-primary,
+		.cta-button-secondary {
+			transition: none;
+		}
+	}
+</style>

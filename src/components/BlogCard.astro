@@ -1,0 +1,27 @@
+---
+interface Props {
+	title: string;
+	excerpt: string;
+	image: string;
+	category: string;
+	date: string;
+	author: string;
+	slug: string;
+}
+
+const { title, excerpt, image, category, date, author, slug } = Astro.props;
+---
+
+<div class="bg-[#00002a] rounded-[24px] border border-white/5 overflow-hidden shadow-2xl transition-all duration-300 hover:-translate-y-2">
+	<!-- Image Pleine Largeur (Full-Bleed) -->
+	<div class="w-full h-[380px] relative bg-[#00001C]">
+		<img src={image} class="w-full h-full object-cover" alt={title} />
+	</div>
+	<!-- Contenu sous l'image avec padding -->
+	<div class="p-8">
+		<div class="text-xs uppercase tracking-widest text-gray-400 mb-3">{date} • Par {author}</div>
+		<h2 class="text-2xl font-extrabold text-white tracking-tight mb-4 hover:text-orange-500 transition-colors">{title}</h2>
+		<p class="text-gray-400 leading-relaxed mb-6 line-clamp-3">{excerpt}</p>
+		<a href={`/blog/${slug}`} class="inline-flex items-center text-sm font-bold text-orange-500 hover:underline">LIRE L'ARTICLE →</a>
+	</div>
+</div>

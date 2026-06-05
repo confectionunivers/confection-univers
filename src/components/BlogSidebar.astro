@@ -1,0 +1,110 @@
+---
+import { BLOG_POSTS } from '../lib/blog-data';
+
+const recentPosts = BLOG_POSTS.slice(0, 3);
+---
+
+<aside class="space-y-6">
+	<!-- Search Widget -->
+	<div class="widget-card p-6 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.6)] hover:border-orange-500/30" style="background: #00002a; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px;">
+		<h3 class="mb-4 text-lg font-extrabold tracking-tight text-white">Rechercher</h3>
+		<div class="relative">
+			<input
+				type="text"
+				placeholder="Rechercher un article..."
+				class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/40 transition-all duration-300 focus:border-[#F5B544] focus:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#F5B544]/20"
+			/>
+			<svg class="absolute right-4 top-1/2 h-5 w-5 -translate-y-1/2 text-white/40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+			</svg>
+		</div>
+	</div>
+
+	<!-- Recent Posts Widget -->
+	<div class="widget-card p-6 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.6)] hover:border-orange-500/30" style="background: #00002a; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px;">
+		<h3 class="mb-4 text-lg font-extrabold tracking-tight text-white">Articles Récents</h3>
+		<div class="space-y-4">
+			{recentPosts.map(post => (
+				<a href={`/blog/${post.slug}`} class="group flex gap-4 transition-all duration-300 hover:translate-x-1">
+					<div class="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-xl">
+						<img
+							src={post.image}
+							alt={post.title}
+							class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+						/>
+					</div>
+					<div class="flex flex-col justify-center">
+						<h4 class="mb-1 text-sm font-bold leading-tight text-white group-hover:text-[#F5B544] transition-colors line-clamp-2">
+							{post.title}
+						</h4>
+						<div class="text-xs font-semibold tracking-widest uppercase" style="color: #9CA3AF;">
+							{post.date}
+						</div>
+					</div>
+				</a>
+			))}
+		</div>
+	</div>
+
+	<!-- Categories Widget -->
+	<div class="widget-card p-6 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.6)] hover:border-orange-500/30" style="background: #00002a; border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px;">
+		<h3 class="mb-4 text-lg font-extrabold tracking-tight text-white">Catégories</h3>
+		<ul class="space-y-3">
+			<li>
+				<a href="#" class="group flex items-center justify-between rounded-lg px-4 py-3 transition-all duration-300 hover:bg-white/5 hover:-translate-x-1">
+					<span class="text-white/80 group-hover:text-white">Uniformes Scolaires</span>
+					<span class="text-sm font-semibold" style="color: #F5B544;">12</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="group flex items-center justify-between rounded-lg px-4 py-3 transition-all duration-300 hover:bg-white/5 hover:-translate-x-1">
+					<span class="text-white/80 group-hover:text-white">Tenues de Travail</span>
+					<span class="text-sm font-semibold" style="color: #F5B544;">8</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="group flex items-center justify-between rounded-lg px-4 py-3 transition-all duration-300 hover:bg-white/5 hover:-translate-x-1">
+					<span class="text-white/80 group-hover:text-white">Médical & Santé</span>
+					<span class="text-sm font-semibold" style="color: #F5B544;">5</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="group flex items-center justify-between rounded-lg px-4 py-3 transition-all duration-300 hover:bg-white/5 hover:-translate-x-1">
+					<span class="text-white/80 group-hover:text-white">Événements & Cérémonies</span>
+					<span class="text-sm font-semibold" style="color: #F5B544;">7</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="group flex items-center justify-between rounded-lg px-4 py-3 transition-all duration-300 hover:bg-white/5 hover:-translate-x-1">
+					<span class="text-white/80 group-hover:text-white">Conseils & Tendances</span>
+					<span class="text-sm font-semibold" style="color: #F5B544;">15</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+	<!-- CTA Widget -->
+	<div class="widget-card p-6 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] hover:-translate-y-2 hover:scale-[1.01] hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.6)] hover:border-orange-500/30" style="background: linear-gradient(135deg, #00002a 0%, #0E172A 100%); border: 2px solid rgba(245, 181, 68, 0.3); border-radius: 24px;">
+		<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl" style="background: rgba(245, 181, 68, 0.1);">
+			<svg class="h-6 w-6" style="color: #F5B544;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+			</svg>
+		</div>
+		<h3 class="mb-3 text-xl font-extrabold tracking-tight text-white">Un projet de confection pour votre institution ?</h3>
+		<p class="mb-6 text-sm leading-relaxed" style="color: #9CA3AF;">
+			Obtenez un devis personnalisé pour vos tenues professionnelles en quelques clics.
+		</p>
+		<a href="/contact" class="btn-hero-primary w-full justify-center">
+			<span>Demander un devis</span>
+			<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+			</svg>
+		</a>
+	</div>
+</aside>
+
+<style>
+	.widget-card {
+		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	}
+</style>

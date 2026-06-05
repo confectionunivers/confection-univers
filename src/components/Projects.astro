@@ -2,75 +2,291 @@
 const PROJECTS = [
 	{
 		title: 'Projet de fourniture d\'uniformes scolaires',
-		img: 'scolaire.png',
+		img: 'project-uniformes-commission.jpg',
 		cat: 'Uniformes scolaires',
 		year: '2025',
 		description: 'Nous avons fabriqué 5 000 uniformes personnalisés pour la commission scolaire, livrés à temps avec une qualité constante dans toutes les tailles.',
+		link: '/projets/uniformes',
 	},
 	{
 		title: 'Tenues de cérémonie de graduation',
-		img: 'hero-toges-graduation.jpg',
+		img: 'project-toges-ceremonie.jpg',
 		cat: 'Toges de graduation',
 		year: '2025',
-		description: 'Produit 2 000 toges de graduation et tenues académiques pour les cérémonies universitaires avec des tissus premium et un artisanat précis.',
+		description: 'Production de toges académiques en tissus premium, finitions soignées, prêtes pour les cérémonies officielles.',
+		link: '/projets/graduation',
 	},
 	{
-		title: 'Contrat d\'uniformes d\'entreprise',
-		img: 'travail.png',
-		cat: 'Tenues d\'entreprise',
-		year: '2026',
-		description: 'Conçu et fabriqué 3 500 uniformes d\'entreprise pour une compagnie nationale, assurant la cohérence de la marque et le confort des employés.',
+		title: 'Équipements et tenues de travail',
+		img: 'project-tenues-industrielles.jpg',
+		cat: 'Tenues de travail',
+		year: '2025',
+		description: 'Conçus pour la sécurité, la durabilité et le confort, adaptés aux environnements exigeants.',
+		link: '/projets/tenues-travail',
 	},
 ];
 ---
 
-<section class="premium-section py-32 border-0">
-	<!-- Premium Golden Glow -->
+<style>
+	:root {
+		--bg: #00001C;
+		--surface: #0E172A;
+		--surface-2: #121D33;
+		--border: #1C2A46;
+		--text: #E8EDF6;
+		--muted: #A0ACC6;
+		--accent: #F5B544;
+		--accent-600: #F19A1A;
+		--accent-700: #D98300;
+		--accent-grad: linear-gradient(135deg, #FFC561 0%, #F5B544 55%, #F19A1A 100%);
+		--radius-md: 16px;
+		--radius-lg: 22px;
+		--radius-xl: 28px;
+		--shadow-1: 0 10px 30px rgba(0,0,0,0.35);
+		--shadow-accent: 0 12px 28px rgba(245,181,68,0.35);
+	}
+
+	/* Projects Container */
+	.projects-container {
+		position: relative;
+		padding: 5rem 0;
+	}
+
+	/* Project Card Grid */
+	.project-card {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 3rem;
+		align-items: center;
+		padding: 0;
+	}
+
+	@media (min-width: 1024px) {
+		.project-card {
+			grid-template-columns: 1fr 1fr;
+			gap: 4rem;
+		}
+	}
+
+	/* Image Case */
+	.project-image-case {
+		position: relative;
+		border-radius: var(--radius-xl);
+		overflow: hidden;
+		box-shadow: var(--shadow-1);
+		max-height: 550px;
+	}
+
+	.project-image-case img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	/* Right Column Container */
+	.project-right-column {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+	}
+
+	/* Text Case */
+	.project-text-case {
+		border-radius: var(--radius-xl);
+		border: 1px solid var(--border);
+		padding: 3rem;
+		background: rgba(18, 29, 51, 0.8);
+		backdrop-filter: blur(12px);
+	}
+
+	@media (max-width: 1023px) {
+		.project-text-case {
+			padding: 2rem;
+		}
+	}
+
+	/* Button Case */
+	.project-button-case {
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+	}
+
+	/* Navigation Dots */
+	.nav-dots {
+		position: fixed;
+		right: 2rem;
+		top: 50%;
+		transform: translateY(-50%);
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		z-index: 50;
+	}
+
+	@media (max-width: 1023px) {
+		.nav-dots {
+			display: none;
+		}
+	}
+
+	.nav-dot {
+		width: 10px;
+		height: 10px;
+		border-radius: 50%;
+		border: 2px solid var(--accent);
+		background: transparent;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		opacity: 0.6;
+	}
+
+	.nav-dot.active {
+		background: var(--accent);
+		transform: scale(1.3);
+		opacity: 1;
+	}
+
+	.nav-dot:hover {
+		background: var(--accent-600);
+		opacity: 1;
+	}
+
+	/* Counter */
+	.slide-counter {
+		position: fixed;
+		right: 2rem;
+		top: calc(50% + 100px);
+		font-display: font-bold;
+		font-size: 0.75rem;
+		color: var(--muted);
+		letter-spacing: 0.1em;
+		z-index: 50;
+		opacity: 0.6;
+	}
+
+	@media (max-width: 1023px) {
+		.slide-counter {
+			display: none;
+		}
+	}
+
+	/* Slide Transitions */
+	.slide {
+		position: relative;
+		opacity: 0;
+		transition: opacity 0.4s ease;
+	}
+
+	.slide.active {
+		opacity: 1;
+	}
+
+	@media (max-width: 1023px) {
+		.slide {
+			min-height: auto;
+			padding: 2rem 0;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.slide {
+			transition: none;
+		}
+	}
+</style>
+
+<section style="background: var(--bg);">
+	<!-- Background Glow -->
 	<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-		<div class="absolute left-[15%] top-[30%] w-[600px] h-[500px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.12) 0%, transparent 70%); filter: blur(120px);"></div>
-		<div class="absolute right-[15%] bottom-[30%] w-[500px] h-[400px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.08) 0%, transparent 70%); filter: blur(100px);"></div>
+		<div class="absolute left-[10%] top-[20%] w-[500px] h-[500px] rounded-full" style="background: radial-gradient(ellipse, rgba(245, 181, 68, 0.08) 0%, transparent 70%); filter: blur(120px);"></div>
+		<div class="absolute right-[15%] bottom-[30%] w-[400px] h-[400px] rounded-full" style="background: radial-gradient(ellipse, rgba(245, 181, 68, 0.06) 0%, transparent 70%); filter: blur(100px);"></div>
 	</div>
 
-	<div class="mx-auto max-w-7xl px-6">
-		<div
-			class="mb-24 flex flex-col items-center justify-between gap-8 border-b border-[rgba(250,204,107,0.2)] pb-16 md:flex-row"
-		>
-			<div class="text-sm font-black uppercase tracking-[0.2em] premium-subtitle">{'{ 05 }'} # Nos projets</div>
-			<div class="font-display text-4xl font-bold uppercase italic tracking-tighter text-[#F9FAFB] md:text-6xl">
+	<!-- Section Header -->
+	<div class="mx-auto max-w-7xl px-6 md:px-10 py-8 md:py-12">
+		<div class="mb-8 md:mb-12 flex flex-col items-center justify-between gap-8 border-b border-[var(--border)] pb-8 md:flex-row">
+			<div class="text-xs font-black uppercase tracking-[0.25em]" style="color: var(--accent);">{'{ 05 }'} # Nos projets</div>
+			<div class="font-display text-3xl font-bold uppercase tracking-tight text-white md:text-5xl">
 				Projets de fabrication
 			</div>
 		</div>
+	</div>
 
-		<div class="space-y-24">
+	<!-- Navigation Dots -->
+	<div class="nav-dots">
+		{
+			PROJECTS.map((_, index) => (
+				<button
+					class={`nav-dot ${index === 0 ? 'active' : ''}`}
+					data-index={index}
+					aria-label={`Aller au projet ${index + 1}`}
+				/>
+			))
+		}
+	</div>
+
+	<!-- Counter -->
+	<div class="slide-counter">
+		<span id="current-slide">01</span> / <span id="total-slides">{String(PROJECTS.length).padStart(2, '0')}</span>
+	</div>
+
+	<!-- Projects Container -->
+	<div class="projects-container">
+		<div class="container mx-auto px-6 lg:px-12">
 			{
-				PROJECTS.map((p) => (
-					<div class="sticky top-32 grid items-center gap-16 border-t border-[rgba(250,204,107,0.15)] py-16 lg:grid-cols-2">
-						<div class="group relative aspect-[16/10] overflow-hidden rounded-[1.5rem] premium-card ring-1 ring-[rgba(250,204,107,0.2)]">
-							<img
-								src={`/images/${p.img}`}
-								class="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
-								alt={p.title}
-							/>
-							<div class="pointer-events-none absolute inset-0 bg-[#050816]/25 transition-colors group-hover:bg-transparent" />
-						</div>
-
-						<div class="reveal-view space-y-10">
-							<div class="flex gap-10 text-[11px] font-black uppercase tracking-[0.2em] text-foreground/45">
-								<div>Année : {p.year}</div>
-								<div>Catégorie : {p.cat}</div>
+				PROJECTS.map((p, index) => (
+					<div class={`slide slide-${index} ${index === 0 ? 'active' : ''}`} data-index={index}>
+						<div class="project-card">
+							<!-- Left: Image Case -->
+							<div class="project-image-case">
+								<img
+									src={`/images/${p.img}`}
+									alt={p.title}
+									loading="lazy"
+								/>
 							</div>
-							<h3 class="font-display text-5xl font-bold uppercase leading-[0.9] tracking-tighter text-[#F9FAFB] lg:text-7xl">
-								{p.title}
-							</h3>
-							<p class="max-w-md text-lg font-medium text-foreground/70 leading-[1.6]">
-								{p.description}
-							</p>
-							<button
-								type="button"
-								class="premium-button rounded-full px-12 py-5 text-[11px] font-black uppercase tracking-widest text-background transition"
-							>
-								Voir les détails
-							</button>
+
+							<!-- Right: Text + Button Cases -->
+							<div class="project-right-column">
+								<!-- Text Case -->
+								<div class="project-text-case">
+									<!-- Meta Info -->
+									<div class="mb-6 flex flex-wrap items-center gap-4 text-xs font-semibold uppercase tracking-[0.12em]" style="color: var(--muted);">
+										<div class="flex items-center gap-2">
+											<span class="h-px w-6" style="background: var(--border);" />
+											<span>{p.year}</span>
+										</div>
+										<div class="flex items-center gap-2">
+											<span class="h-px w-6" style="background: var(--border);" />
+											<span>{p.cat}</span>
+										</div>
+									</div>
+
+									<!-- Title -->
+									<h3 class="mb-6 font-display text-2xl font-bold uppercase leading-[1.2] tracking-tight text-white md:text-3xl lg:text-4xl">
+										{p.title}
+									</h3>
+
+									<!-- Description -->
+									<p class="max-w-xl text-[15px] leading-7" style="color: var(--muted);">
+										{p.description}
+									</p>
+								</div>
+
+								<!-- Button Case -->
+								<div class="project-button-case">
+									<a
+										href={p.link}
+										class="btn-hero-primary"
+									>
+										<span>Voir les détails</span>
+										<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+											<path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+										</svg>
+									</a>
+								</div>
+							</div>
 						</div>
 					</div>
 				))
@@ -80,39 +296,58 @@ const PROJECTS = [
 </section>
 
 <script>
-	import gsap from 'gsap';
+	if (typeof window !== 'undefined') {
+		const init = () => {
+			const slides = Array.from(document.querySelectorAll('.slide'));
+			const dots = Array.from(document.querySelectorAll('.nav-dot'));
+			const currentSlideEl = document.getElementById('current-slide');
+			
+			if (slides.length > 0) {
+				let currentIndex = 0;
+				
+				// Set initial state
+				slides.forEach((slide, index) => {
+					const slideEl = slide as HTMLElement;
+					if (index === 0) {
+						slideEl.classList.add('active');
+					} else {
+						slideEl.classList.remove('active');
+						slideEl.style.display = 'none';
+					}
+				});
 
-	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-	if (!prefersReducedMotion) {
-		const projectItems = document.querySelectorAll('.sticky');
-		
-		projectItems.forEach((item, index) => {
-			item.style.opacity = '0';
-			item.style.transform = index % 2 === 0 ? 'translateX(-50px)' : 'translateX(50px)';
-			item.style.clipPath = 'inset(0 100% 0 0)';
-			item.style.willChange = 'transform, opacity, clip-path';
-		});
-
-		const observer = new IntersectionObserver((entries) => {
-			entries.forEach((entry) => {
-				if (entry.isIntersecting) {
-					const index = Array.from(projectItems).indexOf(entry.target);
-					
-					gsap.to(entry.target, {
-						opacity: 1,
-						x: 0,
-						clipPath: 'inset(0 0 0 0)',
-						duration: 0.9,
-						ease: 'power2.out',
-						clearProps: 'transform'
+				// Navigation dots click handlers
+				dots.forEach((dot, index) => {
+					dot.addEventListener('click', () => {
+						// Hide current slide
+						slides[currentIndex].classList.remove('active');
+						(slides[currentIndex] as HTMLElement).style.display = 'none';
+						
+						// Show new slide
+						currentIndex = index;
+						slides[currentIndex].classList.add('active');
+						(slides[currentIndex] as HTMLElement).style.display = 'block';
+						
+						// Update dots
+						dots.forEach((d, i) => {
+							if (i === currentIndex) {
+								d.classList.add('active');
+							} else {
+								d.classList.remove('active');
+							}
+						});
+						
+						// Update counter
+						if (currentSlideEl) {
+							currentSlideEl.textContent = String(currentIndex + 1).padStart(2, '0');
+						}
 					});
-					
-					observer.unobserve(entry.target);
-				}
-			});
-		}, { threshold: 0.2, rootMargin: '0px 0px -100px 0px' });
+				});
+			}
+		};
 
-		projectItems.forEach((item) => observer.observe(item));
+		const ready = () => init();
+		if (document.readyState !== 'loading') ready();
+		else window.addEventListener('DOMContentLoaded', ready, { once: true });
 	}
 </script>

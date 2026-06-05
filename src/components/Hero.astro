@@ -19,7 +19,7 @@ const galleryItems = [
 
 <section
 	id="hero"
-	class="hero-section relative flex min-h-screen flex-col justify-center overflow-hidden pb-0 pt-36 md:pt-40 border-0 outline-none mb-[-1px]"
+	class="hero-section relative flex min-h-screen flex-col justify-center overflow-hidden pb-0 pt-20 md:pt-24 border-0 outline-none mb-[-1px]"
 	aria-label="Accueil"
 	lang="fr"
 	style="border: none !important; outline: none !important; box-shadow: none !important; background: linear-gradient(135deg, #050816 0%, #0b1024 60%, #020617 100%);"
@@ -59,7 +59,7 @@ const galleryItems = [
 	</div>
 
 	<!-- Marquee Text Animation -->
-	<div class="absolute bottom-0 left-0 right-0 overflow-hidden pointer-events-none">
+	<div class="absolute bottom-16 left-0 right-0 overflow-hidden pointer-events-none">
 		<div class="marquee-container flex whitespace-nowrap">
 			<div class="marquee-content flex items-center gap-8 text-primary/40 text-sm uppercase tracking-widest">
 				<span>Confection de Toges</span>
@@ -85,21 +85,47 @@ const galleryItems = [
 			</div>
 		</div>
 	</div>
+
+	<!-- Scroll Down Indicator avec Lottie -->
+	<div class="absolute bottom-24 left-1/2 -translate-x-1/2 z-10 pointer-events-none">
+		<div class="scroll-down-indicator flex flex-col items-center gap-2">
+			<span class="text-primary/60 text-xs uppercase tracking-widest">Scroll</span>
+			<div class="scroll-chevron w-6 h-6 text-primary/60 animate-bounce">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+				</svg>
+			</div>
+		</div>
+	</div>
+
+	<!-- WhatsApp Floating Button -->
+	<a
+		href="https://wa.me/221771234567"
+		target="_blank"
+		rel="noopener noreferrer"
+		class="whatsapp-float fixed bottom-8 right-8 z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
+		aria-label="Contactez-nous sur WhatsApp"
+	>
+		<svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+			<path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+		</svg>
+		<div class="whatsapp-pulse-ring absolute inset-0 rounded-full border-2 border-[#25D366] opacity-0 pointer-events-none"></div>
+	</a>
 	
 	<!-- Main Content -->
 	<div
-		class="hero-content mx-auto grid w-full max-w-7xl items-center gap-12 px-6 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16 xl:gap-20 relative"
+		class="hero-content mx-auto grid w-full max-w-7xl items-center gap-12 px-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16 xl:gap-20 relative"
 	>
 		<!-- Sewing-inspired vertical divider line -->
-		<div class="hidden lg:block absolute left-[50%] top-[20%] bottom-[20%] w-px bg-gradient-to-b from-transparent via-[rgba(148,163,184,0.25)] to-transparent -translate-x-1/2"></div>
-		
+		<div class="hidden lg:block absolute left-[45%] top-[20%] bottom-[20%] w-px bg-gradient-to-b from-transparent via-[rgba(148,163,184,0.25)] to-transparent -translate-x-1/2"></div>
+
 		<!-- Sewing pattern markers (subtle circles) -->
-		<div class="hidden lg:block absolute left-[45%] top-[25%] w-2 h-2 rounded-full border border-[rgba(148,163,184,0.15)] -translate-x-1/2" aria-hidden="true"></div>
-		<div class="hidden lg:block absolute left-[45%] top-[50%] w-2 h-2 rounded-full border border-[rgba(148,163,184,0.15)] -translate-x-1/2" aria-hidden="true"></div>
-		<div class="hidden lg:block absolute left-[45%] top-[75%] w-2 h-2 rounded-full border border-[rgba(148,163,184,0.15)] -translate-x-1/2" aria-hidden="true"></div>
+		<div class="hidden lg:block absolute left-[40%] top-[25%] w-2 h-2 rounded-full border border-[rgba(148,163,184,0.15)] -translate-x-1/2" aria-hidden="true"></div>
+		<div class="hidden lg:block absolute left-[40%] top-[50%] w-2 h-2 rounded-full border border-[rgba(148,163,184,0.15)] -translate-x-1/2" aria-hidden="true"></div>
+		<div class="hidden lg:block absolute left-[40%] top-[75%] w-2 h-2 rounded-full border border-[rgba(148,163,184,0.15)] -translate-x-1/2" aria-hidden="true"></div>
 
 		<!-- Left Column: Text Content -->
-		<div class="hero-text-block flex flex-col justify-center">
+		<div class="hero-text-block flex flex-col justify-center lg:w-full">
 			<p
 				id="hero-subtitle"
 				class="mb-5 text-[11px] font-semibold uppercase tracking-[0.2em] text-[rgba(250,204,107,0.7)] md:text-xs"
@@ -113,8 +139,7 @@ const galleryItems = [
 			>
 				<span class="block text-[#F9FAFB]">Confection</span>
 				<span
-					class="mt-1 block font-bold"
-					style="background: linear-gradient(135deg, #FACC6B 0%, #F59E0B 50%, #D97706 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"
+					class="mt-1 block font-bold animated-gradient-text"
 				>
 					Univers
 				</span>
@@ -146,36 +171,36 @@ const galleryItems = [
 			</div>
 
 			<div
-				class="hero-reveal mt-14 flex flex-wrap items-center gap-x-10 gap-y-3 pt-10 text-sm text-foreground/50 relative"
+				class="hero-reveal mt-14 flex flex-row items-center gap-x-6 pt-10 text-sm text-foreground/50 relative"
 				style="--hero-d: 320ms"
 			>
 				<!-- Sewing-inspired dotted line -->
 				<div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[rgba(148,163,184,0.25)] to-transparent"></div>
-				<span class="font-medium text-foreground/65">Uniformes sur mesure</span>
-				<span class="hidden h-1 w-1 rounded-full bg-primary/50 sm:inline" aria-hidden="true"></span>
-				<span class="font-medium text-foreground/65">Qualité premium</span>
-				<span class="hidden h-1 w-1 rounded-full bg-primary/50 sm:inline" aria-hidden="true"></span>
-				<span class="font-medium text-foreground/65">Production en gros</span>
+				<span class="font-medium text-foreground/65 whitespace-nowrap">Uniformes sur mesure</span>
+				<span class="h-1 w-1 rounded-full bg-primary/50" aria-hidden="true"></span>
+				<span class="font-medium text-foreground/65 whitespace-nowrap">Qualité premium</span>
+				<span class="h-1 w-1 rounded-full bg-primary/50" aria-hidden="true"></span>
+				<span class="font-medium text-foreground/65 whitespace-nowrap">Production en gros</span>
 			</div>
 		</div>
 
 		<!-- Right Column: 3D Image Gallery -->
 		<div
 			id="hero-images"
-			class="relative mx-auto w-full max-w-lg lg:mx-0 lg:max-w-none"
+			class="relative w-full lg:w-full"
 		>
 			<div
-				class="hero-3d-container grid gap-3 sm:gap-4 md:min-h-[min(560px,68vh)] md:grid-cols-[1.12fr_0.88fr] md:grid-rows-2 md:gap-5 perspective-1000"
+				class="hero-3d-container grid gap-4 sm:gap-6 md:min-h-[min(650px,75vh)] md:grid-cols-[1.1fr_0.9fr] md:grid-rows-2 md:gap-6 perspective-1000"
 			>
 				<!-- Main Card (Larger - Graduation) -->
 				<figure
-					class="hero-figure-3d group relative col-span-1 overflow-hidden rounded-[1.5rem] border border-[rgba(250,204,107,0.25)] shadow-[0_24px_60px_rgba(0,0,0,0.60)] md:row-span-2 md:min-h-[320px] transform-style-3d transition-all duration-200 ease hover:scale-[1.03] hover:-translate-y-[2px] hover:shadow-[0_32px_80px_rgba(0,0,0,0.70)]"
+					class="hero-figure-3d group relative col-span-1 overflow-hidden rounded-[1.5rem] border border-[rgba(250,204,107,0.25)] shadow-[0_24px_60px_rgba(0,0,0,0.60)] md:row-span-2 md:min-h-[400px] transform-style-3d transition-all duration-200 ease hover:scale-[1.03] hover:-translate-y-[2px] hover:shadow-[0_32px_80px_rgba(0,0,0,0.70)]"
 					data-tilt
 				>
 					<img
 						src={heroImages.graduation}
 						alt="Professional graduation gowns manufactured with precision and quality"
-						class="hero-img-3d h-full min-h-[240px] w-full object-cover transition-transform duration-[1.1s] ease-out will-change-transform md:min-h-full"
+						class="hero-img-3d h-full w-full object-cover transition-transform duration-[1.1s] ease-out will-change-transform"
 						width="800"
 						height="1000"
 						loading="eager"
@@ -197,7 +222,7 @@ const galleryItems = [
 					<img
 						src={heroImages.uniformes}
 						alt="Custom school uniforms manufactured for educational institutions"
-						class="hero-img-3d h-full min-h-[140px] w-full object-cover transition-transform duration-[1.1s] ease-out will-change-transform md:min-h-[calc(50%-0.625rem)]"
+						class="hero-img-3d h-full w-full object-cover transition-transform duration-[1.1s] ease-out will-change-transform"
 						width="600"
 						height="400"
 						loading="eager"
@@ -215,7 +240,7 @@ const galleryItems = [
 					<img
 						src={heroImages.tenues}
 						alt="Workwear uniforms, medical scrubs and lab coats for professional environments"
-						class="hero-img-3d h-full min-h-[140px] w-full object-cover transition-transform duration-[1.1s] ease-out will-change-transform md:min-h-[calc(50%-0.625rem)]"
+						class="hero-img-3d h-full w-full object-cover transition-transform duration-[1.1s] ease-out will-change-transform"
 						width="600"
 						height="400"
 						loading="lazy"
@@ -239,210 +264,71 @@ const galleryItems = [
 	import gsap from 'gsap';
 	import ScrollTrigger from 'gsap/ScrollTrigger';
 	import SplitType from 'split-type';
+	import { createHeroEntryTimeline, createMouseParallax, prefersReducedMotion, isMobile, animateMarquee, animatePrimaryButtonHover, setupSecondaryButtonHover } from '../lib/animations';
 
 	// Register ScrollTrigger
 	gsap.registerPlugin(ScrollTrigger);
 
-	// Mobile detection for mouse tracking
-	const isMobile = () => {
-		return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
-		       ('ontouchstart' in window) || 
-		       (navigator.maxTouchPoints > 0);
-	};
-
-	// Complex Hero Animations with GSAP - Premium Cinematic Style
-	if (!isMobile()) {
-		// Cinematic entry animations
-		const heroTimeline = gsap.timeline();
-
-		// Text block fade-in with translateY and overshoot
-		heroTimeline.from('.hero-text-block', {
-			opacity: 0,
-			y: 20,
-			duration: 0.6,
-			ease: 'back.out(1.2)'
+	// Vérification des préférences de mouvement réduit
+	if (prefersReducedMotion()) {
+		// Désactiver toutes les animations si l'utilisateur préfère le mouvement réduit
+		document.querySelectorAll('.hero-section *').forEach((el: Element) => {
+			(el as HTMLElement).style.animation = 'none';
+			(el as HTMLElement).style.transition = 'none';
+		});
+	} else {
+		// Animation d'entrée complète de la Hero section
+		const heroTimeline = createHeroEntryTimeline({
+			navbar: 'nav',
+			subtitle: '#hero-subtitle',
+			title: '#hero-title',
+			description: '#hero-description',
+			buttons: '', // Animation désactivée pour les boutons
+			images: '', // Animation désactivée pour les images
+			decorative: '.floating-shape-1, .floating-shape-2, .floating-shape-3, .floating-shape-4'
 		});
 
-		// Subtitle fade-in-up with stagger
-		heroTimeline.from('#hero-subtitle', {
-			opacity: 0,
-			y: 15,
-			duration: 0.5,
-			ease: 'power2.out'
-		}, '-=0.3');
-
-		// Title fade-in-up with stagger and overshoot
-		const heroTitle = document.querySelector('#hero-title');
-		if (heroTitle) {
-			const splitTitle = new SplitType(heroTitle, { types: 'words' });
-			
-			heroTimeline.from(splitTitle.words, {
-				opacity: 0,
-				y: 25,
-				duration: 0.7,
-				ease: 'back.out(1.1)',
-				stagger: 0.06
-			}, '-=0.3');
-		}
-
-		// Description fade-in-up
-		heroTimeline.from('#hero-description', {
-			opacity: 0,
-			y: 15,
-			duration: 0.5,
-			ease: 'power2.out'
-		}, '-=0.4');
-
-		// Buttons scale-in with glow
-		heroTimeline.from('.hero-reveal', {
-			opacity: 0,
-			scale: 0.95,
-			y: 10,
-			duration: 0.5,
-			ease: 'back.out(1.15)',
-			stagger: 0.08
-		}, '-=0.3');
-
-		// Add glow animation to primary button
-		heroTimeline.to('.hero-reveal:first-child', {
-			boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.15), 0 18px 40px rgba(0, 0, 0, 0.50)',
-			duration: 0.6,
-			ease: 'power2.out'
-		}, '-=0.4');
-
-		// Hero images slide-in from right with rotation
-		heroTimeline.from('#hero-images', {
-			opacity: 0,
-			x: 40,
-			rotation: 3,
-			duration: 0.7,
-			ease: 'power2.out'
-		}, '-=0.5');
-
-		// Individual photo cards stagger
-		const photoCards = document.querySelectorAll('.hero-photo-card');
-		if (photoCards.length > 0) {
-			heroTimeline.from(photoCards, {
-				opacity: 0,
-				y: 20,
-				rotation: (i) => i % 2 === 0 ? 2 : -2,
-				duration: 0.5,
-				ease: 'power2.out',
-				stagger: 0.1
-			}, '-=0.5');
-		}
-
-		// Animate floating shapes with elastic effect
-		gsap.from('.floating-shape-1', {
-			opacity: 0,
-			scale: 0,
-			duration: 1.5,
-			ease: 'elastic.out(1, 0.5)',
-			delay: 0.3
-		});
-
-		gsap.from('.floating-shape-2', {
-			opacity: 0,
-			scale: 0,
-			duration: 1.5,
-			ease: 'elastic.out(1, 0.5)',
-			delay: 0.5
-		});
-
-		gsap.from('.floating-shape-3', {
-			opacity: 0,
-			scale: 0,
-			duration: 1.5,
-			ease: 'elastic.out(1, 0.5)',
-			delay: 0.7
-		});
-
-		gsap.from('.floating-shape-4', {
-			opacity: 0,
-			scale: 0,
-			duration: 1.5,
-			ease: 'elastic.out(1, 0.5)',
-			delay: 0.9
-		});
-
-		// Animate lines with stagger
+		// Animation des lignes décoratives
 		gsap.from('.line-1, .line-2, .line-3, .line-4', {
 			scaleY: 0,
 			opacity: 0,
 			duration: 1,
 			ease: 'power3.out',
 			stagger: 0.2,
-			delay: 0.3
+			delay: 0.5
 		});
 
-		// Animate marquee
-		gsap.from('.marquee-content', {
-			x: '100%',
-			duration: 2,
-			ease: 'power2.out',
-			delay: 1.5
-		});
+		// Animation du ticker (marquee infini)
+		const marqueeContent = document.querySelector('.marquee-content') as HTMLElement;
+		if (marqueeContent) {
+			animateMarquee('.marquee-content', 30);
+		}
 
-		// Parallax effect on mouse movement for 3D depth
-		const heroSection = document.getElementById('hero');
-		if (heroSection) {
-			heroSection.addEventListener('mousemove', (e) => {
-				const mouseX = (e.clientX / window.innerWidth) - 0.5;
-				const mouseY = (e.clientY / window.innerHeight) - 0.5;
+		// Effet parallax au mouvement de la souris
+		if (!isMobile()) {
+			const heroSection = document.getElementById('hero');
+			if (heroSection) {
+				const cleanupParallax = createMouseParallax(heroSection, [
+					{ selector: '.hero-figure-3d:nth-child(1)', xFactor: 1.2, yFactor: 1.2 },
+					{ selector: '.hero-figure-3d:nth-child(2)', xFactor: -0.8, yFactor: 0.6 },
+					{ selector: '.hero-figure-3d:nth-child(3)', xFactor: 0.5, yFactor: -1 }
+				]);
 
-				gsap.to('.floating-shape-1', {
-					x: mouseX * 30,
-					y: mouseY * 30,
-					duration: 1,
-					ease: 'power2.out'
-				});
+				// Cleanup au démontage
+				window.addEventListener('beforeunload', cleanupParallax);
+			}
+		}
 
-				gsap.to('.floating-shape-2', {
-					x: mouseX * -20,
-					y: mouseY * -20,
-					duration: 1,
-					ease: 'power2.out'
-				});
+		// Micro-interactions sur les boutons CTA
+		animatePrimaryButtonHover('.cta-button-primary');
+		setupSecondaryButtonHover('.cta-button-secondary');
 
-				gsap.to('.floating-shape-3', {
-					x: mouseX * 25,
-					y: mouseY * -25,
-					duration: 1,
-					ease: 'power2.out'
-				});
-
-				gsap.to('.floating-shape-4', {
-					x: mouseX * -30,
-					y: mouseY * 30,
-					duration: 1,
-					ease: 'power2.out'
-				});
-
+		// Parallax au scroll
+		if (!isMobile()) {
+			const heroSection = document.getElementById('hero');
+			if (heroSection) {
 				gsap.to('#hero-images', {
-					x: mouseX * -15,
-					y: mouseY * -15,
-					duration: 1,
-					ease: 'power2.out'
-				});
-			});
-
-			// Scroll-based parallax effects
-			gsap.to('#hero-images', {
-				y: -50,
-				scrollTrigger: {
-					trigger: heroSection,
-					start: 'top top',
-					end: 'bottom top',
-					scrub: 1
-				}
-			});
-
-			// Parallax for golden glow
-			const goldenGlow = document.querySelector('.golden-glow');
-			if (goldenGlow) {
-				gsap.to(goldenGlow, {
-					opacity: 0.15,
-					scale: 1.1,
+					y: -50,
 					scrollTrigger: {
 						trigger: heroSection,
 						start: 'top top',
@@ -450,95 +336,113 @@ const galleryItems = [
 						scrub: 1
 					}
 				});
-			}
 
-			// Subtle text parallax
-			gsap.to('.hero-text-block', {
-				y: -30,
-				scrollTrigger: {
-					trigger: heroSection,
-					start: 'top top',
-					end: 'bottom top',
-					scrub: 1.5
-				}
+				gsap.to('.hero-text-block', {
+					y: -30,
+					scrollTrigger: {
+						trigger: heroSection,
+						start: 'top top',
+						end: 'bottom top',
+						scrub: 1.5
+					}
+				});
+			}
+		}
+
+		// 3D Tilt Effect pour les images (optionnel, désactivé si Swiper est utilisé)
+		if (!isMobile()) {
+			const tiltElements = document.querySelectorAll('[data-tilt]');
+			
+			tiltElements.forEach((element: Element) => {
+				const htmlElement = element as HTMLElement;
+				htmlElement.addEventListener('mousemove', (e: Event) => {
+					const mouseEvent = e as MouseEvent;
+					const rect = htmlElement.getBoundingClientRect();
+					const x = mouseEvent.clientX - rect.left;
+					const y = mouseEvent.clientY - rect.top;
+					
+					const centerX = rect.width / 2;
+					const centerY = rect.height / 2;
+					
+					const rotateX = ((y - centerY) / centerY) * -8;
+					const rotateY = ((x - centerX) / centerX) * 8;
+					
+					htmlElement.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+				});
+				
+				htmlElement.addEventListener('mouseleave', () => {
+					htmlElement.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+				});
 			});
 		}
-	}
-
-	// GSAP Animations for Hero with staggered timing - DISABLED for now
-	// const heroTimeline = gsap.timeline();
-
-	// heroTimeline
-	// 	.to('#hero-subtitle', {
-	// 		opacity: 1,
-	// 		y: 0,
-	// 		duration: 0.8,
-	// 		ease: 'power3.out'
-	// 	})
-	// 	.to('#hero-images', {
-	// 		opacity: 1,
-	// 		y: 0,
-	// 		duration: 0.8,
-	// 		ease: 'power3.out'
-	// 	}, '-=0.4');
-
-	// Parallax effect on scroll for hero images
-	if (!isMobile()) {
-		window.addEventListener('scroll', () => {
-			const scrolled = window.pageYOffset;
-			const heroImages = document.getElementById('hero-images');
-			if (heroImages) {
-				heroImages.style.transform = `translateY(${scrolled * 0.1}px)`;
-			}
-		});
-	}
-
-	// 3D Tilt Effect for Images
-	if (!isMobile()) {
-		const tiltElements = document.querySelectorAll('[data-tilt]');
-		
-		tiltElements.forEach(element => {
-			element.addEventListener('mousemove', (e) => {
-				const rect = element.getBoundingClientRect();
-				const x = e.clientX - rect.left;
-				const y = e.clientY - rect.top;
-				
-				const centerX = rect.width / 2;
-				const centerY = rect.height / 2;
-				
-				const rotateX = ((y - centerY) / centerY) * -8; // Max 8deg rotation
-				const rotateY = ((x - centerX) / centerX) * 8;
-				
-				element.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-			});
-			
-			element.addEventListener('mouseleave', () => {
-				element.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-			});
-		});
-	}
-
-	// Mouse Parallax for Floating Shapes
-	if (!isMobile()) {
-		const shapes = document.querySelectorAll('.shape');
-		const heroSection = document.querySelector('.hero-section');
-		
-		heroSection.addEventListener('mousemove', (e) => {
-			const x = (e.clientX / window.innerWidth - 0.5) * 2;
-			const y = (e.clientY / window.innerHeight - 0.5) * 2;
-			
-			shapes.forEach((shape, index) => {
-				const speed = (index + 1) * 15;
-				const translateX = x * speed;
-				const translateY = y * speed;
-				
-				shape.style.transform = `translate(${translateX}px, ${translateY}px)`;
-			});
-		});
 	}
 </script>
 
 <style>
+	/* Animation du gradient sur le mot "Univers" */
+	.animated-gradient-text {
+		background: linear-gradient(135deg, #FACC6B 0%, #F59E0B 50%, #D97706 100%);
+		background-size: 200% auto;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		animation: gradient-shift 3s linear infinite;
+		will-change: background-position;
+	}
+
+	@keyframes gradient-shift {
+		0% {
+			background-position: 0% center;
+		}
+		100% {
+			background-position: 200% center;
+		}
+	}
+
+	/* Animation pulse pour le bouton WhatsApp */
+	.whatsapp-pulse-ring {
+		animation: whatsapp-pulse 2s ease-out infinite;
+	}
+
+	@keyframes whatsapp-pulse {
+		0% {
+			transform: scale(1);
+			opacity: 0.6;
+		}
+		50% {
+			opacity: 0.3;
+		}
+		100% {
+			transform: scale(1.8);
+			opacity: 0;
+		}
+	}
+
+	/* Optimisation des performances avec will-change */
+	.hero-figure-3d {
+		will-change: transform;
+	}
+
+	.hero-text-block {
+		will-change: transform, opacity;
+	}
+
+	.cta-button-primary,
+	.cta-button-secondary {
+		will-change: transform, box-shadow;
+	}
+
+	.marquee-content {
+		will-change: transform;
+	}
+
+	.floating-shape-1,
+	.floating-shape-2,
+	.floating-shape-3,
+	.floating-shape-4 {
+		will-change: transform, opacity;
+	}
+
 	/* 3D Perspective Container */
 	.perspective-1000 {
 		perspective: 1000px;

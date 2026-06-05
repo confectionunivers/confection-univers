@@ -8,41 +8,49 @@ const services = [
 		title: 'Toges de graduation',
 		description: 'Toges de graduation et tenues académiques personnalisées pour les universités et grandes écoles de Dakar et Thiès, confectionnées avec des tissus de qualité premium.',
 		image: '/images/toge-graduation.jpg',
+		slug: 'toges-graduation',
 	},
 	{
 		title: 'Uniformes scolaires',
 		description: 'Programmes complets d\'uniformes scolaires pour les établissements primaires et secondaires du Sénégal, incluant chemises, pantalons et jupes sur mesure.',
 		image: '/images/uniforme-scolaire.jpg',
+		slug: 'uniformes-scolaires',
 	},
 	{
 		title: 'Tenues d\'entreprise',
 		description: 'Tenues de travail professionnelles pour les entreprises et industries sénégalaises, alliant confort, durabilité et image de marque.',
 		image: '/images/tenue-travail.jpg',
+		slug: 'tenues-entreprise',
 	},
 	{
 		title: 'Kimonos',
 		description: 'Kimonos traditionnels et modernes confectionnés avec des tissus de qualité, parfaits pour les cérémonies culturelles et événements spéciaux au Sénégal.',
 		image: '/images/kimono.jpg',
+		slug: 'kimonos',
 	},
 	{
 		title: 'Blouses médicales',
 		description: 'Blouses médicales confortables et fonctionnelles pour le personnel des hôpitaux et cliniques de Dakar et Thiès, avec poches pratiques et tissus faciles d\'entretien.',
 		image: '/images/blouse-medicale.jpg',
+		slug: 'blouses-medicales',
 	},
 	{
 		title: 'Toges d\'avocat',
 		description: 'Toges d\'avocat et tenues juridiques conformes aux standards du barreau sénégalais, confectionnées avec précision pour les professionnels du droit.',
 		image: '/images/toge-avocat.jpg',
+		slug: 'toges-avocat',
 	},
 	{
 		title: 'Costumes africains',
 		description: 'Costumes africains traditionnels et contemporains inspirés du patrimoine sénégalais, utilisant des tissus locaux comme le bazin et le wax.',
 		image: '/images/costume-africain.jpg',
+		slug: 'costumes-africains',
 	},
 	{
 		title: 'Tenues de sport',
 		description: 'Tenues de sport et maillots d\'équipe pour les clubs, écoles et associations sportives du Sénégal, conçus pour la performance et le confort.',
 		image: '/images/tenue-sport.jpg',
+		slug: 'tenues-sport',
 	},
 ];
 ---
@@ -110,12 +118,12 @@ const services = [
 										{s.title}
 									</h3>
 									<p class="mt-3 flex-1 text-sm leading-relaxed text-ink/65 md:text-[0.9375rem]">{s.description}</p>
-									<span class="mt-5 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary opacity-90 transition duration-300 group-hover:gap-3">
+									<a href={`/blog/${s.slug}`} class="mt-5 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary opacity-90 transition duration-300 group-hover:gap-3">
 										En savoir plus
 										<svg class="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
 											<path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6" />
 										</svg>
-									</span>
+									</a>
 								</div>
 							</article>
 						))
