@@ -12,7 +12,7 @@ const heroImages = {
 const galleryItems = [
 	{ image: '/images/gallery1.jpg', label: 'Toges de graduation' },
 	{ image: '/images/gallery2.jpg', label: 'Uniformes scolaires' },
-	{ image: '/images/gallery3.jpg', label: 'Tenues d\'entreprise' },
+	{ image: '/images/gallery3.jpg', label: 'Tenue de Travail' },
 ];
 
 ---
@@ -273,8 +273,9 @@ const galleryItems = [
 	if (prefersReducedMotion()) {
 		// Désactiver toutes les animations si l'utilisateur préfère le mouvement réduit
 		document.querySelectorAll('.hero-section *').forEach((el: Element) => {
-			(el as HTMLElement).style.animation = 'none';
-			(el as HTMLElement).style.transition = 'none';
+			const elStyle = el as HTMLElement;
+			elStyle.style.animation = 'none';
+			elStyle.style.transition = 'none';
 		});
 	} else {
 		// Animation d'entrée complète de la Hero section

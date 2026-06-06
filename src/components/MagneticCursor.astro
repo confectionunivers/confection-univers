@@ -73,7 +73,8 @@
 		cursorX += dotDx * 0.25;
 		cursorY += dotDy * 0.25;
 		
-		cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+		const cursorEl = cursor as HTMLElement;
+		cursorEl.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
 		
 		// Cursor outline follows with more inertia (slower)
 		const outlineDx = mouseX - outlineX;
@@ -81,7 +82,8 @@
 		outlineX += outlineDx * 0.08;
 		outlineY += outlineDy * 0.08;
 		
-		cursorOutline.style.transform = `translate(${outlineX}px, ${outlineY}px)`;
+		const cursorOutlineEl = cursorOutline as HTMLElement;
+		cursorOutlineEl.style.transform = `translate(${outlineX}px, ${outlineY}px)`;
 		
 		requestAnimationFrame(animateCursor);
 	}

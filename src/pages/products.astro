@@ -9,36 +9,42 @@ const productCategories = [
 		description: 'Tenues académiques prestigieuses pour les cérémonies de remise des diplômes',
 		image: '/images/toge-graduation.jpg',
 		count: 12,
+		slug: 'toges-graduation',
 	},
 	{
 		name: 'Uniformes scolaires',
 		description: 'Uniformes complets pour écoles primaires, collèges et lycées',
 		image: '/images/uniforme-scolaire.jpg',
 		count: 25,
+		slug: 'uniformes-scolaires',
 	},
 	{
 		name: 'Tenues médicales',
 		description: 'Blouses, tuniques et tenues pour professionnels de santé',
 		image: '/images/blouse-medicale.jpg',
 		count: 18,
+		slug: 'tenues-medicales',
 	},
 	{
-		name: 'Tenues d\'entreprise',
+		name: 'Tenue de Travail',
 		description: 'Vêtements professionnels pour entreprises et industries',
 		image: '/images/tenue-travail.jpg',
 		count: 15,
+		slug: 'tenue-travail',
 	},
 	{
 		name: 'Costumes africains',
 		description: 'Tenues traditionnelles en bazin, wax et tissus locaux',
 		image: '/images/costume-africain.jpg',
 		count: 30,
+		slug: 'costumes-africains',
 	},
 	{
 		name: 'Tenues de sport',
 		description: 'Maillots et équipements pour clubs et associations sportives',
 		image: '/images/tenue-sport.jpg',
 		count: 20,
+		slug: 'tenues-sport',
 	},
 ];
 ---
@@ -111,7 +117,7 @@ const productCategories = [
 										{category.description}
 									</p>
 									<a
-										href="/contact"
+										href={`/collections/${category.slug}`}
 										class="mt-6 inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.2em] text-primary opacity-90 transition duration-300 group-hover:gap-3"
 									>
 										Voir la collection

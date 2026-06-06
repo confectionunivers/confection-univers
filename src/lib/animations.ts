@@ -392,8 +392,9 @@ export const animateWhatsAppPulse = (buttonSelector: string): void => {
 		opacity: 0;
 		pointer-events: none;
 	`;
-	button.style.position = 'relative';
-	button.appendChild(ring);
+	const buttonEl = button as HTMLElement;
+	buttonEl.style.position = 'relative';
+	buttonEl.appendChild(ring);
 
 	// Animation du ring
 	gsap.to(ring, {

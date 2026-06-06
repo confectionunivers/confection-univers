@@ -75,8 +75,9 @@ import gsap from 'gsap';
 		entries.forEach((entry, index) => {
 			if (entry.isIntersecting) {
 				setTimeout(() => {
-					entry.target.style.opacity = '1';
-					entry.target.style.transform = 'translateY(0)';
+					const targetEl = entry.target as HTMLElement;
+					targetEl.style.opacity = '1';
+					targetEl.style.transform = 'translateY(0)';
 				}, index * 200);
 				observer.unobserve(entry.target);
 			}
@@ -84,9 +85,10 @@ import gsap from 'gsap';
 	}, observerOptions);
 
 	document.querySelectorAll('.trust-badge').forEach(badge => {
-		badge.style.opacity = '0';
-		badge.style.transform = 'translateY(50px)';
-		badge.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+		const badgeEl = badge as HTMLElement;
+		badgeEl.style.opacity = '0';
+		badgeEl.style.transform = 'translateY(50px)';
+		badgeEl.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
 		observer.observe(badge);
 	});
 </script>
