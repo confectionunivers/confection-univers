@@ -1,0 +1,120 @@
+{
+	"version": 3,
+	"routes": [
+		{
+			"handle": "filesystem"
+		},
+		{
+			"src": "^/_astro/(.*)$",
+			"headers": {
+				"cache-control": "public, max-age=31536000, immutable"
+			},
+			"continue": true
+		},
+		{
+			"src": "^/_server-islands/([^/]+?)/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/_image/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/about/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/about\\.data$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/api/send-devis/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/apropos/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/blog/([^/]+?)/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/blog/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/collections/([^/]+?)/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/components/CTA/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/components/LogoWall/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/components/Section/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/components/SectionSeparator/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/components/StatCard/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/components/TeamCard/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/components/Testimonial/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/components/Timeline/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/components/ValueCard/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/contact/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/products/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/projects/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/realisation/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/services/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/404/?$",
+			"dest": "_render"
+		},
+		{
+			"src": "^/.*$",
+			"dest": "_render",
+			"status": 404
+		}
+	]
+}

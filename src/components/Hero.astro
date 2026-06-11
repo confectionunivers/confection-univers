@@ -3,6 +3,8 @@
  * Visuels hero : placez vos fichiers dans public/images/
  * (ajustez les noms ci-dessous si besoin).
  */
+import { Image } from 'astro:assets';
+
 const heroImages = {
 	graduation: '/images/hero-toges-graduation.jpg',
 	uniformes: '/images/hero-uniformes.jpg',
@@ -44,24 +46,24 @@ const galleryItems = [
 
 	<!-- Animated Floating Shapes -->
 	<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-		<div class="floating-shape-1 absolute left-[10%] top-[20%] w-20 h-20 border border-primary/30 rounded-full opacity-20"></div>
-		<div class="floating-shape-2 absolute right-[15%] top-[40%] w-16 h-16 border border-primary-light/30 rounded-lg opacity-20"></div>
-		<div class="floating-shape-3 absolute left-[20%] bottom-[30%] w-24 h-24 border border-primary/30 rounded-full opacity-20"></div>
-		<div class="floating-shape-4 absolute right-[25%] bottom-[20%] w-12 h-12 border border-primary-light/30 rounded-lg opacity-20"></div>
+		<div class="floating-shape-1 absolute left-[10%] top-[20%] w-20 h-20 border border-primary/30 rounded-full opacity-20 transform-gpu will-change-transform"></div>
+		<div class="floating-shape-2 absolute right-[15%] top-[40%] w-16 h-16 border border-primary-light/30 rounded-lg opacity-20 transform-gpu will-change-transform"></div>
+		<div class="floating-shape-3 absolute left-[20%] bottom-[30%] w-24 h-24 border border-primary/30 rounded-full opacity-20 transform-gpu will-change-transform"></div>
+		<div class="floating-shape-4 absolute right-[25%] bottom-[20%] w-12 h-12 border border-primary-light/30 rounded-lg opacity-20 transform-gpu will-change-transform"></div>
 	</div>
 
 	<!-- Line Animations -->
 	<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-		<div class="line-1 absolute left-[5%] top-[15%] w-[1px] h-[200px] bg-gradient-to-b from-transparent via-primary/30 to-transparent"></div>
-		<div class="line-2 absolute right-[10%] top-[25%] w-[1px] h-[150px] bg-gradient-to-b from-transparent via-primary-light/30 to-transparent"></div>
-		<div class="line-3 absolute left-[15%] bottom-[20%] w-[1px] h-[180px] bg-gradient-to-b from-transparent via-primary/30 to-transparent"></div>
-		<div class="line-4 absolute right-[20%] bottom-[15%] w-[1px] h-[120px] bg-gradient-to-b from-transparent via-primary-light/30 to-transparent"></div>
+		<div class="line-1 absolute left-[5%] top-[15%] w-[1px] h-[200px] bg-gradient-to-b from-transparent via-primary/30 to-transparent transform-gpu will-change-transform"></div>
+		<div class="line-2 absolute right-[10%] top-[25%] w-[1px] h-[150px] bg-gradient-to-b from-transparent via-primary-light/30 to-transparent transform-gpu will-change-transform"></div>
+		<div class="line-3 absolute left-[15%] bottom-[20%] w-[1px] h-[180px] bg-gradient-to-b from-transparent via-primary/30 to-transparent transform-gpu will-change-transform"></div>
+		<div class="line-4 absolute right-[20%] bottom-[15%] w-[1px] h-[120px] bg-gradient-to-b from-transparent via-primary-light/30 to-transparent transform-gpu will-change-transform"></div>
 	</div>
 
 	<!-- Marquee Text Animation -->
 	<div class="absolute bottom-16 left-0 right-0 overflow-hidden pointer-events-none">
-		<div class="marquee-container flex whitespace-nowrap">
-			<div class="marquee-content flex items-center gap-8 text-primary/40 text-sm uppercase tracking-widest">
+		<div class="marquee-container flex whitespace-nowrap transform-gpu will-change-transform">
+			<div class="marquee-content flex items-center gap-8 text-primary/40 text-sm uppercase tracking-widest transform-gpu will-change-transform">
 				<span>Confection de Toges</span>
 				<span class="w-2 h-2 rounded-full bg-primary/40"></span>
 				<span>Uniformes Scolaires</span>
@@ -103,7 +105,7 @@ const galleryItems = [
 		href="https://wa.me/221771234567"
 		target="_blank"
 		rel="noopener noreferrer"
-		class="whatsapp-float fixed bottom-8 right-8 z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 group"
+		class="whatsapp-float fixed bottom-8 right-8 z-50 flex items-center justify-center w-14 h-14 bg-[#25D366] rounded-full shadow-lg hover:shadow-xl transition-all duration-300 group transform-gpu will-change-transform"
 		aria-label="Contactez-nous sur WhatsApp"
 	>
 		<svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -155,17 +157,17 @@ const galleryItems = [
 			<div class="hero-reveal mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center" style="--hero-d: 240ms">
 				<a
 					href="/contact"
-					class="cta-button-primary group relative inline-flex min-h-[3.25rem] items-center justify-center overflow-hidden rounded-full px-8 py-3.5 text-center text-[13px] font-semibold uppercase tracking-[0.18em] text-background transition-all duration-500"
+					class="cta-button-primary group relative inline-flex min-h-[3.25rem] items-center justify-center overflow-hidden rounded-full px-8 py-3.5 text-center text-[13px] font-semibold uppercase tracking-[0.18em] text-background transition-all duration-500 transform-gpu will-change-transform"
 					style="background: linear-gradient(135deg, #FACC6B 0%, #F59E0B 50%, #D97706 100%); box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 18px 40px rgba(0, 0, 0, 0.50); border: 1px solid rgba(161, 98, 7, 0.7);"
 				>
-					<span class="relative z-10 transition-transform duration-300 group-hover:scale-[1.02]">Demander un devis</span>
+					<span class="relative z-10 transition-transform duration-300 transform-gpu will-change-transform">Demander un devis</span>
 					<span class="cta-button-glow absolute inset-0 rounded-full border-2 border-primary/0 transition-all duration-500 group-hover:border-primary/50 group-hover:shadow-[0_0_30px_rgba(198,161,95,0.4)]"></span>
 				</a>
 				<a
 					href="/products"
-					class="cta-button-secondary group relative inline-flex min-h-[3.25rem] items-center justify-center rounded-full border-2 border-[rgba(250,204,107,0.3)] bg-[rgba(0,0,0,0.3)] px-8 py-3.5 text-center text-[13px] font-semibold uppercase tracking-[0.18em] text-[#F9FAFB] transition-all duration-400 hover:bg-[rgba(0,0,0,0.5)] hover:border-[rgba(250,204,107,0.5)]"
+					class="cta-button-secondary group relative inline-flex min-h-[3.25rem] items-center justify-center rounded-full border-2 border-[rgba(250,204,107,0.3)] bg-[rgba(0,0,0,0.3)] px-8 py-3.5 text-center text-[13px] font-semibold uppercase tracking-[0.18em] text-[#F9FAFB] transition-all duration-400 hover:bg-[rgba(0,0,0,0.5)] hover:border-[rgba(250,204,107,0.5)] transform-gpu will-change-transform"
 				>
-					<span class="relative z-10 transition-all duration-300 group-hover:text-[#FACC6B] group-hover:scale-105">Voir nos produits</span>
+					<span class="relative z-10 transition-all duration-300 transform-gpu will-change-transform">Voir nos produits</span>
 					<span class="cta-button-glow absolute inset-0 rounded-full border-2 border-primary/0 transition-all duration-400 group-hover:border-primary group-hover:shadow-[0_0_20px_rgba(198,161,95,0.3)]"></span>
 				</a>
 			</div>
@@ -194,13 +196,12 @@ const galleryItems = [
 			>
 				<!-- Main Card (Larger - Graduation) -->
 				<figure
-					class="hero-figure-3d group relative col-span-1 overflow-hidden rounded-[1.5rem] border border-[rgba(250,204,107,0.25)] shadow-[0_24px_60px_rgba(0,0,0,0.60)] md:row-span-2 md:min-h-[400px] transform-style-3d transition-all duration-200 ease hover:scale-[1.03] hover:-translate-y-[2px] hover:shadow-[0_32px_80px_rgba(0,0,0,0.70)]"
-					data-tilt
+					class="hero-figure-3d hero-card-float-1 group relative col-span-1 overflow-hidden rounded-[1.5rem] border border-[rgba(250,204,107,0.25)] shadow-[0_24px_60px_rgba(0,0,0,0.60)] md:row-span-2 md:min-h-[400px] transform-style-3d transform-gpu will-change-transform transition-all duration-200 ease hover:scale-[1.03] hover:shadow-[0_32px_80px_rgba(0,0,0,0.70)]"
 				>
-					<img
+					<Image
 						src={heroImages.graduation}
 						alt="Professional graduation gowns manufactured with precision and quality"
-						class="hero-img-3d h-full w-full object-cover transition-transform duration-[1.1s] ease-out will-change-transform"
+						class="hero-img-3d h-full w-full object-cover transform-gpu will-change-transform transition-transform duration-[1.1s] ease-out"
 						width="800"
 						height="1000"
 						loading="eager"
@@ -216,13 +217,12 @@ const galleryItems = [
 
 				<!-- Secondary Card 1 (Smaller - Uniformes) -->
 				<figure
-					class="hero-figure-3d group relative overflow-hidden rounded-[1.25rem] border border-[rgba(255,255,255,0.06)] shadow-[0_16px_40px_rgba(0,0,0,0.50)] md:min-h-0 transform-style-3d transition-all duration-200 ease hover:scale-[1.03] hover:-translate-y-[2px] hover:shadow-[0_20px_50px_rgba(0,0,0,0.60)]"
-					data-tilt
+					class="hero-figure-3d hero-card-float-2 group relative overflow-hidden rounded-[1.5rem] border border-[rgba(250,204,107,0.25)] shadow-[0_24px_60px_rgba(0,0,0,0.60)] md:min-h-0 transform-style-3d transform-gpu will-change-transform transition-all duration-200 ease hover:scale-[1.03] hover:shadow-[0_32px_80px_rgba(0,0,0,0.70)]"
 				>
-					<img
+					<Image
 						src={heroImages.uniformes}
 						alt="Custom school uniforms manufactured for educational institutions"
-						class="hero-img-3d h-full w-full object-cover transition-transform duration-[1.1s] ease-out will-change-transform"
+						class="hero-img-3d h-full w-full object-cover transform-gpu will-change-transform transition-transform duration-[1.1s] ease-out"
 						width="600"
 						height="400"
 						loading="eager"
@@ -234,13 +234,12 @@ const galleryItems = [
 
 				<!-- Secondary Card 2 (Smaller - Tenues) -->
 				<figure
-					class="hero-figure-3d group relative overflow-hidden rounded-[1.25rem] border border-[rgba(255,255,255,0.06)] shadow-[0_16px_40px_rgba(0,0,0,0.50)] md:min-h-0 transform-style-3d transition-all duration-200 ease hover:scale-[1.03] hover:-translate-y-[2px] hover:shadow-[0_20px_50px_rgba(0,0,0,0.60)]"
-					data-tilt
+					class="hero-figure-3d hero-card-float-3 group relative overflow-hidden rounded-[1.5rem] border border-[rgba(250,204,107,0.25)] shadow-[0_24px_60px_rgba(0,0,0,0.60)] md:min-h-0 transform-style-3d transform-gpu will-change-transform transition-all duration-200 ease hover:scale-[1.03] hover:shadow-[0_32px_80px_rgba(0,0,0,0.70)]"
 				>
-					<img
+					<Image
 						src={heroImages.tenues}
 						alt="Workwear uniforms, medical scrubs and lab coats for professional environments"
-						class="hero-img-3d h-full w-full object-cover transition-transform duration-[1.1s] ease-out will-change-transform"
+						class="hero-img-3d h-full w-full object-cover transform-gpu will-change-transform transition-transform duration-[1.1s] ease-out"
 						width="600"
 						height="400"
 						loading="lazy"
@@ -261,13 +260,7 @@ const galleryItems = [
 </section>
 
 <script>
-	import gsap from 'gsap';
-	import ScrollTrigger from 'gsap/ScrollTrigger';
-	import SplitType from 'split-type';
-	import { createHeroEntryTimeline, createMouseParallax, prefersReducedMotion, isMobile, animateMarquee, animatePrimaryButtonHover, setupSecondaryButtonHover } from '../lib/animations';
-
-	// Register ScrollTrigger
-	gsap.registerPlugin(ScrollTrigger);
+	import { prefersReducedMotion } from '../lib/animations';
 
 	// Vérification des préférences de mouvement réduit
 	if (prefersReducedMotion()) {
@@ -277,106 +270,8 @@ const galleryItems = [
 			elStyle.style.animation = 'none';
 			elStyle.style.transition = 'none';
 		});
-	} else {
-		// Animation d'entrée complète de la Hero section
-		const heroTimeline = createHeroEntryTimeline({
-			navbar: 'nav',
-			subtitle: '#hero-subtitle',
-			title: '#hero-title',
-			description: '#hero-description',
-			buttons: '', // Animation désactivée pour les boutons
-			images: '', // Animation désactivée pour les images
-			decorative: '.floating-shape-1, .floating-shape-2, .floating-shape-3, .floating-shape-4'
-		});
-
-		// Animation des lignes décoratives
-		gsap.from('.line-1, .line-2, .line-3, .line-4', {
-			scaleY: 0,
-			opacity: 0,
-			duration: 1,
-			ease: 'power3.out',
-			stagger: 0.2,
-			delay: 0.5
-		});
-
-		// Animation du ticker (marquee infini)
-		const marqueeContent = document.querySelector('.marquee-content') as HTMLElement;
-		if (marqueeContent) {
-			animateMarquee('.marquee-content', 30);
-		}
-
-		// Effet parallax au mouvement de la souris
-		if (!isMobile()) {
-			const heroSection = document.getElementById('hero');
-			if (heroSection) {
-				const cleanupParallax = createMouseParallax(heroSection, [
-					{ selector: '.hero-figure-3d:nth-child(1)', xFactor: 1.2, yFactor: 1.2 },
-					{ selector: '.hero-figure-3d:nth-child(2)', xFactor: -0.8, yFactor: 0.6 },
-					{ selector: '.hero-figure-3d:nth-child(3)', xFactor: 0.5, yFactor: -1 }
-				]);
-
-				// Cleanup au démontage
-				window.addEventListener('beforeunload', cleanupParallax);
-			}
-		}
-
-		// Micro-interactions sur les boutons CTA
-		animatePrimaryButtonHover('.cta-button-primary');
-		setupSecondaryButtonHover('.cta-button-secondary');
-
-		// Parallax au scroll
-		if (!isMobile()) {
-			const heroSection = document.getElementById('hero');
-			if (heroSection) {
-				gsap.to('#hero-images', {
-					y: -50,
-					scrollTrigger: {
-						trigger: heroSection,
-						start: 'top top',
-						end: 'bottom top',
-						scrub: 1
-					}
-				});
-
-				gsap.to('.hero-text-block', {
-					y: -30,
-					scrollTrigger: {
-						trigger: heroSection,
-						start: 'top top',
-						end: 'bottom top',
-						scrub: 1.5
-					}
-				});
-			}
-		}
-
-		// 3D Tilt Effect pour les images (optionnel, désactivé si Swiper est utilisé)
-		if (!isMobile()) {
-			const tiltElements = document.querySelectorAll('[data-tilt]');
-			
-			tiltElements.forEach((element: Element) => {
-				const htmlElement = element as HTMLElement;
-				htmlElement.addEventListener('mousemove', (e: Event) => {
-					const mouseEvent = e as MouseEvent;
-					const rect = htmlElement.getBoundingClientRect();
-					const x = mouseEvent.clientX - rect.left;
-					const y = mouseEvent.clientY - rect.top;
-					
-					const centerX = rect.width / 2;
-					const centerY = rect.height / 2;
-					
-					const rotateX = ((y - centerY) / centerY) * -8;
-					const rotateY = ((x - centerX) / centerX) * 8;
-					
-					htmlElement.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-				});
-				
-				htmlElement.addEventListener('mouseleave', () => {
-					htmlElement.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-				});
-			});
-		}
 	}
+	// Toutes les animations sont maintenant gérées en CSS pur pour une accélération GPU optimale à 60 FPS
 </script>
 
 <style>
@@ -453,38 +348,78 @@ const galleryItems = [
 		transform-style: preserve-3d;
 	}
 
-	/* Floating Shapes Animation */
+	/* Floating Shapes Animation - GPU Accelerated */
 	@keyframes float {
 		0%, 100% {
-			transform: translateY(0) translateX(0);
+			transform: translate3d(0, 0, 0);
 		}
 		50% {
-			transform: translateY(-20px) translateX(10px);
+			transform: translate3d(10px, -20px, 0);
 		}
 	}
 
-	.shape {
-		animation: float 6s ease-in-out infinite;
-	}
-
-	.shape-1 {
+	.floating-shape-1 {
+		animation: float 8s ease-in-out infinite;
 		animation-delay: 0s;
+		will-change: transform;
 	}
 
-	.shape-2 {
+	.floating-shape-2 {
+		animation: float 7s ease-in-out infinite;
 		animation-delay: 1s;
+		will-change: transform;
 	}
 
-	.shape-3 {
+	.floating-shape-3 {
+		animation: float 9s ease-in-out infinite;
 		animation-delay: 2s;
+		will-change: transform;
 	}
 
-	.shape-4 {
+	.floating-shape-4 {
+		animation: float 6s ease-in-out infinite;
 		animation-delay: 3s;
+		will-change: transform;
 	}
 
-	.shape-5 {
-		animation-delay: 4s;
+	/* Decorative Lines Animation - GPU Accelerated */
+	@keyframes lineGrow {
+		0% {
+			transform: translate3d(0, -50%, 0) scaleY(0);
+			opacity: 0;
+		}
+		100% {
+			transform: translate3d(0, -50%, 0) scaleY(1);
+			opacity: 1;
+		}
+	}
+
+	.line-1 {
+		animation: lineGrow 1s ease-out forwards;
+		animation-delay: 0.5s;
+		transform-origin: top;
+		will-change: transform, opacity;
+	}
+
+	.line-2 {
+		animation: lineGrow 1s ease-out forwards;
+		animation-delay: 0.7s;
+		transform-origin: top;
+		will-change: transform, opacity;
+	}
+
+	.line-3 {
+		animation: lineGrow 1s ease-out forwards;
+		animation-delay: 0.9s;
+		transform-origin: top;
+		will-change: transform, opacity;
+	}
+
+	.line-4 {
+		animation: lineGrow 1s ease-out forwards;
+		animation-delay: 1.1s;
+		transform-origin: top;
+		will-change: transform, opacity;
 	}
 
 	/* CTA Button Premium Effects */
@@ -497,11 +432,11 @@ const galleryItems = [
 
 	.cta-button-primary:hover {
 		box-shadow: 0 12px 40px -6px rgba(198, 161, 95, 0.55), 0 0 30px rgba(198, 161, 95, 0.3);
-		transform: translateY(-2px) scale(1.02);
+		transform: translate3d(0, -2px, 0) scale3d(1.02, 1.02, 1);
 	}
 
 	.cta-button-secondary:hover {
-		transform: translateY(-2px) scale(1.02);
+		transform: translate3d(0, -2px, 0) scale3d(1.02, 1.02, 1);
 		box-shadow: 0 8px 24px -8px rgba(198, 161, 95, 0.3);
 	}
 
@@ -513,11 +448,11 @@ const galleryItems = [
 	@keyframes scroll {
 		0% {
 			opacity: 1;
-			transform: translateY(0);
+			transform: translate3d(0, 0, 0);
 		}
 		100% {
 			opacity: 0;
-			transform: translateY(12px);
+			transform: translate3d(0, 12px, 0);
 		}
 	}
 
@@ -528,11 +463,11 @@ const galleryItems = [
 	@keyframes fade-in-up {
 		from {
 			opacity: 0;
-			transform: translateY(20px);
+			transform: translate3d(0, 20px, 0);
 		}
 		to {
 			opacity: 1;
-			transform: translateY(0);
+			transform: translate3d(0, 0, 0);
 		}
 	}
 
@@ -550,33 +485,33 @@ const galleryItems = [
 	@keyframes hero-reveal-up {
 		from {
 			opacity: 0;
-			transform: translateY(1.75rem);
+			transform: translate3d(0, 1.75rem, 0);
 		}
 		to {
 			opacity: 1;
-			transform: translateY(0);
+			transform: translate3d(0, 0, 0);
 		}
 	}
 
 	@keyframes hero-panel-in {
 		from {
 			opacity: 0;
-			transform: translateY(1.35rem) scale(0.99);
+			transform: translate3d(0, 1.35rem, 0) scale(0.99);
 		}
 		to {
 			opacity: 1;
-			transform: translateY(0) scale(1);
+			transform: translate3d(0, 0, 0) scale(1);
 		}
 	}
 
 	@keyframes hero-img-in {
 		from {
 			opacity: 0;
-			transform: scale(1.05) rotateX(5deg);
+			transform: scale3d(1.05, 1.05, 1.05) rotateX(5deg);
 		}
 		to {
 			opacity: 1;
-			transform: scale(1) rotateX(0);
+			transform: scale3d(1, 1, 1) rotateX(0);
 		}
 	}
 
@@ -624,13 +559,96 @@ const galleryItems = [
 		}
 	}
 
+	/* Smooth Hero Card Float Animations - GPU Accelerated */
+	@keyframes smoothHeroFloat {
+		0%, 100% {
+			transform: translate3d(0, 0, 0);
+		}
+		50% {
+			transform: translate3d(0, -15px, 0);
+		}
+	}
+
+	.hero-card-float-1 {
+		animation: smoothHeroFloat 7s ease-in-out infinite;
+	}
+
+	.hero-card-float-2 {
+		animation: smoothHeroFloat 8s ease-in-out infinite;
+		animation-delay: 1s;
+	}
+
+	.hero-card-float-3 {
+		animation: smoothHeroFloat 6s ease-in-out infinite;
+		animation-delay: 2s;
+	}
+
+	/* Marquee Animation - GPU Accelerated */
+	@keyframes marqueeSlide {
+		0% {
+			transform: translate3d(0, 0, 0);
+		}
+		100% {
+			transform: translate3d(-50%, 0, 0);
+		}
+	}
+
+	.marquee-content {
+		animation: marqueeSlide 30s linear infinite;
+	}
+
+	.marquee-container:hover .marquee-content {
+		animation-play-state: paused;
+	}
+
+	/* GPU-Accelerated Hover Effects */
+	.hero-figure-3d .hero-img-3d:hover {
+		transform: scale3d(1.05, 1.05, 1);
+	}
+
+	.whatsapp-float:hover {
+		transform: scale3d(1.1, 1.1, 1);
+	}
+
+	/* GPU-Accelerated CTA Button Text Hover Effects */
+	.cta-button-primary span {
+		transition: transform 0.3s ease;
+	}
+
+	.cta-button-primary:hover span {
+		transform: scale3d(1.02, 1.02, 1);
+	}
+
+	.cta-button-secondary span {
+		transition: transform 0.3s ease, color 0.3s ease;
+	}
+
+	.cta-button-secondary:hover span {
+		transform: scale3d(1.05, 1.05, 1);
+	}
+
 	/* Mobile Optimization */
 	@media (max-width: 1023px) {
-		.floating-shapes {
-			display: none;
+		.floating-shape-1,
+		.floating-shape-2,
+		.floating-shape-3,
+		.floating-shape-4 {
+			animation: none;
+		}
+		.line-1,
+		.line-2,
+		.line-3,
+		.line-4 {
+			animation: none;
+			opacity: 1;
 		}
 		.hero-figure-3d {
 			transform: none !important;
+		}
+		.hero-card-float-1,
+		.hero-card-float-2,
+		.hero-card-float-3 {
+			animation: none;
 		}
 	}
 </style>

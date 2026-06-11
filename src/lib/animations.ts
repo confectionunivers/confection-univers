@@ -32,11 +32,23 @@ export const isMobile = (): boolean => {
 export const animateNavbarEntry = (navbarSelector: string): void => {
 	if (prefersReducedMotion()) return;
 
+	const navbar = document.querySelector(navbarSelector) as HTMLElement;
+	if (navbar) {
+		navbar.style.willChange = 'transform, opacity';
+	}
+
+	// Optimisation mobile : durée réduite et mouvement moins prononcé
+	const duration = isMobile() ? 0.5 : 0.8;
+	const yValue = isMobile() ? -30 : -50;
+
 	gsap.from(navbarSelector, {
-		y: -50,
+		y: yValue,
 		opacity: 0,
-		duration: 0.8,
-		ease: 'power3.out'
+		duration: duration,
+		ease: 'power3.out',
+		onComplete: () => {
+			if (navbar) navbar.style.willChange = 'auto';
+		}
 	});
 };
 
@@ -46,11 +58,19 @@ export const animateNavbarEntry = (navbarSelector: string): void => {
 export const animateSubtitleEntry = (subtitleSelector: string): void => {
 	if (prefersReducedMotion()) return;
 
+	const subtitle = document.querySelector(subtitleSelector) as HTMLElement;
+	if (subtitle) {
+		subtitle.style.willChange = 'transform, opacity';
+	}
+
 	gsap.from(subtitleSelector, {
 		y: 30,
 		opacity: 0,
 		duration: 0.6,
-		ease: 'power3.out'
+		ease: 'power3.out',
+		onComplete: () => {
+			if (subtitle) subtitle.style.willChange = 'auto';
+		}
 	});
 };
 
@@ -197,32 +217,24 @@ export const createHeroEntryTimeline = (selectors: {
 	}, '-=0.4');
 
 	// Animation des boutons
-	const buttons = document.querySelectorAll(selectors.buttons);
-	if (buttons.length > 0) {
-		tl.from(buttons, {
-			y: 20,
-			opacity: 0,
-			duration: 0.5,
-			ease: 'power3.out',
-			stagger: 0.1
-		}, '-=0.3');
+	if (selectors.buttons && selectors.buttons !== '') {
+		const buttons = document.querySelectorAll(selectors.buttons);
+		if (buttons.length > 0) {
+			tl.from(buttons, {
+				y: 20,
+				opacity: 0,
+				duration: 0.5,
+				ease: 'power3.out',
+				stagger: 0.1
+			}, '-=0.3');
+		}
 	}
 
 	// Animation des images
-	const images = document.querySelectorAll(selectors.images);
-	if (images.length > 0) {
-		tl.from(images, {
-			scale: 0.8,
-			opacity: 0,
-			duration: 0.8,
-			ease: 'back.out(1.4)',
-			stagger: 0.2
-		}, '-=0.3');
-	} else {
-		// Si le sélecteur ne trouve pas les images, essayer avec un sélecteur plus spécifique
-		const heroImages = document.querySelectorAll('.hero-figure-3d');
-		if (heroImages.length > 0) {
-			tl.from(heroImages, {
+	if (selectors.images && selectors.images !== '') {
+		const images = document.querySelectorAll(selectors.images);
+		if (images.length > 0) {
+			tl.from(images, {
 				scale: 0.8,
 				opacity: 0,
 				duration: 0.8,
@@ -233,7 +245,7 @@ export const createHeroEntryTimeline = (selectors: {
 	}
 
 	// Animation des éléments décoratifs (optionnels)
-	if (selectors.decorative) {
+	if (selectors.decorative && selectors.decorative !== '') {
 		const decorative = document.querySelectorAll(selectors.decorative);
 		if (decorative.length > 0) {
 			tl.from(decorative, {
@@ -289,25 +301,91 @@ export const createMouseParallax = (
 };
 
 /**
- * Animation hover du bouton principal (scale + shadow + flèche)
+ * Animation hover du bouton principal (scale + shadow + flèche avec effet 3D prononcé)
  */
 export const animatePrimaryButtonHover = (buttonSelector: string): void => {
 	if (prefersReducedMotion()) return;
 
-	const button = document.querySelector(buttonSelector);
+	const button = document.querySelector(buttonSelector) as HTMLElement;
 	if (!button) return;
 
+	button.style.willChange = 'transform, box-shadow';
+
 	button.addEventListener('mouseenter', () => {
+		// Mobile : animation simplifiée sans rotation 3D
+		if (isMobile()) {
+			gsap.to(button, {
+				scale: 1.05,
+				duration: 0.3,
+				ease: 'power2.out'
+			});
+		} else {
+			gsap.to(button, {
+				scale: 1.08,
+				rotateX: 5,
+				rotateY: -5,
+				duration: 0.4,
+				ease: 'power2.out'
+			});
+		}
+
+		const arrow = button.querySelector('svg, .arrow');
+		if (arrow) {
+			gsap.to(arrow, {
+				x: isMobile() ? 5 : 8,
+				rotate: isMobile() ? 10 : 15,
+				duration: isMobile() ? 0.3 : 0.4,
+				ease: 'power2.out'
+			});
+		}
+	});
+
+	button.addEventListener('mouseleave', () => {
 		gsap.to(button, {
-			scale: 1.05,
-			duration: 0.3,
+			scale: 1,
+			rotateX: 0,
+			rotateY: 0,
+			duration: 0.4,
 			ease: 'power2.out'
 		});
 
 		const arrow = button.querySelector('svg, .arrow');
 		if (arrow) {
 			gsap.to(arrow, {
-				x: 5,
+				x: 0,
+				rotate: 0,
+				duration: 0.4,
+				ease: 'power2.out'
+			});
+		}
+	});
+};
+
+/**
+ * Animation hover du bouton secondaire (remplissage de gauche à droite avec effet 3D)
+ * Cette fonction utilise CSS plutôt que GSAP pour l'effet de remplissage
+ */
+export const setupSecondaryButtonHover = (buttonSelector: string): void => {
+	if (prefersReducedMotion()) return;
+
+	const button = document.querySelector(buttonSelector) as HTMLElement;
+	if (!button) return;
+
+	button.style.willChange = 'transform, box-shadow';
+
+	button.addEventListener('mouseenter', () => {
+		// Mobile : animation simplifiée sans rotation 3D
+		if (isMobile()) {
+			gsap.to(button, {
+				scale: 1.03,
+				duration: 0.25,
+				ease: 'power2.out'
+			});
+		} else {
+			gsap.to(button, {
+				scale: 1.05,
+				rotateX: 3,
+				rotateY: -3,
 				duration: 0.3,
 				ease: 'power2.out'
 			});
@@ -317,33 +395,12 @@ export const animatePrimaryButtonHover = (buttonSelector: string): void => {
 	button.addEventListener('mouseleave', () => {
 		gsap.to(button, {
 			scale: 1,
+			rotateX: 0,
+			rotateY: 0,
 			duration: 0.3,
 			ease: 'power2.out'
 		});
-
-		const arrow = button.querySelector('svg, .arrow');
-		if (arrow) {
-			gsap.to(arrow, {
-				x: 0,
-				duration: 0.3,
-				ease: 'power2.out'
-			});
-		}
 	});
-};
-
-/**
- * Animation hover du bouton secondaire (remplissage de gauche à droite)
- * Cette fonction utilise CSS plutôt que GSAP pour l'effet de remplissage
- */
-export const setupSecondaryButtonHover = (buttonSelector: string): void => {
-	if (prefersReducedMotion()) return;
-
-	const button = document.querySelector(buttonSelector);
-	if (!button) return;
-
-	// L'effet de remplissage est géré par CSS (::before pseudo-element)
-	// Cette fonction peut être étendue pour des effets GSAP supplémentaires
 };
 
 /**
@@ -412,4 +469,137 @@ export const animateWhatsAppPulse = (buttonSelector: string): void => {
 export const cleanupAnimations = (): void => {
 	gsap.killTweensOf('*');
 	ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+};
+
+/**
+ * Animation d'entrée des sections avec stagger
+ */
+export const animateSectionEntry = (sectionSelector: string, staggerDelay: number = 0.15): void => {
+	if (prefersReducedMotion()) return;
+
+	const section = document.querySelector(sectionSelector);
+	if (!section) return;
+
+	const children = Array.from(section.children) as HTMLElement[];
+	if (children.length === 0) return;
+
+	children.forEach(child => {
+		child.style.willChange = 'transform, opacity';
+	});
+
+	gsap.from(children, {
+		y: 50,
+		opacity: 0,
+		duration: 0.8,
+		ease: 'power3.out',
+		stagger: staggerDelay,
+		onComplete: () => {
+			children.forEach(child => {
+				child.style.willChange = 'auto';
+			});
+		}
+	});
+};
+
+/**
+ * Animation de scroll avec parallax pour les cartes
+ */
+export const animateCardsScroll = (cardsSelector: string): void => {
+	if (prefersReducedMotion() || isMobile()) return;
+
+	const cards = document.querySelectorAll(cardsSelector);
+	if (cards.length === 0) return;
+
+	cards.forEach((card, index) => {
+		const cardElement = card as HTMLElement;
+		cardElement.style.willChange = 'transform';
+
+		gsap.to(cardElement, {
+			y: -30 * (index + 1) * 0.5,
+			scrollTrigger: {
+				trigger: cardElement,
+				start: 'top bottom',
+				end: 'bottom top',
+				scrub: 1
+			},
+			onComplete: () => {
+				cardElement.style.willChange = 'auto';
+			}
+		});
+	});
+};
+
+/**
+ * Animation de révélation progressive du texte
+ */
+export const animateTextReveal = (textSelector: string): void => {
+	if (prefersReducedMotion()) return;
+
+	const textElement = document.querySelector(textSelector) as HTMLElement;
+	if (!textElement) return;
+
+	textElement.style.willChange = 'transform, opacity';
+
+	gsap.from(textElement, {
+		y: 40,
+		opacity: 0,
+		duration: 1,
+		ease: 'power3.out',
+		onComplete: () => {
+			textElement.style.willChange = 'auto';
+		}
+	});
+};
+
+/**
+ * Animation de transition fluide entre sections
+ */
+export const animateSectionTransition = (sectionsSelector: string): void => {
+	if (prefersReducedMotion()) return;
+
+	const sections = document.querySelectorAll(sectionsSelector);
+	if (sections.length === 0) return;
+
+	sections.forEach((section, index) => {
+		const sectionElement = section as HTMLElement;
+		sectionElement.style.willChange = 'transform, opacity';
+
+		gsap.from(sectionElement, {
+			y: 60,
+			opacity: 0,
+			duration: 0.8,
+			ease: 'power3.out',
+			scrollTrigger: {
+				trigger: sectionElement,
+				start: 'top 80%',
+				end: 'top 20%',
+				toggleActions: 'play none none reverse'
+			},
+			onComplete: () => {
+				sectionElement.style.willChange = 'auto';
+			}
+		});
+	});
+};
+
+/**
+ * Animation de fade-in avec scale pour les éléments
+ */
+export const animateFadeInScale = (elementSelector: string): void => {
+	if (prefersReducedMotion()) return;
+
+	const element = document.querySelector(elementSelector) as HTMLElement;
+	if (!element) return;
+
+	element.style.willChange = 'transform, opacity';
+
+	gsap.from(element, {
+		scale: 0.9,
+		opacity: 0,
+		duration: 0.6,
+		ease: 'back.out(1.2)',
+		onComplete: () => {
+			element.style.willChange = 'auto';
+		}
+	});
 };

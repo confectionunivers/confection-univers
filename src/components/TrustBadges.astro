@@ -11,8 +11,8 @@ import gsap from 'gsap';
 	<div class="relative z-10 mx-auto max-w-7xl px-6">
 		<div class="grid grid-cols-1 gap-8 md:grid-cols-3">
 			<!-- Badge 1: Tissus Haute Résistance -->
-			<div class="trust-badge group flex flex-col items-center gap-4 p-6 rounded-2xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 bg-[rgba(0,0,0,0.3)] backdrop-blur-xl border border-[rgba(250,204,107,0.15)] hover:border-[rgba(250,204,107,0.3)] hover:bg-[rgba(0,0,0,0.4)] hover:shadow-[0_8px_32px_rgba(198,161,95,0.15)]">
-				<div class="flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(250,204,107,0.1)] transition-all duration-500 group-hover:bg-[rgba(250,204,107,0.2)] group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(198,161,95,0.4)]">
+			<div class="trust-badge group flex flex-col items-center gap-4 p-6 rounded-2xl transform-gpu transition-all duration-500 will-change-transform hover:scale-[1.02] hover:-translate-y-2 bg-[rgba(0,0,0,0.3)] backdrop-blur-xl border border-[rgba(250,204,107,0.15)] hover:border-[rgba(250,204,107,0.3)] hover:bg-[rgba(0,0,0,0.4)] hover:shadow-[0_8px_32px_rgba(198,161,95,0.15)]">
+				<div class="flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(250,204,107,0.1)] transform-gpu transition-all duration-500 will-change-transform group-hover:bg-[rgba(250,204,107,0.2)] group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(198,161,95,0.4)]">
 					<svg class="h-8 w-8 text-[#FACC6B] transition-colors duration-500 group-hover:text-[#FACC6B]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
 					</svg>
@@ -28,8 +28,8 @@ import gsap from 'gsap';
 			</div>
 
 			<!-- Badge 2: Coupes Sur-Mesure & Standardisées -->
-			<div class="trust-badge group flex flex-col items-center gap-4 p-6 rounded-2xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 bg-[rgba(0,0,0,0.3)] backdrop-blur-xl border border-[rgba(250,204,107,0.15)] hover:border-[rgba(250,204,107,0.3)] hover:bg-[rgba(0,0,0,0.4)] hover:shadow-[0_8px_32px_rgba(198,161,95,0.15)]">
-				<div class="flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(250,204,107,0.1)] transition-all duration-500 group-hover:bg-[rgba(250,204,107,0.2)] group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(198,161,95,0.4)]">
+			<div class="trust-badge group flex flex-col items-center gap-4 p-6 rounded-2xl transform-gpu transition-all duration-500 will-change-transform hover:scale-[1.02] hover:-translate-y-2 bg-[rgba(0,0,0,0.3)] backdrop-blur-xl border border-[rgba(250,204,107,0.15)] hover:border-[rgba(250,204,107,0.3)] hover:bg-[rgba(0,0,0,0.4)] hover:shadow-[0_8px_32px_rgba(198,161,95,0.15)]">
+				<div class="flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(250,204,107,0.1)] transform-gpu transition-all duration-500 will-change-transform group-hover:bg-[rgba(250,204,107,0.2)] group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(198,161,95,0.4)]">
 					<svg class="h-8 w-8 text-[#FACC6B] transition-colors duration-500 group-hover:text-[#FACC6B]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
 					</svg>
@@ -45,8 +45,8 @@ import gsap from 'gsap';
 			</div>
 
 			<!-- Badge 3: Production Grand Volume & Délais Garantis -->
-			<div class="trust-badge group flex flex-col items-center gap-4 p-6 rounded-2xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-2 bg-[rgba(0,0,0,0.3)] backdrop-blur-xl border border-[rgba(250,204,107,0.15)] hover:border-[rgba(250,204,107,0.3)] hover:bg-[rgba(0,0,0,0.4)] hover:shadow-[0_8px_32px_rgba(198,161,95,0.15)]">
-				<div class="flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(250,204,107,0.1)] transition-all duration-500 group-hover:bg-[rgba(250,204,107,0.2)] group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(198,161,95,0.4)]">
+			<div class="trust-badge group flex flex-col items-center gap-4 p-6 rounded-2xl transform-gpu transition-all duration-500 will-change-transform hover:scale-[1.02] hover:-translate-y-2 bg-[rgba(0,0,0,0.3)] backdrop-blur-xl border border-[rgba(250,204,107,0.15)] hover:border-[rgba(250,204,107,0.3)] hover:bg-[rgba(0,0,0,0.4)] hover:shadow-[0_8px_32px_rgba(198,161,95,0.15)]">
+				<div class="flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(250,204,107,0.1)] transform-gpu transition-all duration-500 will-change-transform group-hover:bg-[rgba(250,204,107,0.2)] group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(198,161,95,0.4)]">
 					<svg class="h-8 w-8 text-[#FACC6B] transition-colors duration-500 group-hover:text-[#FACC6B]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
 					</svg>

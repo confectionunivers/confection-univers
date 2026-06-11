@@ -1,0 +1,103 @@
+---
+const processSteps = [
+	{
+		number: '01',
+		title: 'Demande & Étude',
+		description: 'Analyse approfondie de votre cahier des charges et envoi d\'un devis personnalisé sous 24 à 48 heures.'
+	},
+	{
+		number: '02',
+		title: 'Prototype & Échantillon',
+		description: 'Confection d\'un premier modèle test pour validation absolue des tissus, des coupes, des tailles et de vos logos/broderies.'
+	},
+	{
+		number: '03',
+		title: 'Production en Série',
+		description: 'Lancement de la fabrication artisanale et industrielle au sein de notre atelier avec un contrôle qualité rigoureux à chaque étape.'
+	},
+	{
+		number: '04',
+		title: 'Livraison Sécurisée',
+		description: 'Repassage, conditionnement individuel et expédition clé en main de vos commandes partout au Sénégal.'
+	}
+];
+---
+
+<section class="relative z-10 py-32 border-0" style="background: linear-gradient(180deg, #00002a 0%, #00001C 100%);">
+	<!-- Premium Golden Glow -->
+	<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+		<div class="absolute left-[10%] top-[25%] w-[500px] h-[500px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.12) 0%, transparent 70%); filter: blur(100px);"></div>
+		<div class="absolute right-[10%] bottom-[25%] w-[400px] h-[400px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.08) 0%, transparent 70%); filter: blur(80px);"></div>
+	</div>
+
+	<div class="mx-auto max-w-7xl px-6">
+		<div class="mb-24 text-center">
+			<div class="reveal-view mb-6 text-[11px] font-semibold uppercase tracking-[0.2em] premium-subtitle" style="color: rgba(250, 204, 107, 0.7);">
+				Comment ça marche
+			</div>
+
+			<h2
+				class="reveal-view font-display text-2xl md:text-3xl font-bold text-[#F9FAFB] text-center tracking-tight"
+			>
+				Notre Processus de <span style="color: #FACC6B;">Commande</span>
+			</h2>
+		</div>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+			{
+				processSteps.map((step, index) => (
+					<div
+						class="group relative overflow-hidden rounded-[1.5rem] border border-[rgba(250,204,107,0.25)] bg-white/5 backdrop-blur-sm p-6 md:p-8 transform-gpu transition-all duration-500 ease-out will-change-transform hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(212,175,55,0.15)] hover:border-[rgba(250,204,107,0.4)]"
+					>
+						<div class="relative z-20">
+							<div class="mb-4 font-display text-4xl font-bold tracking-tight" style="color: #FACC6B;">
+								{step.number}
+							</div>
+
+							<h3 class="mb-3 font-display text-lg font-bold text-[#F9FAFB] tracking-tight">
+								{step.title}
+							</h3>
+
+							<p class="text-sm font-normal leading-[1.6] text-white/70">
+								{step.description}
+							</p>
+						</div>
+
+						<!-- Decorative Glow -->
+						<div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[rgba(212,175,55,0.05)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.premium-subtitle {
+		animation: fadeInUp 0.8s ease-out forwards;
+	}
+
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.reveal-view {
+		opacity: 0;
+		animation: fadeInUp 0.8s ease-out forwards;
+	}
+
+	.reveal-view:nth-child(1) {
+		animation-delay: 0.1s;
+	}
+
+	.reveal-view:nth-child(2) {
+		animation-delay: 0.2s;
+	}
+</style>

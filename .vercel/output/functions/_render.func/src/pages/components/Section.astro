@@ -1,0 +1,13 @@
+---
+interface Props {
+	class?: string;
+	children: any;
+	background?: string;
+}
+
+const { class: className = '', background = '', children } = Astro.props;
+---
+
+<section class={`relative py-24 md:py-32 ${background} ${className}`}>
+	{children}
+</section>
