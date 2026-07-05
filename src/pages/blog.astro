@@ -8,6 +8,8 @@ import BlogCard from '../components/BlogCard.astro';
 import BlogPagination from '../components/BlogPagination.astro';
 import { BLOG_POSTS } from '../lib/blog-data';
 
+export const prerender = true;
+
 const POSTS_PER_PAGE = 6;
 const currentPage = 1;
 const totalPages = Math.ceil(BLOG_POSTS.length / POSTS_PER_PAGE);
