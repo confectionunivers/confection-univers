@@ -5,8 +5,14 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-	output: 'server',
-	adapter: vercel(),
+	output: 'hybrid',
+	adapter: vercel({
+		functions: {
+			api: {
+				include: ['src/pages/api/**'],
+			},
+		},
+	}),
 	integrations: [react()],
 	vite: {
 		plugins: [tailwindcss()],
