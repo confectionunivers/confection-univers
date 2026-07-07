@@ -3,17 +3,18 @@ import tailwindcss from '@tailwindcss/vite';
 import vercel from '@astrojs/vercel';
 import react from '@astrojs/react';
 
-// https://astro.build/config
 export default defineConfig({
+    site: 'https://confectionunivers.com',
     output: 'server',
     adapter: vercel({
-        webAnalytics: { enabled: true },
-        imagesConfig: { sizes: [320, 640, 1280, 1920] },
-        // Forcer le déploiement en Serverless Function standard
-        functionPerRoute: false 
+        functionPerRoute: false,
+        entrypoint: './entry.mjs'
     }),
     integrations: [react()],
     vite: {
         plugins: [tailwindcss()],
-    },
+        ssr: {
+            noExternal: true
+        }
+    }
 });
