@@ -1,10 +1,31 @@
-import { t as __exportAll } from "./rolldown-runtime_D7D4PA-g.mjs";
-import { $ as AstroError, O as MissingGetFontFileRequestUrl, S as InvalidImageService, V as RemoteImageNotAllowed, _ as ImageMissingAlt, c as ExpectedImageOptions, d as FontFamilyNotFound, l as ExpectedNotESMImage, s as ExpectedImage } from "./errors-data_sKwIzwfZ.mjs";
-import { S as isRemoteAllowed, _ as fetchWithRedirects, b as isRemoteImage, c as isRemotePath, g as inferRemoteSize$1, x as resolveSrc, y as isESMImportedImage } from "./path_CP1oRZAZ.mjs";
+import { $ as AstroError, C as LocalImageUsedWrongly, O as MissingGetFontFileRequestUrl, S as InvalidImageService, V as RemoteImageNotAllowed, X as UnsupportedImageConversion, Z as UnsupportedImageFormat, _ as ImageMissingAlt, c as ExpectedImageOptions, d as FontFamilyNotFound, k as MissingImageDimension, l as ExpectedNotESMImage, s as ExpectedImage, v as IncompatibleDescriptorOptions } from "./errors-data_sKwIzwfZ.mjs";
+import { S as isRemoteAllowed, b as isRemoteImage, c as isRemotePath, f as removeQueryString, g as inferRemoteSize$1, l as joinPaths, x as resolveSrc, y as isESMImportedImage } from "./path_CP1oRZAZ.mjs";
 import { C as createComponent, S as createAstro, _ as addAttribute, b as unescapeHTML, d as renderTemplate, h as maybeRenderHead, t as spreadAttributes } from "./server_eIjUU75i.mjs";
-import { a as DEFAULT_HASH_PROPS, i as resolveDefaultOutputFormat, n as isLocalService } from "./service_D_KJTHgE.mjs";
 import "./compiler_Ca1DtYCd.mjs";
 import * as mime from "mrmime";
+//#region node_modules/astro/dist/assets/consts.js
+var VALID_SUPPORTED_FORMATS = [
+	"jpeg",
+	"jpg",
+	"png",
+	"tiff",
+	"webp",
+	"gif",
+	"svg",
+	"avif"
+];
+var DEFAULT_OUTPUT_FORMAT = "webp";
+var DEFAULT_HASH_PROPS = [
+	"src",
+	"width",
+	"height",
+	"format",
+	"quality",
+	"fit",
+	"position",
+	"background"
+];
+//#endregion
 //#region node_modules/astro/dist/assets/layout.js
 var DEFAULT_RESOLUTIONS = [
 	640,
@@ -57,6 +78,201 @@ var getSizesAttribute = ({ width, layout }) => {
 	}
 };
 //#endregion
+//#region node_modules/astro/dist/assets/utils/inferSourceFormat.js
+var DATA_PREFIX = "data:";
+function inferSourceFormat(src) {
+	if (src.startsWith(DATA_PREFIX)) {
+		const sepIndex = src.indexOf(";");
+		const commaIndex = src.indexOf(",");
+		const mimeEnd = sepIndex === -1 ? commaIndex : commaIndex === -1 ? sepIndex : Math.min(sepIndex, commaIndex);
+		if (mimeEnd === -1) return void 0;
+		const mime = src.slice(5, mimeEnd);
+		if (mime === "image/svg+xml") return "svg";
+		return mime.split("/")[1] || void 0;
+	}
+	try {
+		const cleanSrc = removeQueryString(src).split("#")[0];
+		const lastSlash = cleanSrc.lastIndexOf("/");
+		const basename = lastSlash === -1 ? cleanSrc : cleanSrc.slice(lastSlash + 1);
+		const lastDot = basename.lastIndexOf(".");
+		if (lastDot === -1) return void 0;
+		return basename.slice(lastDot + 1).toLowerCase();
+	} catch {
+		return;
+	}
+}
+function resolveDefaultOutputFormat(sourceFormat) {
+	return sourceFormat === "svg" ? "svg" : DEFAULT_OUTPUT_FORMAT;
+}
+//#endregion
+//#region node_modules/astro/dist/assets/services/service.js
+function isLocalService(service) {
+	if (!service) return false;
+	return "transform" in service;
+}
+function parseQuality(quality) {
+	let result = Number.parseInt(quality);
+	if (Number.isNaN(result)) return quality;
+	return result;
+}
+var sortNumeric = (a, b) => a - b;
+function verifyOptions(options) {
+	if (!options.src || !isRemoteImage(options.src) && !isESMImportedImage(options.src)) throw new AstroError({
+		...ExpectedImage,
+		message: ExpectedImage.message(JSON.stringify(options.src), typeof options.src, JSON.stringify(options, (_, v) => v === void 0 ? null : v))
+	});
+	if (!isESMImportedImage(options.src)) {
+		if (options.src.startsWith("/@fs/") || !isRemotePath(options.src) && !options.src.startsWith("/")) throw new AstroError({
+			...LocalImageUsedWrongly,
+			message: LocalImageUsedWrongly.message(options.src)
+		});
+		let missingDimension;
+		if (!options.width && !options.height) missingDimension = "both";
+		else if (!options.width && options.height) missingDimension = "width";
+		else if (options.width && !options.height) missingDimension = "height";
+		if (missingDimension) throw new AstroError({
+			...MissingImageDimension,
+			message: MissingImageDimension.message(missingDimension, options.src)
+		});
+	} else {
+		if (!VALID_SUPPORTED_FORMATS.includes(options.src.format)) throw new AstroError({
+			...UnsupportedImageFormat,
+			message: UnsupportedImageFormat.message(options.src.format, options.src.src, VALID_SUPPORTED_FORMATS)
+		});
+		if (options.widths && options.densities) throw new AstroError(IncompatibleDescriptorOptions);
+		if (options.src.format !== "svg" && options.format === "svg") throw new AstroError(UnsupportedImageConversion);
+	}
+}
+var baseService = {
+	propertiesToHash: DEFAULT_HASH_PROPS,
+	validateOptions(options) {
+		verifyOptions(options);
+		if (!options.format) if (isESMImportedImage(options.src)) options.format = resolveDefaultOutputFormat(options.src.format);
+		else {
+			const inferred = inferSourceFormat(options.src);
+			if (inferred) options.format = resolveDefaultOutputFormat(inferred);
+		}
+		if (options.width) options.width = Math.round(options.width);
+		if (options.height) options.height = Math.round(options.height);
+		if (options.layout) delete options.layout;
+		if (options.fit === "none") delete options.fit;
+		return options;
+	},
+	getHTMLAttributes(options) {
+		const { targetWidth, targetHeight } = getTargetDimensions(options);
+		const { src, width, height, format, quality, densities, widths, formats, layout, priority, fit, position, background, ...attributes } = options;
+		return {
+			...attributes,
+			width: targetWidth,
+			height: targetHeight,
+			loading: attributes.loading ?? "lazy",
+			decoding: attributes.decoding ?? "async"
+		};
+	},
+	getSrcSet(options) {
+		const { targetWidth, targetHeight } = getTargetDimensions(options);
+		const aspectRatio = targetWidth / targetHeight;
+		const { widths, densities } = options;
+		const targetFormat = options.format;
+		let transformedWidths = (widths ?? []).sort(sortNumeric);
+		let imageWidth = options.width;
+		let maxWidth = Number.POSITIVE_INFINITY;
+		if (isESMImportedImage(options.src)) {
+			imageWidth = options.src.width;
+			maxWidth = imageWidth;
+			if (transformedWidths.length > 0 && transformedWidths.at(-1) > maxWidth) {
+				transformedWidths = transformedWidths.filter((width) => width <= maxWidth);
+				transformedWidths.push(maxWidth);
+			}
+		}
+		transformedWidths = Array.from(new Set(transformedWidths));
+		const { width: transformWidth, height: transformHeight, ...transformWithoutDimensions } = options;
+		let allWidths = [];
+		if (densities) {
+			const densityValues = densities.map((density) => {
+				if (typeof density === "number") return density;
+				else return Number.parseFloat(density);
+			});
+			allWidths = densityValues.sort(sortNumeric).map((density) => Math.round(targetWidth * density)).map((width, index) => ({
+				width,
+				descriptor: `${densityValues[index]}x`
+			}));
+		} else if (transformedWidths.length > 0) allWidths = transformedWidths.map((width) => ({
+			width,
+			descriptor: `${width}w`
+		}));
+		return allWidths.map(({ width, descriptor }) => {
+			const height = Math.round(width / aspectRatio);
+			return {
+				transform: {
+					...transformWithoutDimensions,
+					width,
+					height
+				},
+				descriptor,
+				attributes: targetFormat ? { type: `image/${targetFormat}` } : {}
+			};
+		});
+	},
+	getURL(options, imageConfig) {
+		const searchParams = new URLSearchParams();
+		if (isESMImportedImage(options.src)) searchParams.append("href", options.src.src);
+		else if (isRemoteAllowed(options.src, imageConfig)) searchParams.append("href", options.src);
+		else return options.src;
+		Object.entries({
+			w: "width",
+			h: "height",
+			q: "quality",
+			f: "format",
+			fit: "fit",
+			position: "position",
+			background: "background"
+		}).forEach(([param, key]) => {
+			options[key] && searchParams.append(param, options[key].toString());
+		});
+		let url = `${joinPaths("/", imageConfig.endpoint.route)}?${searchParams}`;
+		if (imageConfig.assetQueryParams) {
+			const assetQueryString = imageConfig.assetQueryParams.toString();
+			if (assetQueryString) url += "&" + assetQueryString;
+		}
+		return url;
+	},
+	parseURL(url) {
+		const params = url.searchParams;
+		if (!params.has("href")) return;
+		return {
+			src: params.get("href"),
+			width: params.has("w") ? Number.parseInt(params.get("w")) : void 0,
+			height: params.has("h") ? Number.parseInt(params.get("h")) : void 0,
+			format: params.has("f") ? params.get("f") : void 0,
+			quality: params.get("q"),
+			fit: params.get("fit"),
+			position: params.get("position") ?? void 0,
+			background: params.get("background") ?? void 0
+		};
+	},
+	getRemoteSize(url, imageConfig) {
+		return inferRemoteSize$1(url, imageConfig);
+	}
+};
+function getTargetDimensions(options) {
+	let targetWidth = options.width;
+	let targetHeight = options.height;
+	if (isESMImportedImage(options.src)) {
+		const aspectRatio = options.src.width / options.src.height;
+		if (targetHeight && !targetWidth) targetWidth = Math.round(targetHeight * aspectRatio);
+		else if (targetWidth && !targetHeight) targetHeight = Math.round(targetWidth / aspectRatio);
+		else if (!targetWidth && !targetHeight) {
+			targetWidth = options.src.width;
+			targetHeight = options.src.height;
+		}
+	}
+	return {
+		targetWidth,
+		targetHeight
+	};
+}
+//#endregion
 //#region node_modules/astro/dist/assets/types.js
 function isImageMetadata(src) {
 	return src.fsPath && !("fsPath" in src);
@@ -80,7 +296,7 @@ var cssFitValues = [
 ];
 async function getConfiguredImageService() {
 	if (!globalThis?.astroAsset?.imageService) {
-		const { default: service } = await import("./sharp_hsOhIWDX.mjs").catch((e) => {
+		const { default: service } = await import("./sharp_DH9Sbyu7.mjs").catch((e) => {
 			const error = new AstroError(InvalidImageService);
 			error.cause = e;
 			throw error;
@@ -416,81 +632,4 @@ var inferRemoteSize = async (url) => {
 };
 var getImage = async (options) => await getImage$1(options, imageConfig);
 //#endregion
-//#region node_modules/astro/dist/assets/utils/etag.js
-var fnv1a52 = (str) => {
-	const len = str.length;
-	let i = 0, t0 = 0, v0 = 8997, t1 = 0, v1 = 33826, t2 = 0, v2 = 40164, t3 = 0, v3 = 52210;
-	while (i < len) {
-		v0 ^= str.charCodeAt(i++);
-		t0 = v0 * 435;
-		t1 = v1 * 435;
-		t2 = v2 * 435;
-		t3 = v3 * 435;
-		t2 += v0 << 8;
-		t3 += v1 << 8;
-		t1 += t0 >>> 16;
-		v0 = t0 & 65535;
-		t2 += t1 >>> 16;
-		v1 = t1 & 65535;
-		v3 = t3 + (t2 >>> 16) & 65535;
-		v2 = t2 & 65535;
-	}
-	return (v3 & 15) * 281474976710656 + v2 * 4294967296 + v1 * 65536 + (v0 ^ v3 >> 4);
-};
-var etag = (payload, weak = false) => {
-	return (weak ? "W/\"" : "\"") + fnv1a52(payload).toString(36) + payload.length.toString(36) + "\"";
-};
-//#endregion
-//#region node_modules/astro/dist/assets/endpoint/loadImage.js
-async function loadImage(src, headers, imageConfig, isRemote, fetchFn) {
-	try {
-		const res = await fetchWithRedirects({
-			url: src,
-			headers,
-			imageConfig,
-			fetchFn
-		});
-		if (isRemote && !isRemoteAllowed(res.url, imageConfig)) return;
-		if (!res.ok) return;
-		return await res.arrayBuffer();
-	} catch {
-		return;
-	}
-}
-//#endregion
-//#region node_modules/astro/dist/assets/endpoint/generic.js
-var generic_exports = /* @__PURE__ */ __exportAll({ GET: () => GET });
-var GET = async ({ request }) => {
-	try {
-		const imageService = await getConfiguredImageService();
-		if (!("transform" in imageService)) throw new Error("Configured image service is not a local service");
-		const url = new URL(request.url);
-		const transform = await imageService.parseURL(url, imageConfig);
-		if (!transform?.src) throw new Error("Incorrect transform returned by `parseURL`");
-		let inputBuffer = void 0;
-		const isRemoteImage = isRemotePath(transform.src);
-		if (isRemoteImage && isRemoteAllowed(transform.src, imageConfig) === false) return new Response("Forbidden", { status: 403 });
-		const sourceUrl = new URL(transform.src, url.origin);
-		if (!isRemoteImage && sourceUrl.origin !== url.origin) return new Response("Forbidden", { status: 403 });
-		inputBuffer = await loadImage(sourceUrl, isRemoteImage ? new Headers() : request.headers, imageConfig, isRemoteImage);
-		if (!inputBuffer) return new Response("Not Found", { status: 404 });
-		const { data, format } = await imageService.transform(new Uint8Array(inputBuffer), transform, imageConfig);
-		return new Response(data, {
-			status: 200,
-			headers: {
-				"Content-Type": mime.lookup(format) ?? `image/${format}`,
-				"Cache-Control": "public, max-age=31536000",
-				ETag: etag(data.toString()),
-				Date: (/* @__PURE__ */ new Date()).toUTCString()
-			}
-		});
-	} catch (err) {
-		console.error("Could not process image request:", err);
-		return new Response("Internal Server Error", { status: 500 });
-	}
-};
-//#endregion
-//#region \0virtual:astro:page:node_modules/astro/dist/assets/endpoint/generic@_@js
-var page = () => generic_exports;
-//#endregion
-export { page };
+export { parseQuality as a, baseService as i, $$Image as n, resolveDefaultOutputFormat as o, getConfiguredImageService as r, imageConfig as t };

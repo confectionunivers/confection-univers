@@ -1,5 +1,7 @@
 import { Resend } from 'resend';
 
+export const prerender = false;
+
 export async function POST({ request }) {
   console.log('=== API send-devis called ===');
   
@@ -162,7 +164,7 @@ export async function POST({ request }) {
     console.log('API Key length:', import.meta.env.RESEND_API_KEY?.length);
     
     const data = await resend.emails.send({
-      from: 'onboarding@resend.dev',
+      from: 'Confection Univers <contact@confectionunivers.com>',
       to: 'confectionunivers@gmail.com',
       subject: `Nouvelle demande de devis - ${name}`,
       html: htmlContent,
