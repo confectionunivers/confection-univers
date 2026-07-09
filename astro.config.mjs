@@ -7,13 +7,12 @@ export default defineConfig({
     site: 'https://confectionunivers.com',
     output: 'server',
     adapter: vercel({
-        functionPerRoute: false
+        edgeMiddleware: false,
+        functionPerRoute: true,
+        imageService: false
     }),
     integrations: [react()],
     vite: {
-        plugins: [tailwindcss()],
-        ssr: {
-            noExternal: true
-        }
+        plugins: [tailwindcss()]
     }
 });
