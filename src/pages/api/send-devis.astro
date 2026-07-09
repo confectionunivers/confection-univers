@@ -6,15 +6,11 @@ export const prerender = false;
 export async function POST({ request }: { request: Request }) {
   console.log('=== API send-devis called ===');
   
-  // Global try-catch to ensure we always return JSON
   try {
     console.log('Step 1: Checking environment variables');
-    
-    // Use Astro's standard way to access environment variables
     const apiKey = import.meta.env.RESEND_API_KEY;
     console.log("Clé API détectée :", apiKey ? `${apiKey.substring(0, 5)}...` : "NON DEFINIE");
     
-    // Check if API key is available
     if (!apiKey || apiKey === 'ta_nouvelle_cle_ici' || apiKey.length < 10) {
       console.error('RESEND_API_KEY is not properly configured');
       return new Response(
@@ -43,7 +39,6 @@ export async function POST({ request }: { request: Request }) {
       message 
     });
 
-    // Validate required fields (support both form types)
     const itemType = clothing_type || service;
     if (!name || !email || !itemType) {
       console.error('Missing required fields:', { name: !!name, email: !!email, itemType: !!itemType });
@@ -53,7 +48,6 @@ export async function POST({ request }: { request: Request }) {
       );
     }
 
-    // Create HTML email content
     const htmlContent = `
       <!DOCTYPE html>
       <html lang="fr">
@@ -170,37 +164,27 @@ export async function POST({ request }: { request: Request }) {
 
     console.log('Sending email via Resend from contact@confectionunivers.com');
     
-    try {
-      const data = await resend.emails.send({
-        from: 'Confection Univers <contact@confectionunivers.com>',
-        to: 'confectionunivers@gmail.com',
-        subject: `Nouvelle demande de devis - ${name}`,
-        html: htmlContent,
-        replyTo: email,
-      });
-      console.log("Succès Resend :", data);
-    } catch (anyError: any) {
-      console.error("Erreur détaillée lors de l'envoi Resend :", anyError);
-      throw anyError;
-    }
-
+    const data = await resend.emails.send({
+      from: 'Confection Univers <contact@confectionunivers.com>',
+      to: 'confectionunivers@gmail.com',
+      subject: `Nouvelle demande de devis - ${name}`,
+      html: htmlContent,
+      replyTo: email,
+    });
+    console.log("Succès Resend :", data);
+    
     return new Response(
       JSON.stringify({ success: true, message: 'Email sent successfully' }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   } catch (anyError: any) {
-    console.error('Error sending email:', anyError);
     console.error('Error details:', {
       message: anyError.message,
       name: anyError.name,
       stack: anyError.stack,
     });
     return new Response(
-      JSON.stringify({ 
-        error: 'Failed to send email', 
-        details: anyError.message,
-        name: anyError.name 
-      }),
+      JSON.stringify({ error: 'Failed to send email', details: anyError.message }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
