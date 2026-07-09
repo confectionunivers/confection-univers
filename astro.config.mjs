@@ -7,8 +7,7 @@ export default defineConfig({
     site: 'https://confectionunivers.com',
     output: 'server',
     adapter: vercel({
-        functionPerRoute: false,
-        entrypoint: './entry.mjs'
+        functionPerRoute: false
     }),
     integrations: [react()],
     vite: {
