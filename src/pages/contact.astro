@@ -2,8 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
-
-export const prerender = true;
 ---
 
 <Layout title="Contact | Confection Univers">
@@ -239,7 +237,7 @@ export const prerender = true;
 					email: formData.get('email'),
 					phone: formData.get('phone'),
 					company: formData.get('company'),
-					service: formData.get('service'),
+					clothing_type: formData.get('service'),
 					quantity: formData.get('quantity'),
 					message: formData.get('message'),
 				};

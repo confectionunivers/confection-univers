@@ -365,18 +365,59 @@ const whatsappUrl = `https://wa.me/${contact.whatsappDigits}?text=${encodeURICom
 						body: JSON.stringify(data),
 					});
 
-					const result = await response.json();
+					console.log('Response status:', response.status);
+					console.log('Response ok:', response.ok);
+					console.log('Content-Type:', response.headers.get('content-type'));
 
-					if (response.ok && result.success) {
+					// Check content-type before parsing JSON
+					const contentType = response.headers.get('content-type');
+					const isJson = contentType && contentType.includes('application/json');
+
+					// Check if response is ok before parsing JSON
+					if (!response.ok) {
+						let errorMessage = 'Erreur lors de l\'envoi du message';
+						if (isJson) {
+							try {
+								const errorData = await response.json();
+								errorMessage = errorData.error || errorData.details || errorMessage;
+								console.error('API Error:', errorData);
+							} catch (e) {
+								console.error('Failed to parse error response as JSON:', e);
+							}
+						} else {
+							// If not JSON, read as text to see the actual error
+							const errorText = await response.text();
+							console.error('Non-JSON error response:', errorText);
+							errorMessage = `Erreur HTTP ${response.status}: ${errorText || response.statusText}`;
+						}
+						showNotification(`Erreur: ${errorMessage}`, 'error');
+						return;
+					}
+
+					let result;
+					if (isJson) {
+						result = await response.json();
+						console.log('API Response:', result);
+					} else {
+						// If not JSON, read as text
+						const responseText = await response.text();
+						console.error('Non-JSON response:', responseText);
+						showNotification('Erreur: Le serveur a renvoyé une réponse invalide', 'error');
+						return;
+					}
+
+					if (result.success) {
 						// Show success notification
 						showNotification('Message envoyé avec succès ! Nous vous répondrons sous 1 à 2 jours ouvrables.', 'success');
 						form.reset();
 					} else {
-						// Show error notification
-						showNotification('Erreur lors de l\'envoi du message. Veuillez réessayer.', 'error');
+						// Show error notification with details
+						const errorMessage = result.error || result.details || 'Erreur lors de l\'envoi du message. Veuillez réessayer.';
+						showNotification(`Erreur: ${errorMessage}`, 'error');
+						console.error('API Error:', result);
 					}
 				} catch (error) {
-					console.error('Error:', error);
+					console.error('Fetch Error:', error);
 					showNotification('Erreur de connexion. Veuillez vérifier votre internet et réessayer.', 'error');
 				} finally {
 					// Re-enable submit button

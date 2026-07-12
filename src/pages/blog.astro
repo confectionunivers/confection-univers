@@ -14,8 +14,6 @@ const totalPages = Math.ceil(BLOG_POSTS.length / POSTS_PER_PAGE);
 const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
 const endIndex = startIndex + POSTS_PER_PAGE;
 const displayedPosts = BLOG_POSTS.slice(startIndex, endIndex);
-
-export const prerender = true;
 ---
 
 <Layout title="Blog - Confection Univers">

@@ -1,6 +1,5 @@
 {
   "buildCommand": "astro build",
-  "outputDirectory": ".vercel/output",
-  "framework": null,
-  "regions": ["iad1"]
+  "outputDirectory": "dist",
+  "framework": null
 }
