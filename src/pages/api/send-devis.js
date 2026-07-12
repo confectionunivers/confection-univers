@@ -5,7 +5,7 @@ export async function POST({ request }) {
   
   try {
     console.log('Step 1: Reading API key');
-    const apiKey = process.env.RESEND_API_KEY;
+    const apiKey = process.env.RESEND_API_KEY || import.meta.env.RESEND_API_KEY;
     console.log('API Key status:', apiKey ? 'EXISTS' : 'MISSING');
     
     if (!apiKey || apiKey === 'ta_nouvelle_cle_ici' || apiKey.length < 10) {
