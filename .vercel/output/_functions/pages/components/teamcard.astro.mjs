@@ -1,4 +1,6 @@
-import { d as createAstro, c as createComponent, m as maybeRenderHead, e as addAttribute, b as renderTemplate } from '../../chunks/astro/server_Dq_uziaj.mjs';
+import { d as createAstro, c as createComponent, m as maybeRenderHead, e as addAttribute, b as renderTemplate } from '../../chunks/astro/server_8J0kuGxV.mjs';
+import 'piccolore';
+import 'clsx';
 export { renderers } from '../../renderers.mjs';
 
 const $$Astro = createAstro("https://confectionunivers.com");

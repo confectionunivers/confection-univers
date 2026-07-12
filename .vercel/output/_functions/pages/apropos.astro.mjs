@@ -1,4 +1,6 @@
-import { c as createComponent, b as renderTemplate } from '../chunks/astro/server_Dq_uziaj.mjs';
+import { c as createComponent, b as renderTemplate } from '../chunks/astro/server_8J0kuGxV.mjs';
+import 'piccolore';
+import 'clsx';
 export { renderers } from '../renderers.mjs';
 
 const $$Apropos = createComponent(($$result, $$props, $$slots) => {

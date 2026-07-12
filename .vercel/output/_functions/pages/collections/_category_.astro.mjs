@@ -1,5 +1,6 @@
-import { d as createAstro, c as createComponent, r as renderComponent, b as renderTemplate, m as maybeRenderHead, e as addAttribute, a as renderScript } from '../../chunks/astro/server_Dq_uziaj.mjs';
-import { $ as $$Layout, a as $$Navbar, b as $$Footer } from '../../chunks/Footer_CNEvECdF.mjs';
+import { d as createAstro, c as createComponent, r as renderComponent, b as renderTemplate, m as maybeRenderHead, e as addAttribute, a as renderScript } from '../../chunks/astro/server_8J0kuGxV.mjs';
+import 'piccolore';
+import { $ as $$Layout, a as $$Navbar, b as $$Footer } from '../../chunks/Footer_DeLfn5ZU.mjs';
 export { renderers } from '../../renderers.mjs';
 
 const $$Astro = createAstro("https://confectionunivers.com");
