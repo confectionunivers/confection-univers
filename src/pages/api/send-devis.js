@@ -1,9 +1,6 @@
 import { Resend } from 'resend';
-import type { APIRoute } from 'astro';
 
-export const prerender = false;
-
-export const POST: APIRoute = async ({ request }) => {
+export async function POST({ request }) {
   try {
     const apiKey = import.meta.env.RESEND_API_KEY;
     console.log("Clé API détectée :", apiKey ? `${apiKey.substring(0, 5)}...` : "NON DEFINIE");
@@ -177,4 +174,4 @@ export const POST: APIRoute = async ({ request }) => {
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
-};
+}
