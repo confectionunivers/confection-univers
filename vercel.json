@@ -2,10 +2,5 @@
   "buildCommand": "astro build",
   "outputDirectory": ".vercel/output",
   "framework": null,
-  "regions": ["iad1"],
-  "functions": {
-    "api/**/*.astro": {
-      "runtime": "nodejs22.x"
-    }
-  }
+  "regions": ["iad1"]
 }

@@ -94,11 +94,12 @@ const revealId = `reveal-${Math.random().toString(36).substr(2, 9)}`;
 </style>
 
 <script>
+	import gsap from 'gsap';
+
 	// Check for reduced motion preference
 	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 	if (!prefersReducedMotion) {
-		import gsap from 'gsap';
 
 		// Intersection Observer for scroll-triggered animations
 		const observerOptions = {

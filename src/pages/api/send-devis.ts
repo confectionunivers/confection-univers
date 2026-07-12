@@ -1,16 +1,11 @@
 import { Resend } from 'resend';
+import type { APIRoute } from 'astro';
 
-export const config = {
-  runtime: 'edge'
-};
+export const prerender = false;
 
-export default async function handler(req) {
-  if (req.method !== 'POST') {
-    return new Response('Method not allowed', { status: 405 });
-  }
-
+export const POST: APIRoute = async ({ request }) => {
   try {
-    const apiKey = process.env.RESEND_API_KEY;
+    const apiKey = import.meta.env.RESEND_API_KEY;
     console.log("Clé API détectée :", apiKey ? `${apiKey.substring(0, 5)}...` : "NON DEFINIE");
     
     if (!apiKey || apiKey === 'ta_nouvelle_cle_ici' || apiKey.length < 10) {
@@ -21,7 +16,7 @@ export default async function handler(req) {
     }
 
     const resend = new Resend(apiKey);
-    const body = await req.json();
+    const body = await request.json();
     const { name, email, phone, clothing_type, service, company, quantity, customization, message } = body;
 
     console.log('Données exactes reçues du formulaire :', { 
@@ -182,4 +177,4 @@ export default async function handler(req) {
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
-}
+};
