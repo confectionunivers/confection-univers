@@ -151,7 +151,7 @@ export async function POST({ request }) {
 
     console.log('Step 5: Sending email via Resend');
     const data = await resend.emails.send({
-      from: 'Confection Univers <contact@confectionunivers.com>',
+      from: 'Confection Univers <onboarding@resend.dev>',
       to: 'confectionunivers@gmail.com',
       subject: `Nouvelle demande de devis - ${name}`,
       html: htmlContent,
