@@ -1,41 +1,40 @@
 import { Resend } from 'resend';
 
 export async function POST({ request }) {
+  console.log('=== API START ===');
+  
   try {
+    console.log('Step 1: Reading API key');
     const apiKey = process.env.RESEND_API_KEY;
-    console.log("Clé API détectée :", apiKey ? `${apiKey.substring(0, 5)}...` : "NON DEFINIE");
+    console.log('API Key status:', apiKey ? 'EXISTS' : 'MISSING');
     
     if (!apiKey || apiKey === 'ta_nouvelle_cle_ici' || apiKey.length < 10) {
+      console.log('API Key validation failed');
       return new Response(
         JSON.stringify({ error: 'Server configuration error: API key missing or not configured' }),
         { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
+    console.log('Step 2: Initializing Resend');
     const resend = new Resend(apiKey);
+    
+    console.log('Step 3: Reading request body');
     const body = await request.json();
     const { name, email, phone, clothing_type, service, company, quantity, customization, message } = body;
 
-    console.log('Données exactes reçues du formulaire :', { 
-      name, 
-      email, 
-      phone, 
-      clothing_type, 
-      service, 
-      company, 
-      quantity, 
-      customization, 
-      message 
-    });
+    console.log('Form data received:', { name, email, service });
 
     const itemType = clothing_type || service;
     if (!name || !email || !itemType) {
+      console.log('Validation failed: missing required fields');
       return new Response(
         JSON.stringify({ error: 'Missing required fields', details: { name: !!name, email: !!email, itemType: !!itemType } }),
         { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
+    console.log('Step 4: Building HTML content');
     const htmlContent = `
       <!DOCTYPE html>
       <html lang="fr">
@@ -150,6 +149,7 @@ export async function POST({ request }) {
       </html>
     `;
 
+    console.log('Step 5: Sending email via Resend');
     const data = await resend.emails.send({
       from: 'Confection Univers <contact@confectionunivers.com>',
       to: 'confectionunivers@gmail.com',
@@ -159,11 +159,13 @@ export async function POST({ request }) {
     });
     console.log("Succès Resend :", data);
     
+    console.log('Step 6: Returning success response');
     return new Response(
       JSON.stringify({ success: true, message: 'Email sent successfully' }),
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   } catch (anyError) {
+    console.error('=== ERROR CAUGHT ===');
     console.error('Error details:', {
       message: anyError.message,
       name: anyError.name,
