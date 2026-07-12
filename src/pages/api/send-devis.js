@@ -2,7 +2,7 @@ import { Resend } from 'resend';
 
 export async function POST({ request }) {
   try {
-    const apiKey = import.meta.env.RESEND_API_KEY;
+    const apiKey = process.env.RESEND_API_KEY;
     console.log("Clé API détectée :", apiKey ? `${apiKey.substring(0, 5)}...` : "NON DEFINIE");
     
     if (!apiKey || apiKey === 'ta_nouvelle_cle_ici' || apiKey.length < 10) {
