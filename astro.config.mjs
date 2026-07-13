@@ -6,7 +6,9 @@ import react from '@astrojs/react';
 export default defineConfig({
     site: 'https://confectionunivers.com',
     output: 'server',
-    adapter: vercel(),
+    adapter: vercel({
+        edge: false,
+    }),
     integrations: [react()],
     vite: {
         plugins: [tailwindcss()]
