@@ -1,38 +1,41 @@
 import { Resend } from 'resend';
 export { renderers } from '../../renderers.mjs';
 
-const prerender = false;
-const POST = async ({ request }) => {
+async function POST({ request }) {
+  console.log('=== API START ===');
+  
   try {
-    const apiKey = "re_Z2Y91eb6_BHkMSvA4rZZ8fahbD31bx9EX";
-    console.log("Clé API détectée :", apiKey ? `${apiKey.substring(0, 5)}...` : "NON DEFINIE");
-    if (!apiKey || apiKey === "ta_nouvelle_cle_ici" || apiKey.length < 10) {
+    console.log('Step 1: Reading API key');
+    const apiKey = process.env.RESEND_API_KEY;
+    console.log('API Key status:', apiKey ? 'EXISTS' : 'MISSING');
+    
+    if (!apiKey || apiKey === 'ta_nouvelle_cle_ici' || apiKey.length < 10) {
+      console.log('API Key validation failed');
       return new Response(
-        JSON.stringify({ error: "Server configuration error: API key missing or not configured" }),
-        { status: 500, headers: { "Content-Type": "application/json" } }
+        JSON.stringify({ error: 'Server configuration error: API key missing or not configured' }),
+        { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
     }
+
+    console.log('Step 2: Initializing Resend');
     const resend = new Resend(apiKey);
+    
+    console.log('Step 3: Reading request body');
     const body = await request.json();
     const { name, email, phone, clothing_type, service, company, quantity, customization, message } = body;
-    console.log("Données exactes reçues du formulaire :", {
-      name,
-      email,
-      phone,
-      clothing_type,
-      service,
-      company,
-      quantity,
-      customization,
-      message
-    });
+
+    console.log('Form data received:', { name, email, service });
+
     const itemType = clothing_type || service;
     if (!name || !email || !itemType) {
+      console.log('Validation failed: missing required fields');
       return new Response(
-        JSON.stringify({ error: "Missing required fields", details: { name: !!name, email: !!email, itemType: !!itemType } }),
-        { status: 400, headers: { "Content-Type": "application/json" } }
+        JSON.stringify({ error: 'Missing required fields', details: { name: !!name, email: !!email, itemType: !!itemType } }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
+
+    console.log('Step 4: Building HTML content');
     const htmlContent = `
       <!DOCTYPE html>
       <html lang="fr">
@@ -107,14 +110,14 @@ const POST = async ({ request }) => {
             <div class="label">Téléphone</div>
             <div class="value">${phone}</div>
           </div>
-          ` : ""}
+          ` : ''}
           
           ${company ? `
           <div class="field">
             <div class="label">Entreprise / Institution</div>
             <div class="value">${company}</div>
           </div>
-          ` : ""}
+          ` : ''}
           
           <div class="field">
             <div class="label">Type de service</div>
@@ -123,7 +126,7 @@ const POST = async ({ request }) => {
           
           <div class="field">
             <div class="label">Quantité</div>
-            <div class="value">${quantity || "Non spécifié"}</div>
+            <div class="value">${quantity || 'Non spécifié'}</div>
           </div>
           
           ${customization ? `
@@ -131,14 +134,14 @@ const POST = async ({ request }) => {
             <div class="label">Détails de personnalisation</div>
             <div class="value">${customization}</div>
           </div>
-          ` : ""}
+          ` : ''}
           
           ${message ? `
           <div class="field">
             <div class="label">Message additionnel</div>
             <div class="value">${message}</div>
           </div>
-          ` : ""}
+          ` : ''}
         </div>
         <div class="footer">
           <p>Ce message a été envoyé depuis le formulaire de contact de Confection Univers</p>
@@ -146,35 +149,39 @@ const POST = async ({ request }) => {
       </body>
       </html>
     `;
+
+    console.log('Step 5: Sending email via Resend');
     const data = await resend.emails.send({
-      from: "Confection Univers <contact@confectionunivers.com>",
-      to: "confectionunivers@gmail.com",
+      from: 'Confection Univers <onboarding@resend.dev>',
+      to: 'confectionunivers@gmail.com',
       subject: `Nouvelle demande de devis - ${name}`,
       html: htmlContent,
-      replyTo: email
+      replyTo: email,
     });
     console.log("Succès Resend :", data);
+    
+    console.log('Step 6: Returning success response');
     return new Response(
-      JSON.stringify({ success: true, message: "Email sent successfully" }),
-      { status: 200, headers: { "Content-Type": "application/json" } }
+      JSON.stringify({ success: true, message: 'Email sent successfully' }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
   } catch (anyError) {
-    console.error("Error details:", {
+    console.error('=== ERROR CAUGHT ===');
+    console.error('Error details:', {
       message: anyError.message,
       name: anyError.name,
-      stack: anyError.stack
+      stack: anyError.stack,
     });
     return new Response(
-      JSON.stringify({ error: "Failed to send email", details: anyError.message }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
+      JSON.stringify({ error: 'Failed to send email', details: anyError.message }),
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
-};
+}
 
 const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
   __proto__: null,
-  POST,
-  prerender
+  POST
 }, Symbol.toStringTag, { value: 'Module' }));
 
 const page = () => _page;

@@ -5,7 +5,7 @@ import react from '@astrojs/react';
 
 export default defineConfig({
     site: 'https://confectionunivers.com',
-    output: 'hybrid',
+    output: 'server',
     adapter: vercel(),
     integrations: [react()],
     vite: {

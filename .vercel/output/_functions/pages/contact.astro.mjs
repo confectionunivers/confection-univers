@@ -1,1 +1,63 @@
-// Contents removed by Astro as it's used for prerendering only
+import { c as createComponent, r as renderComponent, a as renderScript, b as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_8J0kuGxV.mjs';
+import 'piccolore';
+import { $ as $$Layout, a as $$Navbar, b as $$Footer } from '../chunks/Footer_CcSogXq-.mjs';
+export { renderers } from '../renderers.mjs';
+
+const $$Contact = createComponent(async ($$result, $$props, $$slots) => {
+  return renderTemplate`${renderComponent($$result, "Layout", $$Layout, { "title": "Contact | Confection Univers" }, { "default": async ($$result2) => renderTemplate` ${maybeRenderHead()}<main class="relative"> ${renderComponent($$result2, "Navbar", $$Navbar, {})} <!-- Hero Section --> <section class="relative flex min-h-[60vh] flex-col justify-center overflow-hidden pb-20 pt-32 md:pt-40"> <div class="pointer-events-none absolute inset-0 -z-20 bg-background"></div> <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_85%_60%_at_100%_0%,rgba(198,161,95,0.14),transparent_55%),radial-gradient(ellipse_70%_50%_at_0%_100%,rgba(0,0,42,0.08),transparent_50%)]"></div> <div class="mx-auto max-w-7xl px-6"> <p class="mb-5 text-[11px] font-semibold uppercase tracking-[0.38em] text-primary md:text-xs">
+Contactez-nous
+</p> <h1 class="font-display text-[clamp(2.5rem,6vw,4.75rem)] font-semibold leading-[1.05] tracking-tight text-foreground md:leading-[1.02]"> <span class="block text-foreground">Parlons de votre</span> <span class="mt-1 block bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
+Projet
+</span> </h1> <p class="mt-8 max-w-2xl text-base font-normal leading-relaxed text-foreground/72 md:text-lg md:leading-relaxed">
+Nous sommes là pour répondre à toutes vos questions de confection de vêtements professionnels. Contactez-nous pour un devis gratuit ou simplement pour discuter de vos besoins.
+</p> </div> </section> <!-- Contact Form Section --> <section class="relative z-10 -mt-10 scroll-mt-24 rounded-[3rem] border border-ink/5 bg-paper py-24 text-ink shadow-[0_24px_80px_-28px_rgba(5,10,20,0.14)] md:rounded-[4rem] md:py-32"> <div class="mx-auto max-w-7xl px-6"> <div class="grid gap-16 lg:grid-cols-2"> <!-- Contact Info --> <div class="space-y-12"> <div> <p class="mb-4 text-[11px] font-semibold uppercase tracking-[0.35em] text-primary md:text-xs">Informations</p> <h2 class="font-display text-4xl font-semibold leading-tight tracking-tight text-ink md:text-5xl">
+Nous contacter
+</h2> <p class="mt-6 text-base leading-relaxed text-ink/65 md:text-lg">
+N'hésitez pas à nous contacter par téléphone, email ou en personne. Notre équipe est prête à vous aider à trouver la solution idéale pour vos besoins en confection.
+</p> </div> <div class="space-y-8"> <div class="flex items-start gap-6"> <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary/12 text-2xl">
+📧
+</div> <div> <h4 class="mb-2 text-sm font-black uppercase tracking-widest text-ink/40">Email</h4> <a href="mailto:confectionunivers@gmail.com" class="font-display text-xl font-bold text-ink hover:text-primary transition-colors">
+confectionunivers@gmail.com
+</a> </div> </div> <div class="flex items-start gap-6"> <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary/12 text-2xl">
+📍
+</div> <div> <h4 class="mb-2 text-sm font-black uppercase tracking-widest text-ink/40">Adresse</h4> <p class="font-display text-xl font-bold text-ink">
+Keur Massamba Geuye 2, Lot 129 Bis<br>
+Thiès<br>
+Sénégal
+</p> </div> </div> <div class="flex items-start gap-6"> <div class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary/12 text-2xl">
+⏰
+</div> <div> <h4 class="mb-2 text-sm font-black uppercase tracking-widest text-ink/40">Heures d'ouverture</h4> <p class="font-display text-xl font-bold text-ink">
+Lundi - Vendredi<br>
+8h00 - 18h00
+</p> </div> </div> </div> </div> <!-- Contact Form --> <div class="rounded-3xl border border-ink/10 bg-surface/10 p-8 md:p-12"> <h3 class="font-display text-2xl font-semibold text-ink mb-8">Demande de devis</h3> <form id="contact-form" class="space-y-6"> <div class="grid gap-6 md:grid-cols-2"> <div class="space-y-2"> <label for="name" class="text-sm font-semibold uppercase tracking-widest text-ink/60">
+Nom complet *
+</label> <input type="text" id="name" name="name" required class="w-full rounded-xl border border-ink/20 bg-paper px-5 py-4 text-ink placeholder-ink/40 transition duration-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20" placeholder="Votre nom"> </div> <div class="space-y-2"> <label for="email" class="text-sm font-semibold uppercase tracking-widest text-ink/60">
+Email *
+</label> <input type="email" id="email" name="email" required class="w-full rounded-xl border border-ink/20 bg-paper px-5 py-4 text-ink placeholder-ink/40 transition duration-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20" placeholder="votre@email.com"> </div> </div> <div class="grid gap-6 md:grid-cols-2"> <div class="space-y-2"> <label for="phone" class="text-sm font-semibold uppercase tracking-widest text-ink/60">
+Téléphone
+</label> <input type="tel" id="phone" name="phone" class="w-full rounded-xl border border-ink/20 bg-paper px-5 py-4 text-ink placeholder-ink/40 transition duration-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20" placeholder="+221 XX XXX XX XX"> </div> <div class="space-y-2"> <label for="company" class="text-sm font-semibold uppercase tracking-widest text-ink/60">
+Entreprise / Institution
+</label> <input type="text" id="company" name="company" class="w-full rounded-xl border border-ink/20 bg-paper px-5 py-4 text-ink placeholder-ink/40 transition duration-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20" placeholder="Nom de votre organisation"> </div> </div> <div class="space-y-2"> <label for="service" class="text-sm font-semibold uppercase tracking-widest text-ink/60">
+Type de service *
+</label> <select id="service" name="service" required class="w-full rounded-xl border border-ink/20 bg-paper px-5 py-4 text-ink transition duration-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"> <option value="">Sélectionnez un service</option> <option value="toges-graduation">Toges de graduation</option> <option value="uniformes-scolaires">Uniformes scolaires</option> <option value="tenues-medicales">Tenues médicales</option> <option value="tenues-entreprise">Tenue de travail</option> <option value="costumes-africains">Costumes africains</option> <option value="tenues-sport">Tenues de sport</option> <option value="autre">Autre</option> </select> </div> <div class="space-y-2"> <label for="quantity" class="text-sm font-semibold uppercase tracking-widest text-ink/60">
+Quantité estimée
+</label> <input type="number" id="quantity" name="quantity" min="1" class="w-full rounded-xl border border-ink/20 bg-paper px-5 py-4 text-ink placeholder-ink/40 transition duration-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20" placeholder="Nombre de vêtements"> </div> <div class="space-y-2"> <label for="message" class="text-sm font-semibold uppercase tracking-widest text-ink/60">
+Message *
+</label> <textarea id="message" name="message" required rows="5" class="w-full rounded-xl border border-ink/20 bg-paper px-5 py-4 text-ink placeholder-ink/40 transition duration-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 resize-none" placeholder="Décrivez votre projet et vos besoins spécifiques..."></textarea> </div> <button type="submit" id="submit-button" class="w-full rounded-full bg-primary px-8 py-4 text-[13px] font-semibold uppercase tracking-[0.18em] text-background shadow-[0_8px_32px_-8px_rgba(198,161,95,0.45)] transition duration-500 hover:shadow-[0_12px_40px_-6px_rgba(198,161,95,0.55)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+Envoyer ma demande
+</button> </form> </div> </div> </div> </section> ${renderComponent($$result2, "Footer", $$Footer, {})} </main> ` })} ${renderScript($$result, "C:/GitHub/confection univers/src/pages/contact.astro?astro&type=script&index=0&lang.ts")}`;
+}, "C:/GitHub/confection univers/src/pages/contact.astro", void 0);
+
+const $$file = "C:/GitHub/confection univers/src/pages/contact.astro";
+const $$url = "/contact";
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+	__proto__: null,
+	default: $$Contact,
+	file: $$file,
+	url: $$url
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };
