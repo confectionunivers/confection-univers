@@ -6,6 +6,14 @@ import BlogSidebar from '../../components/BlogSidebar.astro';
 import CommentForm from '../../components/CommentForm.astro';
 import { getPostBySlug, BLOG_POSTS } from '../../lib/blog-data';
 
+export function getStaticPaths() {
+	return BLOG_POSTS.map((post) => {
+		return {
+			params: { slug: post.slug },
+		};
+	});
+}
+
 const { slug } = Astro.params;
 
 if (!slug) {

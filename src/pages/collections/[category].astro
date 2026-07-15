@@ -3,7 +3,94 @@ import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import Footer from '../../components/Footer.astro';
 
-const { category } = Astro.params;
+export function getStaticPaths() {
+	const collectionsData = {
+		'toges-graduation': {
+			name: 'Toges de graduation',
+			images: [
+				'/images/toge-graduation-1.jpg',
+				'/images/toge-graduation-2.jpg',
+				'/images/toge-graduation-3.jpg',
+				'/images/toge-graduation-4.jpg',
+				'/images/toge-graduation-5.jpg',
+				'/images/toge-graduation-6.jpg',
+				'/images/toge-graduation-7.jpg',
+				'/images/toge-graduation-8.jpg',
+			],
+		},
+		'uniformes-scolaires': {
+			name: 'Uniformes scolaires',
+			images: [
+				'/images/uniforme-scolaire-1.jpg',
+				'/images/uniforme-scolaire-2.jpg',
+				'/images/uniforme-scolaire-3.jpg',
+				'/images/uniforme-scolaire-4.jpg',
+				'/images/uniforme-scolaire-5.jpg',
+				'/images/uniforme-scolaire-6.jpg',
+				'/images/uniforme-scolaire-7.jpg',
+				'/images/uniforme-scolaire-8.jpg',
+			],
+		},
+		'tenues-medicales': {
+			name: 'Tenues médicales',
+			images: [
+				'/images/blouse-medicale-1.jpg',
+				'/images/blouse-medicale-2.jpg',
+				'/images/blouse-medicale-3.jpg',
+				'/images/blouse-medicale-4.jpg',
+				'/images/blouse-medicale-5.jpg',
+				'/images/blouse-medicale-6.jpg',
+				'/images/blouse-medicale-7.jpg',
+				'/images/blouse-medicale-8.jpg',
+			],
+		},
+		'tenue-travail': {
+			name: 'Tenue de Travail',
+			images: [
+				'/images/tenue-travail-1.jpg',
+				'/images/tenue-travail-2.jpg',
+				'/images/tenue-travail-3.jpg',
+				'/images/tenue-travail-4.jpg',
+				'/images/tenue-travail-5.jpg',
+				'/images/tenue-travail-6.jpg',
+				'/images/tenue-travail-7.jpg',
+				'/images/tenue-travail-8.jpg',
+			],
+		},
+		'costumes-africains': {
+			name: 'Costumes africains',
+			images: [
+				'/images/costume-africain-1.jpg',
+				'/images/costume-africain-2.jpg',
+				'/images/costume-africain-3.jpg',
+				'/images/costume-africain-4.jpg',
+				'/images/costume-africain-5.jpg',
+				'/images/costume-africain-6.jpg',
+				'/images/costume-africain-7.jpg',
+				'/images/costume-africain-8.jpg',
+			],
+		},
+		'tenues-sport': {
+			name: 'Tenues de sport',
+			images: [
+				'/images/tenue-sport-1.jpg',
+				'/images/tenue-sport-2.jpg',
+				'/images/tenue-sport-3.jpg',
+				'/images/tenue-sport-4.jpg',
+				'/images/tenue-sport-5.jpg',
+				'/images/tenue-sport-6.jpg',
+				'/images/tenue-sport-7.jpg',
+				'/images/tenue-sport-8.jpg',
+			],
+		},
+	};
+	
+	return Object.keys(collectionsData).map((category) => {
+		return {
+			params: { category },
+		};
+	});
+}
 
 const collectionsData = {
 	'toges-graduation': {
@@ -85,6 +172,8 @@ const collectionsData = {
 		],
 	},
 };
+
+const { category } = Astro.params;
 
 const collection = collectionsData[category as keyof typeof collectionsData];
 
