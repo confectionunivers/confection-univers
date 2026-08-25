@@ -7,7 +7,7 @@ interface Props {
 	description?: string;
 }
 
-const { title, description = 'Confection Univers : Entreprise de confection industrielle spécialisée dans la création d\'uniformes scolaires, tenues de graduation, blouses médicales, tenues de travail, tenues de sport et tenues pour écoles coraniques au Sénégal.' } = Astro.props;
+const { title, description = 'Confection Univers est une entreprise de confection industrielle spécialisée dans les uniformes scolaires, toges de graduation, tenues de travail, tenues de sport, uniformes d\'écoles coraniques et blouses médicales au Sénégal.' } = Astro.props;
 ---
 
 <!doctype html>
@@ -18,6 +18,51 @@ const { title, description = 'Confection Univers : Entreprise de confection indu
 		<link rel="icon" type="image/png" href="/favicon.png" />
 		<meta name="description" content={description} />
 		<title>{title}</title>
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="https://confectionunivers.com/" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content="https://confectionunivers.com/images/logo.png" />
+		<meta property="og:site_name" content="Confection Univers" />
+		
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content="https://confectionunivers.com/" />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content="https://confectionunivers.com/images/logo.png" />
+		
+		<!-- Schema.org JSON-LD -->
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "Organization",
+			"name": "Confection Univers",
+			"description": "Entreprise de confection industrielle spécialisée dans les uniformes et vêtements professionnels",
+			"url": "https://confectionunivers.com",
+			"logo": "https://confectionunivers.com/images/logo.png",
+			"address": {
+				"@type": "PostalAddress",
+				"streetAddress": "Keur Massamba Geuye 2, Lot 129 Bis",
+				"addressLocality": "Thiès",
+				"addressCountry": "SN"
+			},
+			"contactPoint": {
+				"@type": "ContactPoint",
+				"telephone": "+221772960776",
+				"email": "confectionunivers@gmail.com",
+				"contactType": "sales"
+			},
+			"sameAs": [
+				"https://facebook.com/confectionunivers",
+				"https://instagram.com/confectionunivers",
+				"https://linkedin.com/company/confectionunivers"
+			]
+		}
+		</script>
+		
 		<link
 			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
 			rel="stylesheet"
