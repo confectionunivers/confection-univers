@@ -3,8 +3,8 @@ const NAV_LINKS = [
 	{ label: 'Accueil', href: '/' },
 	{ label: 'À propos', href: '/about' },
 	{ label: 'Services', href: '/services' },
-	{ label: 'Produits', href: '/products' },
-	{ label: 'Projets', href: '/projects' },
+	{ label: 'Catalogue', href: '/catalogue' },
+	{ label: 'Galerie', href: '/projects' },
 	{ label: 'Blog', href: '/blog' },
 	{ label: 'Contact', href: '/contact' },
 ];
@@ -15,7 +15,8 @@ const contactInfo = {
 	address: 'Keur Massamba Geuye 2, Lot 129 Bis, Thiès',
 };
 
-const currentPath = Astro.url.pathname;
+const normalizePath = (path: string) => path.replace(/\/+$/, '') || '/';
+const currentPath = normalizePath(Astro.url.pathname);
 ---
 
 <header id="premium-header" class="fixed top-0 left-0 right-0 z-[60] bg-[#00001C]/80 backdrop-blur-md">
@@ -97,7 +98,7 @@ const currentPath = Astro.url.pathname;
 			<nav class="nav-links hidden lg:flex">
 				{
 					NAV_LINKS.map((link) => {
-						const isActive = currentPath === link.href;
+						const isActive = currentPath === normalizePath(link.href);
 						return (
 							<a href={link.href} class={`nav-link group flex items-center gap-1 text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 ${isActive ? 'text-[#D4AF37] border-b-2 border-[#D4AF37]' : 'text-[#00002a] hover:text-primary'}`}>
 								<span>{link.label}</span>

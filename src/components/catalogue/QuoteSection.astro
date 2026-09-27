@@ -1,0 +1,251 @@
+---
+import { catalogueFilters, catalogueProducts } from '../../lib/catalogue';
+---
+
+<section id="devis" class="scroll-mt-24 bg-[#00001C] px-6 py-16 text-white md:py-24" aria-labelledby="quote-heading">
+	<div class="mx-auto grid max-w-7xl gap-9 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
+		<div class="lg:sticky lg:top-32 lg:self-start">
+			<p class="mb-4 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#F5B544]">Un projet de confection ?</p>
+			<h2 id="quote-heading" class="font-display text-[clamp(2.6rem,7vw,5.3rem)] font-semibold leading-[0.95] tracking-[-0.06em]">
+				VOUS AVEZ<br />UN PROJET<span class="text-[#F5B544]">?</span>
+			</h2>
+			<p class="mt-6 max-w-md text-base leading-[1.8] text-white/65 md:text-lg">
+				Parlons de votre besoin et construisons ensemble une solution textile adaptée à votre activité.
+			</p>
+			<a href="tel:+221772960776" class="mt-7 inline-flex items-center gap-3 text-xs font-semibold text-white transition-colors hover:text-[#F5B544]">
+				+221 77 296 07 76 <span aria-hidden="true">↗</span>
+			</a>
+			<p class="mt-8 max-w-sm border-t border-white/15 pt-4 text-[10px] leading-relaxed text-white/40">
+				Aucun tarif fixe n’est affiché : chaque demande est à étudier selon le modèle, les quantités et les spécifications souhaitées.
+			</p>
+		</div>
+
+		<div class="bg-[#F7F5F0] p-5 text-[#0A1628] sm:p-7 md:p-9">
+			<div class="mb-7 flex flex-col gap-3 border-b border-[#0A1628]/15 pb-5 sm:flex-row sm:items-end sm:justify-between">
+				<div>
+					<p class="text-[9px] font-semibold uppercase tracking-[0.2em] text-[#8B6325]">Demande de devis</p>
+					<h3 class="mt-2 font-display text-2xl font-semibold tracking-tight md:text-3xl">Parlez-nous de votre projet.</h3>
+				</div>
+				<p class="max-w-xs text-[10px] leading-relaxed text-[#0A1628]/50">Les champs marqués d’un astérisque sont nécessaires pour préparer votre demande.</p>
+			</div>
+
+			<form id="catalogue-quote-form" class="space-y-5">
+				<div class="grid gap-4 sm:grid-cols-2">
+					<div class="quote-field">
+						<label for="quote-name">Nom complet <span aria-hidden="true">*</span></label>
+						<input id="quote-name" name="name" type="text" required autocomplete="name" placeholder="Votre nom" />
+					</div>
+					<div class="quote-field">
+						<label for="quote-organization">Entreprise / établissement</label>
+						<input id="quote-organization" name="organization" type="text" autocomplete="organization" placeholder="Nom de votre organisation" />
+					</div>
+					<div class="quote-field">
+						<label for="quote-phone">Téléphone</label>
+						<input id="quote-phone" name="phone" type="tel" autocomplete="tel" placeholder="+221 …" />
+					</div>
+					<div class="quote-field">
+						<label for="quote-email">Adresse email <span aria-hidden="true">*</span></label>
+						<input id="quote-email" name="email" type="email" required autocomplete="email" placeholder="nom@exemple.com" />
+					</div>
+				</div>
+
+				<div class="grid gap-4 sm:grid-cols-2">
+					<div class="quote-field">
+						<label for="quote-sector">Secteur <span aria-hidden="true">*</span></label>
+						<select id="quote-sector" name="sector" required>
+							<option value="">Sélectionner un secteur</option>
+							{catalogueFilters.sectors.map((option) => <option value={option.label}>{option.label}</option>)}
+							<option value="Autre secteur">Autre secteur</option>
+						</select>
+					</div>
+					<div class="quote-field">
+						<label for="quote-product">Produit recherché <span aria-hidden="true">*</span></label>
+						<select id="quote-product" name="product" required>
+							<option value="">Sélectionner une gamme</option>
+							{catalogueProducts.map((product) => <option value={product.title}>{product.title}</option>)}
+							<option value="Autre besoin textile">Autre besoin textile</option>
+						</select>
+					</div>
+					<div class="quote-field">
+						<label for="quote-quantity">Quantité estimée</label>
+						<input id="quote-quantity" name="quantity" type="number" min="1" inputmode="numeric" placeholder="À préciser si connu" />
+					</div>
+					<div class="quote-field">
+						<label for="quote-date">Date souhaitée</label>
+						<input id="quote-date" name="date" type="date" />
+					</div>
+					<div class="quote-field">
+						<label for="quote-size">Tailles / répartition</label>
+						<input id="quote-size" name="sizes" type="text" maxlength="180" placeholder="Tailles, mesures ou répartition" />
+					</div>
+					<div class="quote-field">
+						<label for="quote-colors">Couleurs</label>
+						<input id="quote-colors" name="colors" type="text" maxlength="120" placeholder="Coloris ou référence" />
+					</div>
+				</div>
+
+				<fieldset class="border-t border-[#0A1628]/12 pt-4">
+					<legend class="mb-3 text-[9px] font-bold uppercase tracking-[0.16em] text-[#0A1628]/60">Personnalisation envisagée</legend>
+					<div class="flex flex-wrap gap-2">
+						{catalogueFilters.personalization.map((option) => (
+							<label class="quote-check">
+								<input type="checkbox" name="customization" value={option.label} />
+								<span>{option.label}</span>
+							</label>
+						))}
+						<label class="quote-check">
+							<input type="checkbox" name="customization" value="Production en série" />
+							<span>Production en série</span>
+						</label>
+					</div>
+				</fieldset>
+
+				<div class="quote-field">
+					<label for="quote-message">Message / cahier des charges</label>
+					<textarea id="quote-message" name="message" rows="4" maxlength="1200" placeholder="Décrivez le contexte, les pièces souhaitées et toute précision utile."></textarea>
+				</div>
+
+				<div class="quote-field">
+					<label for="quote-reference">Fichier ou modèle de référence</label>
+					<input id="quote-reference" name="reference" type="file" accept=".pdf,.png,.jpg,.jpeg,.webp,.doc,.docx,application/pdf,image/png,image/jpeg,image/webp" data-quote-file />
+					<p class="text-[10px] leading-relaxed text-[#0A1628]/48">PDF, JPG, PNG, WebP ou DOCX · 10 Mo maximum. Le fichier reste sur votre appareil jusqu’à votre choix d’envoi.</p>
+					<p data-quote-file-name class="min-h-4 text-[10px] font-medium text-[#8B6325]" aria-live="polite"></p>
+				</div>
+
+				<button type="submit" class="inline-flex min-h-12 w-full items-center justify-center gap-3 bg-[#00001C] px-6 py-3 text-[10px] font-bold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#8B6325] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8B6325] sm:w-auto">
+					Préparer ma demande <span aria-hidden="true">↗</span>
+				</button>
+				<p data-quote-status class="min-h-5 text-xs leading-relaxed text-[#0A1628]/70" role="status" aria-live="polite"></p>
+				<noscript>
+					<p class="text-xs leading-relaxed text-[#0A1628]/60">Pour joindre votre demande, contactez-nous à <a class="underline" href="mailto:confectionunivers@gmail.com">confectionunivers@gmail.com</a> ou par téléphone au +221 77 296 07 76.</p>
+				</noscript>
+			</form>
+		</div>
+	</div>
+</section>
+
+<script>
+	const quoteForm = document.querySelector<HTMLFormElement>('#catalogue-quote-form');
+	const quoteStatus = document.querySelector<HTMLElement>('[data-quote-status]');
+	const quoteFileInput = document.querySelector<HTMLInputElement>('[data-quote-file]');
+	const quoteFileName = document.querySelector<HTMLElement>('[data-quote-file-name]');
+	const quoteProductSelect = document.querySelector<HTMLSelectElement>('#quote-product');
+
+	const productFromUrl = new URLSearchParams(window.location.search).get('produit');
+	if (productFromUrl && quoteProductSelect) {
+		const matchedProduct = Array.from(quoteProductSelect.options).find((option) => option.value === productFromUrl || option.text === productFromUrl);
+		if (matchedProduct) quoteProductSelect.value = matchedProduct.value;
+	}
+
+	quoteFileInput?.addEventListener('change', () => {
+		const file = quoteFileInput.files?.[0];
+		if (quoteFileName) quoteFileName.textContent = file ? `Fichier sélectionné : ${file.name}` : '';
+	});
+
+	quoteForm?.addEventListener('submit', async (event) => {
+		event.preventDefault();
+		if (!quoteForm.reportValidity()) return;
+
+		const data = new FormData(quoteForm);
+		const referenceEntry = data.get('reference');
+		const file = referenceEntry instanceof File && referenceEntry.name ? referenceEntry : null;
+		const maxFileSize = 10 * 1024 * 1024;
+
+		if (file && file.size > maxFileSize) {
+			if (quoteStatus) quoteStatus.textContent = 'Le fichier dépasse 10 Mo. Choisissez un fichier plus léger ou contactez-nous par email.';
+			return;
+		}
+
+		const value = (key: string) => String(data.get(key) ?? '').trim() || 'Non précisé';
+		const customizations = data.getAll('customization').map(String);
+		const details = [
+			`Nom : ${value('name')}`,
+			`Entreprise / établissement : ${value('organization')}`,
+			`Téléphone : ${value('phone')}`,
+			`Email : ${value('email')}`,
+			`Secteur : ${value('sector')}`,
+			`Produit recherché : ${value('product')}`,
+			`Quantité estimée : ${value('quantity')}`,
+			`Tailles / répartition : ${value('sizes')}`,
+			`Couleurs : ${value('colors')}`,
+			`Personnalisation envisagée : ${customizations.length ? customizations.join(', ') : 'Non précisée'}`,
+			`Date souhaitée : ${value('date')}`,
+			`Message : ${value('message')}`,
+			`Fichier de référence : ${file?.name ?? 'Aucun'}`,
+		].join('\n');
+
+		if (file && typeof navigator.share === 'function' && typeof navigator.canShare === 'function' && navigator.canShare({ files: [file] })) {
+			try {
+				await navigator.share({ title: 'Demande de devis — Confection Univers', text: details, files: [file] });
+				if (quoteStatus) quoteStatus.textContent = 'Le partage est ouvert. Choisissez votre application de messagerie et confirmez l’envoi de la demande.';
+				return;
+			} catch (error) {
+				if (error instanceof DOMException && error.name === 'AbortError') return;
+			}
+		}
+
+		const attachmentNote = file ? `\n\nFichier sélectionné : ${file.name}. Pensez à l’ajouter en pièce jointe avant d’envoyer votre email.` : '';
+		const subject = encodeURIComponent(`Demande de devis — ${value('product')}`);
+		const body = encodeURIComponent(`${details}${attachmentNote}`);
+		window.location.href = `mailto:confectionunivers@gmail.com?subject=${subject}&body=${body}`;
+
+		if (quoteStatus) {
+			quoteStatus.innerHTML = '';
+			const prefix = document.createTextNode(file ? 'Votre messagerie va s’ouvrir. Joignez-y le fichier sélectionné, puis envoyez l’email. Si rien ne s’ouvre, écrivez à ' : 'Votre messagerie va s’ouvrir. Relisez puis envoyez votre demande. Si rien ne s’ouvre, écrivez à ');
+			const email = document.createElement('a');
+			email.href = 'mailto:confectionunivers@gmail.com';
+			email.textContent = 'confectionunivers@gmail.com';
+			email.className = 'font-semibold underline underline-offset-2';
+			quoteStatus.append(prefix, email, document.createTextNode('.'));
+		}
+	});
+</script>
+
+<style>
+	.quote-field { display: flex; flex-direction: column; gap: 0.45rem; }
+	.quote-field > label {
+		color: rgba(10, 22, 40, 0.62);
+		font-size: 9px;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+	.quote-field > label span { color: #8b6325; }
+	.quote-field input:not([type='file']),
+	.quote-field select,
+	.quote-field textarea {
+		width: 100%;
+		min-height: 2.8rem;
+		border: 1px solid rgba(10, 22, 40, 0.15);
+		border-radius: 0.15rem;
+		background: rgba(255, 255, 255, 0.65);
+		padding: 0.75rem 0.85rem;
+		color: #0a1628;
+		font: inherit;
+		font-size: 0.78rem;
+		outline: none;
+		transition: border-color 160ms ease, background-color 160ms ease;
+	}
+	.quote-field input[type='file'] {
+		width: 100%;
+		border: 1px dashed rgba(10, 22, 40, 0.24);
+		background: rgba(255, 255, 255, 0.45);
+		padding: 0.7rem;
+		color: rgba(10, 22, 40, 0.65);
+		font-size: 0.7rem;
+	}
+	.quote-field input::placeholder,
+	.quote-field textarea::placeholder { color: rgba(10, 22, 40, 0.38); }
+	.quote-field input:focus-visible,
+	.quote-field select:focus-visible,
+	.quote-field textarea:focus-visible { border-color: #8b6325; background: #fff; }
+	.quote-field textarea { min-height: 6rem; resize: vertical; }
+	.quote-check { display: inline-flex; align-items: center; gap: 0.45rem; border: 1px solid rgba(10, 22, 40, 0.14); padding: 0.45rem 0.65rem; font-size: 0.65rem; color: rgba(10, 22, 40, 0.7); cursor: pointer; }
+	.quote-check input { accent-color: #8b6325; }
+	.quote-check:has(input:focus-visible) { outline: 2px solid #8b6325; outline-offset: 2px; }
+	@media (prefers-reduced-motion: reduce) {
+		.quote-field input,
+		.quote-field select,
+		.quote-field textarea { transition: none; }
+	}
+</style>

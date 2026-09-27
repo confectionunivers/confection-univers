@@ -3,56 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 
-const services = [
-	{
-		title: 'Toges de graduation',
-		description: 'Toges de graduation et tenues académiques personnalisées pour les universités et grandes écoles de Dakar et Thiès, confectionnées avec des tissus de qualité premium.',
-		image: '/images/toge-graduation.jpg',
-		slug: 'toges-graduation',
-	},
-	{
-		title: 'Uniformes scolaires',
-		description: 'Programmes complets d\'uniformes scolaires pour les établissements primaires et secondaires du Sénégal, incluant chemises, pantalons et jupes sur mesure.',
-		image: '/images/uniforme-scolaire.jpg',
-		slug: 'uniformes-scolaires',
-	},
-	{
-		title: 'Tenue de Travail',
-		description: 'Tenues de travail professionnelles pour les entreprises et industries sénégalaises, alliant confort, durabilité et image de marque.',
-		image: '/images/tenue-travail.jpg',
-		slug: 'tenue-travail',
-	},
-	{
-		title: 'Kimonos',
-		description: 'Kimonos traditionnels et modernes confectionnés avec des tissus de qualité, parfaits pour les cérémonies culturelles et événements spéciaux au Sénégal.',
-		image: '/images/kimono.jpg',
-		slug: 'kimonos',
-	},
-	{
-		title: 'Blouses médicales',
-		description: 'Blouses médicales confortables et fonctionnelles pour le personnel des hôpitaux et cliniques de Dakar et Thiès, avec poches pratiques et tissus faciles d\'entretien.',
-		image: '/images/blouse-medicale.jpg',
-		slug: 'blouses-medicales',
-	},
-	{
-		title: 'Toges d\'avocat',
-		description: 'Toges d\'avocat et tenues juridiques conformes aux standards du barreau sénégalais, confectionnées avec précision pour les professionnels du droit.',
-		image: '/images/toge-avocat.jpg',
-		slug: 'toges-avocat',
-	},
-	{
-		title: 'Costumes africains',
-		description: 'Costumes africains traditionnels et contemporains inspirés du patrimoine sénégalais, utilisant des tissus locaux comme le bazin et le wax.',
-		image: '/images/costume-africain.jpg',
-		slug: 'costumes-africains',
-	},
-	{
-		title: 'Tenues de sport',
-		description: 'Tenues de sport et maillots d\'équipe pour les clubs, écoles et associations sportives du Sénégal, conçus pour la performance et le confort.',
-		image: '/images/tenue-sport.jpg',
-		slug: 'tenues-sport',
-	},
-];
+import { SERVICES } from '../lib/services';
+
+const services = SERVICES;
 ---
 
 <Layout title="Services | Confection Univers" description="Confection Univers : services de confection industrielle pour toges de graduation, uniformes scolaires, tenues de travail, blouses médicales, tenues de sport et uniformes d'écoles coraniques au Sénégal.">
@@ -104,7 +57,7 @@ const services = [
 										class="service-card-img h-full w-full object-cover transition duration-700 ease-out"
 										width="640"
 										height="480"
-										loading={i < 4 ? 'eager' : 'lazy'}
+										loading="lazy"
 										decoding="async"
 									/>
 									<div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/25 via-transparent to-transparent opacity-0 transition duration-500 group-hover:opacity-100" aria-hidden="true" />

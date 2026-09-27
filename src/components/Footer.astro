@@ -7,45 +7,29 @@
 	
 	<!-- Premium Golden Glow Effects -->
 	<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-		<div class="absolute left-[5%] top-[10%] w-[400px] h-[400px] rounded-full bg-primary/15 blur-[100px] animate-pulse"></div>
-		<div class="absolute right-[10%] bottom-[20%] w-[300px] h-[300px] rounded-full bg-primary-light/10 blur-[80px] animate-pulse" style="animation-delay: 1s;"></div>
-		<div class="absolute left-[50%] top-[50%] w-[200px] h-[200px] rounded-full bg-primary/8 blur-[60px] animate-pulse" style="animation-delay: 2s;"></div>
+		<div class="absolute left-[5%] top-[10%] w-[400px] h-[400px] rounded-full bg-primary/15 blur-[100px]"></div>
+		<div class="absolute right-[10%] bottom-[20%] w-[300px] h-[300px] rounded-full bg-primary-light/10 blur-[80px]" ></div>
+		<div class="absolute left-[50%] top-[50%] w-[200px] h-[200px] rounded-full bg-primary/8 blur-[60px]" ></div>
 	</div>
 
-	<!-- SECTION SUPÉRIEURE: Newsletter & Liens -->
+	<!-- SECTION SUPÉRIEURE: Contact & Liens -->
 	<div class="mx-auto max-w-7xl px-6 py-20">
 		<div class="grid grid-cols-1 gap-16 lg:grid-cols-2">
-			<!-- Newsletter Block -->
 			<div class="space-y-6">
 				<h3 class="font-display text-[clamp(1.75rem,4vw,2.5rem)] font-semibold leading-[1.1] tracking-tight text-[#F9FAFB]">
-					Restez connecté
+					Un projet de confection ?
 				</h3>
 				<p class="max-w-md text-base font-normal leading-[1.6] text-foreground/72">
-					Recevez nos dernières actualités, offres exclusives et nouveautés en matière de confection textile professionnelle.
+					Parlez-nous de vos besoins en uniformes et vêtements professionnels. Notre équipe vous répondra pour étudier votre demande.
 				</p>
-				<form id="newsletter-form" class="flex flex-col gap-4 sm:flex-row">
-					<div class="relative flex-1">
-						<div class="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-foreground/40">
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-							</svg>
-						</div>
-						<input
-							id="newsletter-email"
-							type="email"
-							placeholder="Votre adresse email"
-							class="w-full rounded-full border-2 border-[rgba(250,204,107,0.3)] bg-[rgba(0,0,0,0.3)] px-12 py-4 text-[#F9FAFB] placeholder-foreground/40 transition-all duration-400 focus:border-[rgba(250,204,107,0.5)] focus:bg-[rgba(0,0,0,0.5)] focus:outline-none"
-							required
-						/>
-					</div>
-					<button
-						type="submit"
-						class="btn-hero-primary"
-					>
-						<span>S'abonner</span>
-						<span class="cta-button-glow absolute inset-0 rounded-full border-2 border-primary/0 transition-all duration-500 group-hover:border-primary/50 group-hover:shadow-[0_0_30px_rgba(198,161,95,0.4)]"></span>
-					</button>
-				</form>
+				<div class="flex flex-col gap-3 sm:flex-row">
+					<a href="/contact" class="btn-hero-primary inline-flex justify-center">
+						<span>Demander un devis</span>
+					</a>
+					<a href="https://wa.me/221772960776" target="_blank" rel="noopener noreferrer" class="inline-flex min-h-12 items-center justify-center rounded-full border border-[rgba(250,204,107,0.3)] px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-primary hover:text-primary">
+						Écrire sur WhatsApp
+					</a>
+				</div>
 			</div>
 
 			<!-- Navigation Columns -->
@@ -55,8 +39,8 @@
 					<ul class="space-y-4">
 						<li><a href="/about" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">À propos</a></li>
 						<li><a href="/services" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Services</a></li>
-						<li><a href="/products" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Produits</a></li>
-						<li><a href="/projects" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Projets</a></li>
+						<li><a href="/catalogue" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Catalogue</a></li>
+						<li><a href="/projects" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Galerie</a></li>
 						<li><a href="/contact" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Contact</a></li>
 					</ul>
 				</div>
@@ -162,81 +146,33 @@
 		window.scrollTo({ top: 0, behavior: 'smooth' });
 	});
 
-	// Newsletter form submission
-	document.getElementById('newsletter-form')?.addEventListener('submit', (e) => {
-		e.preventDefault();
-		const emailInput = document.getElementById('newsletter-email') as HTMLInputElement;
-		if (emailInput && emailInput.value) {
-			alert('Merci pour votre inscription ! Vous recevrez bientôt nos actualités à : ' + emailInput.value);
-			emailInput.value = '';
-		}
-	});
 </script>
 
 <style>
-	/* Animation du gradient sur le mot "Univers" */
 	.animated-gradient-text {
 		background: linear-gradient(135deg, #FACC6B 0%, #F59E0B 50%, #D97706 100%);
-		background-size: 200% auto;
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
-		animation: gradient-shift 3s linear infinite;
-		will-change: background-position;
 	}
 
-	@keyframes gradient-shift {
-		0% {
-			background-position: 0% center;
-		}
-		100% {
-			background-position: 200% center;
-		}
-	}
-
-	/* CTA Button Premium Effects */
-	.cta-button-primary {
-		position: relative;
-		overflow: hidden;
-		box-shadow: 0 8px 32px -8px rgba(198, 161, 95, 0.45);
-		transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-	}
-
-	.cta-button-primary:hover {
-		box-shadow: 0 12px 40px -6px rgba(198, 161, 95, 0.55), 0 0 30px rgba(198, 161, 95, 0.3);
-		transform: translateY(-2px) scale(1.02);
-	}
-
+	.cta-button-primary,
 	.cta-button-secondary {
 		position: relative;
 		overflow: hidden;
-		box-shadow: 0 8px 32px -8px rgba(198, 161, 95, 0.45);
-		transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+		transition: transform 180ms ease, box-shadow 180ms ease;
 	}
 
+	.cta-button-primary:hover,
 	.cta-button-secondary:hover {
-		transform: translateY(-2px) scale(1.02);
-		box-shadow: 0 8px 24px -8px rgba(198, 161, 95, 0.3);
+		transform: translateY(-2px);
 	}
 
 	.cta-button-glow {
 		pointer-events: none;
 	}
 
-	/* Optimisation des performances avec will-change */
-	.cta-button-primary,
-	.cta-button-secondary {
-		will-change: transform, box-shadow;
-	}
-
-	.animated-gradient-text {
-		will-change: background-position;
-	}
-
 	@media (prefers-reduced-motion: reduce) {
-		.animated-gradient-text {
-			animation: none;
-		}
 		.cta-button-primary,
 		.cta-button-secondary {
 			transition: none;

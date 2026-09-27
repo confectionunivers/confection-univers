@@ -1,0 +1,72 @@
+---
+import { catalogueProducts } from '../../lib/catalogue';
+const featuredProjects = [
+	{ slug: 'uniformes-scolaires', title: 'Projet — Uniformes scolaires', sector: 'Éducation', confection: 'Chemises, pantalons, jupes & ensembles', customization: 'Coupe et coloris à cadrer avec l’établissement' },
+	{ slug: 'tenues-professionnelles', title: 'Projet — Tenues professionnelles', sector: 'Entreprise & industrie', confection: 'Vêtements de travail coordonnés', customization: 'Détails et identification à étudier' },
+	{ slug: 'tenues-medicales', title: 'Projet — Tenues médicales', sector: 'Santé & laboratoire', confection: 'Blouses, tuniques & pantalons', customization: 'Usages et matières à préciser' },
+	{ slug: 'tenues-academiques', title: 'Projet — Tenues académiques', sector: 'Éducation & cérémonie', confection: 'Toges, toques & écharpes', customization: 'Protocole et finitions à définir' },
+];
+---
+
+<section id="realisations" class="bg-[#F7F5F0] px-6 py-16 text-[#0A1628] md:py-24" aria-labelledby="realisations-heading">
+	<div class="mx-auto max-w-7xl">
+		<div class="mb-9 flex flex-col gap-5 border-b border-[#0A1628]/15 pb-7 md:flex-row md:items-end md:justify-between">
+			<div>
+				<p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#8B6325]">Projets types · confection professionnelle</p>
+				<h2 id="realisations-heading" class="font-display text-3xl font-semibold tracking-tight md:text-5xl">NOS RÉALISATIONS</h2>
+			</div>
+			<p class="max-w-lg text-xs leading-relaxed text-[#0A1628]/60 md:text-sm">
+				Des typologies de projets pour illustrer les familles de confection. Les visuels sont générés et ne sont pas attribués à des clients ou à des commandes documentées.
+			</p>
+		</div>
+
+		<div class="grid gap-8 md:grid-cols-2 md:gap-6 xl:gap-8">
+			{featuredProjects.map((project, index) => {
+				const product = catalogueProducts.find((item) => item.slug === project.slug)!;
+				return (
+					<article class="realization-card group">
+						<a href={`/catalogue/${product.slug}`} class="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8B6325]" aria-label={`Découvrir ${project.title}`}>
+							<figure class="relative overflow-hidden bg-[#E9E5DC]">
+								<div class={`aspect-[4/3] overflow-hidden ${index === 0 || index === 3 ? 'xl:aspect-[16/9]' : 'xl:aspect-[4/3]'}`}>
+									<img
+										src={product.image}
+										alt={product.alt}
+										class="realization-image h-full w-full object-cover"
+										width="1280"
+										height="960"
+										loading="lazy"
+										decoding="async"
+									/>
+								</div>
+								<figcaption class="absolute left-3 top-3 bg-[#00001C]/80 px-3 py-2 text-[8px] font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-sm sm:left-4 sm:top-4">
+									Illustration générée · projet type
+								</figcaption>
+							</figure>
+							<div class="grid gap-3 border-b border-[#0A1628]/15 py-4 sm:grid-cols-[1fr_auto] sm:items-end">
+								<div>
+									<p class="text-[9px] font-semibold uppercase tracking-[0.18em] text-[#8B6325]">{project.sector}</p>
+									<h3 class="mt-2 font-display text-xl font-semibold tracking-tight md:text-2xl">{project.title}</h3>
+								</div>
+								<span class="text-[9px] font-semibold uppercase tracking-[0.15em] text-[#0A1628]/45">0{index + 1} / 04</span>
+							</div>
+							<dl class="grid gap-x-5 gap-y-2 pt-3 text-[10px] leading-relaxed sm:grid-cols-2">
+								<div><dt class="font-semibold uppercase tracking-[0.12em] text-[#0A1628]/45">Type de confection</dt><dd class="mt-1 text-[#0A1628]/75">{project.confection}</dd></div>
+								<div><dt class="font-semibold uppercase tracking-[0.12em] text-[#0A1628]/45">Personnalisation</dt><dd class="mt-1 text-[#0A1628]/75">{project.customization}</dd></div>
+							</dl>
+						</a>
+					</article>
+				);
+			})}
+		</div>
+
+		<p class="mt-7 text-[10px] leading-relaxed text-[#0A1628]/45">
+			Les intitulés « Projet — … » désignent des exemples de demandes, et non des références clients vérifiées.
+		</p>
+	</div>
+</section>
+
+<style>
+	.realization-image { transition: transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+	.realization-card:hover .realization-image { transform: scale(1.025); }
+	@media (prefers-reduced-motion: reduce) { .realization-image { transition: none; } }
+</style>
