@@ -53,7 +53,7 @@ import gsap from 'gsap';
 				</div>
 				<div class="text-center">
 					<h3 class="font-display text-lg font-semibold text-[#F9FAFB] transition-colors duration-500 group-hover:text-[#FACC6B]">
-						Production Grand Volume & Délais Garantis
+Production en volume & délais planifiés
 					</h3>
 					<p class="mt-2 text-sm text-foreground/70">
 						Pour les universités et institutions scolaires
@@ -63,32 +63,3 @@ import gsap from 'gsap';
 		</div>
 	</div>
 </section>
-
-<script>
-	// Intersection Observer for scroll-triggered animations
-	const observerOptions = {
-		threshold: 0.1,
-		rootMargin: '0px 0px -50px 0px'
-	};
-
-	const observer = new IntersectionObserver((entries) => {
-		entries.forEach((entry, index) => {
-			if (entry.isIntersecting) {
-				setTimeout(() => {
-					const targetEl = entry.target as HTMLElement;
-					targetEl.style.opacity = '1';
-					targetEl.style.transform = 'translateY(0)';
-				}, index * 200);
-				observer.unobserve(entry.target);
-			}
-		});
-	}, observerOptions);
-
-	document.querySelectorAll('.trust-badge').forEach(badge => {
-		const badgeEl = badge as HTMLElement;
-		badgeEl.style.opacity = '0';
-		badgeEl.style.transform = 'translateY(50px)';
-		badgeEl.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
-		observer.observe(badge);
-	});
-</script>

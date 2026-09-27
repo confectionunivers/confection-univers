@@ -71,22 +71,5 @@ const { title, description = 'Confection Univers est une entreprise de confectio
 	<body class="bg-background font-sans text-foreground border-0 m-0 p-0" style="border: none !important; outline: none !important; box-shadow: none !important;">
 		<ScrollProgress />
 		<slot />
-		<script>
-			import Lenis from '@studio-freight/lenis';
-
-			const lenis = new Lenis({
-				lerp: 0.1,
-				duration: 1.5,
-				smoothWheel: true,
-			});
-
-			document.documentElement.classList.add('lenis', 'lenis-smooth');
-
-			function raf(time) {
-				lenis.raf(time);
-				requestAnimationFrame(raf);
-			}
-			requestAnimationFrame(raf);
-		</script>
 	</body>
 </html>

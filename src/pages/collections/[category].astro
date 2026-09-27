@@ -39,7 +39,7 @@ export function getStaticPaths() {
 				'/images/blouse-medicale-3.jpg',
 				'/images/blouse-medicale-4.jpg',
 				'/images/blouse-medicale-5.jpg',
-				'/images/blouse-medicale-6.jpg',
+				'/images/blouse-medicale.jpg',
 				'/images/blouse-medicale-7.jpg',
 				'/images/blouse-medicale-8.jpg',
 			],
@@ -60,14 +60,7 @@ export function getStaticPaths() {
 		'costumes-africains': {
 			name: 'Costumes africains',
 			images: [
-				'/images/costume-africain-1.jpg',
-				'/images/costume-africain-2.jpg',
-				'/images/costume-africain-3.jpg',
-				'/images/costume-africain-4.jpg',
-				'/images/costume-africain-5.jpg',
-				'/images/costume-africain-6.jpg',
-				'/images/costume-africain-7.jpg',
-				'/images/costume-africain-8.jpg',
+			'/images/costume-africain.jpg',
 			],
 		},
 		'tenues-sport': {
@@ -127,7 +120,7 @@ const collectionsData = {
 			'/images/blouse-medicale-3.jpg',
 			'/images/blouse-medicale-4.jpg',
 			'/images/blouse-medicale-5.jpg',
-			'/images/blouse-medicale-6.jpg',
+			'/images/blouse-medicale.jpg',
 			'/images/blouse-medicale-7.jpg',
 			'/images/blouse-medicale-8.jpg',
 		],
@@ -148,14 +141,7 @@ const collectionsData = {
 	'costumes-africains': {
 		name: 'Costumes africains',
 		images: [
-			'/images/costume-africain-1.jpg',
-			'/images/costume-africain-2.jpg',
-			'/images/costume-africain-3.jpg',
-			'/images/costume-africain-4.jpg',
-			'/images/costume-africain-5.jpg',
-			'/images/costume-africain-6.jpg',
-			'/images/costume-africain-7.jpg',
-			'/images/costume-africain-8.jpg',
+			'/images/costume-africain.jpg',
 		],
 	},
 	'tenues-sport': {
@@ -178,7 +164,7 @@ const { category } = Astro.params;
 const collection = collectionsData[category as keyof typeof collectionsData];
 
 if (!collection) {
-	return Astro.redirect('/products');
+	return Astro.redirect('/catalogue');
 }
 ---
 
@@ -200,7 +186,7 @@ if (!collection) {
 					</span>
 				</h1>
 				<a
-					href="/products"
+					href="/catalogue"
 					class="mt-6 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-white/60 transition-all duration-300 hover:text-[#D4AF37] hover:gap-3"
 				>
 					<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

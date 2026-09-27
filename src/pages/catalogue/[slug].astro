@@ -1,0 +1,160 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import Footer from '../../components/Footer.astro';
+import { catalogueProducts } from '../../lib/catalogue';
+
+export function getStaticPaths() {
+	return catalogueProducts.map((product) => ({
+		params: { slug: product.slug },
+		props: { product },
+	}));
+}
+
+const { product } = Astro.props;
+const quoteHref = `/catalogue/?produit=${encodeURIComponent(product.title)}#devis`;
+---
+
+<Layout title={`${product.title} | Catalogue · Confection Univers`} description={`${product.description} Gamme présentée à titre illustratif, personnalisations et conditions à confirmer sur devis.`}>
+	<main class="relative">
+		<Navbar />
+
+		<section class="bg-[#F7F5F0] px-6 pb-16 pt-36 text-[#0A1628] md:pb-20 md:pt-44" aria-labelledby="product-heading">
+			<div class="mx-auto max-w-7xl">
+				<nav aria-label="Fil d’Ariane" class="mb-8">
+					<ol class="flex flex-wrap items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.16em] text-[#0A1628]/50">
+						<li><a href="/catalogue" class="transition-colors hover:text-[#8B6325]">Catalogue</a></li>
+						<li aria-hidden="true">/</li>
+						<li aria-current="page" class="text-[#8B6325]">{product.title}</li>
+					</ol>
+				</nav>
+
+				<div class="grid gap-9 lg:grid-cols-12 lg:items-center lg:gap-12">
+					<div class="lg:col-span-5">
+						<p class="mb-4 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#8B6325]">
+							<span class="font-display text-[#0A1628]/40">{product.number}</span>
+							<span class="h-px w-7 bg-[#8B6325]/50" aria-hidden="true"></span>
+							{product.sectorLabel}
+						</p>
+						<h1 id="product-heading" class="font-display text-[clamp(2.5rem,6vw,4.8rem)] font-semibold leading-[0.98] tracking-[-0.055em]">{product.title}</h1>
+						<p class="mt-4 text-[10px] font-semibold uppercase tracking-[0.16em] text-[#0A1628]/48">{product.category}</p>
+						<p class="mt-6 max-w-xl text-base leading-[1.85] text-[#0A1628]/68 md:text-lg">{product.description}</p>
+						<p class="mt-4 max-w-xl text-xs leading-relaxed text-[#0A1628]/48">
+							Le modèle photographié est une illustration générée, pas une référence de commande. Les détails définitifs sont définis avec vous.
+						</p>
+						<div class="mt-7 flex flex-wrap gap-2">
+							<span class="rounded-full border border-[#0A1628]/15 px-3 py-1.5 text-[9px] font-medium text-[#0A1628]/70">{product.typeLabel}</span>
+							<span class="rounded-full border border-[#0A1628]/15 px-3 py-1.5 text-[9px] font-medium text-[#0A1628]/70">{product.usageLabel}</span>
+							<span class="rounded-full border border-[#8B6325]/35 px-3 py-1.5 text-[9px] font-medium text-[#8B6325]">Sur devis</span>
+						</div>
+						<a href={quoteHref} class="mt-8 inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-[#00001C] px-6 py-3 text-[10px] font-bold uppercase tracking-[0.16em] text-white transition-colors hover:bg-[#8B6325] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8B6325]">
+							Demander un devis <span aria-hidden="true">↗</span>
+						</a>
+					</div>
+
+					<div class="lg:col-span-7">
+						<figure class="space-y-3">
+							<div class="grid gap-2 sm:grid-cols-[1.55fr_0.85fr] sm:gap-3">
+								<div class="aspect-[4/3] overflow-hidden bg-[#E9E5DC]">
+									<img src={product.image} alt={product.alt} class="product-gallery-image h-full w-full object-cover" width="1280" height="960" fetchpriority="high" decoding="async" />
+								</div>
+								<div class="grid grid-cols-2 gap-2 sm:h-full sm:grid-cols-1 sm:grid-rows-2 sm:gap-3">
+									<div class="aspect-[4/3] overflow-hidden bg-[#E9E5DC] sm:aspect-auto sm:min-h-0">
+										<img src={product.detailImage} alt={`Détail de la gamme ${product.title} — illustration générée`} class="product-gallery-image h-full w-full object-cover" width="1120" height="840" loading="lazy" decoding="async" />
+									</div>
+									<div class="aspect-[4/3] overflow-hidden bg-[#E9E5DC] sm:aspect-auto sm:min-h-0">
+										<img src={product.craftImage} alt={`Détail de confection présenté à titre illustratif pour la gamme ${product.title}`} class="product-gallery-image h-full w-full object-cover" width="900" height="675" loading="lazy" decoding="async" />
+									</div>
+								</div>
+							</div>
+							<figcaption class="flex items-center justify-between gap-4 border-t border-[#0A1628]/15 pt-2 text-[9px] uppercase tracking-[0.14em] text-[#0A1628]/45">
+								<span>Galerie · {product.title}</span>
+								<span>Visuels générés à titre d’illustration</span>
+							</figcaption>
+						</figure>
+					</div>
+				</div>
+
+				<div class="mt-12 grid gap-px border border-[#0A1628]/15 bg-[#0A1628]/15 sm:grid-cols-3">
+					<div class="bg-[#F7F5F0] p-4 md:p-5"><p class="text-[9px] font-semibold uppercase tracking-[0.16em] text-[#0A1628]/45">Secteur</p><p class="mt-2 font-display text-sm font-medium">{product.sectorLabel}</p></div>
+					<div class="bg-[#F7F5F0] p-4 md:p-5"><p class="text-[9px] font-semibold uppercase tracking-[0.16em] text-[#0A1628]/45">Usage</p><p class="mt-2 font-display text-sm font-medium">{product.usageLabel}</p></div>
+					<div class="bg-[#F7F5F0] p-4 md:p-5"><p class="text-[9px] font-semibold uppercase tracking-[0.16em] text-[#0A1628]/45">Tarification</p><p class="mt-2 font-display text-sm font-medium">Étude et devis personnalisés</p></div>
+				</div>
+			</div>
+		</section>
+
+		<section class="bg-white px-6 py-14 text-[#0A1628] md:py-20" aria-label="Détails de la gamme">
+			<div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+				<div>
+					<p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.23em] text-[#8B6325]">01 / Le produit</p>
+					<h2 class="font-display text-3xl font-semibold tracking-tight md:text-4xl">Usages & caractéristiques</h2>
+					<p class="mt-4 max-w-md text-sm leading-relaxed text-[#0A1628]/60">Les éléments ci-dessous constituent des repères de conception. Leur faisabilité et leur configuration se confirment avec votre demande.</p>
+				</div>
+				<div class="grid gap-8 sm:grid-cols-2">
+					<div>
+						<h3 class="border-b border-[#0A1628]/15 pb-3 text-[10px] font-bold uppercase tracking-[0.16em] text-[#8B6325]">Applications</h3>
+						<ul class="mt-4 space-y-3 text-sm leading-relaxed text-[#0A1628]/70">
+							{product.applications.map((item) => <li class="flex gap-3"><span class="text-[#8B6325]" aria-hidden="true">—</span><span>{item}</span></li>)}
+						</ul>
+					</div>
+					<div>
+						<h3 class="border-b border-[#0A1628]/15 pb-3 text-[10px] font-bold uppercase tracking-[0.16em] text-[#8B6325]">Caractéristiques à préciser</h3>
+						<ul class="mt-4 space-y-3 text-sm leading-relaxed text-[#0A1628]/70">
+							{product.characteristics.map((item) => <li class="flex gap-3"><span class="text-[#8B6325]" aria-hidden="true">—</span><span>{item}</span></li>)}
+						</ul>
+					</div>
+					<div class="sm:col-span-2">
+						<h3 class="border-b border-[#0A1628]/15 pb-3 text-[10px] font-bold uppercase tracking-[0.16em] text-[#8B6325]">Pièces envisageables</h3>
+						<ul class="mt-4 flex flex-wrap gap-2">
+							{product.pieces.map((piece) => <li class="border border-[#0A1628]/12 px-3 py-2 text-xs text-[#0A1628]/70">{piece}</li>)}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="bg-[#F0EDE6] px-6 py-14 text-[#0A1628] md:py-20" aria-label="Options de personnalisation et production">
+			<div class="mx-auto max-w-7xl">
+				<div class="mb-8 grid gap-4 md:grid-cols-[1fr_0.7fr] md:items-end">
+					<div><p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.23em] text-[#8B6325]">02 / Adaptation</p><h2 class="font-display text-3xl font-semibold tracking-tight md:text-4xl">Tailles, matières & personnalisation</h2></div>
+					<p class="max-w-lg text-xs leading-relaxed text-[#0A1628]/55">Ces choix ne sont pas des options garanties par défaut : ils sont étudiés selon le modèle, le support textile et les disponibilités.</p>
+				</div>
+				<div class="grid gap-px border border-[#0A1628]/12 bg-[#0A1628]/12 sm:grid-cols-2 xl:grid-cols-4">
+					<div class="bg-[#F0EDE6] p-5 md:p-6"><h3 class="text-[9px] font-bold uppercase tracking-[0.16em] text-[#8B6325]">Tailles disponibles</h3><p class="mt-3 text-sm leading-relaxed text-[#0A1628]/70">{product.sizes}</p></div>
+					<div class="bg-[#F0EDE6] p-5 md:p-6"><h3 class="text-[9px] font-bold uppercase tracking-[0.16em] text-[#8B6325]">Couleurs</h3><p class="mt-3 text-sm leading-relaxed text-[#0A1628]/70">{product.colors}</p></div>
+					<div class="bg-[#F0EDE6] p-5 md:p-6"><h3 class="text-[9px] font-bold uppercase tracking-[0.16em] text-[#8B6325]">Types de tissus</h3><p class="mt-3 text-sm leading-relaxed text-[#0A1628]/70">{product.fabrics}</p></div>
+					<div class="bg-[#F0EDE6] p-5 md:p-6"><h3 class="text-[9px] font-bold uppercase tracking-[0.16em] text-[#8B6325]">Possibilités de production</h3><p class="mt-3 text-sm leading-relaxed text-[#0A1628]/70">{product.production}</p></div>
+				</div>
+				<div class="mt-8 grid gap-5 lg:grid-cols-[0.6fr_1.4fr] lg:items-start">
+					<h3 class="text-[10px] font-bold uppercase tracking-[0.17em] text-[#8B6325]">Pistes de personnalisation</h3>
+					<div>
+						<ul class="flex flex-wrap gap-2">
+							{product.customizationLabels.map((item) => <li class="rounded-full bg-white px-3 py-2 text-[10px] font-medium text-[#0A1628]/70">{item}</li>)}
+						</ul>
+						<p class="mt-4 text-xs leading-relaxed text-[#0A1628]/55">Couleurs, logos, broderie, impression, coupe, tailles, matières, étiquettes et production en série peuvent être étudiés selon faisabilité. Les détails sont arrêtés après échange et chiffrage.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="bg-[#00001C] px-6 py-14 text-white md:py-20">
+			<div class="mx-auto flex max-w-7xl flex-col gap-6 border-y border-white/15 py-8 md:flex-row md:items-center md:justify-between md:py-10">
+				<div>
+					<p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#F5B544]">La prochaine étape</p>
+					<h2 class="mt-2 font-display text-2xl font-semibold md:text-3xl">Un projet autour de cette gamme ?</h2>
+					<p class="mt-2 max-w-xl text-xs leading-relaxed text-white/55">Transmettez vos besoins et, si utile, un modèle ou un cahier des charges.</p>
+				</div>
+				<a href={quoteHref} class="inline-flex min-h-12 shrink-0 items-center justify-center gap-3 rounded-full bg-[#F5B544] px-6 py-3 text-[10px] font-bold uppercase tracking-[0.16em] text-[#00001C] transition-colors hover:bg-[#FACC6B] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F5B544]">
+					Demander un devis <span aria-hidden="true">↗</span>
+				</a>
+			</div>
+		</section>
+		<Footer />
+	</main>
+</Layout>
+
+<style>
+	.product-gallery-image { display: block; transition: transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+	.product-gallery-image:hover { transform: scale(1.015); }
+	@media (prefers-reduced-motion: reduce) { .product-gallery-image { transition: none; } }
+</style>

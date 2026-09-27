@@ -7,6 +7,10 @@ export default defineConfig({
     output: 'static',
     integrations: [react()],
     vite: {
-        plugins: [tailwindcss()]
+        plugins: [tailwindcss()],
+        server: {
+            // Allow the sandbox's proxied live-preview hostname.
+            allowedHosts: ['.e2b.app']
+        }
     }
 });

@@ -1,198 +1,93 @@
 ---
-/**
- * Grille de services — images dans public/images/services/
- * Fichiers : graduation.jpg, scolaire.jpg, travail.jpg, sport.jpg,
- * blouses-medicales.jpg, sages-femmes.jpg, infirmiers.jpg, docteurs.jpg
- */
-const services = [
-	{
-		title: 'Toges de graduation',
-		description:
-			'Toges de graduation et tenues académiques personnalisées pour les universités et grandes écoles de Dakar et Thiès, confectionnées avec des tissus de qualité premium.',
-		image: '/images/toge-graduation.jpg',
-		slug: 'toges-graduation',
-	},
-	{
-		title: 'Uniformes scolaires',
-		description:
-			'Programmes complets d\'uniformes scolaires pour les établissements primaires et secondaires du Sénégal, incluant chemises, pantalons et jupes sur mesure.',
-		image: '/images/uniforme-scolaire.jpg',
-		slug: 'uniformes-scolaires',
-	},
-	{
-		title: 'Tenue de Travail',
-		description:
-			'Tenues de travail professionnelles pour les entreprises et industries sénégalaises, alliant confort, durabilité et image de marque.',
-		image: '/images/tenue-travail.jpg',
-		slug: 'tenues-entreprise',
-	},
-	{
-		title: 'Kimonos',
-		description:
-			'Kimonos traditionnels et modernes confectionnés avec des tissus de qualité, parfaits pour les cérémonies culturelles et événements spéciaux au Sénégal.',
-		image: '/images/kimono.jpg',
-		slug: 'kimonos',
-	},
-	{
-		title: 'Blouses médicales',
-		description:
-			'Blouses médicales confortables et fonctionnelles pour le personnel des hôpitaux et cliniques de Dakar et Thiès, avec poches pratiques et tissus faciles d\'entretien.',
-		image: '/images/blouse-medicale.jpg',
-		slug: 'blouses-medicales',
-	},
-	{
-		title: 'Toges d\'avocat',
-		description:
-			'Toges d\'avocat et tenues juridiques conformes aux standards du barreau sénégalais, confectionnées avec précision pour les professionnels du droit.',
-		image: '/images/toge-avocat.jpg',
-		slug: 'toges-avocat',
-	},
-	{
-		title: 'Costumes africains',
-		description:
-			'Costumes africains traditionnels et contemporains inspirés du patrimoine sénégalais, utilisant des tissus locaux comme le bazin et le wax.',
-		image: '/images/costume-africain.jpg',
-		slug: 'costumes-africains',
-	},
-	{
-		title: 'Tenues de sport',
-		description:
-			'Tenues de sport et maillots d\'équipe pour les clubs, écoles et associations sportives du Sénégal, conçus pour la performance et le confort.',
-		image: '/images/tenue-sport.jpg',
-		slug: 'tenues-sport',
-	},
-];
+import { SERVICES } from '../lib/services';
+
+const featuredSlugs = new Set([
+	'toges-graduation',
+	'uniformes-scolaires',
+	'tenue-travail',
+	'blouses-medicales',
+]);
+const featuredServices = SERVICES.filter(({ slug }) => featuredSlugs.has(slug));
 ---
 
 <section
 	id="services"
-	class="relative z-10 scroll-mt-24 rounded-[3rem] border-0 py-24 text-ink md:rounded-[4rem] md:py-32 premium-section"
-	lang="en"
+	class="relative z-10 scroll-mt-24 rounded-[2rem] px-6 py-20 text-white premium-section md:rounded-[3rem] md:py-28"
+	lang="fr"
 	aria-labelledby="services-heading"
 >
-	<!-- Premium Golden Glow -->
-	<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-		<div class="absolute left-[10%] top-[20%] w-[500px] h-[500px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.15) 0%, transparent 70%); filter: blur(100px);"></div>
-		<div class="absolute right-[10%] bottom-[20%] w-[400px] h-[400px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.1) 0%, transparent 70%); filter: blur(80px);"></div>
-	</div>
-
-	<div class="mx-auto max-w-7xl px-6">
-		<div class="mx-auto mb-16 max-w-3xl text-center md:mb-20">
-			<p class="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] premium-subtitle md:text-xs">Notre expertise</p>
-			<h2 id="services-heading" class="font-display text-3xl font-semibold leading-[1.1] tracking-tight text-[#F9FAFB] md:text-4xl lg:text-5xl">
-				Services de confection de vêtements professionnels
+	<div class="mx-auto max-w-7xl">
+		<header class="mx-auto mb-12 max-w-3xl text-center md:mb-16">
+			<p class="mb-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary md:text-xs">Nos services</p>
+			<h2 id="services-heading" class="font-display text-3xl font-semibold leading-tight tracking-tight md:text-4xl lg:text-5xl">
+				La confection adaptée à votre activité
 			</h2>
-			<p class="mt-6 text-base font-normal leading-[1.6] text-foreground/72 md:text-lg md:leading-[1.7]">
-				Des cérémonies de remise des diplômes aux établissements de santé, nous fabriquons des vêtements qui allient précision, confort
-				et qualité professionnelle.
+			<p class="mt-5 text-base leading-relaxed text-foreground/70 md:text-lg">
+				Uniformes et tenues personnalisables pour les établissements scolaires, les cérémonies, les entreprises et les professionnels de santé.
 			</p>
-		</div>
+		</header>
 
-		<div
-			class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 services-grid"
-		>
-			{
-				services.map((s, i) => (
-					<article
-						class="service-card group relative flex flex-col overflow-hidden rounded-[1.5rem] premium-card-secondary opacity-0 translate-y-8"
-					>
-						<div class="relative aspect-[4/3] overflow-hidden bg-surface/40">
+		<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+			{featuredServices.map((service) => (
+				<article class="service-card group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04]">
+					<a href={`/services/${service.slug}`} class="block overflow-hidden" aria-label={`Découvrir : ${service.title}`}>
+						<div class="aspect-[4/3] overflow-hidden bg-surface/40">
 							<img
-								src={s.image}
-								alt={s.title}
-								class="service-card-img h-full w-full object-cover transition duration-700 ease-out"
+								src={service.image}
+								alt={service.title}
+								class="service-card-img h-full w-full object-cover"
 								width="640"
 								height="480"
-								loading={i < 4 ? 'eager' : 'lazy'}
+								loading="lazy"
 								decoding="async"
 							/>
-							<div
-								class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050816]/25 via-transparent to-transparent opacity-0 transition duration-500 group-hover:opacity-100"
-								aria-hidden="true"
-							/>
-							<span
-								class="absolute left-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-[rgba(250,204,107,0.3)] bg-[rgba(0,0,0,0.85)] font-display text-xs font-semibold text-[#FACC6B] backdrop-blur-sm transition duration-500 group-hover:border-[rgba(250,204,107,0.5)] group-hover:bg-[rgba(250,204,107,0.2)] group-hover:text-[#FACC6B]"
-								aria-hidden="true"
-							>
-								{String(i + 1).padStart(2, '0')}
-							</span>
 						</div>
-
-						<div class="flex flex-1 flex-col p-6 md:p-7">
-							<h3 class="font-display text-lg font-semibold leading-snug tracking-tight text-[#F9FAFB] transition duration-300 group-hover:text-[#FACC6B] md:text-xl">
-								{s.title}
-							</h3>
-							<p class="mt-3 flex-1 text-sm font-normal leading-[1.6] text-foreground/70">{s.description}</p>
-							<a
-								href={`/blog/${s.slug}`}
-								class="mt-5 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#FACC6B] opacity-90 transition duration-300 group-hover:gap-3 hover:opacity-100"
-							>
-								En savoir plus
-								<svg class="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-									<path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6" />
-								</svg>
+					</a>
+					<div class="p-5 md:p-6">
+						<h3 class="font-display text-lg font-semibold leading-snug md:text-xl">
+							<a href={`/services/${service.slug}`} class="hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
+								{service.title}
 							</a>
-						</div>
-					</article>
-				))
-			}
+						</h3>
+						<p class="mt-3 text-sm leading-relaxed text-foreground/70">{service.description}</p>
+						<a href={`/services/${service.slug}`} class="mt-5 inline-flex min-h-10 items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary hover:text-primary-light">
+							Voir le service <span aria-hidden="true">→</span>
+						</a>
+					</div>
+				</article>
+			))}
 		</div>
-	</div>
-</section>
 
-<script>
-	import gsap from 'gsap';
-
-	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-	if (!prefersReducedMotion) {
-		const servicesGrid = document.querySelector('.services-grid');
-		if (servicesGrid) {
-			const serviceCards = servicesGrid.querySelectorAll('.service-card');
-			
-			serviceCards.forEach((card) => {
-				const cardEl = card as HTMLElement;
-				cardEl.style.opacity = '0';
-				cardEl.style.transform = 'translateY(30px) rotate(-2deg)';
-				cardEl.style.willChange = 'transform, opacity';
-			});
-		
-			const observer = new IntersectionObserver((entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						gsap.to(serviceCards, {
-							opacity: 1,
-							y: 0,
-							rotation: 0,
-							duration: 0.7,
-							ease: 'back.out(1.1)',
-							stagger: 0.1,
-							clearProps: 'transform'
-						});
-						observer.unobserve(entry.target);
-					}
-				});
-			}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
-
-			observer.observe(servicesGrid);
-		}
-	}
-</script>
+		<div class="mt-9 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-7 text-center sm:flex-row sm:text-left">
+			<p class="text-sm text-foreground/70">Vous avez un besoin particulier ou souhaitez explorer les autres services ?</p>
+			<a href="/services" class="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-background hover:bg-primary-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+				Tous nos services
+			</a>
+		</div>
 	</div>
 </section>
 
 <style>
 	@media (prefers-reduced-motion: no-preference) {
+		.service-card,
+		.service-card-img {
+			transition: transform 220ms ease, border-color 220ms ease;
+		}
+
+		.service-card:hover {
+			transform: translateY(-3px);
+			border-color: rgba(250, 204, 107, 0.35);
+		}
+
 		.service-card:hover .service-card-img {
-			transform: scale(1.06);
+			transform: scale(1.025);
 		}
 	}
+
 	@media (prefers-reduced-motion: reduce) {
-		.service-card {
+		.service-card,
+		.service-card-img {
 			transition: none;
-		}
-		.service-card:hover {
-			transform: none;
 		}
 	}
 </style>
