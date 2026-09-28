@@ -8,21 +8,21 @@ const spanClass = (layout: 'feature' | 'standard' | 'wide') => {
 };
 ---
 
-<section id="catalogue-offres" class="scroll-mt-24 bg-[#F7F5F0] px-6 py-16 text-[#0A1628] md:py-24" aria-labelledby="catalogue-offres-heading">
+<section id="catalogue-offres" class="scroll-mt-24 bg-[#00001C] px-6 py-16 text-white md:py-24" aria-labelledby="catalogue-offres-heading">
 	<div class="mx-auto max-w-7xl">
 		<div class="mb-9 grid gap-5 lg:grid-cols-[1fr_0.7fr] lg:items-end lg:gap-10">
 			<div>
-				<p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#8B6325]">Nos gammes · 01—09</p>
+				<p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#F5B544]">Nos gammes · 01—11</p>
 				<h2 id="catalogue-offres-heading" class="max-w-3xl font-display text-3xl font-semibold leading-[1.06] tracking-tight md:text-5xl">
 					Un vestiaire professionnel, plusieurs usages.
 				</h2>
 			</div>
-			<p class="max-w-xl text-sm leading-[1.8] text-[#0A1628]/65 md:text-base">
+			<p class="max-w-xl text-sm leading-[1.8] text-white/65 md:text-base">
 				Explorez les familles par secteur, type de vêtement, usage ou piste de personnalisation. Les modèles, matières et finitions se précisent à partir de votre cahier des charges.
 			</p>
 		</div>
 
-		<div class="catalogue-filters border-y border-[#0A1628]/15 py-5" role="group" aria-label="Filtres du catalogue">
+		<div class="catalogue-filters rounded-2xl border border-[#F5B544]/25 bg-[#0E172A]/55 p-4 py-5 sm:p-5" role="group" aria-label="Filtres du catalogue">
 			<div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-[repeat(4,minmax(0,1fr))_auto] xl:items-end">
 				<label class="catalogue-filter-field">
 					<span>Secteur</span>
@@ -52,17 +52,17 @@ const spanClass = (layout: 'feature' | 'standard' | 'wide') => {
 						{catalogueFilters.personalization.map((option) => <option value={option.value}>{option.label}</option>)}
 					</select>
 				</label>
-				<button type="button" data-catalogue-reset class="min-h-11 self-end px-3 text-left text-[10px] font-semibold uppercase tracking-[0.16em] text-[#0A1628]/55 underline decoration-[#F5B544] underline-offset-4 transition-colors hover:text-[#0A1628] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8B6325] xl:text-center">
+				<button type="button" data-catalogue-reset class="min-h-11 self-end px-3 text-left text-[10px] font-semibold uppercase tracking-[0.16em] text-white/55 underline decoration-[#F5B544] underline-offset-4 transition-colors hover:text-[#F5B544] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5B544] xl:text-center">
 					Réinitialiser
 				</button>
 			</div>
-			<div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-[#0A1628]/10 pt-3">
-				<p data-catalogue-count aria-live="polite" class="text-xs text-[#0A1628]/60">{catalogueProducts.length} gammes présentées</p>
-				<p class="text-[10px] uppercase tracking-[0.14em] text-[#0A1628]/40">Aucun prix fixe · demande sur devis</p>
+			<div class="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-3">
+				<p data-catalogue-count aria-live="polite" class="text-xs text-white/60">{catalogueProducts.length} gammes présentées</p>
+				<p class="text-[10px] uppercase tracking-[0.14em] text-white/40">Aucun prix fixe · demande sur devis</p>
 			</div>
 		</div>
 
-		<p data-catalogue-empty hidden class="py-14 text-center font-display text-xl text-[#0A1628]/70" role="status">
+		<p data-catalogue-empty hidden class="py-14 text-center font-display text-xl text-white/70" role="status">
 			Aucune gamme ne correspond à cette combinaison. Essayez d’autres filtres.
 		</p>
 
@@ -75,10 +75,10 @@ const spanClass = (layout: 'feature' | 'standard' | 'wide') => {
 					data-type={product.type}
 					data-usage={product.usage}
 					data-customization={product.customizationFilters.join(' ')}
-					class={`catalogue-product group scroll-mt-32 ${spanClass(product.layout)}`}
+					class={`catalogue-product group scroll-mt-32 overflow-hidden rounded-[1.35rem] border border-[#F5B544]/30 bg-[#0E172A]/75 shadow-[0_18px_50px_rgba(0,0,0,0.22)] ${spanClass(product.layout)}`}
 				>
-					<a href={`/catalogue/${product.slug}`} class="catalogue-product-link block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8B6325]" aria-label={`Découvrir ${product.title}`}>
-						<figure class="catalogue-product-figure relative overflow-hidden bg-[#EAE6DD]">
+					<a href={`/catalogue/${product.slug}`} class="catalogue-product-link block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F5B544]" aria-label={`Découvrir ${product.title}`}>
+						<figure class="catalogue-product-figure relative overflow-hidden bg-[#0E172A]">
 							<div class={`catalogue-product-frame ${product.layout === 'feature' || product.layout === 'wide' ? 'aspect-[16/10]' : 'aspect-[4/3]'}`}>
 								<picture>
 									<source
@@ -107,27 +107,27 @@ const spanClass = (layout: 'feature' | 'standard' | 'wide') => {
 							<span class="absolute left-4 top-4 font-display text-xs font-semibold tracking-[0.14em] text-white drop-shadow sm:left-5 sm:top-5">{product.number}</span>
 						</figure>
 
-						<div class="grid gap-2 border-b border-[#0A1628]/15 pb-4 pt-4 sm:grid-cols-[1fr_auto] sm:items-end sm:pt-5">
+						<div class="grid gap-2 border-b border-white/15 px-4 pb-4 pt-4 sm:grid-cols-[1fr_auto] sm:items-end sm:pt-5">
 							<div>
-								<p class="text-[9px] font-semibold uppercase tracking-[0.17em] text-[#8B6325]">{product.category}</p>
-								<h3 class="mt-2 font-display text-xl font-semibold leading-tight tracking-tight text-[#0A1628] transition-colors group-hover:text-[#8B6325] md:text-2xl">{product.title}</h3>
-								<p class="mt-2 max-w-xl text-sm leading-relaxed text-[#0A1628]/62">{product.description}</p>
+								<p class="text-[9px] font-semibold uppercase tracking-[0.17em] text-[#F5B544]">{product.category}</p>
+								<h3 class="mt-2 font-display text-xl font-semibold leading-tight tracking-tight text-white transition-colors group-hover:text-[#F5B544] md:text-2xl">{product.title}</h3>
+								<p class="mt-2 max-w-xl text-sm leading-relaxed text-white/65">{product.description}</p>
 							</div>
-							<span class="inline-flex w-fit items-center gap-2 text-[9px] font-medium uppercase tracking-[0.12em] text-[#0A1628]/50">
-								<span class="h-1 w-1 rounded-full bg-[#B58433]" aria-hidden="true"></span>
+							<span class="inline-flex w-fit items-center gap-2 text-[9px] font-medium uppercase tracking-[0.12em] text-white/55">
+								<span class="h-1 w-1 rounded-full bg-[#F5B544]" aria-hidden="true"></span>
 								Sur étude
 							</span>
 						</div>
 
-						<span class="mt-4 inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.18em] text-[#0A1628]">
-							Découvrir <span class="catalogue-arrow text-[#8B6325]" aria-hidden="true">↗</span>
+						<span class="mx-4 mb-4 mt-4 inline-flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.18em] text-white">
+							Découvrir <span class="catalogue-arrow text-[#F5B544]" aria-hidden="true">↗</span>
 						</span>
 					</a>
 				</article>
 			))}
 		</div>
 
-		<p class="mt-8 max-w-2xl text-[10px] leading-relaxed text-[#0A1628]/45">
+		<p class="mt-8 max-w-2xl text-[10px] leading-relaxed text-white/45">
 			Les visuels sont des illustrations générées pour présenter les familles de produits. Les modèles, coloris, tailles, matières et finitions définitifs sont à valider avec Confection Univers.
 		</p>
 	</div>
@@ -171,7 +171,7 @@ const spanClass = (layout: 'feature' | 'standard' | 'wide') => {
 		display: flex;
 		flex-direction: column;
 		gap: 0.4rem;
-		color: rgba(10, 22, 40, 0.5);
+		color: rgba(247, 245, 240, 0.58);
 		font-size: 9px;
 		font-weight: 700;
 		letter-spacing: 0.15em;
@@ -182,14 +182,14 @@ const spanClass = (layout: 'feature' | 'standard' | 'wide') => {
 		min-height: 2.75rem;
 		width: 100%;
 		appearance: none;
-		border: 1px solid rgba(10, 22, 40, 0.14);
+		border: 1px solid rgba(245, 181, 68, 0.26);
 		border-radius: 999px;
-		background-color: rgba(255, 255, 255, 0.72);
-		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='m2 4.5 4 4 4-4' stroke='%230A1628' stroke-width='1.3'/%3E%3C/svg%3E");
+		background-color: rgba(14, 23, 42, 0.94);
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='m2 4.5 4 4 4-4' stroke='%23F5B544' stroke-width='1.3'/%3E%3C/svg%3E");
 		background-repeat: no-repeat;
 		background-position: right 1rem center;
 		padding: 0.75rem 2.5rem 0.75rem 1rem;
-		color: #0a1628;
+		color: #f7f5f0;
 		font-family: Inter, ui-sans-serif, system-ui, sans-serif;
 		font-size: 0.75rem;
 		font-weight: 500;
@@ -200,11 +200,11 @@ const spanClass = (layout: 'feature' | 'standard' | 'wide') => {
 
 	.catalogue-filter-field select:hover,
 	.catalogue-filter-field select:focus-visible {
-		border-color: rgba(139, 99, 37, 0.65);
+		border-color: rgba(245, 181, 68, 0.75);
 		outline: none;
 	}
 
-	.catalogue-product-frame { overflow: hidden; }
+	.catalogue-product-frame { overflow: hidden; border-radius: 1.2rem; }
 
 	.catalogue-product-image {
 		transition: transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1), filter 500ms ease;
@@ -215,6 +215,9 @@ const spanClass = (layout: 'feature' | 'standard' | 'wide') => {
 		transform: scale(1.025);
 		filter: saturate(1.04);
 	}
+
+	.catalogue-product:hover,
+	.catalogue-product:focus-within { border-color: rgba(245, 181, 68, 0.58); }
 
 	.catalogue-product[hidden] { display: none; }
 

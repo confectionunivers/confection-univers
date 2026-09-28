@@ -54,8 +54,8 @@ const currentPath = normalizePath(Astro.url.pathname);
 
 			<!-- MIDDLE: Prestige Message -->
 			<div class="hidden md:flex items-center justify-center">
-				<span class="font-bold text-[11px] tracking-[0.15em] text-[#00001C]/90 uppercase">
-					• EXCELLENCE TEXTILE & CONFECTION SUR-MESURE •
+				<span class="topbar-message font-bold text-[10px] tracking-[0.15em] text-[#FACC6B] uppercase">
+					• CONFECTION INDUSTRIELLE · VÊTEMENTS PROFESSIONNELS •
 				</span>
 			</div>
 
@@ -78,7 +78,7 @@ const currentPath = normalizePath(Astro.url.pathname);
 
 	<!-- Main Floating Navbar -->
 	<div id="main-navbar" class="main-navbar-container">
-		<div id="floating-navbar" class="floating-navbar hover:-translate-y-0.5 transition-all duration-300">
+		<div id="floating-navbar" class="floating-navbar">
 			<!-- Logo (Left) -->
 			<div class="nav-logo">
 				<a href="/" aria-label="Confection Univers — accueil">
@@ -100,13 +100,8 @@ const currentPath = normalizePath(Astro.url.pathname);
 					NAV_LINKS.map((link) => {
 						const isActive = currentPath === normalizePath(link.href);
 						return (
-							<a href={link.href} class={`nav-link group flex items-center gap-1 text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 ${isActive ? 'text-[#D4AF37] border-b-2 border-[#D4AF37]' : 'text-[#00002a] hover:text-primary'}`}>
+							<a href={link.href} class={`nav-link group flex items-center gap-1 text-[10px] font-bold uppercase tracking-[0.14em] transition-all duration-300 ${isActive ? 'nav-link-active' : 'text-[#18233A] hover:text-[#9A6B0C]'}`} aria-current={isActive ? 'page' : undefined}>
 								<span>{link.label}</span>
-								{!isActive && (
-									<svg class="h-2.5 w-2.5 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-										<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-									</svg>
-								)}
 							</a>
 						);
 					})
@@ -147,11 +142,14 @@ const currentPath = normalizePath(Astro.url.pathname);
 	<div id="nav-mobile-panel" class="nav-mobile-panel overflow-hidden bg-white/95 backdrop-blur-xl lg:hidden">
 		<div class="flex flex-col gap-6 px-6 py-10">
 			{
-				NAV_LINKS.map((link) => (
-					<a href={link.href} class="mobile-nav-link font-display text-2xl font-bold uppercase text-[#00002a] transition-all duration-300 hover:text-primary hover:translate-x-2">
-						{link.label}
-					</a>
-				))
+				NAV_LINKS.map((link) => {
+					const isActive = currentPath === normalizePath(link.href);
+					return (
+						<a href={link.href} aria-current={isActive ? 'page' : undefined} class={`mobile-nav-link font-display text-2xl font-bold uppercase transition-all duration-300 hover:translate-x-2 ${isActive ? 'text-[#A87516]' : 'text-[#00002a] hover:text-[#A87516]'}`}>
+							{link.label}
+						</a>
+					);
+				})
 			}
 			<a
 				href="/contact"
@@ -393,6 +391,169 @@ const currentPath = normalizePath(Astro.url.pathname);
 		clip: rect(0, 0, 0, 0);
 		white-space: nowrap;
 		border: 0;
+	}
+
+	/* Premium layered finish: a floating, subtly tilted 3D navigation pill. */
+	#premium-header {
+		background: linear-gradient(180deg, rgba(5, 8, 22, 0.96), rgba(5, 8, 22, 0.78));
+		border-bottom: 1px solid rgba(245, 181, 68, 0.14);
+		box-shadow: 0 10px 35px rgba(0, 0, 0, 0.18);
+		backdrop-filter: blur(18px);
+		-webkit-backdrop-filter: blur(18px);
+	}
+
+	.top-bar {
+		position: relative;
+		min-height: 38px;
+		padding: 7px 4%;
+		background: linear-gradient(100deg, #0d1424 0%, #080d1b 58%, #151326 100%);
+		border-bottom: 1px solid rgba(245, 181, 68, 0.45);
+		box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.06), 0 5px 18px rgba(0, 0, 0, 0.24);
+		color: #f7f5f0;
+	}
+
+	.top-bar .contact-link {
+		color: rgba(247, 245, 240, 0.78);
+	}
+
+	.top-bar .contact-link svg { color: #F5B544; }
+	.top-bar .contact-link::after { background-color: #F5B544; }
+	.top-bar .topbar-message { color: #FACC6B; }
+
+	.main-navbar-container {
+		padding: 12px 4%;
+		perspective: 1200px;
+	}
+
+	.container-scrolled { padding: 8px 4%; }
+
+	.floating-navbar {
+		position: relative;
+		isolation: isolate;
+		min-height: 82px;
+		padding: 12px 26px;
+		background:
+			linear-gradient(115deg, rgba(255, 255, 255, 0.88), transparent 44%),
+			linear-gradient(105deg, #fffdf7 0%, #f4eedf 48%, #fffaf0 100%);
+		border: 1px solid rgba(245, 181, 68, 0.58);
+		box-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.96),
+			inset 0 -2px 0 rgba(148, 104, 25, 0.16),
+			0 3px 0 rgba(147, 105, 27, 0.22),
+			0 12px 24px rgba(0, 0, 0, 0.2),
+			0 28px 50px -22px rgba(0, 0, 0, 0.58);
+		transform: perspective(1200px) rotateX(2deg) translateZ(0);
+		transform-style: preserve-3d;
+		transition: transform 320ms cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 320ms ease, padding 320ms ease, background 320ms ease;
+	}
+
+	.floating-navbar::before {
+		position: absolute;
+		inset: 1px 2px auto;
+		z-index: 0;
+		height: 48%;
+		border-radius: 9999px 9999px 40% 40%;
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0));
+		content: '';
+		pointer-events: none;
+	}
+
+	.floating-navbar::after {
+		position: absolute;
+		inset: auto 8% -9px;
+		z-index: -2;
+		height: 14px;
+		border-radius: 50%;
+		background: linear-gradient(90deg, transparent, rgba(245, 181, 68, 0.62), transparent);
+		content: '';
+		filter: blur(9px);
+		pointer-events: none;
+	}
+
+	.floating-navbar:hover {
+		transform: perspective(1200px) rotateX(0deg) translateY(-3px) translateZ(5px);
+		box-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 1),
+			inset 0 -2px 0 rgba(148, 104, 25, 0.12),
+			0 3px 0 rgba(147, 105, 27, 0.18),
+			0 18px 32px rgba(0, 0, 0, 0.27),
+			0 34px 58px -22px rgba(0, 0, 0, 0.62);
+	}
+
+	.floating-navbar.navbar-scrolled:hover {
+		transform: perspective(1200px) rotateX(0deg) translateY(-2px) translateZ(4px);
+	}
+
+	.floating-navbar.navbar-scrolled {
+		min-height: 70px;
+		padding: 9px 24px;
+		background: linear-gradient(110deg, #fffdf7 0%, #f3ecdb 48%, #fffaf0 100%);
+		transform: perspective(1200px) rotateX(0.75deg) translateZ(0);
+	}
+
+	.nav-logo,
+	.nav-links,
+	.nav-actions { position: relative; z-index: 1; }
+
+	.nav-links { gap: clamp(10px, 1.45vw, 23px); }
+
+	.nav-link {
+		z-index: 1;
+		padding: 0.65rem 0.76rem;
+		border: 1px solid transparent;
+		border-radius: 9999px;
+		transform: translateZ(4px);
+	}
+
+	.nav-link:hover {
+		background: linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(245, 181, 68, 0.11));
+		border-color: rgba(212, 175, 55, 0.28);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 5px 11px rgba(114, 83, 24, 0.12);
+		transform: translateY(-1px) translateZ(10px);
+	}
+
+	.nav-link::after { bottom: 3px; height: 1px; background-color: #bd871c; }
+
+	.nav-link-active {
+		color: #855c0f !important;
+		background: linear-gradient(180deg, #fff8df 0%, #f5e4b4 100%);
+		border-color: rgba(191, 143, 39, 0.42);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.96), inset 0 -1px 0 rgba(177, 125, 27, 0.18), 0 4px 8px rgba(115, 80, 16, 0.12);
+		transform: translateZ(9px);
+	}
+
+	.nav-link-active::after { display: none; }
+
+	.logo-img { filter: drop-shadow(0 1px 1px rgba(8, 15, 36, 0.1)); }
+	.nav-actions { transform: translateZ(9px); }
+	.btn-hero-primary { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.38), 0 5px 0 rgba(136, 92, 12, 0.24), 0 9px 17px rgba(84, 56, 7, 0.2); }
+	.btn-hero-primary:hover { transform: translateY(-2px) translateZ(5px); }
+
+	.nav-mobile-panel {
+		background: linear-gradient(145deg, #fffdf7, #f3ecdb 72%, #fffaf0);
+		border-top: 1px solid rgba(212, 175, 55, 0.4);
+		box-shadow: 0 18px 30px rgba(0, 0, 0, 0.2);
+	}
+
+	.burger-btn {
+		border: 1px solid rgba(191, 143, 39, 0.3);
+		border-radius: 999px;
+		background: linear-gradient(145deg, #fffdf7, #f3ecdb);
+		box-shadow: inset 0 1px 0 #fff, 0 3px 0 rgba(147, 105, 27, 0.16), 0 6px 12px rgba(0, 0, 0, 0.1);
+	}
+	.burger-icon { padding: 3px 0; }
+	.burger-line { border-radius: 999px; }
+	.mobile-cta {
+		background: linear-gradient(135deg, #FACC6B, #D97706) !important;
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.38), 0 5px 0 rgba(136, 92, 12, 0.22), 0 12px 22px rgba(84, 56, 7, 0.18);
+	}
+
+	@media (max-width: 767px) {
+		.main-navbar-container { padding: 10px 4%; }
+		.floating-navbar { min-height: 68px; padding: 8px 18px; transform: perspective(1000px) rotateX(1deg); }
+		.floating-navbar.navbar-scrolled { min-height: 64px; padding: 7px 16px; }
+		.top-bar { min-height: 34px; padding: 6px 4%; }
+		.top-bar .topbar-message { display: none; }
 	}
 
 	/* Reduced Motion */

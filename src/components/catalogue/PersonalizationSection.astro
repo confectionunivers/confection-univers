@@ -2,20 +2,20 @@
 import { personalizationImages, catalogueFilters } from '../../lib/catalogue';
 ---
 
-<section id="personnalisation" class="bg-[#F7F5F0] px-6 py-16 text-[#0A1628] md:py-24" aria-labelledby="personalisation-heading">
+<section id="personnalisation" class="bg-[#00001C] px-6 py-16 text-white md:py-24" aria-labelledby="personalisation-heading">
 	<div class="mx-auto max-w-7xl">
 		<div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-16">
 			<div>
-				<p class="mb-4 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#8B6325]">Le détail fait la différence</p>
+				<p class="mb-4 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#F5B544]">Le détail fait la différence</p>
 				<h2 id="personalisation-heading" class="font-display text-[clamp(2.7rem,7vw,5.5rem)] font-semibold leading-[0.95] tracking-[-0.06em]">
-					VOTRE<br />IDENTITÉ.<br /><span class="text-[#8B6325]">NOTRE SAVOIR-FAIRE.</span>
+					VOTRE<br />IDENTITÉ.<br /><span class="text-[#F5B544]">NOTRE SAVOIR-FAIRE.</span>
 				</h2>
 			</div>
-			<div class="max-w-xl border-l border-[#8B6325]/35 pl-5 md:pl-7">
-				<p class="text-base leading-[1.85] text-[#0A1628]/75 md:text-lg">
+			<div class="max-w-xl border-l border-[#F5B544]/35 pl-5 md:pl-7">
+				<p class="text-base leading-[1.85] text-white/75 md:text-lg">
 					Une tenue peut traduire les repères de votre organisation. Nous cadrons les choix de personnalisation avec vous, selon le produit, le support textile et la faisabilité du projet.
 				</p>
-				<p class="mt-4 text-xs leading-relaxed text-[#0A1628]/50">
+				<p class="mt-4 text-xs leading-relaxed text-white/50">
 					Les images ci-dessous sont des illustrations générées ; elles ne représentent ni un logo client ni une réalisation attribuée.
 				</p>
 			</div>
@@ -23,7 +23,7 @@ import { personalizationImages, catalogueFilters } from '../../lib/catalogue';
 
 		<div class="mt-10 grid gap-4 sm:grid-cols-3 sm:gap-5">
 			{personalizationImages.map((image, index) => (
-				<figure class="personalisation-visual group relative overflow-hidden bg-[#E5E1D8]">
+				<figure class="personalisation-visual group relative overflow-hidden rounded-[1.25rem] border border-[#F5B544]/30 bg-[#0E172A]">
 					<div class="aspect-[4/3] overflow-hidden sm:aspect-[5/6]">
 						<img
 							src={image.src}
@@ -43,16 +43,16 @@ import { personalizationImages, catalogueFilters } from '../../lib/catalogue';
 			))}
 		</div>
 
-		<div class="mt-9 grid gap-7 border-t border-[#0A1628]/15 pt-7 lg:grid-cols-[0.7fr_1.3fr] lg:items-start">
+		<div class="mt-9 grid gap-7 border-t border-white/15 pt-7 lg:grid-cols-[0.7fr_1.3fr] lg:items-start">
 			<div>
-				<p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#8B6325]">Pistes à étudier</p>
-				<p class="mt-2 max-w-sm text-xs leading-relaxed text-[#0A1628]/55">Chaque option est confirmée après échange sur la pièce et le cahier des charges.</p>
+				<p class="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#F5B544]">Pistes à étudier</p>
+				<p class="mt-2 max-w-sm text-xs leading-relaxed text-white/55">Chaque option est confirmée après échange sur la pièce et le cahier des charges.</p>
 			</div>
 			<ul class="flex flex-wrap gap-2" aria-label="Options de personnalisation à étudier">
 				{catalogueFilters.personalization.map((option) => (
-					<li class="rounded-full border border-[#0A1628]/15 px-3.5 py-2 text-[10px] font-medium text-[#0A1628]/70">{option.label}</li>
+					<li class="rounded-full border border-[#F5B544]/25 px-3.5 py-2 text-[10px] font-medium text-white/70">{option.label}</li>
 				))}
-				<li class="rounded-full border border-[#0A1628]/15 px-3.5 py-2 text-[10px] font-medium text-[#0A1628]/70">Production en série</li>
+				<li class="rounded-full border border-[#F5B544]/25 px-3.5 py-2 text-[10px] font-medium text-white/70">Production en série</li>
 			</ul>
 		</div>
 	</div>

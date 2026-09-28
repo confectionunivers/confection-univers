@@ -1,10 +1,30 @@
 ---
-import { catalogueProducts } from '../lib/catalogue';
-
-const previewSlugs = ['tenues-sportives', 'arts-martiaux', 'ecoles-coraniques', 'tenues-africaines'];
-const previewProducts = previewSlugs
-	.map((slug) => catalogueProducts.find((product) => product.slug === slug))
-	.filter((product) => product !== undefined);
+const previewProducts = [
+	{
+		slug: 'tenues-professionnelles',
+		title: 'Tenues professionnelles',
+		image: '/images/tenue-travail.jpg',
+		alt: 'Tenue de travail professionnelle',
+	},
+	{
+		slug: 'uniformes-scolaires',
+		title: 'Uniformes scolaires',
+		image: '/images/uniforme-scolaire-1.jpg',
+		alt: 'Élèves portant des uniformes scolaires coordonnés',
+	},
+	{
+		slug: 'tenues-medicales',
+		title: 'Blouses médicales',
+		image: '/images/blouse-medicale.jpg',
+		alt: 'Professionnelle de santé en blouse médicale',
+	},
+	{
+		slug: 'tenues-academiques',
+		title: 'Toges académiques',
+		image: '/images/toge-graduation.jpg',
+		alt: 'Diplômé en toge de graduation',
+	},
+];
 ---
 
 <section
@@ -23,7 +43,7 @@ const previewProducts = previewSlugs
 				Le bon vêtement commence par le bon usage.
 			</h2>
 			<p class="mt-5 text-base leading-relaxed text-[#0A1628]/65 md:text-lg">
-				Uniformes, tenues d’équipe et vêtements professionnels : parcourez les solutions textiles et préparez votre demande sur mesure.
+				Découvrez les tenues professionnelles, uniformes scolaires, vêtements médicaux et tenues académiques confectionnés pour les besoins des structures.
 			</p>
 			<a
 				href="/catalogue"
@@ -37,11 +57,11 @@ const previewProducts = previewSlugs
 			{previewProducts.map((product, index) => (
 				<a
 					href={`/catalogue/#${product.slug}`}
-					class="home-catalogue-card group relative min-h-40 overflow-hidden bg-[#00001C] sm:min-h-56"
+					class="home-catalogue-card group relative min-h-40 overflow-hidden rounded-[1.15rem] border border-[#B58433]/45 bg-[#00001C] shadow-[0_14px_32px_rgba(0,0,0,0.12)] sm:min-h-56 sm:rounded-[1.4rem]"
 					aria-label={`Voir la gamme ${product.title} dans le catalogue`}
 				>
 					<img
-						src={product.imageSmall}
+						src={product.image}
 						alt={product.alt}
 						class="home-catalogue-image absolute inset-0 h-full w-full object-cover"
 						width="640"
@@ -50,7 +70,7 @@ const previewProducts = previewSlugs
 						decoding="async"
 					/>
 					<span class="absolute inset-0 bg-gradient-to-t from-[#00001C]/90 via-[#00001C]/15 to-transparent" aria-hidden="true"></span>
-					<span class="absolute left-3 top-3 text-[9px] font-semibold uppercase tracking-[0.14em] text-white/70">0{index + 1}</span>
+					<span class="absolute left-3 top-3 rounded-full border border-white/25 bg-[#00001C]/50 px-2.5 py-1 text-[8px] font-semibold uppercase tracking-[0.14em] text-white/85 backdrop-blur-sm">0{index + 1}</span>
 					<span class="absolute bottom-3 left-3 right-3 font-display text-sm font-semibold text-white sm:bottom-5 sm:left-5 sm:right-5 sm:text-lg">
 						{product.title}
 					</span>
@@ -61,7 +81,11 @@ const previewProducts = previewSlugs
 </section>
 
 <style>
-	.home-catalogue-image { transition: transform 500ms cubic-bezier(0.2, 0.7, 0.2, 1); }
-	.home-catalogue-card:hover .home-catalogue-image { transform: scale(1.025); }
-	@media (prefers-reduced-motion: reduce) { .home-catalogue-image { transition: none; } }
+	.home-catalogue-card { transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease; }
+	.home-catalogue-image { transition: transform 550ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+	.home-catalogue-card:hover,
+	.home-catalogue-card:focus-visible { transform: translateY(-3px); border-color: rgba(181, 132, 51, 0.85); box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); }
+	.home-catalogue-card:hover .home-catalogue-image,
+	.home-catalogue-card:focus-visible .home-catalogue-image { transform: scale(1.035); }
+	@media (prefers-reduced-motion: reduce) { .home-catalogue-card, .home-catalogue-image { transition: none; } }
 </style>
