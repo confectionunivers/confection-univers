@@ -8,14 +8,14 @@ const featuredProjects = [
 ];
 ---
 
-<section id="realisations" class="bg-[#F7F5F0] px-6 py-16 text-[#0A1628] md:py-24" aria-labelledby="realisations-heading">
+<section id="realisations" class="bg-[#00001C] px-6 py-16 text-white md:py-24" aria-labelledby="realisations-heading">
 	<div class="mx-auto max-w-7xl">
-		<div class="mb-9 flex flex-col gap-5 border-b border-[#0A1628]/15 pb-7 md:flex-row md:items-end md:justify-between">
+		<div class="mb-9 flex flex-col gap-5 border-b border-white/15 pb-7 md:flex-row md:items-end md:justify-between">
 			<div>
-				<p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#8B6325]">Projets types · confection professionnelle</p>
+				<p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#F5B544]">Projets types · confection professionnelle</p>
 				<h2 id="realisations-heading" class="font-display text-3xl font-semibold tracking-tight md:text-5xl">NOS RÉALISATIONS</h2>
 			</div>
-			<p class="max-w-lg text-xs leading-relaxed text-[#0A1628]/60 md:text-sm">
+			<p class="max-w-lg text-xs leading-relaxed text-white/60 md:text-sm">
 				Des typologies de projets pour illustrer les familles de confection. Les visuels sont générés et ne sont pas attribués à des clients ou à des commandes documentées.
 			</p>
 		</div>
@@ -24,9 +24,9 @@ const featuredProjects = [
 			{featuredProjects.map((project, index) => {
 				const product = catalogueProducts.find((item) => item.slug === project.slug)!;
 				return (
-					<article class="realization-card group">
-						<a href={`/catalogue/${product.slug}`} class="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#8B6325]" aria-label={`Découvrir ${project.title}`}>
-							<figure class="relative overflow-hidden bg-[#E9E5DC]">
+					<article class="realization-card group overflow-hidden rounded-[1.25rem] border border-[#F5B544]/25 bg-[#0E172A]/55 p-3 sm:p-4">
+						<a href={`/catalogue/${product.slug}`} class="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F5B544]" aria-label={`Découvrir ${project.title}`}>
+							<figure class="relative overflow-hidden rounded-[0.9rem] border border-[#F5B544]/25 bg-[#00001C]">
 								<div class={`aspect-[4/3] overflow-hidden ${index === 0 || index === 3 ? 'xl:aspect-[16/9]' : 'xl:aspect-[4/3]'}`}>
 									<img
 										src={product.image}
@@ -42,16 +42,16 @@ const featuredProjects = [
 									Illustration générée · projet type
 								</figcaption>
 							</figure>
-							<div class="grid gap-3 border-b border-[#0A1628]/15 py-4 sm:grid-cols-[1fr_auto] sm:items-end">
+							<div class="grid gap-3 border-b border-white/15 py-4 sm:grid-cols-[1fr_auto] sm:items-end">
 								<div>
-									<p class="text-[9px] font-semibold uppercase tracking-[0.18em] text-[#8B6325]">{project.sector}</p>
+									<p class="text-[9px] font-semibold uppercase tracking-[0.18em] text-[#F5B544]">{project.sector}</p>
 									<h3 class="mt-2 font-display text-xl font-semibold tracking-tight md:text-2xl">{project.title}</h3>
 								</div>
-								<span class="text-[9px] font-semibold uppercase tracking-[0.15em] text-[#0A1628]/45">0{index + 1} / 04</span>
+								<span class="text-[9px] font-semibold uppercase tracking-[0.15em] text-white/45">0{index + 1} / 04</span>
 							</div>
 							<dl class="grid gap-x-5 gap-y-2 pt-3 text-[10px] leading-relaxed sm:grid-cols-2">
-								<div><dt class="font-semibold uppercase tracking-[0.12em] text-[#0A1628]/45">Type de confection</dt><dd class="mt-1 text-[#0A1628]/75">{project.confection}</dd></div>
-								<div><dt class="font-semibold uppercase tracking-[0.12em] text-[#0A1628]/45">Personnalisation</dt><dd class="mt-1 text-[#0A1628]/75">{project.customization}</dd></div>
+								<div><dt class="font-semibold uppercase tracking-[0.12em] text-white/45">Type de confection</dt><dd class="mt-1 text-white/75">{project.confection}</dd></div>
+								<div><dt class="font-semibold uppercase tracking-[0.12em] text-white/45">Personnalisation</dt><dd class="mt-1 text-white/75">{project.customization}</dd></div>
 							</dl>
 						</a>
 					</article>
@@ -59,7 +59,7 @@ const featuredProjects = [
 			})}
 		</div>
 
-		<p class="mt-7 text-[10px] leading-relaxed text-[#0A1628]/45">
+		<p class="mt-7 text-[10px] leading-relaxed text-white/45">
 			Les intitulés « Projet — … » désignent des exemples de demandes, et non des références clients vérifiées.
 		</p>
 	</div>

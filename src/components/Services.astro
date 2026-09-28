@@ -17,77 +17,139 @@ const featuredServices = SERVICES.filter(({ slug }) => featuredSlugs.has(slug));
 	aria-labelledby="services-heading"
 >
 	<div class="mx-auto max-w-7xl">
-		<header class="mx-auto mb-12 max-w-3xl text-center md:mb-16">
-			<p class="mb-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary md:text-xs">Nos services</p>
-			<h2 id="services-heading" class="font-display text-3xl font-semibold leading-tight tracking-tight md:text-4xl lg:text-5xl">
-				La confection adaptée à votre activité
-			</h2>
-			<p class="mt-5 text-base leading-relaxed text-foreground/70 md:text-lg">
-				Uniformes et tenues personnalisables pour les établissements scolaires, les cérémonies, les entreprises et les professionnels de santé.
-			</p>
+		<header class="mx-auto mb-12 flex max-w-4xl flex-col gap-6 md:mb-14 md:flex-row md:items-end md:justify-between">
+			<div class="max-w-2xl">
+				<p class="mb-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary md:text-xs">Nos services</p>
+				<h2 id="services-heading" class="font-display text-3xl font-semibold leading-tight tracking-tight md:text-4xl lg:text-5xl">
+					La confection adaptée à votre activité
+				</h2>
+				<p class="mt-5 text-base leading-relaxed text-foreground/70 md:text-lg">
+					Des uniformes et tenues professionnelles pour les entreprises, les établissements et les équipes.
+				</p>
+			</div>
+			<a href="/services" class="inline-flex min-h-11 w-fit shrink-0 items-center gap-3 rounded-full border border-[#F5B544]/35 px-5 py-3 text-[10px] font-bold uppercase tracking-[0.14em] text-[#FACC6B] transition-all hover:border-[#F5B544]/70 hover:bg-[#F5B544]/[0.08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#F5B544]">
+				Tous nos services <span aria-hidden="true">↗</span>
+			</a>
 		</header>
 
-		<div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-			{featuredServices.map((service) => (
-				<article class="service-card group overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04]">
-					<a href={`/services/${service.slug}`} class="block overflow-hidden" aria-label={`Découvrir : ${service.title}`}>
-						<div class="aspect-[4/3] overflow-hidden bg-surface/40">
-							<img
-								src={service.image}
-								alt={service.title}
-								class="service-card-img h-full w-full object-cover"
-								width="640"
-								height="480"
-								loading="lazy"
-								decoding="async"
-							/>
+		<div class="services-carousel" data-services-carousel>
+			<div class="services-marquee" tabindex="0" role="region" aria-label="Nos principales gammes de confection, défilement automatique de droite à gauche">
+				<div class="services-track">
+					{[false, true].map((isDuplicate) => (
+						<div class="services-track-group" aria-hidden={isDuplicate ? 'true' : undefined} inert={isDuplicate}>
+							{featuredServices.map((service) => (
+								<article class="service-card group overflow-hidden rounded-[1.25rem] border border-[#F5B544]/25 bg-[#0E172A]/85 shadow-[0_18px_42px_rgba(0,0,0,0.24)]">
+									<a href={`/services/${service.slug}`} class="service-card-image-link block overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[#F5B544]" tabindex={isDuplicate ? -1 : undefined} aria-label={`Découvrir : ${service.title}`}>
+										<div class="aspect-[4/3] overflow-hidden bg-surface/40">
+											<img
+												src={service.image}
+												alt={service.title}
+												class="service-card-img h-full w-full object-cover"
+												width="640"
+												height="480"
+												loading="lazy"
+												decoding="async"
+											/>
+										</div>
+									</a>
+									<div class="p-5 md:p-6">
+										<h3 class="font-display text-lg font-semibold leading-snug md:text-xl">
+											<a href={`/services/${service.slug}`} tabindex={isDuplicate ? -1 : undefined} class="hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
+												{service.title}
+											</a>
+										</h3>
+										<p class="mt-3 min-h-[4.5rem] text-sm leading-relaxed text-foreground/70">{service.description}</p>
+										<a href={`/services/${service.slug}`} tabindex={isDuplicate ? -1 : undefined} class="mt-5 inline-flex min-h-10 items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary hover:text-primary-light">
+											Voir le service <span aria-hidden="true">→</span>
+										</a>
+									</div>
+								</article>
+							))}
 						</div>
-					</a>
-					<div class="p-5 md:p-6">
-						<h3 class="font-display text-lg font-semibold leading-snug md:text-xl">
-							<a href={`/services/${service.slug}`} class="hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary">
-								{service.title}
-							</a>
-						</h3>
-						<p class="mt-3 text-sm leading-relaxed text-foreground/70">{service.description}</p>
-						<a href={`/services/${service.slug}`} class="mt-5 inline-flex min-h-10 items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary hover:text-primary-light">
-							Voir le service <span aria-hidden="true">→</span>
-						</a>
-					</div>
-				</article>
-			))}
-		</div>
+					))}
+				</div>
+			</div>
 
-		<div class="mt-9 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-7 text-center sm:flex-row sm:text-left">
-			<p class="text-sm text-foreground/70">Vous avez un besoin particulier ou souhaitez explorer les autres services ?</p>
-			<a href="/services" class="inline-flex min-h-12 items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-background hover:bg-primary-light focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
-				Tous nos services
-			</a>
+			<div class="mt-5 flex items-center justify-between gap-4 text-xs text-white/45">
+				<p class="hidden sm:block">Survolez ou sélectionnez une carte pour interrompre le défilement.</p>
+				<button type="button" data-services-toggle aria-pressed="false" aria-label="Mettre le défilement en pause" class="services-toggle ml-auto inline-flex min-h-10 items-center gap-2 rounded-full border border-white/15 bg-white/[0.035] px-4 py-2 text-[9px] font-semibold uppercase tracking-[0.12em] text-white/75 transition-colors hover:border-[#F5B544]/50 hover:text-[#FACC6B] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5B544]">
+					<svg data-pause-icon class="h-3.5 w-3.5" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 3.5h2.6v9H4zm5.4 0H12v9H9.4z" /></svg>
+					<svg data-play-icon class="hidden h-3.5 w-3.5" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M5 3.2v9.6L13 8z" /></svg>
+					<span data-toggle-label>Pause</span>
+				</button>
+			</div>
 		</div>
 	</div>
 </section>
 
+<script>
+	const carousel = document.querySelector<HTMLElement>('[data-services-carousel]');
+	const toggle = document.querySelector<HTMLButtonElement>('[data-services-toggle]');
+	const pauseIcon = toggle?.querySelector<SVGElement>('[data-pause-icon]');
+	const playIcon = toggle?.querySelector<SVGElement>('[data-play-icon]');
+	const toggleLabel = toggle?.querySelector<HTMLElement>('[data-toggle-label]');
+
+	toggle?.addEventListener('click', () => {
+		const paused = carousel?.classList.toggle('is-paused') ?? false;
+		toggle.setAttribute('aria-pressed', String(paused));
+		toggle.setAttribute('aria-label', paused ? 'Reprendre le défilement' : 'Mettre le défilement en pause');
+		if (toggleLabel) toggleLabel.textContent = paused ? 'Lecture' : 'Pause';
+		pauseIcon?.classList.toggle('hidden', paused);
+		playIcon?.classList.toggle('hidden', !paused);
+	});
+</script>
+
 <style>
-	@media (prefers-reduced-motion: no-preference) {
-		.service-card,
-		.service-card-img {
-			transition: transform 220ms ease, border-color 220ms ease;
-		}
+	.services-marquee {
+		overflow: hidden;
+		mask-image: linear-gradient(90deg, transparent 0%, #000 4%, #000 96%, transparent 100%);
+	}
 
-		.service-card:hover {
-			transform: translateY(-3px);
-			border-color: rgba(250, 204, 107, 0.35);
-		}
+	.services-track {
+		display: flex;
+		width: max-content;
+		will-change: transform;
+		animation: services-marquee 42s linear infinite;
+	}
 
-		.service-card:hover .service-card-img {
-			transform: scale(1.025);
-		}
+	.services-track-group {
+		display: flex;
+		flex: none;
+		gap: 1.25rem;
+		padding-right: 1.25rem;
+	}
+
+	.service-card {
+		flex: 0 0 clamp(270px, 27vw, 340px);
+		transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
+	}
+
+	.service-card:hover,
+	.service-card:focus-within {
+		transform: translateY(-4px);
+		border-color: rgba(250, 204, 107, 0.62);
+		box-shadow: 0 25px 52px rgba(0, 0, 0, 0.36), 0 0 18px rgba(245, 181, 68, 0.07);
+	}
+
+	.service-card-img { transition: transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1); }
+	.service-card:hover .service-card-img,
+	.service-card:focus-within .service-card-img { transform: scale(1.035); }
+
+	.services-carousel.is-paused .services-track,
+	.services-marquee:hover .services-track,
+	.services-marquee:focus-within .services-track { animation-play-state: paused; }
+
+	@keyframes services-marquee {
+		from { transform: translateX(0); }
+		to { transform: translateX(-50%); }
 	}
 
 	@media (prefers-reduced-motion: reduce) {
+		.services-track { animation: none; transform: none; }
+		.services-track-group[aria-hidden='true'] { display: none; }
+		.services-marquee { overflow-x: auto; mask-image: none; }
 		.service-card,
-		.service-card-img {
-			transition: none;
-		}
+		.service-card-img { transition: none; }
+		.services-toggle { display: none; }
 	}
 </style>
