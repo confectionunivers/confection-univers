@@ -1,0 +1,238 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const catalogueCategories = [
+	{
+		name: 'Toges de cérémonie',
+		description: 'Tenues académiques prestigieuses pour les grandes occasions',
+		icon: '🎓',
+		products: [
+			'Toge de graduation',
+			'Toge de master',
+			'Toge de doctorant',
+			'Toge d\'avocat',
+			'Toge de juge',
+			'Toge de magistrat'
+		]
+	},
+	{
+		name: 'Tenues de travail',
+		description: 'Vêtements professionnels pour divers secteurs d\'activité',
+		icon: '👷',
+		products: [
+			'Tenue agent de sécurité',
+			'Tenue de mécanicien',
+			'Tenue de menuisier',
+			'Tenue hôtellerie'
+		]
+	},
+	{
+		name: 'Blouses médicales',
+		description: 'Tenues hygiéniques pour professionnels de santé',
+		icon: '🏥',
+		products: [
+			'Blouse docteur',
+			'Blouse infirmier',
+			'Blouse sage-femme'
+		]
+	},
+	{
+		name: 'Uniformes scolaires',
+		description: 'Tenues complètes pour établissements d\'enseignement',
+		icon: '🎒',
+		products: [
+			'Chemise',
+			'Pantalon',
+			'Costume',
+			'Gilet',
+			'Carte',
+			'Costume lacoste',
+			'Blouson'
+		]
+	},
+	{
+		name: 'Tenues EPS',
+		description: 'Équipements sportifs complets pour l\'éducation physique',
+		icon: '🏃',
+		products: [
+			'Tenue EPS 5 pièces'
+		]
+	},
+	{
+		name: 'Costumes africains',
+		description: 'Tenues traditionnelles de luxe et modernes',
+		icon: '🌍',
+		products: [
+			'Costume africain de luxe',
+			'Costume africain moderne'
+		]
+	},
+	{
+		name: 'Tenues de sport',
+		description: 'Équipements pour clubs et associations sportives',
+		icon: '⚽',
+		products: [
+			'Tenue football',
+			'Tenue arts martiaux',
+			'Tenue basket'
+		]
+	}
+];
+---
+
+<Layout title="Catalogue Luxe Premium | Confection Univers" description="Catalogue premium Confection Univers : toges de cérémonie, tenues de travail, blouses médicales, uniformes scolaires, tenues EPS, costumes africains et tenues de sport de haute qualité.">
+	<main class="relative">
+		<Navbar />
+		
+		<!-- Hero Section -->
+		<section class="relative flex min-h-[60vh] flex-col justify-center overflow-hidden pb-20 pt-32 md:pt-40">
+			<div class="pointer-events-none absolute inset-0 -z-20 bg-background"></div>
+			<div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_85%_60%_at_100%_0%,rgba(198,161,95,0.14),transparent_55%),radial-gradient(ellipse_70%_50%_at_0%_100%,rgba(0,0,42,0.08),transparent_50%)]"></div>
+			
+			<div class="mx-auto max-w-7xl px-6">
+				<p class="mb-5 text-[11px] font-semibold uppercase tracking-[0.38em] text-primary md:text-xs">
+					Collection Premium
+				</p>
+				<h1 class="font-display text-[clamp(2.5rem,6vw,4.75rem)] font-semibold leading-[1.05] tracking-tight text-foreground md:leading-[1.02]">
+					<span class="block text-foreground">Catalogue</span>
+					<span class="mt-1 block bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
+						Luxe Premium
+					</span>
+				</h1>
+				<p class="mt-8 max-w-2xl text-base font-normal leading-relaxed text-foreground/72 md:text-lg md:leading-relaxed">
+					Découvrez notre collection exclusive de vêtements professionnels confectionnés avec les matériaux les plus nobles et un savoir-faire artisanal d'exception.
+				</p>
+			</div>
+		</section>
+
+		<!-- Catalogue Section -->
+		<section class="relative z-10 -mt-10 scroll-mt-24 rounded-[3rem] border border-ink/5 bg-paper py-24 text-ink shadow-[0_24px_80px_-28px_rgba(5,10,20,0.14)] md:rounded-[4rem] md:py-32">
+			<div class="mx-auto max-w-7xl px-6">
+				<div class="mx-auto mb-16 max-w-3xl text-center md:mb-20">
+					<p class="mb-4 text-[11px] font-semibold uppercase tracking-[0.35em] text-primary md:text-xs">Notre gamme</p>
+					<h2 class="font-display text-4xl font-semibold leading-tight tracking-tight text-ink md:text-5xl lg:text-6xl">
+						Catégories Premium
+					</h2>
+					<p class="mt-6 text-base leading-relaxed text-ink/65 md:text-lg">
+						Explorez notre sélection de vêtements professionnels de haute qualité, conçus pour répondre aux exigences les plus strictes.
+					</p>
+				</div>
+
+				<div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+					{
+						catalogueCategories.map((category, i) => (
+							<article class="group relative overflow-hidden rounded-3xl border border-ink/10 bg-paper shadow-[0_8px_32px_-12px_rgba(5,10,20,0.12)] transition duration-500 ease-out will-change-transform hover:-translate-y-2 hover:border-primary/30 hover:shadow-[0_20px_60px_-16px_rgba(5,10,20,0.2)]">
+								<div class="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+									<span class="text-6xl">{category.icon}</span>
+									<div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/20 to-transparent opacity-80"></div>
+									<div class="absolute bottom-6 left-6 right-6">
+										<span class="inline-flex items-center gap-2 rounded-full bg-primary/90 px-4 py-2 text-[11px] font-semibold uppercase tracking-widest text-paper backdrop-blur-sm">
+											{category.products.length} articles
+										</span>
+									</div>
+								</div>
+
+								<div class="p-8">
+									<h3 class="font-display text-2xl font-semibold leading-tight tracking-tight text-ink transition duration-300 group-hover:text-primary">
+										{category.name}
+									</h3>
+									<p class="mt-4 text-base leading-relaxed text-ink/65">
+										{category.description}
+									</p>
+									
+									<div class="mt-6 space-y-2">
+										<p class="text-[11px] font-semibold uppercase tracking-[0.2em] text-ink/40">Produits disponibles :</p>
+										<ul class="space-y-1">
+											{
+												category.products.map((product) => (
+													<li class="flex items-center gap-2 text-sm text-ink/70">
+														<span class="h-1.5 w-1.5 rounded-full bg-primary/60"></span>
+														{product}
+													</li>
+												))
+											}
+										</ul>
+									</div>
+
+									<a
+										href="/contact"
+										class="mt-6 inline-flex items-center gap-2 text-[12px] font-semibold uppercase tracking-[0.2em] text-primary opacity-90 transition duration-300 group-hover:gap-3"
+									>
+										Commander
+										<svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+											<path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6" />
+										</svg>
+									</a>
+								</div>
+							</article>
+						))
+					}
+				</div>
+
+				<div class="mt-16 flex flex-col items-center justify-center gap-4 border-t border-primary/10 pt-12 text-center md:mt-20 md:flex-row md:gap-8">
+					<p class="max-w-md text-sm text-ink/55 md:text-base">Vous souhaitez personnaliser une commande ? Contactez-nous pour un devis sur mesure.</p>
+					<a
+						href="/contact"
+						class="inline-flex shrink-0 items-center justify-center rounded-full border border-primary/40 bg-ink px-8 py-3.5 text-[12px] font-semibold uppercase tracking-[0.18em] text-paper transition duration-400 hover:bg-primary hover:text-background"
+					>
+						Demander un devis
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- Premium Features Section -->
+		<section class="relative z-10 -mt-10 rounded-[4rem] bg-background py-32 text-foreground">
+			<div class="mx-auto max-w-7xl px-6">
+				<div class="mx-auto mb-16 max-w-3xl text-center md:mb-20">
+					<p class="mb-4 text-[11px] font-semibold uppercase tracking-[0.35em] text-primary md:text-xs">Excellence</p>
+					<h2 class="font-display text-4xl font-semibold leading-tight tracking-tight text-foreground md:text-5xl lg:text-6xl">
+						Pourquoi notre gamme Premium ?
+					</h2>
+				</div>
+
+				<div class="grid gap-12 md:grid-cols-3">
+					<div class="space-y-6 rounded-3xl border border-primary/15 bg-surface/30 p-8">
+						<div class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/20">
+							<svg class="w-8 h-8 text-[#00002a]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+							</svg>
+						</div>
+						<h3 class="font-display text-2xl font-semibold text-foreground">Tissus nobles</h3>
+						<p class="text-base leading-relaxed text-foreground/65">
+							Sélection rigoureuse des meilleurs tissus pour une qualité irréprochable et un confort optimal.
+						</p>
+					</div>
+
+					<div class="space-y-6 rounded-3xl border border-primary/15 bg-surface/30 p-8">
+						<div class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/20">
+							<svg class="w-8 h-8 text-[#00002a]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z" />
+							</svg>
+						</div>
+						<h3 class="font-display text-2xl font-semibold text-foreground">Finitions luxe</h3>
+						<p class="text-base leading-relaxed text-foreground/65">
+							Coutures renforcées, broderies précises et détails soignés pour un résultat d'exception.
+						</p>
+					</div>
+
+					<div class="space-y-6 rounded-3xl border border-primary/15 bg-surface/30 p-8">
+						<div class="flex h-16 w-16 items-center justify-center rounded-full bg-primary/20">
+							<svg class="w-8 h-8 text-[#00002a]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+							</svg>
+						</div>
+						<h3 class="font-display text-2xl font-semibold text-foreground">Garantie qualité</h3>
+						<p class="text-base leading-relaxed text-foreground/65">
+							Contrôle qualité rigoureux à chaque étape de production pour une satisfaction totale.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<Footer />
+	</main>
+</Layout>
