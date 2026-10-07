@@ -4,7 +4,7 @@ const technicalDetails = [
 	{ label: 'COL', text: 'Coupe structurée', note: 'Finition élégante.', side: 'left' },
 	{ label: 'DÉTAILS', text: 'Coutures renforcées', note: 'Finitions soignées.', side: 'left' },
 	{ label: 'ÉCUSSON', text: 'Broderie personnalisée', note: "Logo de l'établissement.", side: 'right' },
-	{ label: 'JUPE', text: 'Plis réguliers', note: 'Confort et liberté de mouvement.', side: 'right' },
+	{ label: 'PANTALON', text: 'Coupe nette', note: 'Aisance au quotidien.', side: 'right' },
 	{ label: 'FINITION', text: 'Contrôle qualité', note: 'Détails réalisés avec précision.', side: 'right' },
 ];
 ---
@@ -40,12 +40,13 @@ const technicalDetails = [
 		<div class="cu-hero__stage hero-reveal hero-reveal--stage" aria-label="Uniforme scolaire premium présenté en showroom">
 			<div class="cu-hero__product-media">
 				<div class="cu-hero__product-light" aria-hidden="true"></div>
+				<div class="cu-hero__product-podium" aria-hidden="true"></div>
 				<img
 					class="cu-hero__product-image"
 					src="/images/hero-showroom-mannequin-cutout.png"
-					alt="Mannequin doré portant un uniforme scolaire bleu nuit cinq pièces, présenté sur un podium ivoire"
-					width="768"
-					height="1376"
+					alt="Mannequin doré portant une tenue institutionnelle beige et bleu nuit, présenté sur un podium ivoire"
+					width="225"
+					height="691"
 					loading="eager"
 					decoding="async"
 					fetchpriority="high"
@@ -335,6 +336,7 @@ const technicalDetails = [
 		position: absolute;
 		bottom: 3.5%;
 		left: 50%;
+		z-index: 0;
 		width: 220px;
 		height: 18px;
 		border-radius: 50%;
@@ -343,11 +345,37 @@ const technicalDetails = [
 		transform: translateX(-50%);
 	}
 
+	.cu-hero__product-podium {
+		position: absolute;
+		bottom: 3.5%;
+		left: 50%;
+		z-index: 0;
+		width: 280px;
+		height: 56px;
+		border: 1px solid rgba(255, 248, 230, 0.6);
+		border-radius: 50% / 28%;
+		background: linear-gradient(180deg, #fbf7ed 0%, #ede5d5 53%, #cfc4b2 54%, #ddd4c3 100%);
+		box-shadow: 0 10px 0 -3px rgba(173, 154, 122, 0.72), 0 18px 24px rgba(0, 0, 0, 0.25), 0 0 22px rgba(217, 171, 80, 0.16);
+		transform: translateX(-50%);
+	}
+
+	.cu-hero__product-podium::before {
+		position: absolute;
+		top: -1px;
+		left: -1px;
+		width: calc(100% + 2px);
+		height: 28px;
+		border: 1px solid rgba(255, 250, 237, 0.74);
+		border-radius: 50%;
+		background: linear-gradient(180deg, #fffaf0 0%, #eee6d7 100%);
+		content: '';
+	}
+
 	.cu-hero__product-image {
 		position: relative;
 		z-index: 1;
 		display: block;
-		height: 100%;
+		height: 89%;
 		width: auto;
 		max-width: none;
 		object-fit: contain;
@@ -567,7 +595,7 @@ const technicalDetails = [
 		}
 
 		.cu-hero__product-image {
-			height: 100%;
+			height: 89%;
 		}
 
 		.cu-callout {
@@ -666,10 +694,11 @@ const technicalDetails = [
 		}
 
 		.cu-hero__product-image {
-			height: 100%;
+			height: 89%;
 		}
 
-		.cu-hero__product-light {
+		.cu-hero__product-light,
+		.cu-hero__product-podium {
 			bottom: 2%;
 		}
 
