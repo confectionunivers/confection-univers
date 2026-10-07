@@ -33,3 +33,6 @@ images-source/*
 
 # sauvegarde des visuels hero d'origine (remastering)
 .hero-originaux/
+
+# Fichiers temporaires du script de remasterisation du hero
+src/assets/hero/.tmp-hero-*.jpg
