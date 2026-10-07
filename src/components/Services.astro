@@ -1,44 +1,52 @@
 ---
+import SewingDecor from './decor/SewingDecor.astro';
+import StitchLine from './decor/StitchLine.astro';
+import SectionHead from './ui/SectionHead.astro';
+import RollButton from './ui/RollButton.astro';
 import { SERVICES } from '../lib/services';
 
-const featuredSlugs = new Set([
-	'toges-graduation',
-	'uniformes-scolaires',
-	'tenue-travail',
-	'blouses-medicales',
-]);
-const featuredServices = SERVICES.filter(({ slug }) => featuredSlugs.has(slug));
+/**
+ * Bandeau des services — défilement continu.
+ *
+ * Pourquoi toutes les gammes et non 4 « principales » :
+ * la boucle n'est invisible que si la piste contient assez de matière. Avec
+ * 4 cartes, le motif se répétait tous les ~1 440 px et la reprise se voyait
+ * à l'écran. Les 8 gammes portent un passage à ~2 300–2 900 px, soit toujours
+ * plus large que le conteneur (1 280 px max) : la couture reste hors champ.
+ *
+ * La piste contient deux groupes identiques et se décale de -50 %, donc le
+ * second groupe atterrit exactement sur le premier : la boucle est sans raccord.
+ */
+const marqueeItems = SERVICES;
+const groups = [false, true];
 ---
 
 <section
 	id="services"
-	class="relative z-10 scroll-mt-24 rounded-[2rem] px-6 py-20 text-white premium-section md:rounded-[3rem] md:py-28"
+	class="nx-grain relative z-10 scroll-mt-24 overflow-hidden rounded-[1.5rem] px-6 py-20 text-white md:rounded-[2.5rem] md:py-28"
 	lang="fr"
 	aria-labelledby="services-heading"
 >
 	<div class="mx-auto max-w-7xl">
-		<header class="mx-auto mb-12 flex max-w-4xl flex-col gap-6 md:mb-14 md:flex-row md:items-end md:justify-between">
-			<div class="max-w-2xl">
-				<p class="mb-4 text-[11px] font-semibold uppercase tracking-[0.22em] text-primary md:text-xs">Nos services</p>
-				<h2 id="services-heading" class="font-display text-3xl font-semibold leading-tight tracking-tight md:text-4xl lg:text-5xl">
-					La confection adaptée à votre activité
-				</h2>
-				<p class="mt-5 text-base leading-relaxed text-foreground/70 md:text-lg">
-					Des uniformes et tenues professionnelles pour les entreprises, les établissements et les équipes.
-				</p>
+		<div class="mb-12 flex flex-col gap-8 md:mb-14 lg:flex-row lg:items-end lg:justify-between">
+			<SectionHead
+				index="03"
+				tag="Nos services"
+				title="La confection adaptée à <span class='nx-accent'>votre activité</span>"
+				lead="Des uniformes et tenues professionnelles pour les entreprises, les établissements et les équipes."
+			/>
+			<div class="shrink-0">
+				<RollButton href="/services" label="Tous nos services" />
 			</div>
-			<a href="/services" class="inline-flex min-h-11 w-fit shrink-0 items-center gap-3 rounded-full border border-[#F5B544]/35 px-5 py-3 text-[10px] font-bold uppercase tracking-[0.14em] text-[#FACC6B] transition-all hover:border-[#F5B544]/70 hover:bg-[#F5B544]/[0.08] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#F5B544]">
-				Tous nos services <span aria-hidden="true">↗</span>
-			</a>
-		</header>
+		</div>
 
 		<div class="services-carousel" data-services-carousel>
-			<div class="services-marquee" tabindex="0" role="region" aria-label="Nos principales gammes de confection, défilement automatique de droite à gauche">
+			<div class="services-marquee" tabindex="0" role="region" aria-label="Nos gammes de confection, défilement continu">
 				<div class="services-track">
-					{[false, true].map((isDuplicate) => (
+					{groups.map((isDuplicate) => (
 						<div class="services-track-group" aria-hidden={isDuplicate ? 'true' : undefined} inert={isDuplicate}>
-							{featuredServices.map((service) => (
-								<article class="service-card group overflow-hidden rounded-[1.25rem] border border-[#F5B544]/25 bg-[#0E172A]/85 shadow-[0_18px_42px_rgba(0,0,0,0.24)]">
+							{marqueeItems.map((service) => (
+								<article class="service-card nx-card-lift nx-zoom group overflow-hidden rounded-[1.5rem] border border-[#F5B544]/20 bg-[#000058]/80 shadow-[0_18px_42px_rgba(0,0,0,0.26)]">
 									<a href={`/services/${service.slug}`} class="service-card-image-link block overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-[#F5B544]" tabindex={isDuplicate ? -1 : undefined} aria-label={`Découvrir : ${service.title}`}>
 										<div class="aspect-[4/3] overflow-hidden bg-surface/40">
 											<img
@@ -80,22 +88,34 @@ const featuredServices = SERVICES.filter(({ slug }) => featuredSlugs.has(slug));
 			</div>
 		</div>
 	</div>
+
+
+	<StitchLine class="pointer-events-none absolute inset-x-8 bottom-4 text-[#F5B544]" step={18} opacity={0.24} />
+
+	<!-- Décors de couture (purement décoratifs) -->
+	<SewingDecor variant="mannequin" class="pointer-events-none absolute right-4 top-[30%] hidden h-24 w-24 text-[#F5B544] opacity-[0.12] xl:block" />
+	<SewingDecor variant="zipper" class="pointer-events-none absolute left-4 bottom-20 hidden h-16 w-16 text-[#F5B544] opacity-[0.13] xl:block" />
+	<SewingDecor variant="chalk" class="pointer-events-none absolute right-[30%] bottom-6 hidden h-16 w-16 text-[#F5B544] opacity-[0.14] lg:block" />
+	<SewingDecor variant="spool" class="pointer-events-none absolute left-5 top-4 hidden h-14 w-14 text-[#F5B544] opacity-[0.10] lg:block" />
+	<SewingDecor variant="needle" class="pointer-events-none absolute bottom-4 right-5 hidden h-16 w-16 rotate-[10deg] text-[#F5B544] opacity-[0.16] xl:block" />
 </section>
 
 <script>
-	const carousel = document.querySelector<HTMLElement>('[data-services-carousel]');
-	const toggle = document.querySelector<HTMLButtonElement>('[data-services-toggle]');
-	const pauseIcon = toggle?.querySelector<SVGElement>('[data-pause-icon]');
-	const playIcon = toggle?.querySelector<SVGElement>('[data-play-icon]');
-	const toggleLabel = toggle?.querySelector<HTMLElement>('[data-toggle-label]');
+	// Scopé par instance : chaque carrousel pilote son propre bouton.
+	document.querySelectorAll<HTMLElement>('[data-services-carousel]').forEach((carousel) => {
+		const toggle = carousel.querySelector<HTMLButtonElement>('[data-services-toggle]');
+		const pauseIcon = carousel.querySelector<SVGElement>('[data-pause-icon]');
+		const playIcon = carousel.querySelector<SVGElement>('[data-play-icon]');
+		const toggleLabel = carousel.querySelector<HTMLElement>('[data-toggle-label]');
 
-	toggle?.addEventListener('click', () => {
-		const paused = carousel?.classList.toggle('is-paused') ?? false;
-		toggle.setAttribute('aria-pressed', String(paused));
-		toggle.setAttribute('aria-label', paused ? 'Reprendre le défilement' : 'Mettre le défilement en pause');
-		if (toggleLabel) toggleLabel.textContent = paused ? 'Lecture' : 'Pause';
-		pauseIcon?.classList.toggle('hidden', paused);
-		playIcon?.classList.toggle('hidden', !paused);
+		toggle?.addEventListener('click', () => {
+			const paused = carousel.classList.toggle('is-paused');
+			toggle.setAttribute('aria-pressed', String(paused));
+			toggle.setAttribute('aria-label', paused ? 'Reprendre le défilement' : 'Mettre le défilement en pause');
+			if (toggleLabel) toggleLabel.textContent = paused ? 'Lecture' : 'Pause';
+			pauseIcon?.classList.toggle('hidden', paused);
+			playIcon?.classList.toggle('hidden', !paused);
+		});
 	});
 </script>
 
@@ -108,14 +128,19 @@ const featuredServices = SERVICES.filter(({ slug }) => featuredSlugs.has(slug));
 	.services-track {
 		display: flex;
 		width: max-content;
+		/* Transform GPU : évite les micro-saccades de repaint pendant le défilement. */
+		transform: translate3d(0, 0, 0);
+		backface-visibility: hidden;
 		will-change: transform;
-		animation: services-marquee 42s linear infinite;
+		animation: services-marquee 60s linear infinite;
 	}
 
 	.services-track-group {
 		display: flex;
 		flex: none;
 		gap: 1.25rem;
+		/* Le remplissage de fin fait la même largeur que les gouttières internes :
+		   le raccord entre les deux groupes est invisible. */
 		padding-right: 1.25rem;
 	}
 
@@ -135,21 +160,30 @@ const featuredServices = SERVICES.filter(({ slug }) => featuredSlugs.has(slug));
 	.service-card:hover .service-card-img,
 	.service-card:focus-within .service-card-img { transform: scale(1.035); }
 
-	.services-carousel.is-paused .services-track,
-	.services-marquee:hover .services-track,
-	.services-marquee:focus-within .services-track { animation-play-state: paused; }
+	/*
+	 * Le défilement ne s'arrête QUE via le bouton Pause.
+	 * Avant, le survol et le focus le figeaient : dès qu'on approchait la souris
+	 * ou qu'on cliquait une carte, le bandeau restait arrêté et semblait cassé.
+	 */
+	.services-carousel.is-paused .services-track { animation-play-state: paused; }
 
 	@keyframes services-marquee {
-		from { transform: translateX(0); }
-		to { transform: translateX(-50%); }
+		from { transform: translate3d(0, 0, 0); }
+		to { transform: translate3d(-50%, 0, 0); }
 	}
 
+	/*
+	 * Mouvement réduit : le bandeau continue de défiler (c'est le principe même
+	 * du carrousel), mais beaucoup plus lentement, et les effets de survol sont
+	 * neutralisés. Le bouton Pause reste disponible.
+	 */
 	@media (prefers-reduced-motion: reduce) {
-		.services-track { animation: none; transform: none; }
-		.services-track-group[aria-hidden='true'] { display: none; }
-		.services-marquee { overflow-x: auto; mask-image: none; }
+		.services-track { animation-duration: 200s; }
 		.service-card,
 		.service-card-img { transition: none; }
-		.services-toggle { display: none; }
+		.service-card:hover,
+		.service-card:focus-within { transform: none; }
+		.service-card:hover .service-card-img,
+		.service-card:focus-within .service-card-img { transform: none; }
 	}
 </style>

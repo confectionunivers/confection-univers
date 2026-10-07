@@ -1,0 +1,493 @@
+/* ============================================================================
+   COUCHE NORYX — design system des sections
+   Transposition du thème Noryx (structure, typographie, effets) sur la
+   palette Confection Univers : bleu de nuit #00004B + or #F5B544.
+   Toutes les classes sont préfixées `nx-`.
+   ========================================================================== */
+
+/* ----------------------------------------------------------------------------
+   1. En-tête de section — `{ 01 } # Notre savoir-faire`
+   -------------------------------------------------------------------------- */
+.nx-head {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 0.85rem 1.35rem;
+}
+
+.nx-num {
+	font-family: var(--font-display);
+	font-size: clamp(0.72rem, 1.05vw, 0.86rem);
+	font-weight: 700;
+	letter-spacing: 0.14em;
+	color: var(--color-primary);
+	opacity: 0.85;
+	white-space: nowrap;
+}
+
+.nx-tag {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.7rem;
+	font-size: clamp(0.72rem, 1.05vw, 0.86rem);
+	font-weight: 700;
+	letter-spacing: 0.2em;
+	text-transform: uppercase;
+}
+
+.nx-tag::before {
+	content: '';
+	display: block;
+	width: clamp(1.4rem, 3vw, 2.6rem);
+	height: 1px;
+	background: currentColor;
+	opacity: 0.55;
+}
+
+/* ----------------------------------------------------------------------------
+   2. Typographie d'affichage
+   -------------------------------------------------------------------------- */
+.nx-display {
+	font-family: var(--font-display);
+	font-weight: 700;
+	line-height: 0.98;
+	letter-spacing: -0.03em;
+	text-wrap: balance;
+}
+
+.nx-display--xl {
+	font-size: clamp(2.6rem, 8.4vw, 8.5rem);
+}
+
+.nx-display--lg {
+	font-size: clamp(2.1rem, 5.4vw, 5rem);
+}
+
+.nx-display--md {
+	font-size: clamp(1.6rem, 3.2vw, 3rem);
+}
+
+/* Grand titre espacé (effet Noryx : les lettres s'écartent) */
+.nx-spaced {
+	text-transform: uppercase;
+	font-family: var(--font-display);
+	font-weight: 600;
+	line-height: 1.12;
+	letter-spacing: 0.02em;
+	word-spacing: 0.1em;
+}
+
+/* Mot en or dans un titre */
+.nx-accent {
+	color: var(--color-primary);
+}
+
+/* Trait de texte qui se révèle derrière un masque */
+.nx-mask {
+	display: block;
+	overflow: hidden;
+}
+
+.nx-mask > * {
+	display: block;
+	transform: translateY(105%);
+}
+
+/* ----------------------------------------------------------------------------
+   3. Bouton à lettres qui roulent (signature Noryx)
+   -------------------------------------------------------------------------- */
+.nx-btn {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+	min-height: 2.9rem;
+	padding: 0.85rem 1.5rem;
+	border-radius: 999px;
+	border: 1px solid color-mix(in srgb, currentColor 28%, transparent);
+	font-family: var(--font-display);
+	font-size: 0.72rem;
+	font-weight: 700;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	overflow: hidden;
+	isolation: isolate;
+	transition: border-color 320ms ease, color 320ms ease, background-color 320ms ease;
+}
+
+.nx-btn:hover,
+.nx-btn:focus-visible {
+	border-color: color-mix(in srgb, var(--color-primary) 70%, transparent);
+}
+
+/* Version pleine (or sur bleu) */
+.nx-btn--solid {
+	background: var(--color-primary);
+	border-color: var(--color-primary);
+	color: var(--color-background);
+}
+
+.nx-btn--solid:hover,
+.nx-btn--solid:focus-visible {
+	background: var(--color-primary-light);
+	border-color: var(--color-primary-light);
+}
+
+/* Le rouleau de lettres */
+.nx-roll {
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+}
+
+.nx-roll__face,
+.nx-roll__ghost {
+	display: block;
+	transition: transform 420ms cubic-bezier(0.22, 0.9, 0.24, 1);
+}
+
+.nx-roll__ghost {
+	position: absolute;
+	inset: 0;
+	transform: translateY(100%);
+	color: var(--color-primary);
+}
+
+.nx-btn:hover .nx-roll__face,
+.nx-btn:focus-visible .nx-roll__face {
+	transform: translateY(-100%);
+}
+
+.nx-btn:hover .nx-roll__ghost,
+.nx-btn:focus-visible .nx-roll__ghost {
+	transform: translateY(0);
+}
+
+/* Flèche qui avance */
+.nx-arrow {
+	display: inline-flex;
+	transition: transform 320ms cubic-bezier(0.22, 0.9, 0.24, 1);
+}
+
+.nx-btn:hover .nx-arrow,
+.nx-btn:focus-visible .nx-arrow {
+	transform: translateX(4px);
+}
+
+/* ----------------------------------------------------------------------------
+   4. Surfaces et cartes
+   -------------------------------------------------------------------------- */
+.nx-panel {
+	border-radius: clamp(1.25rem, 2.4vw, 2.25rem);
+	border: 1px solid rgba(245, 181, 68, 0.16);
+	background: color-mix(in srgb, var(--color-surface) 62%, transparent);
+	backdrop-filter: blur(6px);
+}
+
+.nx-panel--light {
+	border-color: rgba(10, 22, 40, 0.1);
+	background: rgba(255, 255, 255, 0.72);
+	backdrop-filter: none;
+}
+
+.nx-card-lift {
+	transition: transform 420ms cubic-bezier(0.22, 0.9, 0.24, 1), box-shadow 420ms ease,
+		border-color 420ms ease;
+}
+
+.nx-card-lift:hover {
+	transform: translateY(-6px);
+	box-shadow: 0 28px 60px rgba(0, 0, 0, 0.34);
+}
+
+/* Image qui zoome doucement */
+.nx-zoom img,
+.nx-zoom > picture > img {
+	transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.nx-zoom:hover img,
+.nx-zoom:hover > picture > img {
+	transform: scale(1.05);
+}
+
+/* ----------------------------------------------------------------------------
+   5. Statistiques / compteurs
+   -------------------------------------------------------------------------- */
+.nx-stat__value {
+	font-family: var(--font-display);
+	font-weight: 700;
+	line-height: 1;
+	letter-spacing: -0.03em;
+	font-size: clamp(2.1rem, 4.6vw, 3.6rem);
+	font-variant-numeric: tabular-nums;
+}
+
+.nx-stat__label {
+	font-size: 0.78rem;
+	line-height: 1.45;
+	opacity: 0.72;
+}
+
+/* ----------------------------------------------------------------------------
+   6. Accordéon numéroté (FAQ)
+   -------------------------------------------------------------------------- */
+.nx-acc {
+	border-top: 1px solid rgba(245, 181, 68, 0.18);
+}
+
+.nx-acc__item {
+	border-bottom: 1px solid rgba(245, 181, 68, 0.18);
+}
+
+.nx-acc__trigger {
+	display: flex;
+	align-items: center;
+	gap: 1.2rem;
+	width: 100%;
+	padding: 1.5rem 0;
+	text-align: left;
+	cursor: pointer;
+	transition: color 260ms ease;
+}
+
+.nx-acc__index {
+	font-family: var(--font-display);
+	font-size: 0.8rem;
+	font-weight: 700;
+	letter-spacing: 0.1em;
+	color: var(--color-primary);
+	flex: none;
+	width: 2.4rem;
+}
+
+.nx-acc__question {
+	flex: 1;
+	font-family: var(--font-display);
+	font-size: clamp(1.05rem, 2vw, 1.5rem);
+	font-weight: 600;
+	line-height: 1.25;
+}
+
+.nx-acc__sign {
+	flex: none;
+	position: relative;
+	width: 2.4rem;
+	height: 2.4rem;
+	border-radius: 999px;
+	border: 1px solid rgba(245, 181, 68, 0.35);
+	display: grid;
+	place-items: center;
+	transition: background-color 300ms ease, transform 400ms cubic-bezier(0.22, 0.9, 0.24, 1);
+}
+
+.nx-acc__sign::before,
+.nx-acc__sign::after {
+	content: '';
+	position: absolute;
+	background: var(--color-primary);
+}
+
+.nx-acc__sign::before {
+	width: 0.8rem;
+	height: 1.5px;
+}
+
+.nx-acc__sign::after {
+	width: 1.5px;
+	height: 0.8rem;
+	transition: transform 400ms cubic-bezier(0.22, 0.9, 0.24, 1);
+}
+
+.nx-acc__item[data-open='true'] .nx-acc__sign {
+	background: rgba(245, 181, 68, 0.14);
+	transform: rotate(180deg);
+}
+
+.nx-acc__item[data-open='true'] .nx-acc__sign::after {
+	transform: scaleY(0);
+}
+
+.nx-acc__body {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: grid-template-rows 480ms cubic-bezier(0.22, 0.9, 0.24, 1);
+}
+
+.nx-acc__item[data-open='true'] .nx-acc__body {
+	grid-template-rows: 1fr;
+}
+
+.nx-acc__body > div {
+	overflow: hidden;
+}
+
+.nx-acc__answer {
+	padding: 0 0 1.6rem 3.6rem;
+	max-width: 62ch;
+	line-height: 1.65;
+	opacity: 0.74;
+}
+
+/* ----------------------------------------------------------------------------
+   7. Bandeau défilant (grand texte)
+   -------------------------------------------------------------------------- */
+.nx-band {
+	display: flex;
+	overflow: hidden;
+	user-select: none;
+	mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+
+.nx-band__track {
+	display: flex;
+	flex: none;
+	width: max-content;
+	animation: nx-band-scroll 22s linear infinite;
+	will-change: transform;
+}
+
+.nx-band__group {
+	display: flex;
+	flex: none;
+	align-items: center;
+	gap: 1.35rem;
+	padding-right: 1.35rem;
+}
+
+/* Écritures défilantes : petites et discrètes, façon ligne de repères. */
+.nx-band__word {
+	font-family: var(--font-display);
+	font-size: clamp(0.72rem, 0.95vw, 0.92rem);
+	font-weight: 600;
+	letter-spacing: 0.22em;
+	text-transform: uppercase;
+	line-height: 1;
+	white-space: nowrap;
+}
+
+.nx-band__dot {
+	width: 0.26rem;
+	height: 0.26rem;
+	border-radius: 999px;
+	background: currentColor;
+	opacity: 0.6;
+	flex: none;
+}
+
+@keyframes nx-band-scroll {
+	from {
+		transform: translate3d(0, 0, 0);
+	}
+	to {
+		transform: translate3d(-50%, 0, 0);
+	}
+}
+
+/* ----------------------------------------------------------------------------
+   8. Divers
+   -------------------------------------------------------------------------- */
+.nx-divider {
+	height: 1px;
+	width: 100%;
+	background: linear-gradient(90deg, transparent, rgba(245, 181, 68, 0.35), transparent);
+}
+
+.nx-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	border-radius: 999px;
+	border: 1px solid rgba(245, 181, 68, 0.3);
+	background: rgba(245, 181, 68, 0.07);
+	padding: 0.4rem 0.9rem;
+	font-size: 0.66rem;
+	font-weight: 700;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--color-primary-light);
+}
+
+/* Grain léger, comme les sections Noryx */
+.nx-grain::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	opacity: 0.035;
+	background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ----------------------------------------------------------------------------
+   9. Mouvement réduit
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+	.nx-band__track {
+		animation: none;
+	}
+
+	.nx-mask > * {
+		transform: none;
+	}
+
+	.nx-roll__face,
+	.nx-roll__ghost,
+	.nx-card-lift,
+	.nx-zoom img {
+		transition: none;
+	}
+
+	.nx-card-lift:hover {
+		transform: none;
+	}
+}
+
+/* ----------------------------------------------------------------------------
+   10. États initiaux des animations
+   Ces règles ne s'appliquent que si le JavaScript est actif (classe `has-motion`
+   posée dans le <head>). Sans JS, tout le contenu reste visible.
+   -------------------------------------------------------------------------- */
+.has-motion [data-motion='up'] {
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(30px);
+}
+
+.has-motion [data-motion='fade'] {
+	opacity: 0;
+	visibility: hidden;
+}
+
+.has-motion [data-motion='scale'] {
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(20px) scale(0.965);
+}
+
+.has-motion [data-motion='left'] {
+	opacity: 0;
+	visibility: hidden;
+	transform: translateX(-34px);
+}
+
+.has-motion [data-motion='right'] {
+	opacity: 0;
+	visibility: hidden;
+	transform: translateX(34px);
+}
+
+.has-motion [data-motion-group] > * {
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(26px);
+}
+
+.has-motion [data-motion-group][data-motion-scale] > * {
+	transform: translateY(20px) scale(0.96);
+}
+
+/* Le contenu animé ne doit jamais bloquer les clics pendant son apparition. */
+[data-motion],
+[data-motion-group] > * {
+	will-change: transform, opacity;
+}

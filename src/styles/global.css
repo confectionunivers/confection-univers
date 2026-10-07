@@ -1,17 +1,18 @@
 @import 'tailwindcss';
+@import './noryx.css';
 
 @theme {
 	/* Confection Univers — Design Tokens from Hero */
 	/* Colors */
-	--color-background: #00001C; /* Deep blue night */
-	--color-background-muted: #00002a; /* Darker blue */
+	--color-background: #00004A; /* Bleu du logo assombri (#00005B -> #00004A) */
+	--color-background-muted: #000039; /* Bleu de nuit profond */
 	--color-foreground: #f7f5f0; /* Light text */
 	--color-primary: #F5B544; /* Gold accent */
 	--color-primary-light: #FACC6B; /* Light gold */
 	--color-primary-dark: #D97706; /* Dark gold */
-	--color-secondary: #00002a; /* Secondary dark */
-	--color-surface: #0E172A; /* Surface dark */
-	--color-surface-elevated: #132238; /* Elevated surface */
+	--color-secondary: #000039; /* Bleu secondaire */
+	--color-surface: #000058; /* Surface surélevée */
+	--color-surface-elevated: #000066; /* Surface surélevée claire */
 	--color-ink: #0a1628; /* Ink color */
 	--color-paper: #faf8f4; /* Paper white */
 	--color-muted: #A0ACC6; /* Muted text */
@@ -32,8 +33,8 @@
 	--cu-gold: #F5B544;
 	--cu-gold-light: #FACC6B;
 	--cu-gold-dark: #D97706;
-	--cu-navy: #00001C;
-	--cu-navy-dark: #00002a;
+	--cu-navy: #00004A;
+	--cu-navy-dark: #000039;
 	--cu-ink: #0a1628;
 	--cu-text-white: #F9FAFB;
 	--cu-text-muted: #A0ACC6;
@@ -41,7 +42,11 @@
 
 @layer base {
 	body {
-		@apply bg-background text-foreground antialiased;
+		@apply text-foreground antialiased;
+		/* Dégradé du bleu de nuit : #00004A (logo) ↔ #00004B ↔ #000039 */
+		background-color: #00004A;
+		background-image: linear-gradient(180deg, #00004B 0%, #00004A 45%, #000039 100%);
+		background-attachment: fixed;
 	}
 	::selection {
 		@apply bg-primary text-background;
@@ -248,7 +253,7 @@
 
 	/* Premium Global Styles */
 	.premium-section {
-		background: linear-gradient(135deg, #050816 0%, #0b1024 60%, #020617 100%);
+		background: linear-gradient(160deg, #00004B 0%, #00004A 48%, #000039 100%);
 	}
 
 	.premium-card {

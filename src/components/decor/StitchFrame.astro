@@ -1,0 +1,49 @@
+---
+/**
+ * Cadre « piqué main » : quatre équerres de points de couture aux coins d'un
+ * bloc, dans l'esprit d'un repère de tailleur. Purement décoratif.
+ *
+ * Usage : à placer DANS un parent en `relative`. Le cadre ne capte aucun clic.
+ */
+interface Props {
+	class?: string;
+	/** Décale le cadre vers l'extérieur du bloc (classes Tailwind, ex. "-inset-2"). */
+	inset?: string;
+	/** Taille des équerres, en px. */
+	size?: number;
+	/** Épaisseur du trait, en px. */
+	stroke?: number;
+}
+
+const { class: className = '', inset = '-inset-2', size = 34, stroke = 2 } = Astro.props;
+
+const corners = [
+	{ pos: 'left-0 top-0', d: `M ${size} 0 H 0 V ${size}` },
+	{ pos: 'right-0 top-0', d: `M 0 0 H ${size} V ${size}` },
+	{ pos: 'left-0 bottom-0', d: `M ${size} ${size} H 0 V 0` },
+	{ pos: 'right-0 bottom-0', d: `M 0 ${size} H ${size} V 0` },
+];
+---
+
+<span
+	class={`pointer-events-none absolute ${inset} ${className}`}
+	aria-hidden="true"
+>
+	{corners.map(({ pos, d }) => (
+		<span class={`absolute ${pos} block`}>
+			<svg
+				width={size}
+				height={size}
+				viewBox={`0 0 ${size} ${size}`}
+				fill="none"
+				stroke="currentColor"
+				stroke-width={stroke}
+				stroke-linecap="round"
+				stroke-dasharray="3 5"
+				focusable="false"
+			>
+				<path d={d} />
+			</svg>
+		</span>
+	))}
+</span>

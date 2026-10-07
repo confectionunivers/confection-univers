@@ -8,22 +8,27 @@ const spanClass = (layout: 'feature' | 'standard' | 'wide') => {
 };
 ---
 
-<section id="catalogue-offres" class="scroll-mt-24 bg-[#00001C] px-6 py-16 text-white md:py-24" aria-labelledby="catalogue-offres-heading">
+<section id="catalogue-offres" class="scroll-mt-24 bg-[#00004B] px-6 py-16 text-white md:py-24" aria-labelledby="catalogue-offres-heading">
 	<div class="mx-auto max-w-7xl">
 		<div class="mb-9 grid gap-5 lg:grid-cols-[1fr_0.7fr] lg:items-end lg:gap-10">
 			<div>
-				<p class="mb-3 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#F5B544]">Nos gammes · 01—11</p>
-				<h2 id="catalogue-offres-heading" class="max-w-3xl font-display text-3xl font-semibold leading-[1.06] tracking-tight md:text-5xl">
-					Un vestiaire professionnel, plusieurs usages.
-				</h2>
+				<div class="mb-10">
+					<div class="nx-head mb-5 text-[#F5B544]">
+						<span class="nx-num">{ 01 }</span>
+						<span class="nx-tag">Nos gammes</span>
+					</div>
+					<h2 id="catalogue-offres-heading" class="nx-display nx-display--lg nx-mask text-white">
+						<span>Un vestiaire professionnel, plusieurs usages.</span>
+					</h2>
+				</div>
 			</div>
 			<p class="max-w-xl text-sm leading-[1.8] text-white/65 md:text-base">
 				Explorez les familles par secteur, type de vêtement, usage ou piste de personnalisation. Les modèles, matières et finitions se précisent à partir de votre cahier des charges.
 			</p>
 		</div>
 
-		<div class="catalogue-filters rounded-2xl border border-[#F5B544]/25 bg-[#0E172A]/55 p-4 py-5 sm:p-5" role="group" aria-label="Filtres du catalogue">
-			<div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-[repeat(4,minmax(0,1fr))_auto] xl:items-end">
+		<div class="catalogue-filters rounded-2xl border border-[#F5B544]/25 bg-[#000058]/55 p-4 py-5 sm:p-5" role="group" aria-label="Filtres du catalogue">
+			<div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-[repeat(4,minmax(0,1fr))_auto] xl:items-end" data-motion-group data-motion-stagger="0.06" data-motion-scale>
 				<label class="catalogue-filter-field">
 					<span>Secteur</span>
 					<select data-catalogue-filter="sector" aria-label="Filtrer par secteur">
@@ -75,10 +80,10 @@ const spanClass = (layout: 'feature' | 'standard' | 'wide') => {
 					data-type={product.type}
 					data-usage={product.usage}
 					data-customization={product.customizationFilters.join(' ')}
-					class={`catalogue-product group scroll-mt-32 overflow-hidden rounded-[1.35rem] border border-[#F5B544]/30 bg-[#0E172A]/75 shadow-[0_18px_50px_rgba(0,0,0,0.22)] ${spanClass(product.layout)}`}
+					class={`catalogue-product group scroll-mt-32 overflow-hidden rounded-[1.35rem] border border-[#F5B544]/30 bg-[#000058]/75 shadow-[0_18px_50px_rgba(0,0,0,0.22)] ${spanClass(product.layout)}`}
 				>
 					<a href={`/catalogue/${product.slug}`} class="catalogue-product-link block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F5B544]" aria-label={`Découvrir ${product.title}`}>
-						<figure class="catalogue-product-figure relative overflow-hidden bg-[#0E172A]">
+						<figure class="catalogue-product-figure relative overflow-hidden bg-[#000058]">
 							<div class={`catalogue-product-frame ${product.layout === 'feature' || product.layout === 'wide' ? 'aspect-[16/10]' : 'aspect-[4/3]'}`}>
 								<picture>
 									<source
@@ -97,7 +102,7 @@ const spanClass = (layout: 'feature' | 'standard' | 'wide') => {
 									/>
 								</picture>
 							</div>
-							<figcaption class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-[#00001C]/80 via-[#00001C]/20 to-transparent px-4 pb-4 pt-12 sm:px-5 sm:pb-5">
+							<figcaption class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-[#00004B]/80 via-[#00004B]/20 to-transparent px-4 pb-4 pt-12 sm:px-5 sm:pb-5">
 								<span class="inline-flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.18em] text-white/85">
 									<span class="h-1.5 w-1.5 rounded-full bg-[#F5B544]" aria-hidden="true"></span>
 									{product.sectorLabel}

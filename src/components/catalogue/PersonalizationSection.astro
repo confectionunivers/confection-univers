@@ -2,14 +2,19 @@
 import { personalizationImages, catalogueFilters } from '../../lib/catalogue';
 ---
 
-<section id="personnalisation" class="bg-[#00001C] px-6 py-16 text-white md:py-24" aria-labelledby="personalisation-heading">
+<section id="personnalisation" class="bg-[#00004B] px-6 py-16 text-white md:py-24" aria-labelledby="personalisation-heading">
 	<div class="mx-auto max-w-7xl">
 		<div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end lg:gap-16">
 			<div>
-				<p class="mb-4 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#F5B544]">Le détail fait la différence</p>
-				<h2 id="personalisation-heading" class="font-display text-[clamp(2.7rem,7vw,5.5rem)] font-semibold leading-[0.95] tracking-[-0.06em]">
-					VOTRE<br />IDENTITÉ.<br /><span class="text-[#F5B544]">NOTRE SAVOIR-FAIRE.</span>
-				</h2>
+				<div class="mb-10">
+					<div class="nx-head mb-5 text-[#F5B544]">
+						<span class="nx-num">{ 03 }</span>
+						<span class="nx-tag">Personnalisation</span>
+					</div>
+					<h2 id="personalisation-heading" class="nx-display nx-display--lg nx-mask text-white">
+						<span>Votre identité. Notre savoir-faire.</span>
+					</h2>
+				</div>
 			</div>
 			<div class="max-w-xl border-l border-[#F5B544]/35 pl-5 md:pl-7">
 				<p class="text-base leading-[1.85] text-white/75 md:text-lg">
@@ -23,7 +28,7 @@ import { personalizationImages, catalogueFilters } from '../../lib/catalogue';
 
 		<div class="mt-10 grid gap-4 sm:grid-cols-3 sm:gap-5">
 			{personalizationImages.map((image, index) => (
-				<figure class="personalisation-visual group relative overflow-hidden rounded-[1.25rem] border border-[#F5B544]/30 bg-[#0E172A]">
+				<figure class="personalisation-visual group relative overflow-hidden rounded-[1.25rem] border border-[#F5B544]/30 bg-[#000058]">
 					<div class="aspect-[4/3] overflow-hidden sm:aspect-[5/6]">
 						<img
 							src={image.src}
@@ -35,7 +40,7 @@ import { personalizationImages, catalogueFilters } from '../../lib/catalogue';
 							decoding="async"
 						/>
 					</div>
-					<figcaption class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-[#00001C]/85 via-[#00001C]/25 to-transparent p-4 pt-14 sm:p-5 sm:pt-16">
+					<figcaption class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-gradient-to-t from-[#00004B]/85 via-[#00004B]/25 to-transparent p-4 pt-14 sm:p-5 sm:pt-16">
 						<span class="font-display text-base font-semibold text-white sm:text-lg">{image.label}</span>
 						<span class="text-[8px] font-semibold uppercase tracking-[0.14em] text-white/60">0{index + 1} / Illustration</span>
 					</figcaption>

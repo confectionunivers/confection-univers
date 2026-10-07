@@ -1,4 +1,8 @@
 ---
+import SewingDecor from './decor/SewingDecor.astro';
+import StitchLine from './decor/StitchLine.astro';
+import SectionHead from './ui/SectionHead.astro';
+import RollButton from './ui/RollButton.astro';
 /**
  * Section contact premium — ajustez `contact` et `formAction` selon votre configuration.
  * Formulaire : par défaut FormSubmit (remplacez l’URL par votre e-mail FormSubmit ou autre endpoint).
@@ -24,15 +28,14 @@ const whatsappUrl = `https://wa.me/${contact.whatsappDigits}?text=${encodeURICom
 	aria-labelledby="contact-heading"
 >
 	<div class="mx-auto max-w-7xl px-6">
-		<div class="mx-auto mb-14 max-w-2xl text-center md:mb-16">
-			<p class="mb-3 text-[11px] font-semibold uppercase tracking-[0.35em] text-primary md:text-xs">Contact</p>
-			<h2 id="contact-heading" class="font-display text-4xl font-semibold tracking-tight md:text-5xl lg:text-6xl">
-				Demander un devis
-			</h2>
-			<p class="mt-4 text-base leading-relaxed text-ink/65 md:text-lg">
-				Devis, échantillons ou questions sur nos vêtements : notre équipe répond avec soin et efficacité.
-			</p>
-		</div>
+		<SectionHead
+			index="07"
+			tag="Contact"
+			tone="light"
+			align="center"
+			title="Demander un <span class='nx-accent'>devis</span>"
+			lead="Décrivez vos pièces, vos quantités et vos délais : nous revenons vers vous avec une proposition adaptée."
+		/>
 
 		<div class="grid gap-12 lg:grid-cols-12 lg:gap-10 xl:gap-14">
 			<!-- Coordonnées + carte -->
@@ -276,6 +279,14 @@ const whatsappUrl = `https://wa.me/${contact.whatsappDigits}?text=${encodeURICom
 			</div>
 		</div>
 	</div>
+
+
+	<!-- Décors de couture (purement décoratifs) -->
+	<SewingDecor variant="ribbon" class="pointer-events-none absolute left-6 bottom-10 hidden h-24 w-24 text-[#8B6325] opacity-[0.18] lg:block" />
+	<SewingDecor variant="ruler" class="pointer-events-none absolute right-[30%] top-8 hidden h-14 w-14 rotate-[10deg] text-[#8B6325] opacity-[0.17] xl:block" />
+	<StitchLine class="pointer-events-none absolute inset-x-6 bottom-4 text-[#8B6325]" step={18} opacity={0.22} />
+	<SewingDecor variant="needle" class="pointer-events-none absolute right-6 top-10 hidden h-20 w-20 rotate-[12deg] text-[#8B6325] opacity-[0.13] lg:block" />
+	<StitchLine class="pointer-events-none absolute inset-x-6 top-4 text-[#8B6325]" step={18} opacity={0.16} />
 </section>
 
 <script>

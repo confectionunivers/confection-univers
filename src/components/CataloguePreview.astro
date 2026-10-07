@@ -1,4 +1,8 @@
 ---
+import SewingDecor from './decor/SewingDecor.astro';
+import StitchLine from './decor/StitchLine.astro';
+import SectionHead from './ui/SectionHead.astro';
+import RollButton from './ui/RollButton.astro';
 const previewProducts = [
 	{
 		slug: 'tenues-professionnelles',
@@ -34,30 +38,21 @@ const previewProducts = [
 	aria-labelledby="catalogue-preview-heading"
 >
 	<div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.75fr_1.25fr] lg:items-center lg:gap-16">
-		<header class="max-w-xl">
-			<p class="mb-4 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-[#8B6325]">
-				<span class="h-px w-8 bg-[#8B6325]" aria-hidden="true"></span>
-				Nos gammes
-			</p>
-			<h2 id="catalogue-preview-heading" class="font-display text-3xl font-semibold leading-tight tracking-tight md:text-4xl lg:text-5xl">
-				Le bon vêtement commence par le bon usage.
-			</h2>
-			<p class="mt-5 text-base leading-relaxed text-[#0A1628]/65 md:text-lg">
-				Découvrez les tenues professionnelles, uniformes scolaires, vêtements médicaux et tenues académiques confectionnés pour les besoins des structures.
-			</p>
-			<a
-				href="/catalogue"
-				class="mt-7 inline-flex min-h-12 items-center justify-center gap-3 rounded-full bg-[#00001C] px-6 py-3 text-[10px] font-bold uppercase tracking-[0.14em] text-white transition-colors hover:bg-[#8B6325] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8B6325]"
-			>
-				Découvrir le catalogue <span aria-hidden="true">↗</span>
-			</a>
-		</header>
+		<SectionHead
+			index="04"
+			tag="Nos gammes"
+			tone="light"
+			title="Le bon vêtement commence par <span class='nx-accent'>le bon usage.</span>"
+			lead="Découvrez les tenues professionnelles, uniformes scolaires, vêtements médicaux et tenues académiques confectionnés pour les besoins des structures."
+		>
+			<RollButton href="/catalogue" label="Découvrir le catalogue" variant="solid" class="mt-7" />
+		</SectionHead>
 
-		<div class="grid grid-cols-2 gap-3 sm:gap-4">
+		<div class="grid grid-cols-2 gap-3 sm:gap-4" data-motion-group data-motion-stagger="0.1" data-motion-scale>
 			{previewProducts.map((product, index) => (
 				<a
 					href={`/catalogue/#${product.slug}`}
-					class="home-catalogue-card group relative min-h-40 overflow-hidden rounded-[1.15rem] border border-[#B58433]/45 bg-[#00001C] shadow-[0_14px_32px_rgba(0,0,0,0.12)] sm:min-h-56 sm:rounded-[1.4rem]"
+					class="home-catalogue-card nx-card-lift group relative min-h-40 overflow-hidden rounded-[1.4rem] border border-[#B58433]/40 bg-[#00004B] shadow-[0_14px_32px_rgba(0,0,0,0.12)] sm:min-h-56 sm:rounded-[1.75rem]"
 					aria-label={`Voir la gamme ${product.title} dans le catalogue`}
 				>
 					<img
@@ -69,8 +64,8 @@ const previewProducts = [
 						loading="lazy"
 						decoding="async"
 					/>
-					<span class="absolute inset-0 bg-gradient-to-t from-[#00001C]/90 via-[#00001C]/15 to-transparent" aria-hidden="true"></span>
-					<span class="absolute left-3 top-3 rounded-full border border-white/25 bg-[#00001C]/50 px-2.5 py-1 text-[8px] font-semibold uppercase tracking-[0.14em] text-white/85 backdrop-blur-sm">0{index + 1}</span>
+					<span class="absolute inset-0 bg-gradient-to-t from-[#00004B]/90 via-[#00004B]/15 to-transparent" aria-hidden="true"></span>
+					<span class="absolute left-3 top-3 rounded-full border border-white/25 bg-[#00004B]/50 px-2.5 py-1 text-[8px] font-semibold uppercase tracking-[0.14em] text-white/85 backdrop-blur-sm">0{index + 1}</span>
 					<span class="absolute bottom-3 left-3 right-3 font-display text-sm font-semibold text-white sm:bottom-5 sm:left-5 sm:right-5 sm:text-lg">
 						{product.title}
 					</span>
@@ -78,6 +73,14 @@ const previewProducts = [
 			))}
 		</div>
 	</div>
+
+
+	<!-- Décors de couture (purement décoratifs) -->
+	<SewingDecor variant="ribbon" class="pointer-events-none absolute left-4 top-4 hidden h-24 w-24 text-[#8B6325] opacity-[0.2] lg:block" />
+	<SewingDecor variant="tape" class="pointer-events-none absolute bottom-16 right-6 hidden h-24 w-24 text-[#8B6325] opacity-[0.18] lg:block" />
+	<SewingDecor variant="button" class="pointer-events-none absolute right-[38%] top-1/2 hidden h-14 w-14 text-[#8B6325] opacity-[0.18] xl:block" />
+	<SewingDecor variant="scissors" class="pointer-events-none absolute right-4 top-6 hidden h-20 w-20 rotate-[16deg] text-[#8B6325] opacity-[0.14] lg:block" />
+	<StitchLine class="pointer-events-none absolute inset-x-6 bottom-4 text-[#8B6325]" step={18} opacity={0.18} />
 </section>
 
 <style>

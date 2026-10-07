@@ -2,16 +2,26 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import PageHero from '../components/ui/PageHero.astro';
 ---
 
 <Layout title="À Propos | Confection Univers" description="Découvrez Confection Univers, entreprise sénégalaise spécialisée dans les uniformes scolaires, les toges de graduation, les blouses médicales, les tenues de travail et les vêtements professionnels.">
 	<main class="relative">
 		<Navbar />
 		
-		<!-- Hero Section -->
+		<!-- En-tête de page (style Noryx) -->
+		<PageHero
+			tag="Notre histoire"
+			title="Confection"
+			titleAccent="Univers"
+			lead="Une entreprise sénégalaise spécialisée dans les uniformes scolaires, les toges de graduation, les blouses médicales et les tenues de travail."
+			words={['Thiès', 'Atelier', 'Sur mesure', 'Séries']}
+			accent={1}
+		/>
+
 		<section class="relative flex min-h-[60vh] flex-col justify-center overflow-hidden pb-20 pt-32 md:pt-40">
 			<div class="pointer-events-none absolute inset-0 -z-20 bg-background"></div>
-			<div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_85%_60%_at_100%_0%,rgba(198,161,95,0.14),transparent_55%),radial-gradient(ellipse_70%_50%_at_0%_100%,rgba(0,0,42,0.08),transparent_50%)]"></div>
+			<div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_85%_60%_at_100%_0%,rgba(198,161,95,0.14),transparent_55%),radial-gradient(ellipse_70%_50%_at_0%_100%,rgba(0,0,57,0.08),transparent_50%)]"></div>
 			
 			<div class="mx-auto max-w-7xl px-6">
 				<p class="mb-5 text-[11px] font-semibold uppercase tracking-[0.38em] text-primary md:text-xs">
@@ -41,7 +51,7 @@ import Footer from '../components/Footer.astro';
 
 							<div class="space-y-12">
 								<div class="about-block border-b border-ink/10 pb-10">
-									<h3 class="text-[#00002a] text-lg font-bold font-display mb-4">
+									<h3 class="text-[#000039] text-lg font-bold font-display mb-4">
 										Capacité & Rigueur Industrielle
 									</h3>
 									<p class="text-base font-medium leading-relaxed text-ink/70">
@@ -50,7 +60,7 @@ import Footer from '../components/Footer.astro';
 								</div>
 
 								<div class="about-block border-b border-ink/10 pb-10">
-									<h3 class="text-[#00002a] text-lg font-bold font-display mb-4">
+									<h3 class="text-[#000039] text-lg font-bold font-display mb-4">
 										Textiles Techniques Spécialisés
 									</h3>
 									<p class="text-base font-medium leading-relaxed text-ink/70">

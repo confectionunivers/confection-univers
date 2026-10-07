@@ -3,6 +3,9 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 
+import PageHero from '../components/ui/PageHero.astro';
+import SectionHead from '../components/ui/SectionHead.astro';
+import RollButton from '../components/ui/RollButton.astro';
 import { SERVICES } from '../lib/services';
 
 const services = SERVICES;
@@ -12,44 +15,36 @@ const services = SERVICES;
 	<main class="relative">
 		<Navbar />
 		
-		<!-- Hero Section -->
-		<section class="relative flex min-h-[60vh] flex-col justify-center overflow-hidden pb-20 pt-32 md:pt-40">
-			<div class="pointer-events-none absolute inset-0 -z-20 bg-background"></div>
-			<div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_85%_60%_at_100%_0%,rgba(198,161,95,0.14),transparent_55%),radial-gradient(ellipse_70%_50%_at_0%_100%,rgba(0,0,42,0.08),transparent_50%)]"></div>
-			
-			<div class="mx-auto max-w-7xl px-6">
-				<p class="mb-5 text-[11px] font-semibold uppercase tracking-[0.38em] text-primary md:text-xs">
-					Nos services
-				</p>
-				<h1 class="font-display text-[clamp(2.5rem,6vw,4.75rem)] font-semibold leading-[1.05] tracking-tight text-foreground md:leading-[1.02]">
-					<span class="block text-foreground">Services de</span>
-					<span class="mt-1 block bg-gradient-to-r from-primary via-primary-light to-primary bg-clip-text text-transparent">
-						Confection
-					</span>
-				</h1>
-				<p class="mt-8 max-w-2xl text-base font-normal leading-relaxed text-foreground/72 md:text-lg md:leading-relaxed">
-					Des cérémonies de remise des diplômes aux établissements de santé, nous fabriquons des vêtements qui allient précision, confort et qualité professionnelle.
-				</p>
-			</div>
-		</section>
+		<!-- En-tête de page (style Noryx) -->
+		<PageHero
+			tag="Nos services"
+			title="Services de"
+			titleAccent="Confection"
+			lead="Des cérémonies de remise des diplômes aux établissements de santé, nous fabriquons des vêtements qui allient précision, confort et qualité professionnelle."
+			words={['Uniformes', 'Toges', 'Blouses', 'Tenues de travail', 'Sport']}
+			accent={2}
+		>
+			<RollButton href="/catalogue" label="Voir le catalogue" variant="solid" />
+			<RollButton href="/contact" label="Demander un devis" />
+		</PageHero>
 
 		<!-- Services Grid Section -->
 		<section class="relative z-10 -mt-10 scroll-mt-24 rounded-[3rem] border border-ink/5 bg-paper py-24 text-ink shadow-[0_24px_80px_-28px_rgba(5,10,20,0.14)] md:rounded-[4rem] md:py-32">
 			<div class="mx-auto max-w-7xl px-6">
-				<div class="mx-auto mb-16 max-w-3xl text-center md:mb-20">
-					<p class="mb-4 text-[11px] font-semibold uppercase tracking-[0.35em] text-primary md:text-xs">Notre expertise</p>
-					<h2 class="font-display text-4xl font-semibold leading-tight tracking-tight text-ink md:text-5xl lg:text-6xl">
-						Services de confection de vêtements professionnels
-					</h2>
-					<p class="mt-6 text-base leading-relaxed text-ink/65 md:text-lg">
-						Chaque service est conçu pour répondre aux besoins spécifiques des institutions sénégalaises, avec un souci constant de qualité et de satisfaction client.
-					</p>
+				<div class="mb-16 max-w-3xl md:mb-20">
+					<SectionHead
+						index="01"
+						tag="Notre expertise"
+						tone="light"
+						title="Services de confection de <span class='nx-accent'>vêtements professionnels</span>"
+						lead="Chaque service est conçu pour répondre aux besoins spécifiques des institutions sénégalaises, avec un souci constant de qualité et de satisfaction client."
+					/>
 				</div>
 
-				<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+				<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" data-motion-group data-motion-stagger="0.08" data-motion-scale>
 					{
 						services.map((s, i) => (
-							<article class="service-card group relative flex flex-col overflow-hidden rounded-2xl border border-ink/10 bg-paper shadow-[0_4px_24px_-8px_rgba(5,10,20,0.08)] transition duration-500 ease-out will-change-transform hover:-translate-y-2 hover:border-primary/35 hover:shadow-[0_28px_56px_-16px_rgba(5,10,20,0.18)]">
+							<article class="service-card nx-card-lift nx-zoom group relative flex flex-col overflow-hidden rounded-[1.5rem] border border-ink/10 bg-paper shadow-[0_4px_24px_-8px_rgba(5,10,20,0.08)]">
 								<div class="relative aspect-[4/3] overflow-hidden bg-surface/40">
 									<img
 										src={s.image}

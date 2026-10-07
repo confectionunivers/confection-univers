@@ -1,142 +1,105 @@
 ---
+import SewingDecor from './decor/SewingDecor.astro';
+import StitchLine from './decor/StitchLine.astro';
+import SectionHead from './ui/SectionHead.astro';
+import RollButton from './ui/RollButton.astro';
+
+/**
+ * Section FAQ — accordéon numéroté façon Noryx :
+ *   { 06 } # FAQ  →  questions repliées, une seule ouverte à la fois,
+ *   encadré « encore une question ? » sur le côté.
+ */
 const faqItems = [
 	{
 		question: 'Existe-t-il une quantité minimale de commande (MOQ) ?',
-		answer: 'La faisabilité et les quantités sont étudiées au cas par cas selon le modèle, les tailles et votre cahier des charges. Transmettez-nous votre besoin pour recevoir une proposition adaptée.'
+		answer: 'La faisabilité et les quantités sont étudiées au cas par cas selon le modèle, les tailles et votre cahier des charges. Transmettez-nous votre besoin pour recevoir une proposition adaptée.',
 	},
 	{
 		question: 'Quels sont vos délais moyens de confection et de livraison ?',
-		answer: 'Le calendrier dépend des modèles, des quantités, des matières et des finitions retenues. Il est confirmé dans la proposition après étude de votre commande.'
+		answer: 'Le calendrier dépend des modèles, des quantités, des matières et des finitions retenues. Il est confirmé dans la proposition après étude de votre commande.',
 	},
 	{
 		question: 'Proposez-vous la personnalisation complète avec nos logos ?',
-		answer: 'Les options de logo, broderie ou marquage sont étudiées selon le vêtement et le support textile. La méthode retenue est à valider avant le lancement de la production.'
+		answer: 'Les options de logo, broderie ou marquage sont étudiées selon le vêtement et le support textile. La méthode retenue est à valider avant le lancement de la production.',
 	},
 	{
 		question: 'Livrez-vous en dehors de Dakar et Thiès ?',
-		answer: 'Indiquez la ville ou le site de réception dans votre demande. Les modalités et frais de livraison éventuels seront précisés avec le devis.'
-	}
+		answer: 'Indiquez la ville ou le site de réception dans votre demande. Les modalités et frais de livraison éventuels seront précisés avec le devis.',
+	},
 ];
 ---
 
-<section class="relative z-10 py-32 border-0" style="background: #00001C;">
-	<!-- Premium Golden Glow -->
-	<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-		<div class="absolute left-[10%] top-[25%] w-[500px] h-[500px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.12) 0%, transparent 70%); filter: blur(100px);"></div>
-		<div class="absolute right-[10%] bottom-[25%] w-[400px] h-[400px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.08) 0%, transparent 70%); filter: blur(80px);"></div>
+<section class="nx-grain relative z-10 overflow-hidden border-0 py-24 md:py-32" style="background: linear-gradient(150deg, #00004A 0%, #000058 52%, #00004A 100%);" aria-labelledby="faq-heading">
+	<!-- Halos -->
+	<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+		<div class="absolute left-[10%] top-[25%] h-[500px] w-[500px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.12) 0%, transparent 70%); filter: blur(100px);"></div>
+		<div class="absolute bottom-[25%] right-[10%] h-[400px] w-[400px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.08) 0%, transparent 70%); filter: blur(80px);"></div>
 	</div>
 
-	<div class="mx-auto max-w-4xl px-6">
-		<div class="mb-16 text-center">
-			<div class="reveal-view mb-6 text-[11px] font-semibold uppercase tracking-[0.2em] premium-subtitle" style="color: rgba(250, 204, 107, 0.7);">
-				Besoin d'informations ?
-			</div>
+	<div class="mx-auto max-w-7xl px-6">
+		<div class="grid gap-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-16">
+			<!-- Accordéon -->
+			<div>
+				<SectionHead
+					index="06"
+					tag="Questions fréquentes"
+					title="Tout ce que vous voulez <span class='nx-accent'>savoir</span>"
+					lead="Les réponses aux questions que les structures nous posent le plus souvent avant de commander."
+				/>
 
-			<h2
-				class="reveal-view font-display text-2xl md:text-3xl font-bold text-[#F9FAFB] text-center tracking-tight"
-			>
-				Questions <span style="color: #FACC6B;">Fréquentes</span>
-			</h2>
-		</div>
-
-		<div class="space-y-4">
-			{
-				faqItems.map((item, index) => (
-					<div class="faq-item" data-index={index}>
-						<button
-							class="faq-question w-full flex items-center justify-between p-6 rounded-[1rem] border border-[#D4AF37]/20 bg-white/5 backdrop-blur-sm transform-gpu transition-all duration-300 will-change-transform hover:border-[#D4AF37]/30 hover:bg-white/10"
-							aria-expanded="false"
-						>
-							<span class="faq-question-text text-left text-base font-medium text-[#F9FAFB] transition-colors duration-300">
-								{item.question}
-							</span>
-							<svg
-								class="faq-icon w-5 h-5 text-[#FACC6B] transition-transform duration-300 flex-shrink-0 ml-4"
-								fill="none"
-								stroke="currentColor"
-								stroke-width="2"
-								viewBox="0 0 24 24"
-							>
-								<path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-							</svg>
-						</button>
-						<div class="faq-answer overflow-hidden max-h-0 transition-all duration-500 ease-out">
-							<div class="p-6 pt-0 text-sm leading-[1.6] text-white/70">
-								{item.answer}
+				<div class="nx-acc mt-12" data-accordion data-motion="up" data-motion-delay="0.12">
+					{faqItems.map((item, i) => (
+						<div class="nx-acc__item" data-open={i === 0 ? 'true' : 'false'}>
+							<button type="button" class="nx-acc__trigger text-white">
+								<span class="nx-acc__index">{String(i + 1).padStart(2, '0')}.</span>
+								<span class="nx-acc__question">{item.question}</span>
+								<span class="nx-acc__sign" aria-hidden="true"></span>
+							</button>
+							<div class="nx-acc__body">
+								<div>
+									<p class="nx-acc__answer text-[#A0ACC6]">{item.answer}</p>
+								</div>
 							</div>
 						</div>
+					))}
+				</div>
+			</div>
+
+			<!-- Encadré d'appel, comme le bloc « Still not sure? » de Noryx -->
+			<aside class="lg:sticky lg:top-28 lg:self-start" data-motion="up" data-motion-delay="0.18">
+				<div class="nx-panel relative overflow-hidden p-8 md:p-10">
+					<SewingDecor variant="tape" class="pointer-events-none absolute -right-4 -top-6 h-28 w-28 text-[#F5B544] opacity-[0.12]" />
+
+					<span class="nx-badge">Réponse en 1 h</span>
+
+					<h3 class="nx-display nx-display--md mt-6 text-white">
+						Encore une <span class="nx-accent">question ?</span>
+					</h3>
+
+					<p class="mt-4 text-sm leading-relaxed text-[#A0ACC6]">
+						Écrivez-nous votre besoin : pièces, quantités, délais. Nous revenons vers vous avec une proposition
+						adaptée à votre structure.
+					</p>
+
+					<div class="mt-8 flex flex-wrap gap-3">
+						<RollButton href="/contact" label="Nous écrire" variant="solid" />
+						<RollButton href="/catalogue" label="Voir le catalogue" />
 					</div>
-				))
-			}
+				</div>
+
+				<div class="nx-divider mt-8"></div>
+				<p class="mt-6 text-xs leading-relaxed text-white/40">
+					Confection Univers — atelier de confection industrielle, Thiès, Sénégal.
+				</p>
+			</aside>
 		</div>
 	</div>
+
+	<StitchLine class="pointer-events-none absolute inset-x-8 bottom-4 text-[#F5B544]" step={18} opacity={0.22} />
+
+	<!-- Décors de couture -->
+	<SewingDecor variant="pin" class="pointer-events-none absolute right-6 top-[5%] hidden h-16 w-16 -rotate-[28deg] text-[#F5B544] opacity-[0.16] lg:block" />
+	<SewingDecor variant="chalk" class="pointer-events-none absolute bottom-[6%] left-4 hidden h-16 w-16 text-[#F5B544] opacity-[0.16] lg:block" />
+	<SewingDecor variant="thimble" class="pointer-events-none absolute left-6 top-[42%] hidden h-16 w-16 rotate-[-10deg] text-[#F5B544] opacity-[0.14] xl:block" />
+	<SewingDecor variant="yarn" class="pointer-events-none absolute bottom-[22%] right-4 hidden h-20 w-20 text-[#F5B544] opacity-[0.13] xl:block" />
 </section>
-
-<script>
-	document.querySelectorAll('.faq-question').forEach(button => {
-		button.addEventListener('click', () => {
-			const faqItem = button.closest('.faq-item') as HTMLElement;
-			const answer = faqItem?.querySelector('.faq-answer') as HTMLElement;
-			const icon = button.querySelector('.faq-icon') as HTMLElement;
-			const questionText = button.querySelector('.faq-question-text') as HTMLElement;
-			const isOpen = button.getAttribute('aria-expanded') === 'true';
-
-			// Close all other items
-			document.querySelectorAll('.faq-question').forEach(otherButton => {
-				if (otherButton !== button) {
-					otherButton.setAttribute('aria-expanded', 'false');
-					const otherItem = otherButton.closest('.faq-item') as HTMLElement;
-					const otherAnswer = otherItem?.querySelector('.faq-answer') as HTMLElement;
-					const otherIcon = otherButton.querySelector('.faq-icon') as HTMLElement;
-					const otherQuestionText = otherButton.querySelector('.faq-question-text') as HTMLElement;
-					
-					if (otherAnswer) otherAnswer.style.maxHeight = '0';
-					if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
-					if (otherQuestionText) otherQuestionText.style.color = '#F9FAFB';
-				}
-			});
-
-			// Toggle current item
-			button.setAttribute('aria-expanded', (!isOpen).toString());
-			if (!isOpen && answer && icon && questionText) {
-				answer.style.maxHeight = answer.scrollHeight + 'px';
-				icon.style.transform = 'rotate(180deg)';
-				questionText.style.color = '#FACC6B';
-			} else if (answer && icon && questionText) {
-				answer.style.maxHeight = '0';
-				icon.style.transform = 'rotate(0deg)';
-				questionText.style.color = '#F9FAFB';
-			}
-		});
-	});
-</script>
-
-<style>
-	.premium-subtitle {
-		animation: fadeInUp 0.8s ease-out forwards;
-	}
-
-	@keyframes fadeInUp {
-		from {
-			opacity: 0;
-			transform: translateY(20px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	.reveal-view {
-		opacity: 0;
-		animation: fadeInUp 0.8s ease-out forwards;
-	}
-
-	.reveal-view:nth-child(1) {
-		animation-delay: 0.1s;
-	}
-
-	.reveal-view:nth-child(2) {
-		animation-delay: 0.2s;
-	}
-</style>

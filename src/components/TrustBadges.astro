@@ -1,64 +1,74 @@
 ---
+import SewingDecor from './decor/SewingDecor.astro';
+import MarqueeBand from './ui/MarqueeBand.astro';
+
+/**
+ * Bandeau de confiance — style Noryx.
+ * Trois garanties alignées, séparées par des filets, puis un bandeau de mots
+ * qui défile en continu (effet signature de Noryx).
+ */
+const badges = [
+	{
+		title: 'Matières étudiées selon l’usage',
+		text: 'Tissus et entretien à définir selon le vêtement et son usage.',
+		path: 'M4 6h16M4 12h16M4 18h16M7 3v18m10-18v18',
+	},
+	{
+		title: 'Modèles & tailles cadrés',
+		text: 'Pièces, coupes et répartition des tailles préparées avec votre structure.',
+		path: 'M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z',
+	},
+	{
+		title: 'Production en série sur devis',
+		text: 'Quantités, options et planning confirmés après étude du projet.',
+		path: 'M12 3 3.5 7.5 12 12l8.5-4.5L12 3Zm-8.5 9L12 16.5l8.5-4.5M3.5 16.5 12 21l8.5-4.5',
+	},
+];
 ---
-<section class="relative premium-section py-16 border-0 outline-none mt-[-1px]" style="border: none !important; outline: none !important; box-shadow: none !important;">
-	<!-- Glow Effects -->
-	<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-		<div class="absolute left-[20%] top-[30%] w-[300px] h-[300px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.15) 0%, transparent 70%); filter: blur(100px);"></div>
-		<div class="absolute right-[20%] bottom-[30%] w-[250px] h-[250px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.1) 0%, transparent 70%); filter: blur(80px);"></div>
+
+<section
+	class="premium-section relative overflow-hidden border-0 px-6 pb-10 pt-14"
+	style="border: none !important; outline: none !important; box-shadow: none !important;"
+	aria-label="Nos garanties"
+>
+	<!-- Halos dorés -->
+	<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+		<div class="absolute left-[20%] top-[30%] h-[300px] w-[300px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.13) 0%, transparent 70%); filter: blur(100px);"></div>
+		<div class="absolute bottom-[30%] right-[20%] h-[250px] w-[250px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.09) 0%, transparent 70%); filter: blur(80px);"></div>
 	</div>
 
-	<div class="relative z-10 mx-auto max-w-7xl px-6">
-		<div class="grid grid-cols-1 gap-8 md:grid-cols-3">
-			<!-- Badge 1: Matières étudiées selon l’usage -->
-			<div class="trust-badge group flex flex-col items-center gap-4 p-6 rounded-2xl transform-gpu transition-all duration-500 will-change-transform hover:scale-[1.02] hover:-translate-y-2 bg-[rgba(0,0,0,0.3)] backdrop-blur-xl border border-[rgba(250,204,107,0.15)] hover:border-[rgba(250,204,107,0.3)] hover:bg-[rgba(0,0,0,0.4)] hover:shadow-[0_8px_32px_rgba(198,161,95,0.15)]">
-				<div class="flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(250,204,107,0.1)] transform-gpu transition-all duration-500 will-change-transform group-hover:bg-[rgba(250,204,107,0.2)] group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(198,161,95,0.4)]">
-					<svg class="h-8 w-8 text-[#FACC6B] transition-colors duration-500 group-hover:text-[#FACC6B]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16M7 3v18m10-18v18" />
-					</svg>
-				</div>
-				<div class="text-center">
-					<h3 class="font-display text-lg font-semibold text-[#F9FAFB] transition-colors duration-500 group-hover:text-[#FACC6B]">
-						Matières étudiées selon l’usage
-					</h3>
-					<p class="mt-2 text-sm text-foreground/70">
-						Tissus et entretien à définir selon le vêtement et son usage.
-					</p>
-				</div>
-			</div>
-
-			<!-- Badge 2: Modèles & tailles cadrés -->
-			<div class="trust-badge group flex flex-col items-center gap-4 p-6 rounded-2xl transform-gpu transition-all duration-500 will-change-transform hover:scale-[1.02] hover:-translate-y-2 bg-[rgba(0,0,0,0.3)] backdrop-blur-xl border border-[rgba(250,204,107,0.15)] hover:border-[rgba(250,204,107,0.3)] hover:bg-[rgba(0,0,0,0.4)] hover:shadow-[0_8px_32px_rgba(198,161,95,0.15)]">
-				<div class="flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(250,204,107,0.1)] transform-gpu transition-all duration-500 will-change-transform group-hover:bg-[rgba(250,204,107,0.2)] group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(198,161,95,0.4)]">
-					<svg class="h-8 w-8 text-[#FACC6B] transition-colors duration-500 group-hover:text-[#FACC6B]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" />
-					</svg>
-				</div>
-				<div class="text-center">
-					<h3 class="font-display text-lg font-semibold text-[#F9FAFB] transition-colors duration-500 group-hover:text-[#FACC6B]">
-						Modèles & tailles cadrés
-					</h3>
-					<p class="mt-2 text-sm text-foreground/70">
-						Pièces, coupes et répartition des tailles préparées avec votre structure.
-					</p>
-				</div>
-			</div>
-
-			<!-- Badge 3: Production en série sur devis -->
-			<div class="trust-badge group flex flex-col items-center gap-4 p-6 rounded-2xl transform-gpu transition-all duration-500 will-change-transform hover:scale-[1.02] hover:-translate-y-2 bg-[rgba(0,0,0,0.3)] backdrop-blur-xl border border-[rgba(250,204,107,0.15)] hover:border-[rgba(250,204,107,0.3)] hover:bg-[rgba(0,0,0,0.4)] hover:shadow-[0_8px_32px_rgba(198,161,95,0.15)]">
-				<div class="flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(250,204,107,0.1)] transform-gpu transition-all duration-500 will-change-transform group-hover:bg-[rgba(250,204,107,0.2)] group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(198,161,95,0.4)]">
-					<svg class="h-8 w-8 text-[#FACC6B] transition-colors duration-500 group-hover:text-[#FACC6B]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M12 3 3.5 7.5 12 12l8.5-4.5L12 3Zm-8.5 9L12 16.5l8.5-4.5M3.5 16.5 12 21l8.5-4.5" />
-					</svg>
-				</div>
-				<div class="text-center">
-					<h3 class="font-display text-lg font-semibold text-[#F9FAFB] transition-colors duration-500 group-hover:text-[#FACC6B]">
-Production en série sur devis
-					</h3>
-					<p class="mt-2 text-sm text-foreground/70">
-						Quantités, options et planning confirmés après étude du projet.
-					</p>
-				</div>
-			</div>
-		</div>
+	<div class="relative z-10 mx-auto max-w-7xl">
+		<ul
+			class="grid grid-cols-1 divide-y divide-[#F5B544]/12 md:grid-cols-3 md:divide-x md:divide-y-0"
+			data-motion-group
+			data-motion-stagger="0.12"
+		>
+			{badges.map((badge, i) => (
+				<li class:list={['flex gap-4 px-0 py-7 md:px-8', i === 0 && 'md:pl-0', i === badges.length - 1 && 'md:pr-0']}>
+					<span class="flex h-11 w-11 flex-none items-center justify-center rounded-full border border-[#F5B544]/30 bg-[#F5B544]/[0.08] text-[#FACC6B]">
+						<svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+							<path stroke-linecap="round" stroke-linejoin="round" d={badge.path} />
+						</svg>
+					</span>
+					<div>
+						<h3 class="font-display text-base font-semibold leading-snug text-[#F9FAFB] md:text-lg">{badge.title}</h3>
+						<p class="mt-1.5 text-sm leading-relaxed text-foreground/65">{badge.text}</p>
+					</div>
+				</li>
+			))}
+		</ul>
 	</div>
+
+	<!-- Bandeau défilant, effet Noryx -->
+	<MarqueeBand
+		class="mt-12"
+		tone="dark"
+		duration={19}
+		words={['Sur mesure', 'Séries', 'Uniformes', 'Toges', 'Blouses', 'Tenues de travail']}
+		accent={1}
+	/>
+
+	<!-- Décors de couture (purement décoratifs) -->
+	<SewingDecor variant="ruler" class="pointer-events-none absolute right-4 top-3 hidden h-12 w-12 rotate-[6deg] text-[#F5B544] opacity-[0.16] lg:block" />
+	<SewingDecor variant="zipper" class="pointer-events-none absolute left-4 bottom-24 hidden h-14 w-14 text-[#F5B544] opacity-[0.15] xl:block" />
 </section>

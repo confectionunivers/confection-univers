@@ -1,0 +1,340 @@
+---
+import SewingDecor from './decor/SewingDecor.astro';
+import SectionHead from './ui/SectionHead.astro';
+
+/**
+ * Section « Notre signature » — placée juste après « À propos » sur la page
+ * d'accueil. Elle rassemble les trois éléments de l'identité de l'atelier :
+ * le stylo, la signature « Confection Univers » et la chemise blanche à cravate.
+ *
+ * Tout est vectoriel (SVG) : la section reste nette à toutes les résolutions,
+ * ne pèse quasiment rien et se recolore depuis la palette du site.
+ */
+---
+
+<section
+	id="signature"
+	class="signature-section relative overflow-hidden px-6 py-20 md:py-28"
+	aria-labelledby="signature-heading"
+>
+	<!-- Halos dorés, dans l'esprit des autres sections -->
+	<div class="pointer-events-none absolute inset-0" aria-hidden="true">
+		<div class="absolute left-[6%] top-[12%] h-[420px] w-[420px] rounded-full" style="background: radial-gradient(ellipse, rgba(245, 181, 68, 0.09) 0%, transparent 70%); filter: blur(120px);"></div>
+		<div class="absolute right-[8%] bottom-[8%] h-[380px] w-[380px] rounded-full" style="background: radial-gradient(ellipse, rgba(245, 181, 68, 0.06) 0%, transparent 70%); filter: blur(110px);"></div>
+	</div>
+
+	<!-- Éléments de couture en fond -->
+	<SewingDecor variant="tape" class="pointer-events-none absolute -left-6 top-24 h-32 w-32 text-[#F5B544] opacity-[0.16] md:left-6 md:h-40 md:w-40" weight={0.9} />
+	<SewingDecor variant="scissors" class="pointer-events-none absolute right-4 top-[18%] hidden h-28 w-28 rotate-[18deg] text-[#F5B544] opacity-[0.16] lg:block" />
+	<SewingDecor variant="button" class="pointer-events-none absolute bottom-16 left-[12%] hidden h-16 w-16 text-[#F5B544] opacity-[0.16] lg:block" />
+
+	<div class="relative mx-auto max-w-7xl">
+		<div class="grid items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
+			<!-- ================= Colonne visuelle : la chemise blanche à cravate ================= -->
+			<div class="signature-plate relative mx-auto w-full max-w-md lg:max-w-none">
+				<div class="signature-plate-frame relative overflow-hidden rounded-[1.75rem] border border-[#F5B544]/25 bg-[#000058]/70 px-8 pt-10 pb-0 shadow-[0_28px_70px_rgba(0,0,0,0.35)]">
+					<!-- Ligne de couture supérieure -->
+					<div class="pointer-events-none absolute inset-x-6 top-4 flex items-center gap-2 text-[#F5B544] opacity-40" aria-hidden="true">
+						<span class="h-px flex-1 bg-[repeating-linear-gradient(90deg,currentColor_0_7px,transparent_7px_14px)]"></span>
+						<span class="font-display text-[9px] font-bold uppercase tracking-[0.3em] opacity-70">Atelier</span>
+						<span class="h-px flex-1 bg-[repeating-linear-gradient(90deg,currentColor_0_7px,transparent_7px_14px)]"></span>
+					</div>
+
+					<!-- Chemise blanche + cravate -->
+					<svg
+						viewBox="0 0 360 440"
+						class="signature-shirt mx-auto block h-auto w-full max-w-[330px]"
+						role="img"
+						aria-label="Chemise blanche de confection avec cravate"
+						preserveAspectRatio="xMidYMax meet"
+					>
+						<defs>
+							<linearGradient id="cu-shirt-shadow" x1="0" y1="0" x2="1" y2="0">
+								<stop offset="0%" stop-color="#C9D3E2" />
+								<stop offset="22%" stop-color="#FFFFFF" />
+								<stop offset="68%" stop-color="#F4F7FC" />
+								<stop offset="100%" stop-color="#C2CDDE" />
+							</linearGradient>
+							<linearGradient id="cu-tie" x1="0.1" y1="0" x2="0.95" y2="1">
+								<stop offset="0%" stop-color="#233063" />
+								<stop offset="48%" stop-color="#0C1233" />
+								<stop offset="100%" stop-color="#05081C" />
+							</linearGradient>
+							<linearGradient id="cu-tie-knot" x1="0" y1="0" x2="1" y2="1">
+								<stop offset="0%" stop-color="#2C3A72" />
+								<stop offset="100%" stop-color="#101740" />
+							</linearGradient>
+						</defs>
+
+						{/* Corps de la chemise */}
+						<path
+							d="M34 128 C58 96 106 76 132 68 L180 116 L228 68 C254 76 302 96 326 128 L336 424 L24 424 Z"
+							fill="url(#cu-shirt-shadow)"
+							stroke="#A9B6CA"
+							stroke-width="1.6"
+							stroke-linejoin="round"
+						/>
+
+						{/* Empiècement d'épaule */}
+						<path d="M34 128 C58 96 106 76 132 68 L138 86 C110 96 76 118 56 142 Z" fill="#FFFFFF" opacity="0.85" />
+						<path d="M326 128 C302 96 254 76 228 68 L222 86 C250 96 284 118 304 142 Z" fill="#FFFFFF" opacity="0.85" />
+
+						{/* Patte de boutonnage */}
+						<path d="M168 112 H192 V424 H168 Z" fill="#FFFFFF" stroke="#D3DCE8" stroke-width="1.2" />
+						<path d="M193.5 112 V424" stroke="#E2E8F1" stroke-width="1" />
+
+						{/* Boutons */}
+						<circle cx="180" cy="196" r="3.6" fill="#C7D1E0" opacity="0.5" />
+						<circle cx="180" cy="256" r="3.6" fill="#C7D1E0" opacity="0.5" />
+						<circle cx="180" cy="336" r="3.8" fill="#CBD5E3" />
+						<circle cx="180" cy="392" r="3.8" fill="#CBD5E3" />
+
+						{/* Col : deux rabats (bords adoucis, pointe vers le bas) */}
+						<path
+							d="M176 70 C158 62 138 58 126 60 C130 78 140 108 170 150 C168 116 172 92 176 70 Z"
+							fill="#FFFFFF"
+							stroke="#BCC8D9"
+							stroke-width="1.4"
+							stroke-linejoin="round"
+						/>
+						<path
+							d="M184 70 C202 62 222 58 234 60 C230 78 220 108 190 150 C192 116 188 92 184 70 Z"
+							fill="#FAFCFF"
+							stroke="#BCC8D9"
+							stroke-width="1.4"
+							stroke-linejoin="round"
+						/>
+						<path d="M172 86 C166 104 164 126 168 142" stroke="#E4EAF3" stroke-width="1.4" stroke-dasharray="4 4" fill="none" />
+						<path d="M188 86 C194 104 196 126 192 142" stroke="#E4EAF3" stroke-width="1.4" stroke-dasharray="4 4" fill="none" />
+
+						{/* Cravate : nœud puis pan */}
+						<path d="M164 170 L196 170 L208 288 L180 320 L152 288 Z" fill="url(#cu-tie)" />
+						<path d="M164 170 L196 170 L200 196 L160 196 Z" fill="#1A2450" opacity="0.55" />
+						<path d="M180 196 L180 320" stroke="#000000" stroke-opacity="0.28" stroke-width="1.2" />
+						<path d="M165 138 L195 138 L199 168 L180 176 L161 168 Z" fill="url(#cu-tie-knot)" stroke="#0A0F2A" stroke-width="1" stroke-linejoin="round" />
+
+						{/* Pointillés de couture, clin d'œil à l'atelier */}
+						<path d="M46 168 C66 148 96 130 124 120" stroke="#C6D0DF" stroke-width="1.3" stroke-dasharray="5 5" fill="none" />
+						<path d="M314 168 C294 148 264 130 236 120" stroke="#C6D0DF" stroke-width="1.3" stroke-dasharray="5 5" fill="none" />
+					</svg>
+				</div>
+
+				<!-- Le stylo posé sur le coin du plateau -->
+				<svg
+					viewBox="0 0 60 240"
+					class="signature-pen pointer-events-none absolute -bottom-4 -left-3 h-40 w-auto md:h-52 lg:-left-6"
+					style="transform: rotate(62deg); transform-origin: center;"
+					aria-hidden="true"
+					focusable="false"
+				>
+					<defs>
+						<linearGradient id="cu-pen-gold" x1="0" y1="0" x2="1" y2="0">
+							<stop offset="0%" stop-color="#C98A22" />
+							<stop offset="26%" stop-color="#F7D98A" />
+							<stop offset="52%" stop-color="#F5B544" />
+							<stop offset="78%" stop-color="#FCE9B4" />
+							<stop offset="100%" stop-color="#B87A18" />
+						</linearGradient>
+						<linearGradient id="cu-pen-body" x1="0" y1="0" x2="1" y2="0">
+							<stop offset="0%" stop-color="#3A1111" />
+							<stop offset="35%" stop-color="#7B2A21" />
+							<stop offset="60%" stop-color="#521814" />
+							<stop offset="100%" stop-color="#2A0C0B" />
+						</linearGradient>
+					</defs>
+					{/* Corps */}
+					<rect x="17" y="8" width="26" height="118" rx="11" fill="url(#cu-pen-body)" />
+					<rect x="21.5" y="14" width="4" height="104" rx="2" fill="#FFFFFF" opacity="0.16" />
+					{/* Bague */}
+					<rect x="16" y="124" width="28" height="11" rx="3" fill="url(#cu-pen-gold)" />
+					{/* Clip */}
+					<path d="M43 20 C48 24 48 56 43 62 L40.4 59 C44.6 54 44.6 28 40.4 23 Z" fill="url(#cu-pen-gold)" />
+					{/* Poignée */}
+					<rect x="19" y="135" width="22" height="42" rx="6" fill="#131A3E" />
+					<rect x="22" y="139" width="3.5" height="34" rx="1.7" fill="#FFFFFF" opacity="0.13" />
+					{/* Plume */}
+					<path
+						d="M19 177 L41 177 C39 197 35 215 30 231 C25 215 21 197 19 177 Z"
+						fill="url(#cu-pen-gold)"
+						stroke="#8E5A10"
+						stroke-width="0.9"
+					/>
+					<path d="M30 187 V228" stroke="#3A2408" stroke-width="1.3" stroke-linecap="round" />
+					<circle cx="30" cy="193" r="2.5" fill="#3A2408" />
+					<path d="M22.5 199 C27 203 33 203 37.5 199" stroke="#8E5A10" stroke-width="1" fill="none" opacity="0.7" />
+				</svg>
+			</div>
+
+			<!-- ================= Colonne texte ================= -->
+			<div class="space-y-7">
+				<SectionHead
+					id="signature-heading"
+					tag="Notre signature"
+					title="Chaque pièce porte <span class='nx-accent'>notre nom.</span>"
+				/>
+
+				<p class="max-w-xl text-base leading-relaxed text-[#A0ACC6] md:text-lg">
+					Avant la première coupe, il y a un trait de plume : le vôtre. Nous le traduisons en patronage,
+					en tissu et en couture, jusqu'à la dernière finition.
+				</p>
+
+				<ul class="grid gap-4 sm:grid-cols-3">
+					<li class="signature-feature">
+						<SewingDecor variant="chalk" class="h-7 w-7 text-[#F5B544]" />
+						<span class="signature-feature-title">Trait précis</span>
+						<span class="signature-feature-text">Patronage au millimètre.</span>
+					</li>
+					<li class="signature-feature">
+						<SewingDecor variant="spool" class="h-7 w-7 text-[#F5B544]" />
+						<span class="signature-feature-title">Tissu choisi</span>
+						<span class="signature-feature-text">Matières durables.</span>
+					</li>
+					<li class="signature-feature">
+						<SewingDecor variant="needle" class="h-7 w-7 text-[#F5B544]" />
+						<span class="signature-feature-title">Finition main</span>
+						<span class="signature-feature-text">Contrôle pièce par pièce.</span>
+					</li>
+				</ul>
+
+				<!-- La signature, révélée comme si elle s'écrivait -->
+				<div class="signature-lockup relative pt-4" data-signature-lockup>
+					<span class="signature-script" data-signature-script>Confection Univers</span>
+					<svg class="signature-flourish" viewBox="0 0 420 34" fill="none" aria-hidden="true" focusable="false">
+						<path
+							d="M6 22 C 70 8 150 6 214 14 C 262 20 306 26 350 18 C 372 14 392 10 412 6"
+							stroke="#F5B544"
+							stroke-width="2"
+							stroke-linecap="round"
+							opacity="0.75"
+						/>
+						<path
+							d="M28 28 C 96 18 176 17 240 23"
+							stroke="#F5B544"
+							stroke-width="1.2"
+							stroke-linecap="round"
+							opacity="0.35"
+						/>
+					</svg>
+					<p class="mt-3 text-[11px] uppercase tracking-[0.2em] text-[#A0ACC6]">
+						Atelier de confection — Thiès, Sénégal
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.signature-section {
+		/* Dégradé du bleu de nuit du logo */
+		background: linear-gradient(180deg, #000058 0%, #00004B 45%, #00004A 100%);
+		position: relative;
+	}
+
+	.signature-feature {
+		display: flex;
+		flex-direction: column;
+		gap: 0.35rem;
+		border-radius: 1rem;
+		border: 1px solid rgba(245, 181, 68, 0.2);
+		background: rgba(255, 255, 255, 0.028);
+		padding: 1rem;
+		transition: border-color 250ms ease, background-color 250ms ease;
+	}
+
+	.signature-feature:hover {
+		border-color: rgba(245, 181, 68, 0.45);
+		background: rgba(245, 181, 68, 0.05);
+	}
+
+	.signature-feature-title {
+		font-family: var(--font-display);
+		font-size: 0.9rem;
+		font-weight: 600;
+		color: #ffffff;
+	}
+
+	.signature-feature-text {
+		font-size: 0.8rem;
+		line-height: 1.5;
+		color: #a0acc6;
+	}
+
+	/* Signature manuscrite */
+	.signature-script {
+		display: block;
+		font-family: 'Great Vibes', 'Segoe Script', 'Brush Script MT', cursive;
+		font-size: clamp(2.6rem, 7vw, 4rem);
+		line-height: 1.15;
+		color: #f5b544;
+		text-shadow: 0 2px 22px rgba(245, 181, 68, 0.22);
+		white-space: nowrap;
+	}
+
+	.signature-flourish {
+		display: block;
+		width: min(100%, 420px);
+		height: 2rem;
+		margin-top: -0.4rem;
+	}
+
+	/* Révélation « écriture » au scroll : le trait se pose de gauche à droite. */
+	[data-signature-script],
+	.signature-flourish {
+		clip-path: inset(0 100% 0 0);
+		transition: clip-path 1500ms cubic-bezier(0.33, 0.85, 0.35, 1);
+	}
+
+	[data-signature-lockup].is-signed [data-signature-script],
+	[data-signature-lockup].is-signed .signature-flourish {
+		clip-path: inset(0 0 0 0);
+	}
+
+	/* Le stylo se redresse légèrement quand la signature se termine. */
+	.signature-pen {
+		transition: transform 1500ms cubic-bezier(0.33, 0.85, 0.35, 1);
+	}
+
+	.signature-plate:hover .signature-pen {
+		transform: rotate(48deg) translateY(-6px);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		[data-signature-script],
+		.signature-flourish {
+			clip-path: none;
+			transition: none;
+		}
+
+		.signature-pen,
+		.signature-plate:hover .signature-pen {
+			transition: none;
+			transform: rotate(62deg);
+		}
+	}
+</style>
+
+<script>
+	const lockup = document.querySelector<HTMLElement>('[data-signature-lockup]');
+
+	if (lockup) {
+		const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+		if (reduced) {
+			lockup.classList.add('is-signed');
+		} else {
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							lockup.classList.add('is-signed');
+							observer.unobserve(entry.target);
+						}
+					});
+				},
+				{ threshold: 0.35 }
+			);
+			observer.observe(lockup);
+		}
+	}
+</script>

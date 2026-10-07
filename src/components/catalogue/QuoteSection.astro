@@ -2,13 +2,18 @@
 import { catalogueFilters, catalogueProducts } from '../../lib/catalogue';
 ---
 
-<section id="devis" class="scroll-mt-24 bg-[#00001C] px-6 py-16 text-white md:py-24" aria-labelledby="quote-heading">
+<section id="devis" class="scroll-mt-24 bg-[#00004B] px-6 py-16 text-white md:py-24" aria-labelledby="quote-heading">
 	<div class="mx-auto grid max-w-7xl gap-9 lg:grid-cols-[0.72fr_1.28fr] lg:gap-14">
 		<div class="lg:sticky lg:top-32 lg:self-start">
-			<p class="mb-4 text-[10px] font-semibold uppercase tracking-[0.26em] text-[#F5B544]">Un projet de confection ?</p>
-			<h2 id="quote-heading" class="font-display text-[clamp(2.6rem,7vw,5.3rem)] font-semibold leading-[0.95] tracking-[-0.06em]">
-				VOUS AVEZ<br />UN PROJET<span class="text-[#F5B544]">?</span>
-			</h2>
+			<div class="mb-10">
+					<div class="nx-head mb-5 text-[#8B6325]">
+						<span class="nx-num">{ 06 }</span>
+						<span class="nx-tag">Un projet de confection ?</span>
+					</div>
+					<h2 id="quote-heading" class="nx-display nx-display--lg nx-mask text-[#0A1628]">
+						<span>Vous avez un projet ?</span>
+					</h2>
+				</div>
 			<p class="mt-6 max-w-md text-base leading-[1.8] text-white/65 md:text-lg">
 				Parlons de votre besoin et construisons ensemble une solution textile adaptée à votre activité.
 			</p>
@@ -112,7 +117,7 @@ import { catalogueFilters, catalogueProducts } from '../../lib/catalogue';
 					<p data-quote-file-name class="min-h-4 text-[10px] font-medium text-[#8B6325]" aria-live="polite"></p>
 				</div>
 
-				<button type="submit" class="inline-flex min-h-12 w-full items-center justify-center gap-3 bg-[#00001C] px-6 py-3 text-[10px] font-bold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#8B6325] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8B6325] sm:w-auto">
+				<button type="submit" class="inline-flex min-h-12 w-full items-center justify-center gap-3 bg-[#00004B] px-6 py-3 text-[10px] font-bold uppercase tracking-[0.18em] text-white transition-colors hover:bg-[#8B6325] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8B6325] sm:w-auto">
 					Préparer ma demande <span aria-hidden="true">↗</span>
 				</button>
 				<p data-quote-status class="min-h-5 text-xs leading-relaxed text-[#0A1628]/70" role="status" aria-live="polite"></p>

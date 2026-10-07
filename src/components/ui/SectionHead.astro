@@ -1,0 +1,67 @@
+---
+/**
+ * En-tête de section façon Noryx : `{ 01 } # Notre savoir-faire`
+ * suivi d'un grand titre, avec apparition masquée au scroll.
+ */
+interface Props {
+	/** Numéro affiché entre accolades, ex. "01". Omis pour un simple libellé. */
+	index?: string;
+	/** Libellé après le dièse. */
+	tag: string;
+	/** Titre principal (peut contenir du HTML simple, ex. <span class="nx-accent">). */
+	title?: string;
+	/** Phrase d'introduction. */
+	lead?: string;
+	/** Couleur du texte : sur fond sombre (défaut) ou clair. */
+	tone?: 'dark' | 'light';
+	/** Alignement. */
+	align?: 'left' | 'center';
+	/** Identifiant du titre, pour aria-labelledby. */
+	id?: string;
+	class?: string;
+}
+
+const {
+	index,
+	tag,
+	title,
+	lead,
+	tone = 'dark',
+	align = 'left',
+	id,
+	class: className = '',
+} = Astro.props;
+
+const isDark = tone === 'dark';
+const color = isDark ? 'text-white' : 'text-[#0A1628]';
+const muted = isDark ? 'text-[#A0ACC6]' : 'text-[#0A1628]/65';
+const centered = align === 'center';
+---
+
+<header class={`${centered ? 'mx-auto max-w-3xl text-center' : 'max-w-4xl'} ${className}`}>
+	<div class={`nx-head ${centered ? 'justify-center' : ''} ${isDark ? 'text-primary' : 'text-[#8B6325]'}`} data-motion="fade">
+		{index && <span class="nx-num">{`{ ${index} }`}</span>}
+		<span class="nx-tag">{tag}</span>
+	</div>
+
+	{title && (
+		<h2
+			id={id}
+			class={`nx-display nx-display--lg mt-6 ${color}`}
+			data-motion-mask
+		>
+			<span class="nx-mask">
+				<span set:html={title} />
+			</span>
+		</h2>
+	)}
+
+	{lead && (
+		<p class={`mt-6 max-w-2xl text-base leading-relaxed md:text-lg ${centered ? 'mx-auto' : ''} ${muted}`} data-motion="up" data-motion-delay="0.12">
+			{lead}
+		</p>
+	)}
+
+	<!-- Actions éventuelles (boutons) passées en enfants -->
+	<slot />
+</header>

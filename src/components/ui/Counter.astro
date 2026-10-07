@@ -1,0 +1,45 @@
+---
+/**
+ * Compteur animé : le nombre grimpe jusqu'à sa valeur quand on arrive dessus.
+ * Sans JS (ou mouvement réduit), la valeur finale reste affichée.
+ */
+interface Props {
+	/** Valeur finale. */
+	to: number;
+	/** Nombre de décimales. */
+	decimals?: number;
+	prefix?: string;
+	suffix?: string;
+	label: string;
+	/** 'dark' = sur fond bleu, 'light' = sur fond papier. */
+	tone?: 'dark' | 'light';
+	class?: string;
+}
+
+const {
+	to,
+	decimals = 0,
+	prefix = '',
+	suffix = '',
+	label,
+	tone = 'dark',
+	class: className = '',
+} = Astro.props;
+
+const isDark = tone === 'dark';
+const valueColor = isDark ? 'text-white' : 'text-[#0A1628]';
+const labelColor = isDark ? 'text-[#A0ACC6]' : 'text-[#0A1628]/60';
+const display = `${prefix}${to.toFixed(decimals)}${suffix}`;
+---
+
+<div class={`nx-stat ${className}`} data-motion="up">
+	<div
+		class={`nx-stat__value ${valueColor}`}
+		data-motion-counter
+		data-to={to}
+		data-decimals={decimals}
+		data-prefix={prefix}
+		data-suffix={suffix}
+	>{display}</div>
+	<p class={`nx-stat__label mt-2 ${labelColor}`}>{label}</p>
+</div>

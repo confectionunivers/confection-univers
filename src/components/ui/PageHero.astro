@@ -1,0 +1,67 @@
+---
+import MarqueeBand from './MarqueeBand.astro';
+import SewingDecor from '../decor/SewingDecor.astro';
+import StitchLine from '../decor/StitchLine.astro';
+
+/**
+ * En-tête de page intérieure, style Noryx :
+ * badge → très grand titre → phrase d'introduction → bandeau de mots qui défile.
+ */
+interface Props {
+	tag: string;
+	title: string;
+	titleAccent?: string;
+	lead?: string;
+	/** Mots du bandeau défilant. */
+	words?: string[];
+	accent?: number;
+}
+
+const {
+	tag,
+	title,
+	titleAccent,
+	lead,
+	words = ['Confection', 'Sur mesure', 'Séries', 'Qualité'],
+	accent = 0,
+} = Astro.props;
+---
+
+<section class="nx-grain relative flex min-h-[62vh] flex-col justify-center overflow-hidden pb-10 pt-36 md:pt-44">
+	<!-- Fond -->
+	<div class="pointer-events-none absolute inset-0 -z-20 bg-background"></div>
+	<div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_85%_60%_at_100%_0%,rgba(245,181,68,0.14),transparent_55%),radial-gradient(ellipse_70%_50%_at_0%_100%,rgba(0,0,49,0.5),transparent_50%)]"></div>
+
+	<div class="mx-auto w-full max-w-7xl px-6">
+		<div class="nx-badge mb-7" data-motion="fade">
+			<span class="h-1.5 w-1.5 rounded-full bg-[#F5B544]"></span>
+			{tag}
+		</div>
+
+		<h1 class="nx-display nx-display--xl max-w-4xl text-white">
+			<span class="nx-mask block"><span data-motion="up" data-motion-delay="0.05">{title}</span></span>
+			{titleAccent && (
+				<span class="nx-mask mt-1 block">
+					<span class="nx-accent" data-motion="up" data-motion-delay="0.14">{titleAccent}</span>
+				</span>
+			)}
+		</h1>
+
+		{lead && (
+			<p class="mt-8 max-w-2xl text-base leading-relaxed text-foreground/70 md:text-lg" data-motion="up" data-motion-delay="0.2">
+				{lead}
+			</p>
+		)}
+
+		<div class="mt-10 flex flex-wrap gap-4" data-motion="up" data-motion-delay="0.26">
+			<slot />
+		</div>
+	</div>
+
+	<!-- Bandeau défilant -->
+	<MarqueeBand class="mt-16 border-t border-white/10 pt-8" tone="dark" duration={17} words={words} accent={accent} />
+
+	<SewingDecor variant="mannequin" class="pointer-events-none absolute right-6 top-[26%] hidden h-24 w-24 text-[#F5B544] opacity-[0.13] xl:block" />
+	<SewingDecor variant="spool" class="pointer-events-none absolute bottom-[26%] left-6 hidden h-16 w-16 text-[#F5B544] opacity-[0.14] lg:block" />
+	<StitchLine class="pointer-events-none absolute inset-x-8 bottom-2 text-[#F5B544]" step={18} opacity={0.16} />
+</section>

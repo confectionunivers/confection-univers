@@ -1,0 +1,39 @@
+---
+/**
+ * Bandeau de grand texte qui défile en boucle — un des effets signature de Noryx.
+ * Alimenté par une liste de mots séparés par une pastille.
+ */
+interface Props {
+	words: string[];
+	/** Durée d'un cycle complet, en secondes. */
+	duration?: number;
+	/** 'dark' = texte clair sur fond bleu ; 'light' = texte sombre sur fond papier. */
+	tone?: 'dark' | 'light';
+	/** Mot mis en avant en or (index dans la liste, -1 pour aucun). */
+	accent?: number;
+	class?: string;
+}
+
+const { words, duration = 34, tone = 'dark', accent = -1, class: className = '' } = Astro.props;
+
+const isDark = tone === 'dark';
+const baseColor = isDark ? 'text-white/12' : 'text-[#0A1628]/10';
+
+// Deux groupes identiques : la piste se décale de -50 %, donc la boucle est sans raccord.
+const groups = [false, true];
+---
+
+<div class={`nx-band ${className}`} aria-hidden="true">
+	<div class="nx-band__track" style={`animation-duration:${duration}s`}>
+		{groups.map((isDuplicate) => (
+			<div class="nx-band__group" inert={isDuplicate}>
+				{words.map((word, i) => (
+					<>
+						<span class:list={['nx-band__word', i === accent ? 'text-primary' : baseColor]}>{word}</span>
+						<span class:list={['nx-band__dot', i === accent ? 'text-primary' : baseColor]} />
+					</>
+				))}
+			</div>
+		))}
+	</div>
+</div>

@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
 import TrustBadges from '../components/TrustBadges.astro';
 import About from '../components/About.astro';
+import Signature from '../components/Signature.astro';
 import IndustrialProduction from '../components/IndustrialProduction.astro';
 import Services from '../components/Services.astro';
 import CataloguePreview from '../components/CataloguePreview.astro';
@@ -11,21 +12,36 @@ import OrderProcess from '../components/OrderProcess.astro';
 import FAQ from '../components/FAQ.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import StitchLine from '../components/decor/StitchLine.astro';
 ---
 
 <Layout
 	title="Confection Univers | Confection industrielle au Sénégal"
 	description="Confection Univers accompagne les entreprises, écoles et institutions dans la production en série d’uniformes scolaires, tenues de travail, vêtements sportifs et blouses médicales au Sénégal."
 >
-	<main>
+	<main class="relative">
 		<Navbar />
 		<Hero />
 		<div class="relative z-10 -mt-px">
 			<TrustBadges />
 		</div>
+
 		<About />
+
+		{/* Section signature : le stylo, la signature et la chemise blanche à cravate */}
+		<Signature />
+
+		<div class="relative">
+			<StitchLine class="px-6 text-[#F5B544] md:px-16" step={16} opacity={0.22} />
+		</div>
+
 		<IndustrialProduction />
 		<Services />
+
+		<div class="relative">
+			<StitchLine class="px-6 text-[#F5B544] md:px-16" step={16} opacity={0.18} />
+		</div>
+
 		<CataloguePreview />
 		<OrderProcess />
 		<FAQ />

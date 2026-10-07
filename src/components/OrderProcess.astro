@@ -1,103 +1,95 @@
 ---
+import SewingDecor from './decor/SewingDecor.astro';
+import StitchLine from './decor/StitchLine.astro';
+import SectionHead from './ui/SectionHead.astro';
+import MarqueeBand from './ui/MarqueeBand.astro';
+
+/**
+ * Section « Notre processus » — structure Noryx :
+ *   bandeau de mots  →  { 05 } # Processus  →  4 étapes numérotées en grille.
+ */
 const processSteps = [
 	{
 		number: '01',
 		title: 'Demande & Étude',
-		description: 'Nous précisons les pièces, les quantités, les usages et les échéances souhaitées avant de préparer le devis.'
+		description: 'Nous précisons les pièces, les quantités, les usages et les échéances souhaitées avant de préparer le devis.',
 	},
 	{
 		number: '02',
 		title: 'Prototype & Échantillon',
-		description: 'Un échantillon ou prototype peut être étudié pour valider le modèle, les matières, les tailles et la personnalisation.'
+		description: 'Un échantillon ou prototype peut être étudié pour valider le modèle, les matières, les tailles et la personnalisation.',
 	},
 	{
 		number: '03',
 		title: 'Production en Série',
-		description: 'La production en série est définie à partir du modèle, des quantités et des options validées au devis.'
+		description: 'La production en série est définie à partir du modèle, des quantités et les options validées au devis.',
 	},
 	{
 		number: '04',
 		title: 'Finitions & livraison',
-		description: 'Les finitions, le conditionnement, le calendrier et les modalités de livraison sont précisés pour votre commande.'
-	}
+		description: 'Les finitions, le conditionnement, le calendrier et les modalités de livraison sont précisés pour votre commande.',
+	},
 ];
 ---
 
-<section class="relative z-10 py-32 border-0" style="background: linear-gradient(180deg, #00002a 0%, #00001C 100%);">
-	<!-- Premium Golden Glow -->
-	<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-		<div class="absolute left-[10%] top-[25%] w-[500px] h-[500px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.12) 0%, transparent 70%); filter: blur(100px);"></div>
-		<div class="absolute right-[10%] bottom-[25%] w-[400px] h-[400px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.08) 0%, transparent 70%); filter: blur(80px);"></div>
+<section class="relative z-10 border-0 py-24 md:py-32" style="background: linear-gradient(180deg, #000039 0%, #00004A 55%, #00004B 100%);">
+	<!-- Halos -->
+	<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+		<div class="absolute left-[10%] top-[25%] h-[500px] w-[500px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.12) 0%, transparent 70%); filter: blur(100px);"></div>
+		<div class="absolute bottom-[25%] right-[10%] h-[400px] w-[400px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.08) 0%, transparent 70%); filter: blur(80px);"></div>
 	</div>
+
+	<!-- Bandeau de mots qui défile -->
+	<MarqueeBand
+		class="mb-16"
+		tone="dark"
+		duration={15}
+		words={['Étude', 'Prototype', 'Production', 'Finition', 'Livraison']}
+		accent={2}
+	/>
 
 	<div class="mx-auto max-w-7xl px-6">
-		<div class="mb-24 text-center">
-			<div class="reveal-view mb-6 text-[11px] font-semibold uppercase tracking-[0.2em] premium-subtitle" style="color: rgba(250, 204, 107, 0.7);">
-				Comment ça marche
-			</div>
+		<SectionHead
+			index="05"
+			tag="Comment ça marche"
+			align="center"
+			title="Notre processus de <span class='nx-accent'>commande</span>"
+			lead="Quatre étapes claires, du premier échange à la livraison de vos tenues."
+		/>
 
-			<h2
-				class="reveal-view font-display text-2xl md:text-3xl font-bold text-[#F9FAFB] text-center tracking-tight"
-			>
-				Notre Processus de <span style="color: #FACC6B;">Commande</span>
-			</h2>
-		</div>
-
-		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-			{
-				processSteps.map((step, index) => (
-					<div
-						class="group relative overflow-hidden rounded-[1.5rem] border border-[rgba(250,204,107,0.25)] bg-white/5 backdrop-blur-sm p-6 md:p-8 transform-gpu transition-all duration-500 ease-out will-change-transform hover:-translate-y-2 hover:shadow-[0_20px_50px_rgba(212,175,55,0.15)] hover:border-[rgba(250,204,107,0.4)]"
+		<!-- Étapes numérotées -->
+		<div class="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4" data-motion-group data-motion-stagger="0.12">
+			{processSteps.map((step) => (
+				<div class="nx-card-lift group relative overflow-hidden rounded-[1.5rem] border border-[#F5B544]/20 bg-white/[0.04] p-7 backdrop-blur-sm md:p-8">
+					<!-- Numéro en très grand, en filigrane, comme Noryx -->
+					<span
+						class="pointer-events-none absolute -right-2 -top-5 font-display text-8xl font-bold text-[#F5B544]/[0.09] transition-colors duration-500 group-hover:text-[#F5B544]/[0.16]"
+						aria-hidden="true"
 					>
-						<div class="relative z-20">
-							<div class="mb-4 font-display text-4xl font-bold tracking-tight" style="color: #FACC6B;">
-								{step.number}
-							</div>
+						{step.number}
+					</span>
 
-							<h3 class="mb-3 font-display text-lg font-bold text-[#F9FAFB] tracking-tight">
-								{step.title}
-							</h3>
-
-							<p class="text-sm font-normal leading-[1.6] text-white/70">
-								{step.description}
-							</p>
-						</div>
-
-						<!-- Decorative Glow -->
-						<div class="pointer-events-none absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-[rgba(212,175,55,0.05)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></div>
+					<div class="relative z-10">
+						<span class="font-display text-xs font-bold tracking-[0.18em] text-[#FACC6B]">{step.number}</span>
+						<h3 class="mt-4 font-display text-lg font-bold leading-snug tracking-tight text-[#F9FAFB] md:text-xl">
+							{step.title}
+						</h3>
+						<p class="mt-3 text-sm leading-relaxed text-white/55">{step.description}</p>
 					</div>
-				))
-			}
+
+					<!-- Filet doré qui s'ouvre au survol -->
+					<span class="absolute bottom-0 left-0 h-px w-0 bg-[#F5B544]/60 transition-all duration-500 group-hover:w-full" aria-hidden="true"></span>
+				</div>
+			))}
 		</div>
 	</div>
+
+	<StitchLine class="pointer-events-none absolute inset-x-8 bottom-4 text-[#F5B544]" step={18} opacity={0.22} />
+
+	<!-- Décors de couture -->
+	<SewingDecor variant="needle" class="pointer-events-none absolute bottom-10 left-4 hidden h-20 w-20 rotate-[8deg] text-[#F5B544] opacity-[0.16] xl:block" />
+	<SewingDecor variant="button" class="pointer-events-none absolute right-6 top-10 hidden h-14 w-14 text-[#F5B544] opacity-[0.16] xl:block" />
+	<SewingDecor variant="scissors" class="pointer-events-none absolute bottom-[14%] right-6 hidden h-20 w-20 rotate-[12deg] text-[#F5B544] opacity-[0.13] xl:block" />
+	<SewingDecor variant="spool" class="pointer-events-none absolute left-8 top-[28%] hidden h-16 w-16 text-[#F5B544] opacity-[0.14] xl:block" />
+	<SewingDecor variant="ribbon" class="pointer-events-none absolute right-[32%] top-6 hidden h-24 w-24 text-[#F5B544] opacity-[0.12] lg:block" />
 </section>
-
-<style>
-	.premium-subtitle {
-		animation: fadeInUp 0.8s ease-out forwards;
-	}
-
-	@keyframes fadeInUp {
-		from {
-			opacity: 0;
-			transform: translateY(20px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	.reveal-view {
-		opacity: 0;
-		animation: fadeInUp 0.8s ease-out forwards;
-	}
-
-	.reveal-view:nth-child(1) {
-		animation-delay: 0.1s;
-	}
-
-	.reveal-view:nth-child(2) {
-		animation-delay: 0.2s;
-	}
-</style>
