@@ -71,7 +71,7 @@ const social = [
 				<img src={slides[1].src} alt="" class="h-full w-full object-cover object-top" loading="lazy" decoding="async" />
 			</span>
 			<span class="flex flex-col justify-center gap-1 px-4 py-3">
-				<span class="font-anton text-[22px] uppercase leading-none md:text-[clamp(18px,1.6vw,26px)]">Démarrer un projet</span>
+				<span class="font-anton text-[20px] uppercase leading-none md:text-[clamp(16px,1.35vw,22px)]">Démarrer un projet</span>
 				<span class="text-[12.5px] leading-snug text-white/75">Parlez-en directement à notre équipe</span>
 			</span>
 		</a>
@@ -82,7 +82,7 @@ const social = [
 			class="circle-cta hidden md:absolute md:left-[71.4%] md:top-[82.4%] md:flex md:items-center md:justify-center"
 			aria-label="Découvrir nos services"
 		>
-			<span class="relative z-10 text-[clamp(12px,1vw,15px)] font-medium">Commencer</span>
+			<span class="relative z-10 text-[11px] font-medium tracking-wide">Commencer</span>
 		</a>
 
 		<!-- Image secondaire : déborde sur la section suivante -->
@@ -245,9 +245,19 @@ const social = [
 		}
 	}
 
+	/* Positions fixes de la carte projet (grand écran), calées sur la référence */
+	@media (min-width: 768px) {
+		.start-card {
+			position: absolute;
+			left: 50.8%;
+			top: 82.5%;
+			margin-top: 0;
+			width: 250px;
+		}
+	}
+
 	/* ---------- Carte projet ---------- */
 	.start-card {
-		position: relative;
 		background: #000000;
 		border: 1px solid rgba(255, 255, 255, 0.06);
 		box-shadow: 0 24px 50px -18px rgba(0, 0, 0, 0.8);
