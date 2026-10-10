@@ -50,17 +50,28 @@ const social = [
 	<div class="hero-layout">
 		<!-- Titre + sous-titre -->
 		<div class="reveal hero-title">
-			<h1 class="title-gradient font-anton uppercase hero-h1">UNIVERS</h1>
+			<h1 class="title-gradient font-anton uppercase hero-h1"><span class="block">Confection</span><span class="block">Univers</span></h1>
 			<p class="subtitle font-anton uppercase hero-sub">
-				Confection sur-mesure<span class="text-[#D4AF37]">.</span>
+				Confection de vêtements professionnels - Sénégal
 			</p>
 		</div>
 
 		<!-- Texte descriptif -->
-		<p class="reveal reveal-d1 hero-desc text-white/90">
-			Nous concevons des uniformes scolaires, toges de graduation, tenues de travail et costumes africains modernes,
-			avec des finitions irréprochables.
-		</p>
+		<div class="reveal reveal-d1 hero-desc text-white/90">
+			<p class="hero-lead">
+				Vêtements de qualité supérieure fabriqués avec précision. Designs personnalisés adaptés à vos spécifications.
+				Production en gros fiable pour les institutions et entreprises de toutes tailles.
+			</p>
+			<div class="hero-actions">
+				<a href="/contact" class="hero-btn hero-btn-primary">Demander un devis</a>
+				<a href="/catalogue" class="hero-btn hero-btn-ghost">Voir nos produits</a>
+			</div>
+			<ul class="hero-badges" aria-label="Points forts">
+				<li>Uniformes sur mesure</li>
+				<li>Qualité premium</li>
+				<li>Production en gros</li>
+			</ul>
+		</div>
 
 		<!-- Carte « Démarrer un projet » -->
 		<a
@@ -268,8 +279,8 @@ const social = [
 	}
 
 	.hero-h1 {
-		font-size: 25vw;
-		line-height: 0.84;
+		font-size: 20vw;
+		line-height: 0.9;
 	}
 
 	.hero-sub {
@@ -283,6 +294,70 @@ const social = [
 		max-width: 24rem;
 		font-size: 15px;
 		line-height: 1.5;
+	}
+
+	.hero-lead {
+		margin: 0 0 1.25rem;
+	}
+
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+
+	.hero-btn {
+		display: inline-flex;
+		align-items: center;
+		height: 44px;
+		padding: 0 22px;
+		border-radius: 9999px;
+		font-family: 'Inter', system-ui, sans-serif;
+		font-size: 14px;
+		font-weight: 700;
+		white-space: nowrap;
+		transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+	}
+
+	.hero-btn-primary {
+		background: linear-gradient(135deg, #FACC6B 0%, #D4AF37 50%, #B8860B 100%);
+		color: #00001C;
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 10px 24px -10px rgba(212, 175, 55, 0.7);
+	}
+
+	.hero-btn-ghost {
+		border: 1px solid rgba(255, 255, 255, 0.4);
+		color: #ffffff;
+		background: rgba(0, 0, 20, 0.35);
+		backdrop-filter: blur(6px);
+	}
+
+	.hero-btn:hover {
+		transform: translateY(-2px);
+	}
+
+	.hero-btn-ghost:hover {
+		border-color: #D4AF37;
+		color: #FACC6B;
+	}
+
+	.hero-badges {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-top: 1rem;
+		padding: 0;
+		list-style: none;
+	}
+
+	.hero-badges li {
+		padding: 5px 12px;
+		border-radius: 9999px;
+		border: 1px solid rgba(212, 175, 55, 0.4);
+		background: rgba(0, 0, 28, 0.5);
+		color: #FFE9A8;
+		font-size: 12px;
+		font-weight: 600;
 	}
 
 	.start-card {
@@ -344,19 +419,19 @@ const social = [
 		}
 
 		.hero-h1 {
-			font-size: 13.4vw;
+			font-size: 10vw;
 		}
 
 		.hero-sub {
 			margin-top: 0.6vw;
-			font-size: 2.32vw;
+			font-size: 1.7vw;
 		}
 
 		.hero-desc {
 			position: absolute;
 			left: 59%;
-			top: 63.8%;
-			width: 19%;
+			top: 46%;
+			width: 23%;
 			max-width: none;
 			margin-top: 0;
 			font-size: clamp(13px, 1.05vw, 16px);
