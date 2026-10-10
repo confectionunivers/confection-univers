@@ -1,55 +1,20 @@
 ---
 /**
- * Header : logo, pilules de navigation sombres (desktop), bouton « Demander un devis »
- * et bouton menu qui ouvre un tiroir blanc listant toutes les pages du site.
- * Palette : bleu nuit (#00001C) et or (#D4AF37).
+ * Header : logo (sur fond blanc), 6 liens de navigation, bouton « Demander un devis »
+ * et bouton menu qui ouvre un tiroir blanc. Palette : bleu nuit (#00001C) et or (#D4AF37).
  */
-import { BLOG_POSTS } from '../lib/blog-data';
 
-type Link = { label: string; href: string };
-type NavItem = Link & { children?: Link[] };
-
-const SERVICES: Link[] = [
-	{ label: 'Toges de graduation', href: '/services/toges-graduation' },
-	{ label: 'Uniformes scolaires', href: '/services/uniformes-scolaires' },
-	{ label: 'Tenue de travail', href: '/services/tenue-travail' },
-	{ label: 'Kimonos', href: '/services/kimonos' },
-	{ label: 'Blouses médicales', href: '/services/blouses-medicales' },
-	{ label: "Toges d'avocat", href: '/services/toges-avocat' },
-	{ label: 'Costumes africains', href: '/services/costumes-africains' },
-	{ label: 'Tenues de sport', href: '/services/tenues-sport' },
-];
-
-const COLLECTIONS: Link[] = [
-	{ label: 'Toges de graduation', href: '/collections/toges-graduation' },
-	{ label: 'Uniformes scolaires', href: '/collections/uniformes-scolaires' },
-	{ label: 'Tenues médicales', href: '/collections/tenues-medicales' },
-	{ label: 'Tenue de travail', href: '/collections/tenue-travail' },
-	{ label: 'Costumes africains', href: '/collections/costumes-africains' },
-	{ label: 'Tenues de sport', href: '/collections/tenues-sport' },
-];
-
-const BLOG: Link[] = BLOG_POSTS.map((p) => ({ label: p.title, href: `/blog/${p.slug}` }));
-
-const NAV: NavItem[] = [
+const NAV = [
 	{ label: 'Accueil', href: '/' },
 	{ label: 'À propos', href: '/about' },
-	{ label: 'Services', href: '/services', children: [{ label: 'Tous nos services', href: '/services' }, ...SERVICES] },
-	{ label: 'Collections', href: '/catalogue', children: COLLECTIONS },
+	{ label: 'Services', href: '/services' },
 	{ label: 'Catalogue', href: '/catalogue' },
-	{ label: 'Blog', href: '/blog', children: [{ label: 'Tous les articles', href: '/blog' }, ...BLOG] },
-];
-
-// Liste complète pour le tiroir (toutes les pages)
-const DRAWER: NavItem[] = [
-	...NAV,
-	{ label: 'Produits', href: '/products' },
+	{ label: 'Blog', href: '/blog' },
 	{ label: 'Contact', href: '/contact' },
 ];
 
 const currentPath = Astro.url.pathname;
-const isActive = (href: string) => currentPath === href || (href !== '/' && href !== '/services' && currentPath.startsWith(href + '/'));
-const groupActive = (item: NavItem) => isActive(item.href) || (item.children?.some((c) => isActive(c.href)) ?? false);
+const isActive = (href: string) => currentPath === href || (href !== '/' && currentPath.startsWith(href + '/'));
 
 const gallery = ['/images/gallery1.jpg', '/images/gallery2.jpg', '/images/gallery3.jpg', '/images/gallery4.jpg'];
 const social = [
@@ -58,43 +23,22 @@ const social = [
 	{ label: 'LinkedIn', href: 'https://linkedin.com/company/confectionunivers', icon: 'M4 3a2 2 0 110 4 2 2 0 010-4zm-1 6h3v12H3V9zm6 0h3v2c.5-1 1.8-2 3.6-2C19.5 9 21 10.5 21 13.5V21h-3v-6.5c0-1.6-.6-2.5-2-2.5s-2.5 1-2.5 2.6V21H9V9z' },
 	{ label: 'WhatsApp', href: 'https://wa.me/221772960776', icon: 'M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2z' },
 ];
-
-const chevron = 'M6 9l6 6 6-6';
-const chevronRight = 'M9 6l6 6-6 6';
 ---
 
 <header id="site-header" class="site-header fixed inset-x-0 top-0 z-[60]">
 	<div class="header-inner mx-auto flex items-center justify-between gap-4">
-		<a href="/" class="logo-link shrink-0" aria-label="Confection Univers — accueil">
+		<a href="/" class="logo-link logo-chip shrink-0" aria-label="Confection Univers — accueil">
 			<img src="/images/logo.png" alt="Confection Univers" class="h-10 w-auto md:h-11" width="200" height="76" decoding="async" />
 		</a>
 
-		<!-- Pilules de navigation (grand écran) -->
+		<!-- Liens de navigation (grand écran) -->
 		<nav class="hidden items-center gap-2 xl:flex" aria-label="Navigation principale">
 			{
-				NAV.map((item) =>
-					item.children ? (
-						<div class="pill-group relative">
-							<button type="button" class:list={['pill', groupActive(item) && 'is-active']} aria-haspopup="true" aria-expanded="false" data-dropdown>
-								<span>{item.label}</span>
-								<svg class="chevron h-3 w-3" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true">
-									<path stroke-linecap="round" stroke-linejoin="round" d={chevron} />
-								</svg>
-							</button>
-							<div class="dropdown" role="menu">
-								{item.children.map((c) => (
-									<a href={c.href} role="menuitem" class:list={['dropdown-link', isActive(c.href) && 'is-active']}>
-										{c.label}
-									</a>
-								))}
-							</div>
-						</div>
-					) : (
-						<a href={item.href} class:list={['pill', isActive(item.href) && 'is-active']} aria-current={isActive(item.href) ? 'page' : undefined}>
-							<span>{item.label}</span>
-						</a>
-					),
-				)
+				NAV.map((item) => (
+					<a href={item.href} class:list={['pill', isActive(item.href) && 'is-active']} aria-current={isActive(item.href) ? 'page' : undefined}>
+						<span>{item.label}</span>
+					</a>
+				))
 			}
 		</nav>
 
@@ -120,31 +64,11 @@ const chevronRight = 'M9 6l6 6-6 6';
 	<div class="flex-1 overflow-y-auto px-7 pb-8">
 		<nav aria-label="Menu mobile" class="drawer-nav">
 			{
-				DRAWER.map((item) =>
-					item.children ? (
-						<div class="drawer-group">
-							<button type="button" class:list={['drawer-link w-full', groupActive(item) && 'is-active']} aria-expanded="false" data-accordion>
-								<span>{item.label}</span>
-								<svg class="h-4 w-4 shrink-0 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-									<path stroke-linecap="round" stroke-linejoin="round" d={chevronRight} />
-								</svg>
-							</button>
-							<div class="drawer-sub">
-								<div class="overflow-hidden">
-									{item.children.map((c) => (
-										<a href={c.href} class:list={['drawer-sub-link', isActive(c.href) && 'is-active']}>
-											{c.label}
-										</a>
-									))}
-								</div>
-							</div>
-						</div>
-					) : (
-						<a href={item.href} class:list={['drawer-link', isActive(item.href) && 'is-active']}>
-							<span>{item.label}</span>
-						</a>
-					),
-				)
+				NAV.map((item) => (
+					<a href={item.href} class:list={['drawer-link', isActive(item.href) && 'is-active']}>
+						<span>{item.label}</span>
+					</a>
+				))
 			}
 		</nav>
 
@@ -261,8 +185,19 @@ const chevronRight = 'M9 6l6 6-6 6';
 		}
 	}
 
-	.logo-link img {
-		filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.35));
+	/* Logo sur fond blanc : visible quel que soit le hero */
+	.logo-chip {
+		display: inline-flex;
+		align-items: center;
+		padding: 6px 14px;
+		border-radius: 14px;
+		background: #ffffff;
+		box-shadow: 0 10px 26px -10px rgba(0, 0, 0, 0.5), inset 0 -2px 0 rgba(212, 175, 55, 0.5);
+	}
+
+	.logo-chip img {
+		height: 40px;
+		width: auto;
 	}
 
 	/* ---------- Pilules ---------- */
