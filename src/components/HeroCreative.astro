@@ -1,9 +1,12 @@
 ---
 /**
- * Hero "vitrine" : titre en dégradé, visuels qui défilent via les vignettes,
- * panneau latéral en verre, carte 3D et bouton circulaire.
- * Palette : bleu nuit (#00001C) et or (#D4AF37).
+ * Hero « vitrine » reproduit d'après la référence Xriver Home 03.
+ * Composition : grand titre condensé à gauche, portrait dominant à droite,
+ * texte descriptif, carte projet, bouton circulaire, barre sociale verticale
+ * et image secondaire qui déborde sur la section suivante.
+ * Palette de marque : bleu nuit (#00001C) et or (#D4AF37).
  */
+
 const slides = [
 	{ src: '/images/hero-slides/slide-1.jpg', label: 'Uniformes scolaires', alt: 'Élève en uniforme scolaire bleu marine avec gilet et insigne doré' },
 	{ src: '/images/hero-slides/slide-2.jpg', label: 'Toges de graduation', alt: 'Diplômée en toge de graduation tenant son diplôme' },
@@ -12,121 +15,109 @@ const slides = [
 ];
 
 const social = [
-	{ label: 'Facebook', href: 'https://facebook.com/confectionunivers', icon: 'M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z' },
 	{ label: 'Instagram', href: 'https://instagram.com/confectionunivers', icon: 'M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 2a2.5 2.5 0 100 5 2.5 2.5 0 000-5z' },
 	{ label: 'LinkedIn', href: 'https://linkedin.com/company/confectionunivers', icon: 'M4 3a2 2 0 110 4 2 2 0 010-4zm-1 6h3v12H3V9zm6 0h3v2c.5-1 1.8-2 3.6-2C19.5 9 21 10.5 21 13.5V21h-3v-6.5c0-1.6-.6-2.5-2-2.5s-2.5 1-2.5 2.6V21H9V9z' },
+	{ label: 'Facebook', href: 'https://facebook.com/confectionunivers', icon: 'M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z' },
 	{ label: 'WhatsApp', href: 'https://wa.me/221772960776', icon: 'M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2z' },
 ];
 ---
 
-<section
-	id="hero-cu"
-	class="hero-cu relative isolate min-h-[100svh] overflow-hidden bg-[#00001C] text-white"
-	aria-label="Accueil"
->
-	<!-- Halos animés bleu nuit / or -->
-	<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+<section id="hero-cu" class="hero-cu relative z-20 min-h-[100svh] w-full text-white" aria-label="Accueil">
+	<!-- Fond : lueurs, grain et portrait (rognés au hero uniquement) -->
+	<div class="hero-bg pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
 		<div class="glow glow-1"></div>
 		<div class="glow glow-2"></div>
 		<div class="glow glow-3"></div>
-		<div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#00001C]"></div>
+
+		<div class="hero-photos absolute inset-x-0 top-0 h-[62%] md:inset-y-0 md:left-auto md:right-0 md:h-full md:w-[62%]">
+			{
+				slides.map((s, idx) => (
+					<img
+						data-slide
+						data-label={s.label}
+						src={s.src}
+						alt=""
+						loading={idx === 0 ? 'eager' : 'lazy'}
+						decoding="async"
+						class:list={['hero-photo', idx === 0 && 'is-active']}
+					/>
+				))
+			}
+		</div>
+		<div class="hero-shade absolute inset-0"></div>
 	</div>
 
-	<!-- Visuels : défilement par fondu -->
-	<div class="hero-photos absolute inset-y-0 right-0 w-full lg:w-[58%]" aria-hidden="false">
-		{
-			slides.map((s, idx) => (
-				<img
-					data-slide
-					data-label={s.label}
-					src={s.src}
-					alt={s.alt}
-					loading={idx === 0 ? 'eager' : 'lazy'}
-					decoding="async"
-					class:list={['hero-photo', idx === 0 && 'is-active']}
-				/>
-			))
-		}
-	</div>
+	<div class="hero-layout relative mx-auto flex min-h-[100svh] flex-col px-[6%] pb-14 pt-[46svh] md:block md:px-0 md:pb-0 md:pt-0">
+		<!-- Titre + sous-titre -->
+		<div class="reveal md:absolute md:left-[17.4%] md:top-[19%]">
+			<h1 class="title-gradient font-anton uppercase leading-[0.84] text-[25vw] md:text-[13.4vw]">UNIVERS</h1>
+			<p class="subtitle font-anton mt-1 uppercase text-[7vw] leading-none md:mt-[0.6vw] md:text-[2.32vw]">
+				Confection sur-mesure<span class="text-[#D4AF37]">.</span>
+			</p>
+		</div>
 
-	<!-- Titre -->
-	<div class="relative z-10 flex min-h-[100svh] flex-col justify-end px-[4%] pb-[10svh] pt-36 lg:justify-center lg:pb-0">
-		<h1 class="title-gradient font-display leading-[0.85] tracking-tight" aria-label="Confection Univers">
-			<span class="block text-[clamp(64px,13vw,210px)]">CONFECTION</span>
-		</h1>
-		<p class="subtitle mt-2 font-display text-[clamp(22px,3.4vw,50px)] font-bold uppercase tracking-tight">
-			Excellence textile &amp; confection sur-mesure<span class="text-[#D4AF37]">.</span>
+		<!-- Texte descriptif -->
+		<p class="reveal reveal-d1 mt-8 max-w-sm text-[15px] leading-[1.5] text-white/90 md:mt-0 md:absolute md:left-[59%] md:top-[63.8%] md:w-[19%] md:max-w-none md:text-[clamp(13px,1.05vw,16px)]">
+			Nous concevons des uniformes scolaires, toges de graduation, tenues de travail et costumes africains modernes,
+			avec des finitions irréprochables.
 		</p>
 
-		<!-- Paragraphe -->
-		<p class="mt-8 max-w-md text-[15px] leading-relaxed text-white/85 lg:absolute lg:left-[58%] lg:top-[56%] lg:mt-0 lg:max-w-[360px]">
-			Nous fabriquons des uniformes scolaires, toges de graduation, tenues de travail et costumes africains modernes,
-			avec des finitions irréprochables pour vos élèves, vos équipes et vos clients.
-		</p>
-	</div>
-
-	<!-- Carte « Démarrer un projet » -->
-	<a
-		href="/contact"
-		class="start-card group absolute bottom-[8%] left-[4%] z-20 hidden items-center gap-4 rounded-2xl p-3 pr-6 md:flex lg:left-[15%]"
-		style="transform-style: preserve-3d;"
-	>
-		<span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#D4AF37] text-[#00001C]" aria-hidden="true">
-			<svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 11a9 9 0 0118 0v5a2 2 0 01-2 2h-1v-6h3M3 11v5a2 2 0 002 2h1v-6H3" /></svg>
-		</span>
-		<span>
-			<span class="block font-display text-2xl font-bold uppercase leading-none">Démarrer un projet</span>
-			<span class="mt-1 block text-sm text-white/75">Parlez-en directement à notre équipe</span>
-		</span>
-	</a>
-
-	<!-- Bouton circulaire « Let's start » -->
-	<a
-		href="/services"
-		class="circle-cta absolute bottom-[10%] left-[62%] z-20 hidden h-40 w-40 items-center justify-center rounded-full md:flex"
-		aria-label="Découvrir nos services"
-	>
-		<svg class="ring absolute inset-0 h-full w-full" viewBox="0 0 160 160" aria-hidden="true">
-			<defs>
-				<path id="ring-path" d="M80,80 m-62,0 a62,62 0 1,1 124,0 a62,62 0 1,1 -124,0" />
-			</defs>
-			<text class="font-display text-[11px] uppercase tracking-[0.3em]" fill="#F5E6B0">
-				<textPath href="#ring-path">Nos services • Découvrir • Nos services • Découvrir •</textPath>
-			</text>
-		</svg>
-		<span class="relative z-10 font-display text-base font-semibold">Commencer</span>
-	</a>
-
-	<!-- Panneau latéral en verre -->
-	<aside class="side-panel absolute right-[1.5%] top-1/2 z-30 hidden -translate-y-1/2 flex-col items-center gap-5 rounded-[28px] px-3 py-6 xl:flex" aria-label="Réseaux sociaux et visuels">
-		<a href="#hero-cu" class="chevron flex h-12 w-12 items-center justify-center rounded-full" aria-label="Haut de page">
-			<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 15l6-6 6 6" /></svg>
+		<!-- Carte « Démarrer un projet » -->
+		<a
+			href="/contact"
+			class="start-card reveal reveal-d2 mt-8 flex w-[min(250px,100%)] items-stretch overflow-hidden rounded-[14px] md:absolute md:left-[50.8%] md:top-[82.5%] md:mt-0"
+		>
+			<span class="relative h-[80px] w-[84px] shrink-0 md:h-[94px] md:w-[96px]">
+				<img src={slides[1].src} alt="" class="h-full w-full object-cover object-top" loading="lazy" decoding="async" />
+			</span>
+			<span class="flex flex-col justify-center gap-1 px-4 py-3">
+				<span class="font-anton text-[22px] uppercase leading-none md:text-[clamp(18px,1.6vw,26px)]">Démarrer un projet</span>
+				<span class="text-[12.5px] leading-snug text-white/75">Parlez-en directement à notre équipe</span>
+			</span>
 		</a>
 
-		<div class="flex flex-col gap-3">
+		<!-- Bouton circulaire -->
+		<a
+			href="/services"
+			class="circle-cta hidden md:absolute md:left-[71.4%] md:top-[82.4%] md:flex md:items-center md:justify-center"
+			aria-label="Découvrir nos services"
+		>
+			<span class="relative z-10 text-[clamp(12px,1vw,15px)] font-medium">Commencer</span>
+		</a>
+
+		<!-- Image secondaire : déborde sur la section suivante -->
+		<div class="secondary-img reveal reveal-d3 relative mt-10 aspect-[2.2/1] w-full overflow-hidden rounded-[14px] md:absolute md:left-[6.4%] md:top-[69%] md:mt-0 md:w-[41%]">
+			<img src="/images/hero-toges-graduation.jpg" alt="Toges de graduation Confection Univers" class="h-full w-full object-cover" loading="lazy" decoding="async" />
+		</div>
+	</div>
+
+	<!-- Barre sociale verticale (grand écran) -->
+	<aside
+		class="social-bar absolute right-[1.9%] top-[12.5%] z-30 hidden h-[75%] w-[76px] flex-col items-center justify-between rounded-[24px] py-5 xl:flex"
+		aria-label="Réseaux sociaux et visuels"
+	>
+		<a href="#hero-cu" class="round-btn flex h-12 w-12 items-center justify-center rounded-full" aria-label="Haut de page">
+			<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M6 15l6-6 6 6" /></svg>
+		</a>
+
+		<div class="flex flex-col items-center gap-3">
 			{
 				social.map((s) => (
-					<a href={s.href} target="_blank" rel="noopener noreferrer" class="social-btn flex h-9 w-9 items-center justify-center rounded-full" aria-label={s.label}>
-						<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d={s.icon} /></svg>
+					<a href={s.href} target="_blank" rel="noopener noreferrer" class="social-btn flex h-[30px] w-[30px] items-center justify-center rounded-full" aria-label={s.label}>
+						<svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d={s.icon} /></svg>
 					</a>
 				))
 			}
 		</div>
 
-		<p class="vertical-label font-display text-[11px] font-bold uppercase tracking-[0.25em] text-white/80">Suivez-nous :</p>
+		<p class="vertical-label font-anton text-[13px] uppercase tracking-[0.2em] text-white/90">Follow us :</p>
 
-		<div class="flex flex-col gap-3">
+		<div class="flex flex-col items-center gap-3">
 			{
 				slides.map((s, idx) => (
-					<button
-						type="button"
-						data-thumb
-						data-index={idx}
-						class:list={['thumb relative h-12 w-12 overflow-hidden rounded-full', idx === 0 && 'is-active']}
-						aria-label={`Afficher ${s.label}`}
-					>
-						<img src={s.src} alt="" class="h-full w-full object-cover object-top" loading="lazy" />
-						<span class="thumb-num absolute -right-1 -top-1 rounded-full bg-[#D4AF37] px-1.5 font-display text-[10px] font-bold leading-4 text-[#00001C]">
+					<button type="button" data-thumb class:list={['thumb relative h-12 w-12 rounded-full', idx === 0 && 'is-active']} aria-label={`Afficher ${s.label}`}>
+						<img src={s.src} alt="" class="h-full w-full rounded-full object-cover object-top" loading="lazy" />
+						<span class="thumb-num absolute -right-1 -top-1 rounded-[4px] px-1 font-anton text-[10px] leading-[16px]">
 							{String(idx + 1).padStart(2, '0')}
 						</span>
 					</button>
@@ -134,11 +125,6 @@ const social = [
 			}
 		</div>
 	</aside>
-
-	<!-- Légende de la catégorie active -->
-	<div class="absolute bottom-[3%] left-[4%] z-20 font-display text-xs font-bold uppercase tracking-[0.25em] text-[#F5E6B0] lg:left-[15%] lg:bottom-[2%] md:hidden" aria-live="polite">
-		<span data-label>{slides[0].label}</span>
-	</div>
 </section>
 
 <script>
@@ -146,8 +132,8 @@ const social = [
 	if (root) {
 		const slides = Array.from(root.querySelectorAll<HTMLImageElement>('[data-slide]'));
 		const thumbs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-thumb]'));
-		const labelEl = root.querySelector<HTMLElement>('[data-label]');
 		const n = slides.length;
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		let current = 0;
 		let timer: number | undefined;
 
@@ -155,15 +141,15 @@ const social = [
 			current = k;
 			slides.forEach((s, j) => s.classList.toggle('is-active', j === k));
 			thumbs.forEach((t, j) => t.classList.toggle('is-active', j === k));
-			if (labelEl) labelEl.textContent = slides[k].dataset.label ?? '';
-		};
-
-		const start = () => {
-			stop();
-			timer = window.setInterval(() => show((current + 1) % n), 6000);
 		};
 		const stop = () => {
 			if (timer !== undefined) window.clearInterval(timer);
+			timer = undefined;
+		};
+		const start = () => {
+			if (reduceMotion) return;
+			stop();
+			timer = window.setInterval(() => show((current + 1) % n), 6000);
 		};
 
 		thumbs.forEach((t, j) =>
@@ -172,19 +158,20 @@ const social = [
 				start();
 			}),
 		);
-
 		root.addEventListener('mouseenter', stop);
 		root.addEventListener('mouseleave', start);
 
-		// Léger effet 3D sur la carte, suit la souris
+		// Effet 3D léger sur la carte projet
 		const card = root.querySelector<HTMLElement>('.start-card');
-		card?.addEventListener('mousemove', (e) => {
-			const r = card.getBoundingClientRect();
-			const x = (e.clientX - r.left) / r.width - 0.5;
-			const y = (e.clientY - r.top) / r.height - 0.5;
-			card.style.transform = `perspective(700px) rotateX(${-y * 10}deg) rotateY(${x * 12}deg)`;
-		});
-		card?.addEventListener('mouseleave', () => (card.style.transform = ''));
+		if (card && !reduceMotion) {
+			card.addEventListener('mousemove', (e) => {
+				const r = card.getBoundingClientRect();
+				const x = (e.clientX - r.left) / r.width - 0.5;
+				const y = (e.clientY - r.top) / r.height - 0.5;
+				card.style.transform = `perspective(700px) rotateX(${-y * 8}deg) rotateY(${x * 10}deg)`;
+			});
+			card.addEventListener('mouseleave', () => (card.style.transform = ''));
+		}
 
 		show(0);
 		start();
@@ -192,19 +179,21 @@ const social = [
 </script>
 
 <style>
-	/* Typographie condensée du titre (Anton) */
+	/* ---------- Typographie ---------- */
+	.font-anton,
 	.hero-cu h1,
 	.hero-cu .subtitle {
 		font-family: 'Anton', 'Space Grotesk', sans-serif;
 	}
 
-	/* Titre : dégradé or / champagne */
+	/* Titre : blanc vers or champagne (équivalent du dégradé rose de la référence) */
 	.title-gradient {
-		background: linear-gradient(180deg, #FFF6D5 0%, #FACC6B 35%, #D4AF37 65%, #8a5a06 100%);
+		background: linear-gradient(180deg, #ffffff 0%, #fff6d5 42%, #facc6b 78%, #d4af37 100%);
 		-webkit-background-clip: text;
 		background-clip: text;
 		color: transparent;
-		filter: drop-shadow(0 10px 30px rgba(212, 175, 55, 0.25));
+		text-shadow: none;
+		filter: drop-shadow(0 8px 26px rgba(0, 0, 20, 0.45));
 	}
 
 	.subtitle {
@@ -212,128 +201,201 @@ const social = [
 		text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
 	}
 
-	/* Halos */
+	/* ---------- Fond ---------- */
 	.glow {
 		position: absolute;
 		border-radius: 9999px;
 		filter: blur(110px);
-		opacity: 0.45;
-		animation: cu-float 14s ease-in-out infinite;
+		animation: cu-float 16s ease-in-out infinite;
 	}
-	.glow-1 { left: -5%; top: 5%; width: 520px; height: 520px; background: #1d2a6b; }
-	.glow-2 { right: 10%; bottom: 10%; width: 420px; height: 420px; background: #D4AF37; opacity: 0.25; animation-delay: -4s; }
-	.glow-3 { left: 40%; top: 40%; width: 320px; height: 320px; background: #3a4fb0; opacity: 0.3; animation-delay: -8s; }
+	.glow-1 { left: -8%; top: 0; width: 46vw; height: 46vw; background: #2236a8; opacity: 0.45; }
+	.glow-2 { left: 28%; bottom: 0; width: 30vw; height: 30vw; background: #D4AF37; opacity: 0.18; animation-delay: -5s; }
+	.glow-3 { right: 20%; top: 20%; width: 26vw; height: 26vw; background: #3d6bff; opacity: 0.22; animation-delay: -9s; }
 
-	/* Visuels */
+	.hero-shade {
+		background:
+			linear-gradient(90deg, #00001C 0%, rgba(0, 0, 28, 0.85) 30%, rgba(0, 0, 28, 0.25) 60%, rgba(0, 0, 28, 0) 75%),
+			linear-gradient(0deg, #00001C 0%, rgba(0, 0, 28, 0) 22%);
+	}
+
 	.hero-photo {
 		position: absolute;
 		inset: 0;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		object-position: 60% 20%;
+		object-position: 50% 14%;
 		opacity: 0;
-		transform: scale(1.06);
-		filter: saturate(0.9) contrast(1.05);
-		transition: opacity 1s ease, transform 1.6s cubic-bezier(0.2, 0.7, 0.2, 1);
-		-webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 100%);
-		mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 100%);
+		transform: scale(1.05);
+		filter: saturate(1.05) contrast(1.05);
+		transition: opacity 1s ease, transform 1.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+		-webkit-mask-image: linear-gradient(180deg, #000 70%, transparent 100%);
+		mask-image: linear-gradient(180deg, #000 70%, transparent 100%);
 	}
+
 	.hero-photo.is-active {
 		opacity: 1;
 		transform: scale(1);
 	}
 
-	/* Carte 3D */
-	.start-card {
-		background: linear-gradient(120deg, rgba(0, 0, 28, 0.85), rgba(10, 16, 60, 0.7));
-		border: 1px solid rgba(212, 175, 55, 0.35);
-		box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-		backdrop-filter: blur(10px);
-		transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-	}
-	.start-card:hover {
-		border-color: rgba(212, 175, 55, 0.8);
-		box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(212, 175, 55, 0.25);
+	@media (min-width: 768px) {
+		.hero-photo {
+			-webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 26%, #000 100%);
+			mask-image: linear-gradient(90deg, transparent 0%, #000 26%, #000 100%);
+		}
 	}
 
-	/* Bouton circulaire */
-	.circle-cta {
-		color: #ffffff;
-		background: radial-gradient(circle, rgba(0, 0, 42, 0.6) 0%, rgba(0, 0, 28, 0.2) 100%);
-		box-shadow: inset 0 0 0 1px rgba(245, 230, 176, 0.35), 0 20px 40px -10px rgba(0, 0, 0, 0.6);
-		transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+	/* ---------- Carte projet ---------- */
+	.start-card {
+		position: relative;
+		background: #000000;
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		box-shadow: 0 24px 50px -18px rgba(0, 0, 0, 0.8);
+		transition: transform 0.2s ease, box-shadow 0.3s ease;
 	}
+
+	.start-card:hover {
+		box-shadow: 0 30px 60px -18px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(212, 175, 55, 0.5);
+	}
+
+	.start-card > span:first-child::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(90deg, transparent 40%, #000 100%);
+	}
+
+	.start-card > span:first-child {
+		position: relative;
+	}
+
+	/* ---------- Bouton circulaire ---------- */
+	.circle-cta {
+		width: clamp(72px, 5.5vw, 98px);
+		aspect-ratio: 1;
+		border-radius: 9999px;
+		border: 1.5px solid rgba(255, 255, 255, 0.85);
+		background: transparent;
+		color: #ffffff;
+		transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease, background-color 0.3s ease;
+	}
+
+	/* accent lumineux au bas du cercle */
+	.circle-cta::after {
+		content: '';
+		position: absolute;
+		bottom: -4px;
+		left: 50%;
+		width: 26%;
+		height: 6px;
+		transform: translateX(-50%);
+		border-radius: 9999px;
+		background: linear-gradient(90deg, #3d6bff, #D4AF37);
+		box-shadow: 0 0 14px rgba(212, 175, 55, 0.7);
+	}
+
 	.circle-cta:hover {
 		transform: scale(1.06);
-		box-shadow: inset 0 0 0 1px #D4AF37, 0 0 50px rgba(212, 175, 55, 0.35);
-	}
-	.circle-cta .ring {
-		animation: cu-spin 18s linear infinite;
-	}
-	.circle-cta .ring text {
-		fill: #F5E6B0;
+		border-color: #D4AF37;
+		background-color: rgba(212, 175, 55, 0.08);
 	}
 
-	/* Panneau latéral */
-	.side-panel {
-		background: linear-gradient(180deg, rgba(212, 175, 55, 0.12), rgba(0, 0, 42, 0.55));
-		border: 1px solid rgba(212, 175, 55, 0.25);
+	/* ---------- Barre sociale ---------- */
+	.social-bar {
+		background: rgba(10, 12, 30, 0.42);
+		border: 1px solid rgba(255, 255, 255, 0.1);
 		backdrop-filter: blur(14px);
 		-webkit-backdrop-filter: blur(14px);
-		box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7);
+		box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.7);
 	}
-	.chevron {
-		background: rgba(0, 0, 0, 0.35);
-		border: 1px solid rgba(212, 175, 55, 0.4);
+
+	.round-btn {
+		background: #000;
+		border: 1px solid rgba(255, 255, 255, 0.2);
 		color: #FACC6B;
-		transition: transform 0.3s ease, background-color 0.3s ease;
+		transition: transform 0.3s ease, border-color 0.3s ease;
 	}
-	.chevron:hover {
+
+	.round-btn:hover {
 		transform: translateY(2px);
-		background: rgba(212, 175, 55, 0.2);
+		border-color: #D4AF37;
 	}
+
 	.social-btn {
 		background: #000;
-		color: #fff;
+		color: #ffffff;
 		transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease, color 0.3s ease;
 	}
+
 	.social-btn:hover {
-		transform: translateY(-3px);
+		transform: translateY(-2px);
 		background: #D4AF37;
 		color: #00001C;
 	}
+
 	.vertical-label {
 		writing-mode: vertical-rl;
 		transform: rotate(180deg);
 	}
+
 	.thumb {
-		opacity: 0.6;
-		box-shadow: 0 0 0 2px rgba(0, 0, 0, 0);
+		opacity: 0.55;
 		transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 	}
+
 	.thumb:hover {
 		opacity: 1;
 	}
+
 	.thumb.is-active {
 		opacity: 1;
-		transform: scale(1.08);
-		box-shadow: 0 0 0 2px #D4AF37, 0 0 18px rgba(212, 175, 55, 0.5);
+		box-shadow: 0 0 0 2px #D4AF37, 0 0 16px rgba(212, 175, 55, 0.45);
 	}
+
 	.thumb-num {
-		box-shadow: 0 0 0 2px #00001C;
+		background: #3d6bff;
+		color: #ffffff;
+	}
+
+	.thumb.is-active .thumb-num {
+		background: #D4AF37;
+		color: #00001C;
+	}
+
+	/* ---------- Image secondaire ---------- */
+	.secondary-img {
+		box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
+	}
+
+	/* ---------- Apparition ---------- */
+	@keyframes cu-rise {
+		from { opacity: 0; transform: translateY(18px); }
+		to { opacity: 1; transform: translateY(0); }
 	}
 
 	@keyframes cu-float {
 		0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-		50% { transform: translate3d(30px, -25px, 0) scale(1.08); }
-	}
-	@keyframes cu-spin {
-		to { transform: rotate(360deg); }
+		50% { transform: translate3d(28px, -22px, 0) scale(1.06); }
 	}
 
+	.reveal {
+		animation: cu-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+	}
+
+	.reveal-d1 { animation-delay: 0.12s; }
+	.reveal-d2 { animation-delay: 0.22s; }
+	.reveal-d3 { animation-delay: 0.32s; }
+
 	@media (prefers-reduced-motion: reduce) {
-		.glow, .circle-cta .ring { animation: none; }
-		.hero-photo { transition: opacity 0.3s ease; transform: none; }
+		.glow,
+		.reveal,
+		.hero-photo,
+		.start-card,
+		.circle-cta,
+		.social-btn,
+		.thumb {
+			animation: none;
+			transition: none;
+		}
 	}
 </style>
