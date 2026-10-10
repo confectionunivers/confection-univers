@@ -7,12 +7,26 @@ interface Props {
 	date: string;
 	author: string;
 	slug: string;
+	initiallyHidden?: boolean;
 }
 
-const { title, excerpt, image, category, date, author, slug } = Astro.props;
+const { title, excerpt, image, category, date, author, slug, initiallyHidden = false } = Astro.props;
+const categorySlug = category
+	.normalize('NFD')
+	.replace(/[\u0300-\u036f]/g, '')
+	.toLowerCase()
+	.replace(/[^a-z0-9]+/g, '-')
+	.replace(/^-|-$/g, '');
+const searchText = [title, excerpt, category, author].join(' ').toLocaleLowerCase();
 ---
 
-<div class="bg-[#00002a] rounded-[24px] border border-white/5 overflow-hidden shadow-2xl transition-all duration-300 hover:-translate-y-2">
+<div
+	data-blog-post
+	data-category={categorySlug}
+	data-search={searchText}
+	hidden={initiallyHidden}
+	class="bg-[#00002a] rounded-[24px] border border-white/5 overflow-hidden shadow-2xl transition-all duration-300 hover:-translate-y-2"
+>
 	<!-- Image Pleine Largeur (Full-Bleed) -->
 	<div class="w-full h-[380px] relative bg-[#00001C]">
 		<img src={image} class="w-full h-full object-cover" alt={title} />

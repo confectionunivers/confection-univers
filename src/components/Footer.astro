@@ -32,6 +32,8 @@
 						</div>
 						<input
 							id="newsletter-email"
+							name="email"
+							autocomplete="email"
 							type="email"
 							placeholder="Votre adresse email"
 							class="w-full rounded-full border-2 border-[rgba(250,204,107,0.3)] bg-[rgba(0,0,0,0.3)] px-12 py-4 text-[#F9FAFB] placeholder-foreground/40 transition-all duration-400 focus:border-[rgba(250,204,107,0.5)] focus:bg-[rgba(0,0,0,0.5)] focus:outline-none"
@@ -55,8 +57,7 @@
 					<ul class="space-y-4">
 						<li><a href="/about" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">À propos</a></li>
 						<li><a href="/services" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Services</a></li>
-						<li><a href="/products" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Produits</a></li>
-						<li><a href="/projects" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Projets</a></li>
+						<li><a href="/catalogue" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Produits</a></li>
 						<li><a href="/contact" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Contact</a></li>
 					</ul>
 				</div>
@@ -163,12 +164,30 @@
 	});
 
 	// Newsletter form submission
-	document.getElementById('newsletter-form')?.addEventListener('submit', (e) => {
-		e.preventDefault();
-		const emailInput = document.getElementById('newsletter-email') as HTMLInputElement;
-		if (emailInput && emailInput.value) {
-			alert('Merci pour votre inscription ! Vous recevrez bientôt nos actualités à : ' + emailInput.value);
-			emailInput.value = '';
+	const newsletterForm = document.getElementById('newsletter-form') as HTMLFormElement | null;
+	const newsletterEmail = document.getElementById('newsletter-email') as HTMLInputElement | null;
+	const newsletterButton = newsletterForm?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+
+	newsletterForm?.addEventListener('submit', async (event) => {
+		event.preventDefault();
+		if (!newsletterEmail || !newsletterForm.reportValidity()) return;
+
+		if (newsletterButton) newsletterButton.disabled = true;
+		try {
+			const response = await fetch('/api/newsletter', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ email: newsletterEmail.value.trim() }),
+			});
+			const result = await response.json().catch(() => ({}));
+			if (!response.ok || !result.success) throw new Error('Newsletter request failed');
+
+			alert('Merci pour votre inscription ! Vous recevrez bientôt nos actualités à : ' + newsletterEmail.value);
+			newsletterEmail.value = '';
+		} catch {
+			alert('Une erreur est survenue lors de votre inscription. Veuillez réessayer.');
+		} finally {
+			if (newsletterButton) newsletterButton.disabled = false;
 		}
 	});
 </script>

@@ -1,28 +1,25 @@
 ---
 const PROJECTS = [
 	{
-		title: 'Projet de fourniture d\'uniformes scolaires',
-		img: 'project-uniformes-commission.jpg',
-		cat: 'Uniformes scolaires',
-		year: '2025',
-		description: 'Nous avons fabriqué 5 000 uniformes personnalisés pour la commission scolaire, livrés à temps avec une qualité constante dans toutes les tailles.',
-		link: '/projets/uniformes',
+		title: 'Uniformes scolaires',
+		img: 'uniforme-scolaire.jpg',
+		cat: 'Éducation',
+		description: 'Pièces d’uniforme scolaire à définir selon les modèles, les couleurs et les besoins de l’établissement.',
+		link: '/services/uniformes-scolaires',
 	},
 	{
-		title: 'Tenues de cérémonie de graduation',
-		img: 'project-toges-ceremonie.jpg',
-		cat: 'Toges de graduation',
-		year: '2025',
-		description: 'Production de toges académiques en tissus premium, finitions soignées, prêtes pour les cérémonies officielles.',
-		link: '/projets/graduation',
+		title: 'Toges de graduation',
+		img: 'toge-graduation.jpg',
+		cat: 'Cérémonies académiques',
+		description: 'Toges et accessoires pour les cérémonies de remise des diplômes, avec les couleurs et finitions précisées selon votre demande.',
+		link: '/services/toges-graduation',
 	},
 	{
-		title: 'Équipements et tenues de travail',
-		img: 'project-tenues-industrielles.jpg',
-		cat: 'Tenues de travail',
-		year: '2025',
-		description: 'Conçus pour la sécurité, la durabilité et le confort, adaptés aux environnements exigeants.',
-		link: '/projets/tenues-travail',
+		title: 'Tenues de travail',
+		img: 'tenue-travail.jpg',
+		cat: 'Vêtements professionnels',
+		description: 'Tenues professionnelles dont le modèle et les détails sont étudiés selon l’activité et la demande de l’équipe.',
+		link: '/services/tenue-travail',
 	},
 ];
 ---
@@ -206,9 +203,9 @@ const PROJECTS = [
 	<!-- Section Header -->
 	<div class="mx-auto max-w-7xl px-6 md:px-10 py-8 md:py-12">
 		<div class="mb-8 md:mb-12 flex flex-col items-center justify-between gap-8 border-b border-[var(--border)] pb-8 md:flex-row">
-			<div class="text-xs font-black uppercase tracking-[0.25em]" style="color: var(--accent);">{'{ 05 }'} # Nos projets</div>
+			<div class="text-xs font-black uppercase tracking-[0.25em]" style="color: var(--accent);">{'{ 05 }'} # Nos savoir-faire</div>
 			<div class="font-display text-3xl font-bold uppercase tracking-tight text-white md:text-5xl">
-				Projets de fabrication
+				Domaines de confection
 			</div>
 		</div>
 	</div>
@@ -220,7 +217,7 @@ const PROJECTS = [
 				<button
 					class={`nav-dot ${index === 0 ? 'active' : ''}`}
 					data-index={index}
-					aria-label={`Aller au projet ${index + 1}`}
+					aria-label={`Aller au domaine ${index + 1}`}
 				/>
 			))
 		}

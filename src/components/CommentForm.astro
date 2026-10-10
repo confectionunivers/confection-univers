@@ -4,7 +4,7 @@
 <section class="rounded-2xl p-6 shadow-2xl" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);">
 	<h3 class="mb-6 font-display text-xl font-bold uppercase tracking-tight text-white">Laisser un commentaire</h3>
 	
-	<form class="space-y-6">
+	<form id="comment-form" class="space-y-6">
 		<div class="grid gap-6 md:grid-cols-2">
 			<div>
 				<label for="name" class="mb-2 block text-sm font-semibold uppercase tracking-wider" style="color: #A0ACC6;">
@@ -56,3 +56,53 @@
 		</button>
 	</form>
 </section>
+
+<script>
+	const commentForm = document.getElementById('comment-form') as HTMLFormElement | null;
+	const commentButton = commentForm?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+	const commentButtonLabel = commentButton?.querySelector('span') ?? null;
+	const originalCommentButtonLabel = commentButtonLabel?.textContent ?? '';
+
+	commentForm?.addEventListener('submit', async (event) => {
+		event.preventDefault();
+		if (!commentForm.reportValidity()) return;
+
+		if (commentButton) {
+			commentButton.disabled = true;
+			commentButton.setAttribute('aria-busy', 'true');
+		}
+
+		const formData = new FormData(commentForm);
+		const postTitle = document.querySelector('h1')?.textContent?.trim() || document.title;
+
+		try {
+			const response = await fetch('/api/send-comment', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					name: formData.get('name'),
+					email: formData.get('email'),
+					comment: formData.get('comment'),
+					postTitle,
+				}),
+			});
+			const result = await response.json().catch(() => ({}));
+			if (!response.ok || !result.success) throw new Error('Comment submission failed');
+
+			commentForm.reset();
+			if (commentButtonLabel) {
+				commentButtonLabel.textContent = 'Commentaire envoyé';
+				window.setTimeout(() => {
+					commentButtonLabel.textContent = originalCommentButtonLabel;
+				}, 2500);
+			}
+		} catch {
+			window.alert('Impossible d’envoyer le commentaire pour le moment. Veuillez réessayer.');
+		} finally {
+			if (commentButton) {
+				commentButton.disabled = false;
+				commentButton.removeAttribute('aria-busy');
+			}
+		}
+	});
+</script>

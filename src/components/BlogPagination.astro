@@ -5,28 +5,28 @@ interface Props {
 }
 
 const { currentPage, totalPages } = Astro.props;
-
 const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 ---
 
-<nav class="flex items-center justify-center gap-3">
+<nav class="flex items-center justify-center gap-3" data-blog-pagination aria-label="Pagination des articles">
 	<!-- Previous Button -->
-	{currentPage > 1 && (
-		<a
-			href={`?page=${currentPage - 1}`}
-			class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all duration-300 hover:border-[#F5B544] hover:bg-[#F5B544]/10 hover:text-[#F5B544]"
-			aria-label="Page précédente"
-		>
-			<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-				<path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-			</svg>
-		</a>
-	)}
+	<a
+		href={`?page=${Math.max(1, currentPage - 1)}`}
+		data-blog-prev
+		hidden={currentPage <= 1}
+		class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all duration-300 hover:border-[#F5B544] hover:bg-[#F5B544]/10 hover:text-[#F5B544]"
+		aria-label="Page précédente"
+	>
+		<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+			<path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+		</svg>
+	</a>
 
 	<!-- Page Numbers (Bullets) -->
 	{pages.map((page) => (
 		<a
 			href={`?page=${page}`}
+			data-blog-page={page}
 			class={`flex h-3 w-3 items-center justify-center rounded-full transition-all duration-300 ${
 				page === currentPage
 					? 'h-4 w-4 bg-[#F5B544] shadow-[0_0_12px_rgba(245,181,68,0.5)]'
@@ -40,15 +40,15 @@ const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 	))}
 
 	<!-- Next Button -->
-	{currentPage < totalPages && (
-		<a
-			href={`?page=${currentPage + 1}`}
-			class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all duration-300 hover:border-[#F5B544] hover:bg-[#F5B544]/10 hover:text-[#F5B544]"
-			aria-label="Page suivante"
-		>
-			<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-				<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-			</svg>
-		</a>
-	)}
+	<a
+		href={`?page=${Math.min(totalPages, currentPage + 1)}`}
+		data-blog-next
+		hidden={currentPage >= totalPages}
+		class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all duration-300 hover:border-[#F5B544] hover:bg-[#F5B544]/10 hover:text-[#F5B544]"
+		aria-label="Page suivante"
+	>
+		<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+			<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+		</svg>
+	</a>
 </nav>
