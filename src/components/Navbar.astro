@@ -15,6 +15,8 @@ const contactInfo = {
 };
 
 const currentPath = Astro.url.pathname;
+const isLinkActive = (href: string) =>
+	currentPath === href || (href !== '/' && currentPath.startsWith(href + '/'));
 ---
 
 <header id="premium-header" class="fixed top-0 left-0 right-0 z-[60] bg-[#00001C]/80 backdrop-blur-md">
@@ -93,12 +95,12 @@ const currentPath = Astro.url.pathname;
 			</div>
 
 			<!-- Navigation Links (Center) -->
-			<nav class="nav-links hidden lg:flex">
+			<nav class="nav-links hidden xl:flex">
 				{
 					NAV_LINKS.map((link) => {
-						const isActive = currentPath === link.href;
+						const isActive = isLinkActive(link.href);
 						return (
-							<a href={link.href} class={`nav-link group flex items-center gap-1 text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 ${isActive ? 'text-[#D4AF37] border-b-2 border-[#D4AF37]' : 'text-[#00002a] hover:text-primary'}`}>
+							<a href={link.href} class={`nav-link group flex items-center gap-1 text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 ${isActive ? 'text-[#00002a] border-b-2 border-[#00002a]' : 'text-[#00002a] hover:text-primary'}`}>
 								<span>{link.label}</span>
 								{!isActive && (
 									<svg class="h-2.5 w-2.5 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -116,7 +118,7 @@ const currentPath = Astro.url.pathname;
 				<button
 					type="button"
 					id="nav-menu-btn"
-					class="burger-btn p-2 text-[#00002a] transition-all duration-300 hover:text-primary lg:hidden"
+					class="burger-btn p-2 text-[#00002a] transition-all duration-300 hover:text-primary xl:hidden"
 					aria-expanded="false"
 					aria-controls="nav-mobile-panel"
 				>
@@ -130,7 +132,7 @@ const currentPath = Astro.url.pathname;
 
 				<a
 					href="/contact"
-					class="btn-hero-primary hidden items-center gap-2 lg:flex"
+					class="btn-hero-primary hidden items-center gap-2 xl:flex"
 				>
 					<span>Demander un devis</span>
 					<svg class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -142,7 +144,7 @@ const currentPath = Astro.url.pathname;
 	</div>
 
 	<!-- Mobile Panel -->
-	<div id="nav-mobile-panel" class="nav-mobile-panel overflow-hidden bg-white/95 backdrop-blur-xl lg:hidden">
+	<div id="nav-mobile-panel" class="nav-mobile-panel overflow-hidden bg-white/95 backdrop-blur-xl xl:hidden">
 		<div class="flex flex-col gap-6 px-6 py-10">
 			{
 				NAV_LINKS.map((link) => (
@@ -167,12 +169,19 @@ const currentPath = Astro.url.pathname;
 	const panel = document.getElementById('nav-mobile-panel');
 	const burgerIcon = btn?.querySelector('.burger-icon');
 
-	btn?.addEventListener('click', () => {
-		const open = btn.getAttribute('aria-expanded') === 'true';
-		const next = !open;
-		btn.setAttribute('aria-expanded', next ? 'true' : 'false');
+	const setMenu = (next: boolean) => {
+		btn?.setAttribute('aria-expanded', next ? 'true' : 'false');
 		panel?.classList.toggle('is-open', next);
 		burgerIcon?.classList.toggle('is-active', next);
+	};
+
+	btn?.addEventListener('click', () => {
+		setMenu(btn.getAttribute('aria-expanded') !== 'true');
+	});
+
+	panel?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setMenu(false)));
+	document.addEventListener('keydown', (e) => {
+		if (e.key === 'Escape') setMenu(false);
 	});
 
 	// Smart sticky transformation
@@ -211,14 +220,21 @@ const currentPath = Astro.url.pathname;
 		color: #00001C;
 		padding: 8px 4%;
 		width: 100%;
-		transform: translateY(0);
-		transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		overflow: hidden;
+		max-height: 80px;
+		transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
 		border-bottom: 2px solid rgba(179, 146, 46, 0.3);
 		box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
 	}
 
 	.top-bar-hidden {
-		transform: translateY(-100%);
+		max-height: 0;
+		padding-top: 0;
+		padding-bottom: 0;
+		opacity: 0;
+		border-bottom-width: 0;
+		box-shadow: none;
+		pointer-events: none;
 	}
 
 	/* Main Navbar Container - 3D Floating */
@@ -269,9 +285,14 @@ const currentPath = Astro.url.pathname;
 
 	/* Navigation Links */
 	.nav-links {
-		display: flex;
-		gap: 40px;
+		gap: 2rem;
 		align-items: center;
+	}
+
+	@media (min-width: 1280px) {
+		.nav-links {
+			gap: 2.5rem;
+		}
 	}
 
 	.nav-link {
@@ -349,7 +370,8 @@ const currentPath = Astro.url.pathname;
 	}
 
 	.nav-mobile-panel.is-open {
-		max-height: 32rem;
+		max-height: 85vh;
+		overflow-y: auto;
 	}
 
 	.mobile-nav-link {
