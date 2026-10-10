@@ -98,7 +98,7 @@ const currentPath = Astro.url.pathname;
 					NAV_LINKS.map((link) => {
 						const isActive = currentPath === link.href;
 						return (
-							<a href={link.href} class={`nav-link group flex items-center gap-1 text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 ${isActive ? 'nav-link-active' : 'text-[#00002a] hover:text-primary'}`}>
+							<a href={link.href} class={`nav-link group flex items-center gap-1 text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 ${isActive ? 'text-[#D4AF37] border-b-2 border-[#D4AF37]' : 'text-[#00002a] hover:text-primary'}`}>
 								<span>{link.label}</span>
 								{!isActive && (
 									<svg class="h-2.5 w-2.5 opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -202,242 +202,116 @@ const currentPath = Astro.url.pathname;
 </script>
 
 <style>
-	/* ============ TOP BAR — métal doré biseauté ============ */
+	/* Top Bar - White-Gold Gradient with 3D Effect */
 	.top-bar {
-		position: relative;
-		overflow: hidden;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		background: linear-gradient(100deg, #fffdf5 0%, #fff4c9 22%, #f7dc85 50%, #D4AF37 74%, #fbe9a6 100%);
+		background: linear-gradient(to right, #ffffff, #FFFDF2, #D4AF37);
 		color: #00001C;
-		padding: 9px 4%;
+		padding: 8px 4%;
 		width: 100%;
 		transform: translateY(0);
-		transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-		border-bottom: 1px solid rgba(120, 85, 10, 0.5);
-		box-shadow:
-			inset 0 1px 0 rgba(255, 255, 255, 0.95),
-			inset 0 -2px 0 rgba(120, 85, 10, 0.35),
-			0 10px 26px -10px rgba(120, 85, 10, 0.7);
-	}
-
-	/* liseré de lumière en haut */
-	.top-bar::before {
-		content: '';
-		position: absolute;
-		inset: 0 0 auto 0;
-		height: 1px;
-		background: linear-gradient(90deg, transparent, #ffffff, transparent);
-		pointer-events: none;
-	}
-
-	/* reflet qui balaie la barre */
-	.top-bar::after {
-		content: '';
-		position: absolute;
-		inset: 0;
-		background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, 0.75) 50%, transparent 60%);
-		background-size: 250% 100%;
-		animation: cu-sheen 7s ease-in-out infinite;
-		pointer-events: none;
-		mix-blend-mode: soft-light;
+		transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		border-bottom: 2px solid rgba(179, 146, 46, 0.3);
+		box-shadow: 0 4px 20px rgba(212, 175, 55, 0.25);
 	}
 
 	.top-bar-hidden {
 		transform: translateY(-100%);
 	}
 
-	.top-bar span,
-	.top-bar .contact-link {
-		text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7), 0 -1px 0 rgba(120, 85, 10, 0.25);
-	}
-
-	.top-bar .contact-link {
-		padding: 4px 10px;
-		border-radius: 9999px;
-		transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease, box-shadow 0.3s ease;
-	}
-
-	.top-bar .contact-link:hover {
-		background: rgba(255, 255, 255, 0.45);
-		box-shadow: 0 3px 0 -1px rgba(120, 85, 10, 0.45), 0 6px 12px -6px rgba(120, 85, 10, 0.6);
-		transform: translateY(-2px) scale(1.04);
-	}
-
-	/* ============ MAIN NAVBAR — pilule 3D ============ */
+	/* Main Navbar Container - 3D Floating */
 	.main-navbar-container {
 		width: 100%;
-		padding: 22px 4%;
+		padding: 20px 4%;
 		transition: padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-		perspective: 1400px;
 	}
 
 	.container-scrolled {
-		padding: 14px 4%;
+		padding: 16px 4%;
 	}
 
+	/* Floating Navbar - Pill Shape with Glassmorphism */
 	.floating-navbar {
-		position: relative;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		overflow: hidden;
-		transform-style: preserve-3d;
-		background: linear-gradient(160deg, #ffffff 0%, #fffdf2 35%, #f7dc85 72%, #D4AF37 100%);
+		background: linear-gradient(to right, #ffffff, #FFFDF2, #D4AF37);
 		backdrop-filter: blur(12px);
 		-webkit-backdrop-filter: blur(12px);
 		border-radius: 9999px;
-		border: 1px solid rgba(255, 255, 255, 0.85);
-		/* relief : biseau clair dessus, lèvre sombre dessous, ombre portée douce */
-		box-shadow:
-			inset 0 2px 1px rgba(255, 255, 255, 0.95),
-			inset 0 -3px 3px rgba(150, 110, 20, 0.35),
-			0 6px 0 -1px rgba(150, 110, 20, 0.75),
-			0 24px 44px -14px rgba(120, 85, 10, 0.6);
+		border: 1px solid rgba(212, 175, 55, 0.4);
+		box-shadow: 0 20px 50px -12px rgba(212, 175, 55, 0.25);
 		padding: 16px 32px;
 		max-width: 1400px;
 		margin: 0 auto;
-		transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.5s ease, padding 0.4s ease;
-	}
-
-	/* reflet métallique animé */
-	.floating-navbar::before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		border-radius: inherit;
-		background: linear-gradient(110deg, transparent 38%, rgba(255, 255, 255, 0.8) 50%, transparent 62%);
-		background-size: 260% 100%;
-		animation: cu-sheen 6s ease-in-out infinite;
-		pointer-events: none;
-		mix-blend-mode: soft-light;
-	}
-
-	/* basculement 3D au survol */
-	.floating-navbar:hover {
-		transform: perspective(1400px) rotateX(4deg) translateY(-3px);
-		box-shadow:
-			inset 0 2px 1px rgba(255, 255, 255, 0.95),
-			inset 0 -3px 3px rgba(150, 110, 20, 0.35),
-			0 9px 0 -1px rgba(150, 110, 20, 0.8),
-			0 36px 56px -18px rgba(120, 85, 10, 0.65);
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	.navbar-scrolled {
-		padding: 11px 26px;
-		border: 1px solid rgba(255, 255, 255, 0.95);
-		box-shadow:
-			inset 0 2px 1px rgba(255, 255, 255, 0.95),
-			inset 0 -3px 3px rgba(150, 110, 20, 0.35),
-			0 5px 0 -1px rgba(150, 110, 20, 0.75),
-			0 18px 36px -12px rgba(120, 85, 10, 0.55);
+		background: linear-gradient(to right, #ffffff, #FFFDF2, #D4AF37);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+		border: 1px solid rgba(212, 175, 55, 0.5);
+		box-shadow: 0 20px 50px -12px rgba(212, 175, 55, 0.35);
+		padding: 12px 28px;
 	}
 
-	/* Logo : léger relief et rotation au survol */
+	/* Logo */
 	.nav-logo {
-		perspective: 600px;
+		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
 	.logo-img {
-		filter: drop-shadow(0 3px 2px rgba(120, 85, 10, 0.35));
-		transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.4s ease;
-		transform-style: preserve-3d;
+		transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
-	.nav-logo:hover .logo-img {
-		transform: rotateY(16deg) rotateX(-6deg) scale(1.04);
-		filter: drop-shadow(0 8px 6px rgba(120, 85, 10, 0.45));
-	}
-
-	/* Liens : texte gravé, extrusion 3D au survol */
+	/* Navigation Links */
 	.nav-links {
-		gap: 2rem;
+		display: flex;
+		gap: 40px;
 		align-items: center;
 	}
 
 	.nav-link {
 		position: relative;
-		padding: 6px 12px;
-		border-radius: 9999px;
-		text-shadow: 0 1px 0 rgba(255, 255, 255, 0.85);
-		transform-style: preserve-3d;
-		transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), text-shadow 0.4s ease, background-color 0.3s ease, box-shadow 0.4s ease;
 	}
 
-	.nav-link:hover {
-		transform: translateY(-3px) translateZ(14px) rotateX(12deg);
-		text-shadow: 0 1px 0 #e8c75a, 0 2px 0 #d1a92b, 0 3px 0 #b8921f, 0 6px 8px rgba(90, 60, 0, 0.35);
-		background-color: rgba(255, 255, 255, 0.35);
-		box-shadow: 0 4px 0 -1px rgba(150, 110, 20, 0.45);
-	}
-
-	/* soulignement doré sous le lien */
+	/* Animated Underline Effect */
 	.nav-link::after {
 		content: '';
 		position: absolute;
-		bottom: -2px;
+		bottom: -4px;
 		left: 50%;
 		width: 0;
 		height: 2px;
-		border-radius: 2px;
-		background: linear-gradient(90deg, #8a5a06, #fff, #8a5a06);
-		transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+		background-color: #00002a;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 		transform: translateX(-50%);
 	}
 
 	.nav-link:hover::after {
-		width: 70%;
+		width: 100%;
 	}
 
-	/* lien actif : petite pastille en relief */
-	.nav-link.nav-link-active {
-		color: #00002a;
-		background: linear-gradient(180deg, #ffffff, #f5dd8c);
-		box-shadow: inset 0 1px 0 #fff, 0 3px 0 #b8921f, 0 6px 10px -4px rgba(120, 85, 10, 0.5);
-		text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+	/* CTA Button - Deep Navy Blue */
+	.cta-button {
+		position: relative;
+		overflow: hidden;
+		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+		box-shadow: 0 4px 12px rgba(0, 0, 42, 0.2);
 	}
 
-	/* CTA : bouton-poussoir 3D */
-	.floating-navbar .btn-hero-primary {
-		transform: translateY(0);
-		box-shadow:
-			inset 0 2px 0 rgba(255, 255, 255, 0.6),
-			0 5px 0 #8a5a06,
-			0 14px 24px -8px rgba(120, 80, 0, 0.65);
-		transition: transform 0.25s ease, box-shadow 0.25s ease;
+	.cta-button:hover {
+		box-shadow: 0 8px 24px rgba(0, 0, 42, 0.3);
+		transform: scale(1.05);
 	}
 
-	.floating-navbar .btn-hero-primary:hover {
-		transform: translateY(-2px);
-		box-shadow:
-			inset 0 2px 0 rgba(255, 255, 255, 0.6),
-			0 7px 0 #8a5a06,
-			0 20px 30px -8px rgba(120, 80, 0, 0.7),
-			0 0 28px rgba(250, 204, 107, 0.45);
-	}
-
-	.floating-navbar .btn-hero-primary:active {
-		transform: translateY(4px);
-		box-shadow:
-			inset 0 2px 0 rgba(255, 255, 255, 0.4),
-			0 1px 0 #8a5a06,
-			0 4px 8px -4px rgba(120, 80, 0, 0.6);
-	}
-
-	/* Burger : pastille en relief */
+	/* Burger Menu */
 	.burger-btn {
 		position: relative;
 		z-index: 10;
-		border-radius: 9999px;
-		background: linear-gradient(180deg, #ffffff, #f5dd8c);
-		box-shadow: inset 0 1px 0 #fff, 0 3px 0 #b8921f, 0 8px 14px -6px rgba(120, 85, 10, 0.5);
-		transition: transform 0.25s ease, box-shadow 0.25s ease;
-	}
-
-	.burger-btn:active {
-		transform: translateY(2px);
-		box-shadow: inset 0 1px 0 #fff, 0 1px 0 #b8921f;
 	}
 
 	.burger-icon {
@@ -450,7 +324,6 @@ const currentPath = Astro.url.pathname;
 	.burger-line {
 		width: 100%;
 		height: 2px;
-		border-radius: 2px;
 		background-color: #00002a;
 		transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 		transform-origin: center;
@@ -469,11 +342,9 @@ const currentPath = Astro.url.pathname;
 		transform: rotate(-45deg) translate(5px, -5px);
 	}
 
-	/* Panneau mobile : même matière, en relief */
+	/* Mobile Panel */
 	.nav-mobile-panel {
 		max-height: 0;
-		background: linear-gradient(180deg, #ffffff 0%, #fffdf2 60%, #f7dc85 100%);
-		box-shadow: inset 0 -3px 0 rgba(150, 110, 20, 0.35), 0 18px 36px -12px rgba(120, 85, 10, 0.5);
 		transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 	}
 
@@ -483,25 +354,13 @@ const currentPath = Astro.url.pathname;
 
 	.mobile-nav-link {
 		position: relative;
-		text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
-		transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), text-shadow 0.3s ease;
-	}
-
-	.mobile-nav-link:hover {
-		text-shadow: 0 2px 0 #d1a92b, 0 4px 6px rgba(90, 60, 0, 0.3);
 	}
 
 	.mobile-cta {
 		transition: all 0.3s ease;
-		box-shadow: 0 5px 0 #3a3a3a, 0 12px 20px -8px rgba(0, 0, 0, 0.5);
 	}
 
-	.mobile-cta:active {
-		transform: translateY(3px);
-		box-shadow: 0 2px 0 #3a3a3a;
-	}
-
-	/* Liens de contact */
+	/* Contact Links */
 	.contact-link {
 		position: relative;
 	}
@@ -521,7 +380,7 @@ const currentPath = Astro.url.pathname;
 		width: 100%;
 	}
 
-	/* Lecteurs d'écran */
+	/* Screen Reader Only */
 	.sr-only {
 		position: absolute;
 		width: 1px;
@@ -534,23 +393,18 @@ const currentPath = Astro.url.pathname;
 		border: 0;
 	}
 
-	@keyframes cu-sheen {
-		0%, 100% { background-position: 150% 0; }
-		55% { background-position: -150% 0; }
-	}
-
-	/* Réduction des animations */
+	/* Reduced Motion */
 	@media (prefers-reduced-motion: reduce) {
 		.top-bar,
-		.top-bar::after,
 		.floating-navbar,
-		.floating-navbar::before,
-		.main-navbar-container,
-		.nav-link,
-		.logo-img,
-		.burger-line {
+		.main-navbar-container {
 			transition: none;
-			animation: none;
+		}
+
+		.burger-line,
+		.cta-button,
+		.contact-link::after {
+			transition: none;
 		}
 	}
 </style>
