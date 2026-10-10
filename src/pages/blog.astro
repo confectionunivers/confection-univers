@@ -9,11 +9,7 @@ import BlogPagination from '../components/BlogPagination.astro';
 import { BLOG_POSTS } from '../lib/blog-data';
 
 const POSTS_PER_PAGE = 6;
-const currentPage = 1;
 const totalPages = Math.ceil(BLOG_POSTS.length / POSTS_PER_PAGE);
-const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
-const endIndex = startIndex + POSTS_PER_PAGE;
-const displayedPosts = BLOG_POSTS.slice(startIndex, endIndex);
 ---
 
 <Layout title="Blog | Confection Univers" description="Blog Confection Univers : articles sur la confection industrielle, l'entretien des tenues, les tendances uniformes et conseils pour vos vêtements professionnels au Sénégal.">
@@ -27,8 +23,8 @@ const displayedPosts = BLOG_POSTS.slice(startIndex, endIndex);
 		<section style="background: #00001C;">
 			<div class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 lg:grid-cols-12 gap-8">
 				<!-- Colonne Articles (Gauche - 70%) -->
-				<div class="lg:col-span-8 space-y-8">
-					{displayedPosts.map(post => (
+				<div class="lg:col-span-8 space-y-8" data-blog-list>
+					{BLOG_POSTS.map((post, index) => (
 						<BlogCard
 							title={post.title}
 							excerpt={post.excerpt}
@@ -37,12 +33,13 @@ const displayedPosts = BLOG_POSTS.slice(startIndex, endIndex);
 							date={post.date}
 							author={post.author}
 							slug={post.slug}
+							initiallyHidden={index >= POSTS_PER_PAGE}
 						/>
 					))}
 
 					<!-- Pagination -->
 					<div class="mt-12 flex justify-center">
-						<BlogPagination currentPage={currentPage} totalPages={totalPages} />
+						<BlogPagination currentPage={1} totalPages={totalPages} />
 					</div>
 				</div>
 
@@ -56,3 +53,114 @@ const displayedPosts = BLOG_POSTS.slice(startIndex, endIndex);
 		<Footer />
 	</main>
 </Layout>
+
+<script>
+	const normalizeText = (value: string) => value
+		.normalize('NFD')
+		.replace(/[\u0300-\u036f]/g, '')
+		.toLocaleLowerCase();
+
+	const cards = Array.from(document.querySelectorAll<HTMLElement>('[data-blog-post]'));
+	const searchInput = document.querySelector<HTMLInputElement>('#blog-search');
+	const categoryLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-blog-category]'));
+	const pagination = document.querySelector<HTMLElement>('[data-blog-pagination]');
+	const params = new URLSearchParams(window.location.search);
+	let selectedCategory = params.get('category') || '';
+	let currentPage = Number.parseInt(params.get('page') || '1', 10) || 1;
+
+	if (searchInput) searchInput.value = params.get('q') || '';
+
+	const pageUrl = (page: number) => {
+		const query = new URLSearchParams();
+		const search = searchInput?.value.trim();
+		if (search) query.set('q', search);
+		if (selectedCategory) query.set('category', selectedCategory);
+		query.set('page', String(page));
+		return `/blog?${query.toString()}`;
+	};
+
+	const updatePagination = (totalPages: number) => {
+		if (!pagination) return;
+
+		const previous = pagination.querySelector<HTMLAnchorElement>('[data-blog-prev]');
+		const next = pagination.querySelector<HTMLAnchorElement>('[data-blog-next]');
+		if (previous) {
+			previous.hidden = currentPage <= 1;
+			previous.href = pageUrl(Math.max(1, currentPage - 1));
+		}
+		if (next) {
+			next.hidden = currentPage >= totalPages;
+			next.href = pageUrl(Math.min(totalPages, currentPage + 1));
+		}
+
+		pagination.querySelectorAll<HTMLAnchorElement>('[data-blog-page]').forEach((link) => {
+			const page = Number(link.dataset.blogPage);
+			const active = page === currentPage;
+			link.hidden = page > totalPages;
+			link.href = pageUrl(page);
+			if (active) {
+				link.setAttribute('aria-current', 'page');
+				link.classList.remove('h-3', 'w-3', 'bg-white/20', 'hover:bg-white/40');
+				link.classList.add('h-4', 'w-4', 'bg-[#F5B544]', 'shadow-[0_0_12px_rgba(245,181,68,0.5)]');
+			} else {
+				link.removeAttribute('aria-current');
+				link.classList.remove('h-4', 'w-4', 'bg-[#F5B544]', 'shadow-[0_0_12px_rgba(245,181,68,0.5)]');
+				link.classList.add('h-3', 'w-3', 'bg-white/20', 'hover:bg-white/40');
+			}
+		});
+	};
+
+	const applyFilters = () => {
+		const query = normalizeText(searchInput?.value.trim() || '');
+		const filteredCards = cards.filter((card) => {
+			const matchesCategory = !selectedCategory || card.dataset.category === selectedCategory;
+			const matchesSearch = !query || normalizeText(card.dataset.search || '').includes(query);
+			return matchesCategory && matchesSearch;
+		});
+		const totalPages = Math.max(1, Math.ceil(filteredCards.length / 6));
+		currentPage = Math.min(Math.max(currentPage, 1), totalPages);
+		const firstVisible = (currentPage - 1) * 6;
+		const visibleCards = new Set(filteredCards.slice(firstVisible, firstVisible + 6));
+
+		cards.forEach((card) => {
+			card.hidden = !visibleCards.has(card);
+		});
+		categoryLinks.forEach((link) => {
+			if (link.dataset.blogCategory === selectedCategory) {
+				link.setAttribute('aria-current', 'true');
+			} else {
+				link.removeAttribute('aria-current');
+			}
+		});
+		updatePagination(totalPages);
+
+		const nextParams = new URLSearchParams();
+		const rawSearch = searchInput?.value.trim();
+		if (rawSearch) nextParams.set('q', rawSearch);
+		if (selectedCategory) nextParams.set('category', selectedCategory);
+		if (currentPage > 1) nextParams.set('page', String(currentPage));
+		const queryString = nextParams.toString();
+		const nextUrl = `${window.location.pathname}${queryString ? `?${queryString}` : ''}${window.location.hash}`;
+		window.history.replaceState({}, '', nextUrl);
+	};
+
+	searchInput?.addEventListener('input', () => {
+		currentPage = 1;
+		applyFilters();
+	});
+	searchInput?.closest('form')?.addEventListener('submit', (event) => {
+		event.preventDefault();
+		currentPage = 1;
+		applyFilters();
+	});
+	categoryLinks.forEach((link) => {
+		link.addEventListener('click', (event) => {
+			event.preventDefault();
+			selectedCategory = link.dataset.blogCategory || '';
+			currentPage = 1;
+			applyFilters();
+		});
+	});
+
+	applyFilters();
+</script>

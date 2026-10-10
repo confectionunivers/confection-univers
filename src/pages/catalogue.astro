@@ -1,0 +1,669 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+const catalogSections = [
+	{
+		id: 'toges',
+		number: '01',
+		navLabel: 'Toges & cérémonies',
+		eyebrow: 'Académique & juridique',
+		title: 'Toges & robes d’apparat',
+		intro: 'Des tenues de cérémonie soignées, adaptées aux codes de votre établissement et à chaque étape du parcours académique ou juridique.',
+		products: [
+			{ name: 'Toge de graduation', image: '/images/toge-graduation-1.jpg', alt: 'Toge de graduation confectionnée pour une cérémonie académique', description: 'Une silhouette élégante pour célébrer les réussites et cérémonies de remise de diplômes.' },
+			{ name: 'Toge de Master', image: '/images/toge-graduation-2.jpg', alt: 'Tenue académique de Master', description: 'Une tenue de cérémonie personnalisable selon les couleurs et l’identité de votre institution.' },
+			{ name: 'Toge de doctorant', image: '/images/toge-graduation-3.jpg', alt: 'Toge académique de doctorant', description: 'Une finition distinguée pour les soutenances et cérémonies de doctorat.' },
+			{ name: 'Toge d’avocat', image: '/images/toge-avocat.jpg', alt: 'Toge professionnelle d’avocat', description: 'Une robe professionnelle confectionnée avec attention aux détails et aux finitions.' },
+			{ name: 'Toge de juge', image: '/images/toge-graduation-4.jpg', alt: 'Toge de cérémonie pour juge', description: 'Une tenue d’apparat conçue pour une présence sobre et soignée.' },
+			{ name: 'Toge de magistrat', image: '/images/toge-graduation-5.jpg', alt: 'Toge de cérémonie pour magistrat', description: 'Une coupe soignée, adaptée aux besoins des professionnels du droit.' },
+		],
+	},
+	{
+		id: 'travail',
+		number: '02',
+		navLabel: 'Tenues de travail',
+		eyebrow: 'Professionnels & entreprises',
+		title: 'Tenues de travail',
+		intro: 'Des vêtements professionnels pensés pour accompagner les équipes sur le terrain comme dans les métiers de service.',
+		products: [
+			{ name: 'Tenue d’agent de sécurité', image: '/images/tenue-travail-1.jpg', alt: 'Tenue de travail pour agent de sécurité', description: 'Une tenue professionnelle coordonnée, personnalisable selon les besoins de votre équipe.' },
+			{ name: 'Tenue de mécanicien', image: '/images/tenue-travail-2.jpg', alt: 'Tenue de travail pour mécanicien', description: 'Des vêtements fonctionnels conçus pour accompagner les activités d’atelier.' },
+			{ name: 'Tenue de menuisier', image: '/images/tenue-travail-3.jpg', alt: 'Tenue professionnelle pour menuisier', description: 'Une tenue confortable et pratique pour les métiers de fabrication et d’artisanat.' },
+			{ name: 'Tenue d’hôtellerie', image: '/images/tenue-travail-4.jpg', alt: 'Tenue professionnelle d’hôtellerie', description: 'Une présentation élégante pour les équipes d’accueil, de service et d’hébergement.' },
+		],
+	},
+	{
+		id: 'medical',
+		number: '03',
+		navLabel: 'Blouses médicales',
+		eyebrow: 'Santé & soins',
+		title: 'Blouses médicales',
+		intro: 'Des tenues professionnelles dédiées aux équipes de santé, avec des coupes adaptées à votre établissement.',
+		products: [
+			{ name: 'Blouse de docteur', image: '/images/blouse-medicale-1.jpg', alt: 'Blouse médicale de docteur', description: 'Une blouse soignée, conçue pour un usage professionnel au quotidien.' },
+			{ name: 'Tenue d’infirmier', image: '/images/blouse-medicale-2.jpg', alt: 'Tenue médicale pour infirmier', description: 'Une tenue confortable et fonctionnelle pour les équipes de soins.' },
+			{ name: 'Tenue de sage-femme', image: '/images/blouse-medicale-3.jpg', alt: 'Tenue médicale pour sage-femme', description: 'Une tenue professionnelle personnalisable selon les besoins de votre maternité.' },
+		],
+	},
+	{
+		id: 'scolaire',
+		number: '04',
+		navLabel: 'Uniformes scolaires',
+		eyebrow: 'Écoles & établissements',
+		title: 'Uniformes scolaires',
+		intro: 'Des pièces coordonnées pour composer une tenue scolaire harmonieuse aux couleurs de votre établissement.',
+		products: [
+			{ name: 'Chemise scolaire', image: '/images/uniforme-scolaire-1.jpg', alt: 'Chemise d’uniforme scolaire', description: 'Une pièce essentielle, confectionnée dans la coupe et les couleurs de votre école.' },
+			{ name: 'Pantalon scolaire', image: '/images/uniforme-scolaire-2.jpg', alt: 'Pantalon d’uniforme scolaire', description: 'Une coupe confortable, pensée pour accompagner les journées de classe.' },
+			{ name: 'Costume scolaire', image: '/images/uniforme-scolaire-3.jpg', alt: 'Costume d’uniforme scolaire', description: 'Un ensemble soigné pour une présentation élégante et uniforme.' },
+			{ name: 'Gilet scolaire', image: '/images/uniforme-scolaire-4.jpg', alt: 'Gilet d’uniforme scolaire', description: 'Une pièce complémentaire à assortir à l’uniforme de votre établissement.' },
+			{ name: 'Cravate scolaire', image: '/images/uniforme-scolaire-5.jpg', alt: 'Cravate assortie à un uniforme scolaire', description: 'Une finition coordonnée aux couleurs et à l’identité de l’école.' },
+			{ name: 'Costume Lacoste', image: '/images/uniforme-scolaire-6.jpg', alt: 'Ensemble scolaire de style Lacoste', description: 'Un ensemble scolaire coordonné, personnalisable selon votre demande.' },
+			{ name: 'Blouson scolaire', image: '/images/uniforme-scolaire-7.jpg', alt: 'Blouson d’uniforme scolaire', description: 'Une pièce extérieure assortie aux couleurs de votre établissement.' },
+		],
+	},
+	{
+		id: 'eps',
+		number: '05',
+		navLabel: 'Tenue EPS',
+		eyebrow: 'Éducation physique & sport',
+		title: 'Tenue EPS — 5 pièces',
+		intro: 'Un ensemble de cinq pièces coordonnées pour les cours d’éducation physique et les activités sportives scolaires.',
+		products: [
+			{ name: 'Ensemble EPS — 5 pièces', image: '/images/tenue-sport-1.jpg', alt: 'Ensemble de sport scolaire EPS', description: 'Une tenue coordonnée en cinq pièces, personnalisable aux couleurs de votre établissement.' },
+		],
+	},
+	{
+		id: 'africain',
+		number: '06',
+		navLabel: 'Costume africain',
+		eyebrow: 'Création & élégance',
+		title: 'Costume africain de luxe et moderne',
+		intro: 'Une interprétation élégante des tenues africaines, entre lignes contemporaines et finitions soignées.',
+		products: [
+			{ name: 'Costume africain de luxe et moderne', image: '/images/costume-africain.jpg', alt: 'Costume africain moderne et élégant', description: 'Une création sur mesure pour les cérémonies, événements et occasions spéciales.' },
+		],
+	},
+	{
+		id: 'sport',
+		number: '07',
+		navLabel: 'Tenues de sport',
+		eyebrow: 'Clubs & disciplines',
+		title: 'Tenues de sport',
+		intro: 'Des tenues personnalisables pour les clubs, équipes et associations sportives.',
+		products: [
+			{ name: 'Tenue de football', image: '/images/tenue-sport-2.jpg', alt: 'Tenue de football personnalisable', description: 'Des couleurs et marquages adaptés à votre équipe et à votre club.' },
+			{ name: 'Tenue d’arts martiaux', image: '/images/kimono.jpg', alt: 'Kimono pour les arts martiaux', description: 'Une tenue dédiée aux entraînements et disciplines d’arts martiaux.' },
+			{ name: 'Tenue de basketball', image: '/images/tenue-sport-3.jpg', alt: 'Tenue de basketball personnalisable', description: 'Un ensemble d’équipe personnalisable pour vos entraînements et compétitions.' },
+		],
+	},
+];
+---
+
+<Layout
+	title="Catalogue Premium | Confection Univers"
+	description="Découvrez le catalogue Confection Univers : toges, tenues de travail, blouses médicales, uniformes scolaires, tenues EPS, costumes africains et vêtements de sport confectionnés au Sénégal."
+>
+	<main class="relative overflow-hidden bg-background">
+		<Navbar />
+
+		<!-- Editorial bento hero inspired by the visual references -->
+		<section class="catalogue-hero">
+			<svg aria-hidden="true" class="catalogue-hero__waves" viewBox="0 0 1600 900" preserveAspectRatio="none" fill="none">
+				<path d="M-80 510C180 375 375 390 560 500c177 105 282 115 444 12 145-92 228-192 420-176 111 9 194 63 273 113" stroke="white" stroke-opacity=".1" stroke-width="2" />
+				<path d="M-100 560C170 425 390 435 572 545c177 105 284 111 445 9 145-92 226-188 415-172 111 9 205 69 277 120" stroke="#F5B544" stroke-opacity=".16" stroke-width="1.5" />
+				<path d="M-90 604C176 472 400 478 584 590c174 105 281 113 442 10 148-93 228-189 418-171 110 10 195 65 269 116" stroke="white" stroke-opacity=".055" stroke-width="1" />
+			</svg>
+			<div class="catalogue-hero__intro">
+				<p class="catalogue-eyebrow"><span></span>Catalogue Confection Univers<span></span></p>
+				<h1 class="catalogue-hero__title"><span>L’élégance de vos équipes,</span><strong>confectionnée sur mesure.</strong></h1>
+				<p class="catalogue-hero__copy">Des tenues professionnelles, académiques et sportives pensées pour valoriser votre identité — des pièces du quotidien aux grandes cérémonies.</p>
+				<div class="catalogue-hero__actions">
+					<a href="#collections" class="catalogue-button catalogue-button--gold">Explorer les collections <span aria-hidden="true">↓</span></a>
+					<a href="/contact" class="catalogue-button catalogue-button--outline">Demander un devis</a>
+				</div>
+				<p class="catalogue-hero__meta"><span>07 univers</span><i></i><span>25 modèles</span><i></i><span>Confection sur mesure</span></p>
+			</div>
+
+			<div id="collections" class="catalogue-bento">
+				<a href="#toges" class="bento-tile tile-toges">
+					<img class="bento-tile__image" src="/images/toge-graduation-1.jpg" alt="" width="450" height="600" loading="eager" decoding="async" />
+					<span class="bento-tile__kicker">01 · Académique</span>
+					<div class="bento-tile__content"><h2>Toges & cérémonies</h2><p>6 modèles · Le grand jour, avec distinction</p></div>
+					<span class="bento-tile__arrow" aria-hidden="true">↗</span>
+				</a>
+				<a href="#travail" class="bento-tile tile-travail">
+					<img class="bento-tile__image" src="/images/tenue-travail-1.jpg" alt="" width="450" height="600" loading="eager" decoding="async" />
+					<span class="bento-tile__kicker">02 · Professionnels</span>
+					<div class="bento-tile__content"><h2>Tenues de travail</h2><p>4 modèles · L’allure au quotidien</p></div>
+				</a>
+				<a href="#medical" class="bento-tile tile-medical">
+					<img class="bento-tile__image" src="/images/blouse-medicale-1.jpg" alt="" width="450" height="600" loading="eager" decoding="async" />
+					<span class="bento-tile__kicker">03 · Santé & soins</span>
+					<div class="bento-tile__content"><h2>Blouses médicales</h2><p>3 modèles · Le confort des équipes</p></div>
+				</a>
+				<a href="#africain" class="bento-tile tile-africain">
+					<img class="bento-tile__image" src="/images/costume-africain.jpg" alt="" width="450" height="900" loading="eager" decoding="async" />
+					<span class="bento-tile__kicker">06 · Création & élégance</span>
+					<span class="bento-tile__seal" aria-hidden="true">CU</span>
+					<div class="bento-tile__content"><p class="bento-tile__overline">Une pièce d’exception</p><h2>Costume africain de luxe et moderne</h2><p>Une création élégante, pensée pour les grands moments</p></div>
+				</a>
+				<a href="#scolaire" class="bento-tile tile-scolaire">
+					<img class="bento-tile__image" src="/images/uniforme-scolaire-1.jpg" alt="" width="450" height="420" loading="eager" decoding="async" />
+					<span class="bento-tile__kicker">04 · Écoles</span>
+					<div class="bento-tile__content"><h2>Uniformes scolaires</h2><p>7 modèles · L’identité de votre école</p></div>
+				</a>
+				<a href="#eps" class="bento-tile tile-eps">
+					<img class="bento-tile__image" src="/images/tenue-sport-1.jpg" alt="" width="450" height="600" loading="eager" decoding="async" />
+					<span class="bento-tile__kicker">05 · Éducation physique</span>
+					<div class="bento-tile__content"><h2>Tenue EPS</h2><p>5 pièces · Ensemble coordonné</p></div>
+				</a>
+				<a href="#sport" class="bento-tile tile-sport">
+					<img class="bento-tile__image" src="/images/tenue-sport-2.jpg" alt="" width="450" height="600" loading="eager" decoding="async" />
+					<span class="bento-tile__kicker">07 · Clubs & disciplines</span>
+					<div class="bento-tile__content"><h2>Tenues de sport</h2><p>Football · Arts martiaux · Basketball</p></div>
+				</a>
+			</div>
+		</section>
+
+		<!-- Catalogue collections -->
+		<div class="catalogue-collections text-ink">
+			{catalogSections.map((section, sectionIndex) => (
+				<section id={section.id} style={`background-color: ${sectionIndex % 2 === 0 ? '#faf7f0' : '#f1ecdf'}; color: #111116;`} class:list={[
+					'catalogue-category relative isolate scroll-mt-32 overflow-hidden border-t border-[#C9A552]/35 py-16 md:py-24',
+					sectionIndex % 2 === 0 ? 'bg-[#faf7f0]' : 'bg-[#f1ecdf]'
+				]}>
+					<div aria-hidden="true" class="pointer-events-none absolute right-[-8rem] top-12 z-0 h-[360px] w-[360px] rounded-full border border-[#C9A552]/15"></div>
+					<div aria-hidden="true" class="pointer-events-none absolute right-[2%] top-28 z-0 h-72 w-72 rounded-full bg-[#D4AF37]/[0.055] blur-[80px]"></div>
+					<div class="relative z-10 mx-auto max-w-7xl px-6">
+						<div class="mb-10 grid gap-6 md:mb-14 md:grid-cols-[110px_1fr] md:items-end">
+							<div class="relative flex items-center gap-4 md:flex-col md:items-start md:gap-2">
+								<span aria-hidden="true" class="pointer-events-none absolute -left-1 -top-10 font-display text-[6.5rem] font-bold leading-none tracking-[-0.08em] text-[#C9A552]/10 md:-top-14 md:text-[8rem]">{section.number}</span>
+								<span class="relative flex h-[66px] w-[66px] shrink-0 items-center justify-center rounded-full border border-[#C9A552]/65 bg-white/75 font-display text-xl font-semibold text-[#9A742C] shadow-[0_8px_28px_rgba(114,83,26,0.08)] before:absolute before:inset-1 before:rounded-full before:border before:border-[#C9A552]/20">{section.number}</span>
+								<span class="relative text-[8px] font-semibold uppercase tracking-[0.2em] text-[#9A742C] md:pl-1">Collection</span>
+							</div>
+							<div>
+								<p class="flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.28em] text-[#A27B31] md:text-[10px]">
+									<span class="h-px w-8 bg-[#C9A552]"></span>{section.eyebrow}
+								</p>
+								<div class="mt-3 flex flex-wrap items-end justify-between gap-4">
+									<h2 class="max-w-4xl font-display text-[clamp(2rem,4.2vw,3.75rem)] font-semibold leading-[1.04] tracking-[-0.04em] text-[#11101A]">{section.title}</h2>
+									<span class="inline-flex shrink-0 items-center gap-2 rounded-full border border-[#C9A552]/35 bg-white/65 px-4 py-2 text-[9px] font-semibold uppercase tracking-[0.14em] text-[#8E6C2A]">
+										<span class="h-1.5 w-1.5 rounded-full bg-[#C9A552]"></span>
+										{section.products.length} {section.products.length === 1 ? 'modèle' : 'modèles'}
+									</span>
+								</div>
+								<p class="mt-4 max-w-3xl text-sm leading-relaxed text-[#11101A]/65 md:text-base">{section.intro}</p>
+							</div>
+						</div>
+
+						<div class:list={[
+							'mt-10 grid gap-5 md:mt-14 md:gap-7',
+							section.products.length === 1 ? 'grid-cols-1' : 'grid-cols-1 sm:grid-cols-2 xl:grid-cols-3'
+						]}>
+							{section.products.map((product, productIndex) => (
+								<article class:list={[
+									'catalogue-product-card group relative overflow-hidden rounded-[1.6rem] border border-[#C9A552]/35 bg-white shadow-[0_14px_42px_-24px_rgba(32,25,12,0.28)] transition duration-500 hover:-translate-y-1 hover:border-[#C9A552]/75 hover:shadow-[0_25px_55px_-25px_rgba(32,25,12,0.36)]',
+									section.products.length === 1 ? 'md:grid md:grid-cols-[1.12fr_0.88fr]' : ''
+								]}>
+									<div class:list={[
+										'product-image relative aspect-[4/3] overflow-hidden bg-[#e7e0d3]',
+										section.products.length === 1 ? 'md:aspect-auto md:min-h-[370px]' : ''
+									]}>
+										<button
+											type="button"
+											class="catalogue-image-trigger absolute inset-0 z-0 block h-full w-full cursor-zoom-in overflow-hidden border-0 bg-transparent p-0"
+											aria-label={`Agrandir l’image : ${product.name}`}
+											data-catalogue-lightbox
+											data-image={product.image}
+											data-alt={product.alt}
+											data-caption={product.name}
+										>
+											<img
+												src={product.image}
+												alt={product.alt}
+												class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+												width="800"
+												height="600"
+												loading={productIndex < 2 ? 'eager' : 'lazy'}
+												decoding="async"
+											/>
+										</button>
+										<div class="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-[#090811]/75 via-[#090811]/5 to-transparent"></div>
+										<span class="pointer-events-none absolute left-4 top-4 z-20 rounded-full border border-[#FFE4A4]/70 bg-[#090811]/80 px-3 py-1.5 font-display text-[9px] font-semibold tracking-[0.12em] text-[#FFE4A4] backdrop-blur-md">{section.number} · {String(productIndex + 1).padStart(2, '0')}</span>
+										<span class="pointer-events-none absolute bottom-4 left-4 z-20 rounded-full border border-[#FFE4A4]/45 bg-[#090811]/75 px-4 py-2 text-[8px] font-semibold uppercase tracking-[0.19em] text-[#FFF6E4] backdrop-blur-md sm:text-[9px]">Confection sur mesure</span>
+									</div>
+									<div class="flex flex-col justify-between p-6 md:p-7">
+										<div>
+											<p class="mb-3 text-[8px] font-bold uppercase tracking-[0.24em] text-[#A27B31]">La pièce</p>
+											<h3 class="font-display text-xl font-semibold leading-snug tracking-[-0.025em] text-[#11101A] md:text-2xl">{product.name}</h3>
+											<p class="mt-3 text-sm leading-relaxed text-[#11101A]/60">{product.description}</p>
+										</div>
+										<a href="/contact" class="group/cta mt-7 inline-flex w-fit items-center gap-3 rounded-full bg-[#11101A] px-5 py-3.5 text-[9px] font-bold uppercase tracking-[0.14em] text-[#FFE2A0] transition duration-300 hover:bg-gradient-to-r hover:from-[#FFE2A0] hover:to-[#D99A32] hover:text-[#11101A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#C9A552]">
+											Demander un devis
+											<svg class="h-4 w-4 transition-transform duration-300 group-hover/cta:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" /></svg>
+										</a>
+									</div>
+								</article>
+							))}
+						</div>
+					</div>
+				</section>
+			))}
+		</div>
+
+		<dialog id="catalogue-lightbox" class="catalogue-lightbox" aria-label="Agrandissement de l’image du modèle">
+			<div class="catalogue-lightbox__frame">
+				<button type="button" class="catalogue-lightbox__close" aria-label="Fermer l’image agrandie">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" d="m6 6 12 12M18 6 6 18" /></svg>
+				</button>
+				<img id="catalogue-lightbox-image" class="catalogue-lightbox__image" alt="" />
+				<p id="catalogue-lightbox-caption" class="catalogue-lightbox__caption"></p>
+			</div>
+		</dialog>
+
+		<script>
+			const catalogueLightbox = document.querySelector('#catalogue-lightbox');
+			const catalogueLightboxImage = document.querySelector('#catalogue-lightbox-image');
+			const catalogueLightboxCaption = document.querySelector('#catalogue-lightbox-caption');
+
+			document.addEventListener('click', (event) => {
+				if (!(event.target instanceof Element)) return;
+				const trigger = event.target.closest('[data-catalogue-lightbox]');
+				if (!trigger || !catalogueLightbox || !catalogueLightboxImage || !catalogueLightboxCaption) return;
+
+				const imageUrl = trigger.getAttribute('data-image');
+				if (!imageUrl) return;
+				catalogueLightboxImage.setAttribute('src', imageUrl);
+				catalogueLightboxImage.setAttribute('alt', trigger.getAttribute('data-alt') || '');
+				catalogueLightboxCaption.textContent = trigger.getAttribute('data-caption') || '';
+				if (!catalogueLightbox.open) catalogueLightbox.showModal();
+			});
+
+			catalogueLightbox?.querySelector('.catalogue-lightbox__close')?.addEventListener('click', () => catalogueLightbox.close());
+			catalogueLightbox?.addEventListener('click', (event) => {
+				if (event.target === catalogueLightbox) catalogueLightbox.close();
+			});
+			catalogueLightbox?.addEventListener('close', () => {
+				catalogueLightboxImage?.removeAttribute('src');
+				if (catalogueLightboxImage) catalogueLightboxImage.alt = '';
+				if (catalogueLightboxCaption) catalogueLightboxCaption.textContent = '';
+			});
+		</script>
+
+		<!-- Closing CTA -->
+		<section class="relative isolate overflow-hidden bg-[#07070D] py-20 text-foreground md:py-28">
+			<div aria-hidden="true" class="pointer-events-none absolute inset-0" style="background: radial-gradient(ellipse at 50% 100%, rgba(245,181,68,0.18), transparent 55%), linear-gradient(135deg, #07070d 0%, #0d0c13 100%);"></div>
+			<div aria-hidden="true" class="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#F5B544]/10"></div>
+			<div class="relative mx-auto max-w-6xl px-6">
+				<div class="relative overflow-hidden rounded-[2rem] border border-[#F5B544]/30 bg-white/[0.025] px-6 py-14 text-center shadow-[0_25px_100px_rgba(0,0,0,0.3)] backdrop-blur-sm sm:px-12 sm:py-20">
+					<div aria-hidden="true" class="pointer-events-none absolute -right-16 -top-24 h-64 w-64 rounded-full border border-[#F5B544]/15"></div>
+					<div aria-hidden="true" class="pointer-events-none absolute -bottom-32 -left-20 h-72 w-72 rounded-full bg-[#F5B544]/[0.08] blur-[80px]"></div>
+					<div class="relative mx-auto max-w-4xl">
+						<p class="inline-flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.3em] text-[#F5B544] sm:text-[10px]">
+							<span class="h-px w-7 bg-[#F5B544]"></span>Votre prochain projet commence ici<span class="h-px w-7 bg-[#F5B544]"></span>
+						</p>
+						<h2 class="mt-6 font-display text-[clamp(2.2rem,5vw,4.5rem)] font-semibold leading-[1.04] tracking-[-0.045em] text-white">Créons ensemble vos tenues <span class="bg-gradient-to-r from-[#FFE5A5] via-[#F5B544] to-[#D58D20] bg-clip-text text-transparent">sur mesure.</span></h2>
+						<p class="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-white/65 md:text-base">Partagez vos besoins, vos quantités et vos couleurs : notre équipe vous accompagnera dans le choix de votre collection.</p>
+						<a href="/contact" class="group mt-9 inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-[#FFE2A0] via-[#F5B544] to-[#D8962C] px-8 py-4 text-[10px] font-bold uppercase tracking-[0.18em] text-[#141019] shadow-[0_10px_34px_rgba(245,181,68,0.2)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_42px_rgba(245,181,68,0.32)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F5B544]">
+							Parler de mon projet
+							<svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" /></svg>
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<Footer />
+	</main>
+
+	<style>
+		.catalogue-hero {
+			position: relative;
+			isolation: isolate;
+			overflow: hidden;
+			padding: clamp(132px, 15vw, 180px) 24px 76px;
+			color: #fff;
+			background: radial-gradient(ellipse at 50% 0%, rgba(245, 181, 68, 0.13), transparent 42%), linear-gradient(180deg, #08080b 0%, #050505 78%, #09090c 100%);
+		}
+
+		.catalogue-hero__waves {
+			position: absolute;
+			inset: 0;
+			z-index: -1;
+			width: 100%;
+			height: 100%;
+			pointer-events: none;
+		}
+
+		.catalogue-hero__intro {
+			position: relative;
+			max-width: 1100px;
+			margin: 0 auto;
+			text-align: center;
+		}
+
+		.catalogue-eyebrow {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 12px;
+			color: #f5b544;
+			font-size: 10px;
+			font-weight: 700;
+			letter-spacing: 0.28em;
+			line-height: 1.4;
+			text-transform: uppercase;
+		}
+
+		.catalogue-eyebrow span {
+			width: 30px;
+			height: 1px;
+			background: linear-gradient(90deg, transparent, #f5b544);
+		}
+
+		.catalogue-eyebrow span:last-child { transform: rotate(180deg); }
+
+		.catalogue-hero__title {
+			max-width: 1100px;
+			margin: 24px auto 0;
+			font-family: var(--font-display);
+			font-size: clamp(2.65rem, 5.6vw, 5.4rem);
+			font-weight: 700;
+			line-height: 1.02;
+			letter-spacing: -0.055em;
+		}
+
+		.catalogue-hero__title span,
+		.catalogue-hero__title strong { display: block; }
+
+		.catalogue-hero__title span { color: #fff; }
+
+		.catalogue-hero__title strong {
+			margin-top: 0.06em;
+			color: #f5b544;
+			font-weight: 700;
+			text-shadow: 0 8px 36px rgba(245, 181, 68, 0.18);
+		}
+
+		.catalogue-hero__copy {
+			max-width: 760px;
+			margin: 20px auto 0;
+			color: rgba(255, 255, 255, 0.7);
+			font-size: 16px;
+			line-height: 1.7;
+		}
+
+		.catalogue-hero__actions {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: center;
+			gap: 12px;
+			margin-top: 23px;
+		}
+
+		.catalogue-button {
+			display: inline-flex;
+			min-height: 46px;
+			align-items: center;
+			justify-content: center;
+			gap: 12px;
+			border: 1px solid transparent;
+			border-radius: 999px;
+			padding: 0 21px;
+			font-size: 10px;
+			font-weight: 700;
+			letter-spacing: 0.14em;
+			text-decoration: none;
+			text-transform: uppercase;
+			transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease, color 220ms ease;
+		}
+
+		.catalogue-button--gold {
+			color: #151219;
+			background: linear-gradient(105deg, #ffe8b2, #f5b544 58%, #d99525);
+			box-shadow: 0 8px 28px rgba(245, 181, 68, 0.2);
+		}
+
+		.catalogue-button--outline {
+			border-color: rgba(255, 255, 255, 0.25);
+			color: #fff;
+			background: rgba(255, 255, 255, 0.025);
+		}
+
+		.catalogue-button:hover { transform: translateY(-2px); }
+		.catalogue-button--gold:hover { box-shadow: 0 12px 36px rgba(245, 181, 68, 0.36); }
+		.catalogue-button--outline:hover { border-color: #f5b544; color: #ffe8b2; }
+		.catalogue-button:focus-visible,
+		.bento-tile:focus-visible { outline: 3px solid #f5b544; outline-offset: 4px; }
+
+		.catalogue-hero__meta {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: center;
+			gap: 12px;
+			margin: 19px auto 0;
+			color: rgba(255, 255, 255, 0.55);
+			font-size: 9px;
+			font-weight: 700;
+			letter-spacing: 0.16em;
+			text-transform: uppercase;
+		}
+
+		.catalogue-hero__meta i { width: 4px; height: 4px; border-radius: 50%; background: #f5b544; }
+
+		.catalogue-bento {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			grid-template-areas:
+				"toges toges"
+				"travail medical"
+				"africain africain"
+				"scolaire eps"
+				"sport sport";
+			grid-template-rows: 190px 190px 245px 190px 180px;
+			gap: 12px;
+			width: min(100%, 1080px);
+			margin: 42px auto 0;
+			scroll-margin-top: 150px;
+		}
+
+		.bento-tile {
+			position: relative;
+			display: flex;
+			min-width: 0;
+			flex-direction: column;
+			justify-content: space-between;
+			overflow: hidden;
+			isolation: isolate;
+			border: 1px solid rgba(255, 255, 255, 0.12);
+			border-radius: 20px;
+			padding: 18px;
+			text-decoration: none;
+			box-shadow: 0 16px 42px rgba(0, 0, 0, 0.24);
+			transition: transform 280ms ease, box-shadow 280ms ease;
+		}
+
+		.bento-tile:hover { transform: translateY(-4px); box-shadow: 0 22px 46px rgba(0, 0, 0, 0.36); }
+		.bento-tile__image { position: absolute; z-index: 0; pointer-events: none; object-fit: cover; transition: transform 650ms ease; }
+		.bento-tile:hover .bento-tile__image { transform: scale(1.045); }
+		.bento-tile::after { position: absolute; z-index: 1; inset: 0; content: ""; pointer-events: none; }
+		.bento-tile__kicker,
+		.bento-tile__content,
+		.bento-tile__seal { position: relative; z-index: 2; }
+		.bento-tile__kicker { font-size: 9px; font-weight: 800; letter-spacing: 0.16em; line-height: 1.35; text-transform: uppercase; }
+		.bento-tile__content { max-width: 82%; margin-top: auto; }
+		.bento-tile__content h2 { margin: 0; font-family: var(--font-display); font-size: clamp(17px, 1.65vw, 22px); font-weight: 700; line-height: 1.12; letter-spacing: -0.035em; }
+		.bento-tile__content p { margin: 8px 0 0; font-size: 10px; font-weight: 600; line-height: 1.45; }
+		.bento-tile__content .bento-tile__overline { margin: 0 0 7px; font-size: 8px; font-weight: 800; letter-spacing: 0.17em; text-transform: uppercase; }
+		.bento-tile__seal { position: absolute; top: 16px; right: 16px; display: grid; width: 42px; height: 42px; place-items: center; border: 1px solid #fff1c8; border-radius: 50%; color: #151219; background: #f5b544; font-family: var(--font-display); font-size: 12px; font-weight: 800; }
+
+		.tile-toges { grid-area: toges; color: #15141a; background: #f4f2ed; }
+		.tile-toges .bento-tile__image { right: 0; bottom: 0; width: 56%; height: 100%; object-position: center 18%; }
+		.tile-toges::after { background: linear-gradient(90deg, #f4f2ed 0%, #f4f2ed 32%, rgba(244, 242, 237, 0.92) 49%, rgba(244, 242, 237, 0) 100%); }
+		.tile-toges .bento-tile__kicker,
+		.tile-medical .bento-tile__kicker,
+		.tile-sport .bento-tile__kicker { color: #95712d; }
+
+		.tile-travail { grid-area: travail; color: #fff; background: #868681; }
+		.tile-travail .bento-tile__image,
+		.tile-eps .bento-tile__image { inset: 0; width: 100%; height: 100%; }
+		.tile-travail::after { background: linear-gradient(180deg, rgba(248, 246, 240, 0.94) 0%, rgba(248, 246, 240, 0.22) 42%, rgba(5, 5, 8, 0.78) 100%); }
+		.tile-travail .bento-tile__kicker { color: #24221e; }
+		.tile-travail .bento-tile__content { color: #fff; text-shadow: 0 1px 10px rgba(0, 0, 0, 0.25); }
+		.tile-travail .bento-tile__content p { color: rgba(255, 255, 255, 0.86); }
+
+		.tile-medical { grid-area: medical; color: #15141a; background: #f3f0e9; }
+		.tile-medical .bento-tile__image { right: 0; bottom: 0; width: 59%; height: 80%; object-position: center 12%; }
+		.tile-medical::after { background: linear-gradient(90deg, #f3f0e9 0%, #f3f0e9 35%, rgba(243, 240, 233, 0.92) 51%, rgba(243, 240, 233, 0.04) 100%); }
+
+		.tile-africain { grid-area: africain; min-height: 230px; color: #fff; background: #17141b; }
+		.tile-africain .bento-tile__image { inset: 0; width: 100%; height: 100%; object-position: center 16%; }
+		.tile-africain::after { background: linear-gradient(180deg, rgba(5, 5, 8, 0.6) 0%, rgba(5, 5, 8, 0.08) 38%, rgba(5, 5, 8, 0.92) 100%); }
+		.tile-africain .bento-tile__kicker,
+		.tile-africain .bento-tile__content .bento-tile__overline { color: #ffe2a0; }
+		.tile-africain .bento-tile__content { max-width: 100%; }
+		.tile-africain .bento-tile__content p:last-child { color: rgba(255, 255, 255, 0.78); }
+
+		.tile-scolaire { grid-area: scolaire; color: #19140b; background: linear-gradient(135deg, #ffe8b2, #f5b544 60%, #dc9827); }
+		.tile-scolaire .bento-tile__image { right: 0; bottom: 0; width: 56%; height: 70%; border-top-left-radius: 48px; object-position: center; }
+		.tile-scolaire::after { background: linear-gradient(90deg, #f5b544 0%, rgba(245, 181, 68, 0.97) 35%, rgba(245, 181, 68, 0.72) 53%, rgba(245, 181, 68, 0.02) 100%); }
+		.tile-scolaire .bento-tile__kicker { color: rgba(35, 27, 12, 0.7); }
+
+		.tile-eps { grid-area: eps; color: #fff; background: #9b9b96; }
+		.tile-eps::after { background: linear-gradient(180deg, rgba(246, 244, 238, 0.9) 0%, rgba(246, 244, 238, 0.12) 42%, rgba(7, 7, 11, 0.75) 100%); }
+		.tile-eps .bento-tile__kicker { color: #322e25; }
+		.tile-eps .bento-tile__content p { color: rgba(255, 255, 255, 0.9); }
+
+		.tile-sport { grid-area: sport; color: #15141a; background: #f4f2ed; }
+		.tile-sport .bento-tile__image { right: 0; bottom: 0; width: 54%; height: 100%; object-position: center 15%; }
+		.tile-sport::after { background: linear-gradient(90deg, #f4f2ed 0%, #f4f2ed 35%, rgba(244, 242, 237, 0.93) 50%, rgba(244, 242, 237, 0.02) 100%); }
+
+		.catalogue-category { color: #111116; }
+
+		.catalogue-image-trigger:focus-visible {
+			z-index: 30;
+			outline: 3px solid #f5b544;
+			outline-offset: -5px;
+		}
+
+		.catalogue-lightbox {
+			width: fit-content;
+			max-width: 94vw;
+			max-height: 94vh;
+			margin: auto;
+			padding: 0;
+			overflow: visible;
+			border: 0;
+			color: #fff;
+			background: transparent;
+		}
+
+		.catalogue-lightbox::backdrop {
+			background: rgba(4, 4, 9, 0.88);
+			backdrop-filter: blur(8px);
+		}
+
+		.catalogue-lightbox__frame {
+			position: relative;
+			width: fit-content;
+			max-width: 94vw;
+			overflow: hidden;
+			border: 1px solid rgba(245, 181, 68, 0.7);
+			border-radius: 18px;
+			background: #080810;
+			box-shadow: 0 24px 90px rgba(0, 0, 0, 0.6);
+		}
+
+		.catalogue-lightbox__image {
+			display: block;
+			width: auto;
+			height: auto;
+			max-width: 92vw;
+			max-height: 78vh;
+			margin: auto;
+			object-fit: contain;
+			background: #080810;
+		}
+
+		.catalogue-lightbox__caption {
+			margin: 0;
+			padding: 14px 64px 16px 18px;
+			color: #ffe2a0;
+			font-family: var(--font-display);
+			font-size: 14px;
+			font-weight: 600;
+			line-height: 1.4;
+		}
+
+		.catalogue-lightbox__close {
+			position: absolute;
+			z-index: 2;
+			top: 12px;
+			right: 12px;
+			display: grid;
+			width: 42px;
+			height: 42px;
+			place-items: center;
+			border: 1px solid rgba(255, 226, 160, 0.7);
+			border-radius: 50%;
+			color: #ffe2a0;
+			background: rgba(8, 8, 16, 0.82);
+			cursor: pointer;
+			transition: color 180ms ease, background 180ms ease, transform 180ms ease;
+		}
+
+		.catalogue-lightbox__close svg { width: 20px; height: 20px; }
+		.catalogue-lightbox__close:hover { transform: rotate(90deg); color: #111116; background: #f5b544; }
+		.catalogue-lightbox__close:focus-visible { outline: 3px solid #f5b544; outline-offset: 3px; }
+
+		@media (min-width: 640px) and (max-width: 899px) {
+			.catalogue-bento {
+				grid-template-columns: repeat(3, minmax(0, 1fr));
+				grid-template-areas:
+					"toges travail medical"
+					"scolaire eps africain"
+					"sport sport africain";
+				grid-template-rows: 190px 190px 190px;
+			}
+		}
+
+		@media (min-width: 900px) {
+			.catalogue-bento {
+				grid-template-columns: repeat(4, minmax(0, 1fr));
+				grid-template-areas:
+					"toges travail medical africain"
+					"scolaire eps sport africain";
+				grid-template-rows: 218px 218px;
+				gap: 14px;
+				margin-top: 48px;
+			}
+		}
+
+		@media (max-width: 520px) {
+			.catalogue-hero { padding: 126px 17px 58px; }
+			.catalogue-eyebrow { font-size: 8px; letter-spacing: 0.2em; }
+			.catalogue-eyebrow span { width: 19px; }
+			.catalogue-hero__title { margin-top: 20px; font-size: clamp(2.35rem, 10.5vw, 3.2rem); }
+			.catalogue-hero__copy { margin-top: 16px; font-size: 14px; }
+			.catalogue-hero__meta { gap: 8px; font-size: 8px; letter-spacing: 0.1em; }
+			.catalogue-bento { margin-top: 30px; gap: 10px; grid-template-rows: 175px 175px 235px 175px 175px; }
+			.bento-tile { border-radius: 16px; padding: 14px; }
+			.bento-tile__kicker { font-size: 8px; letter-spacing: 0.11em; }
+			.bento-tile__content { max-width: 87%; }
+			.bento-tile__content h2 { font-size: 17px; }
+			.bento-tile__content p { font-size: 9px; }
+			.tile-africain { min-height: 235px; }
+		}
+
+		@media (prefers-reduced-motion: reduce) {
+			.bento-tile,
+			.bento-tile__image,
+			.catalogue-button { transition: none; }
+		}
+	</style>
+</Layout>
