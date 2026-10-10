@@ -1,4 +1,12 @@
 @font-face {
+	font-family: 'Marcellus';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('/fonts/marcellus-400.woff') format('woff');
+}
+
+@font-face {
 	font-family: 'Playfair Display';
 	font-style: normal;
 	font-weight: 700;
