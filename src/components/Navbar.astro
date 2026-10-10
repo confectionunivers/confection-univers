@@ -109,7 +109,7 @@ const chevronRight = 'M9 6l6 6-6 6';
 
 <div id="menu-overlay" class="menu-overlay fixed inset-0 z-[68]" hidden></div>
 
-<aside id="menu-drawer" class="menu-drawer fixed inset-y-0 right-0 z-[70] flex w-[min(320px,92vw)] flex-col" aria-label="Menu" aria-hidden="true">
+<aside id="menu-drawer" class="menu-drawer fixed inset-y-0 right-0 z-[70] flex w-[min(360px,92vw)] flex-col" aria-label="Menu" aria-hidden="true">
 	<div class="flex items-center justify-between px-7 pb-4 pt-7">
 		<a href="/" aria-label="Accueil"><img src="/images/logo.png" alt="Confection Univers" class="h-10 w-auto" width="200" height="76" /></a>
 		<button type="button" id="menu-close" class="close-btn" aria-label="Fermer le menu">
@@ -149,7 +149,7 @@ const chevronRight = 'M9 6l6 6-6 6';
 		</nav>
 
 		<section class="mt-10" aria-labelledby="drawer-gallery">
-			<h2 id="drawer-gallery" class="mb-4 text-lg font-semibold text-[#00001C]">Restez inspiré sur Instagram</h2>
+			<h2 id="drawer-gallery" class="mb-4 text-lg font-semibold text-[#00001C]">Nos réalisations</h2>
 			<div class="grid grid-cols-2 gap-3">
 				{
 					gallery.map((src) => (
@@ -270,7 +270,7 @@ const chevronRight = 'M9 6l6 6-6 6';
 		display: inline-flex;
 		align-items: center;
 		gap: 6px;
-		height: 34px;
+		height: 36px;
 		padding: 0 14px;
 		border-radius: 9999px;
 		border: 1px solid rgba(212, 175, 55, 0.12);
@@ -415,11 +415,6 @@ const chevronRight = 'M9 6l6 6-6 6';
 
 	.burger-pill.is-open .burger-lines span:nth-child(3) {
 		transform: translateY(-6px) rotate(-45deg);
-	}
-
-	/* Verrouillage du défilement quand le tiroir est ouvert */
-	:global(body.menu-locked) {
-		overflow: hidden;
 	}
 
 	/* ---------- Tiroir (blanc, comme la référence) ---------- */
