@@ -28,7 +28,7 @@ const social = [
 <header id="site-header" class="site-header fixed inset-x-0 top-0 z-[60]">
 	<div class="header-inner mx-auto flex items-center justify-between gap-4">
 		<a href="/" class="logo-link logo-chip shrink-0" aria-label="Confection Univers — accueil">
-			<img src="/images/logo.png" alt="Confection Univers" class="h-10 w-auto md:h-11" width="200" height="76" decoding="async" />
+			<img src="/images/logo.png" alt="Confection Univers" class="h-12 w-auto md:h-14" width="200" height="76" decoding="async" />
 		</a>
 
 		<!-- Liens de navigation (grand écran) -->
@@ -55,7 +55,7 @@ const social = [
 
 <aside id="menu-drawer" class="menu-drawer fixed inset-y-0 right-0 z-[70] flex w-[min(360px,92vw)] flex-col" aria-label="Menu" aria-hidden="true">
 	<div class="flex items-center justify-between px-7 pb-4 pt-7">
-		<a href="/" aria-label="Accueil"><img src="/images/logo.png" alt="Confection Univers" class="h-10 w-auto" width="200" height="76" /></a>
+		<a href="/" aria-label="Accueil" class="logo-chip"><img src="/images/logo.png" alt="Confection Univers" class="h-12 w-auto" width="200" height="76" /></a>
 		<button type="button" id="menu-close" class="close-btn" aria-label="Fermer le menu">
 			<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18" /></svg>
 		</button>
@@ -189,14 +189,14 @@ const social = [
 	.logo-chip {
 		display: inline-flex;
 		align-items: center;
-		padding: 6px 14px;
-		border-radius: 14px;
+		padding: 8px 18px;
+		border-radius: 18px;
 		background: #ffffff;
 		box-shadow: 0 10px 26px -10px rgba(0, 0, 0, 0.5), inset 0 -2px 0 rgba(212, 175, 55, 0.5);
 	}
 
 	.logo-chip img {
-		height: 40px;
+		height: 48px;
 		width: auto;
 	}
 
