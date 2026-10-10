@@ -1,0 +1,339 @@
+---
+/**
+ * Hero "vitrine" : titre en dégradé, visuels qui défilent via les vignettes,
+ * panneau latéral en verre, carte 3D et bouton circulaire.
+ * Palette : bleu nuit (#00001C) et or (#D4AF37).
+ */
+const slides = [
+	{ src: '/images/hero-slides/slide-1.jpg', label: 'Uniformes scolaires', alt: 'Élève en uniforme scolaire bleu marine avec gilet et insigne doré' },
+	{ src: '/images/hero-slides/slide-2.jpg', label: 'Toges de graduation', alt: 'Diplômée en toge de graduation tenant son diplôme' },
+	{ src: '/images/hero-slides/slide-3.jpg', label: 'Tenues de travail', alt: 'Professionnel en tenue de travail bleu marine à liserés dorés' },
+	{ src: '/images/hero-slides/slide-4.jpg', label: 'Costume africain moderne', alt: 'Homme en costume africain moderne bleu nuit brodé d’or' },
+];
+
+const social = [
+	{ label: 'Facebook', href: 'https://facebook.com/confectionunivers', icon: 'M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z' },
+	{ label: 'Instagram', href: 'https://instagram.com/confectionunivers', icon: 'M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 2a2.5 2.5 0 100 5 2.5 2.5 0 000-5z' },
+	{ label: 'LinkedIn', href: 'https://linkedin.com/company/confectionunivers', icon: 'M4 3a2 2 0 110 4 2 2 0 010-4zm-1 6h3v12H3V9zm6 0h3v2c.5-1 1.8-2 3.6-2C19.5 9 21 10.5 21 13.5V21h-3v-6.5c0-1.6-.6-2.5-2-2.5s-2.5 1-2.5 2.6V21H9V9z' },
+	{ label: 'WhatsApp', href: 'https://wa.me/221772960776', icon: 'M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2z' },
+];
+---
+
+<section
+	id="hero-cu"
+	class="hero-cu relative isolate min-h-[100svh] overflow-hidden bg-[#00001C] text-white"
+	aria-label="Accueil"
+>
+	<!-- Halos animés bleu nuit / or -->
+	<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+		<div class="glow glow-1"></div>
+		<div class="glow glow-2"></div>
+		<div class="glow glow-3"></div>
+		<div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#00001C]"></div>
+	</div>
+
+	<!-- Visuels : défilement par fondu -->
+	<div class="hero-photos absolute inset-y-0 right-0 w-full lg:w-[58%]" aria-hidden="false">
+		{
+			slides.map((s, idx) => (
+				<img
+					data-slide
+					data-label={s.label}
+					src={s.src}
+					alt={s.alt}
+					loading={idx === 0 ? 'eager' : 'lazy'}
+					decoding="async"
+					class:list={['hero-photo', idx === 0 && 'is-active']}
+				/>
+			))
+		}
+	</div>
+
+	<!-- Titre -->
+	<div class="relative z-10 flex min-h-[100svh] flex-col justify-end px-[4%] pb-[10svh] pt-36 lg:justify-center lg:pb-0">
+		<h1 class="title-gradient font-display leading-[0.85] tracking-tight" aria-label="Confection Univers">
+			<span class="block text-[clamp(64px,13vw,210px)]">CONFECTION</span>
+		</h1>
+		<p class="subtitle mt-2 font-display text-[clamp(22px,3.4vw,50px)] font-bold uppercase tracking-tight">
+			Excellence textile &amp; confection sur-mesure<span class="text-[#D4AF37]">.</span>
+		</p>
+
+		<!-- Paragraphe -->
+		<p class="mt-8 max-w-md text-[15px] leading-relaxed text-white/85 lg:absolute lg:left-[58%] lg:top-[56%] lg:mt-0 lg:max-w-[360px]">
+			Nous fabriquons des uniformes scolaires, toges de graduation, tenues de travail et costumes africains modernes,
+			avec des finitions irréprochables pour vos élèves, vos équipes et vos clients.
+		</p>
+	</div>
+
+	<!-- Carte « Démarrer un projet » -->
+	<a
+		href="/contact"
+		class="start-card group absolute bottom-[8%] left-[4%] z-20 hidden items-center gap-4 rounded-2xl p-3 pr-6 md:flex lg:left-[15%]"
+		style="transform-style: preserve-3d;"
+	>
+		<span class="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#D4AF37] text-[#00001C]" aria-hidden="true">
+			<svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 11a9 9 0 0118 0v5a2 2 0 01-2 2h-1v-6h3M3 11v5a2 2 0 002 2h1v-6H3" /></svg>
+		</span>
+		<span>
+			<span class="block font-display text-2xl font-bold uppercase leading-none">Démarrer un projet</span>
+			<span class="mt-1 block text-sm text-white/75">Parlez-en directement à notre équipe</span>
+		</span>
+	</a>
+
+	<!-- Bouton circulaire « Let's start » -->
+	<a
+		href="/services"
+		class="circle-cta absolute bottom-[10%] left-[62%] z-20 hidden h-40 w-40 items-center justify-center rounded-full md:flex"
+		aria-label="Découvrir nos services"
+	>
+		<svg class="ring absolute inset-0 h-full w-full" viewBox="0 0 160 160" aria-hidden="true">
+			<defs>
+				<path id="ring-path" d="M80,80 m-62,0 a62,62 0 1,1 124,0 a62,62 0 1,1 -124,0" />
+			</defs>
+			<text class="font-display text-[11px] uppercase tracking-[0.3em]" fill="#F5E6B0">
+				<textPath href="#ring-path">Nos services • Découvrir • Nos services • Découvrir •</textPath>
+			</text>
+		</svg>
+		<span class="relative z-10 font-display text-base font-semibold">Commencer</span>
+	</a>
+
+	<!-- Panneau latéral en verre -->
+	<aside class="side-panel absolute right-[1.5%] top-1/2 z-30 hidden -translate-y-1/2 flex-col items-center gap-5 rounded-[28px] px-3 py-6 xl:flex" aria-label="Réseaux sociaux et visuels">
+		<a href="#hero-cu" class="chevron flex h-12 w-12 items-center justify-center rounded-full" aria-label="Haut de page">
+			<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 15l6-6 6 6" /></svg>
+		</a>
+
+		<div class="flex flex-col gap-3">
+			{
+				social.map((s) => (
+					<a href={s.href} target="_blank" rel="noopener noreferrer" class="social-btn flex h-9 w-9 items-center justify-center rounded-full" aria-label={s.label}>
+						<svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d={s.icon} /></svg>
+					</a>
+				))
+			}
+		</div>
+
+		<p class="vertical-label font-display text-[11px] font-bold uppercase tracking-[0.25em] text-white/80">Suivez-nous :</p>
+
+		<div class="flex flex-col gap-3">
+			{
+				slides.map((s, idx) => (
+					<button
+						type="button"
+						data-thumb
+						data-index={idx}
+						class:list={['thumb relative h-12 w-12 overflow-hidden rounded-full', idx === 0 && 'is-active']}
+						aria-label={`Afficher ${s.label}`}
+					>
+						<img src={s.src} alt="" class="h-full w-full object-cover object-top" loading="lazy" />
+						<span class="thumb-num absolute -right-1 -top-1 rounded-full bg-[#D4AF37] px-1.5 font-display text-[10px] font-bold leading-4 text-[#00001C]">
+							{String(idx + 1).padStart(2, '0')}
+						</span>
+					</button>
+				))
+			}
+		</div>
+	</aside>
+
+	<!-- Légende de la catégorie active -->
+	<div class="absolute bottom-[3%] left-[4%] z-20 font-display text-xs font-bold uppercase tracking-[0.25em] text-[#F5E6B0] lg:left-[15%] lg:bottom-[2%] md:hidden" aria-live="polite">
+		<span data-label>{slides[0].label}</span>
+	</div>
+</section>
+
+<script>
+	const root = document.getElementById('hero-cu');
+	if (root) {
+		const slides = Array.from(root.querySelectorAll<HTMLImageElement>('[data-slide]'));
+		const thumbs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-thumb]'));
+		const labelEl = root.querySelector<HTMLElement>('[data-label]');
+		const n = slides.length;
+		let current = 0;
+		let timer: number | undefined;
+
+		const show = (k: number) => {
+			current = k;
+			slides.forEach((s, j) => s.classList.toggle('is-active', j === k));
+			thumbs.forEach((t, j) => t.classList.toggle('is-active', j === k));
+			if (labelEl) labelEl.textContent = slides[k].dataset.label ?? '';
+		};
+
+		const start = () => {
+			stop();
+			timer = window.setInterval(() => show((current + 1) % n), 6000);
+		};
+		const stop = () => {
+			if (timer !== undefined) window.clearInterval(timer);
+		};
+
+		thumbs.forEach((t, j) =>
+			t.addEventListener('click', () => {
+				show(j);
+				start();
+			}),
+		);
+
+		root.addEventListener('mouseenter', stop);
+		root.addEventListener('mouseleave', start);
+
+		// Léger effet 3D sur la carte, suit la souris
+		const card = root.querySelector<HTMLElement>('.start-card');
+		card?.addEventListener('mousemove', (e) => {
+			const r = card.getBoundingClientRect();
+			const x = (e.clientX - r.left) / r.width - 0.5;
+			const y = (e.clientY - r.top) / r.height - 0.5;
+			card.style.transform = `perspective(700px) rotateX(${-y * 10}deg) rotateY(${x * 12}deg)`;
+		});
+		card?.addEventListener('mouseleave', () => (card.style.transform = ''));
+
+		show(0);
+		start();
+	}
+</script>
+
+<style>
+	/* Typographie condensée du titre (Anton) */
+	.hero-cu h1,
+	.hero-cu .subtitle {
+		font-family: 'Anton', 'Space Grotesk', sans-serif;
+	}
+
+	/* Titre : dégradé or / champagne */
+	.title-gradient {
+		background: linear-gradient(180deg, #FFF6D5 0%, #FACC6B 35%, #D4AF37 65%, #8a5a06 100%);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+		filter: drop-shadow(0 10px 30px rgba(212, 175, 55, 0.25));
+	}
+
+	.subtitle {
+		color: #ffffff;
+		text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+	}
+
+	/* Halos */
+	.glow {
+		position: absolute;
+		border-radius: 9999px;
+		filter: blur(110px);
+		opacity: 0.45;
+		animation: cu-float 14s ease-in-out infinite;
+	}
+	.glow-1 { left: -5%; top: 5%; width: 520px; height: 520px; background: #1d2a6b; }
+	.glow-2 { right: 10%; bottom: 10%; width: 420px; height: 420px; background: #D4AF37; opacity: 0.25; animation-delay: -4s; }
+	.glow-3 { left: 40%; top: 40%; width: 320px; height: 320px; background: #3a4fb0; opacity: 0.3; animation-delay: -8s; }
+
+	/* Visuels */
+	.hero-photo {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 60% 20%;
+		opacity: 0;
+		transform: scale(1.06);
+		filter: saturate(0.9) contrast(1.05);
+		transition: opacity 1s ease, transform 1.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+		-webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 100%);
+		mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 100%);
+	}
+	.hero-photo.is-active {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	/* Carte 3D */
+	.start-card {
+		background: linear-gradient(120deg, rgba(0, 0, 28, 0.85), rgba(10, 16, 60, 0.7));
+		border: 1px solid rgba(212, 175, 55, 0.35);
+		box-shadow: 0 25px 50px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+		backdrop-filter: blur(10px);
+		transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+	}
+	.start-card:hover {
+		border-color: rgba(212, 175, 55, 0.8);
+		box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.8), 0 0 40px rgba(212, 175, 55, 0.25);
+	}
+
+	/* Bouton circulaire */
+	.circle-cta {
+		color: #ffffff;
+		background: radial-gradient(circle, rgba(0, 0, 42, 0.6) 0%, rgba(0, 0, 28, 0.2) 100%);
+		box-shadow: inset 0 0 0 1px rgba(245, 230, 176, 0.35), 0 20px 40px -10px rgba(0, 0, 0, 0.6);
+		transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+	}
+	.circle-cta:hover {
+		transform: scale(1.06);
+		box-shadow: inset 0 0 0 1px #D4AF37, 0 0 50px rgba(212, 175, 55, 0.35);
+	}
+	.circle-cta .ring {
+		animation: cu-spin 18s linear infinite;
+	}
+	.circle-cta .ring text {
+		fill: #F5E6B0;
+	}
+
+	/* Panneau latéral */
+	.side-panel {
+		background: linear-gradient(180deg, rgba(212, 175, 55, 0.12), rgba(0, 0, 42, 0.55));
+		border: 1px solid rgba(212, 175, 55, 0.25);
+		backdrop-filter: blur(14px);
+		-webkit-backdrop-filter: blur(14px);
+		box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7);
+	}
+	.chevron {
+		background: rgba(0, 0, 0, 0.35);
+		border: 1px solid rgba(212, 175, 55, 0.4);
+		color: #FACC6B;
+		transition: transform 0.3s ease, background-color 0.3s ease;
+	}
+	.chevron:hover {
+		transform: translateY(2px);
+		background: rgba(212, 175, 55, 0.2);
+	}
+	.social-btn {
+		background: #000;
+		color: #fff;
+		transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease, color 0.3s ease;
+	}
+	.social-btn:hover {
+		transform: translateY(-3px);
+		background: #D4AF37;
+		color: #00001C;
+	}
+	.vertical-label {
+		writing-mode: vertical-rl;
+		transform: rotate(180deg);
+	}
+	.thumb {
+		opacity: 0.6;
+		box-shadow: 0 0 0 2px rgba(0, 0, 0, 0);
+		transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+	}
+	.thumb:hover {
+		opacity: 1;
+	}
+	.thumb.is-active {
+		opacity: 1;
+		transform: scale(1.08);
+		box-shadow: 0 0 0 2px #D4AF37, 0 0 18px rgba(212, 175, 55, 0.5);
+	}
+	.thumb-num {
+		box-shadow: 0 0 0 2px #00001C;
+	}
+
+	@keyframes cu-float {
+		0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+		50% { transform: translate3d(30px, -25px, 0) scale(1.08); }
+	}
+	@keyframes cu-spin {
+		to { transform: rotate(360deg); }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.glow, .circle-cta .ring { animation: none; }
+		.hero-photo { transition: opacity 0.3s ease; transform: none; }
+	}
+</style>
