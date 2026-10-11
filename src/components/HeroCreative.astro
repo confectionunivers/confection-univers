@@ -1,0 +1,655 @@
+---
+/**
+ * Hero « vitrine » reproduit d'après la référence Xriver Home 03.
+ * Composition : grand titre condensé à gauche, portrait dominant à droite,
+ * texte descriptif, carte projet, bouton circulaire, barre sociale verticale
+ * et image secondaire qui déborde sur la section suivante.
+ * Palette de marque : bleu nuit (#00001C) et or (#D4AF37).
+ */
+
+const slides = [
+	{ src: '/images/hero-slides/slide-1.jpg', label: 'Uniformes scolaires', alt: 'Élève en uniforme scolaire bleu marine avec gilet et insigne doré' },
+	{ src: '/images/hero-slides/slide-2.jpg', label: 'Toges de graduation', alt: 'Diplômée en toge de graduation tenant son diplôme' },
+	{ src: '/images/hero-slides/slide-3.jpg', label: 'Tenues de travail', alt: 'Professionnel en tenue de travail bleu marine à liserés dorés' },
+	{ src: '/images/hero-slides/slide-4.jpg', label: 'Costume africain moderne', alt: 'Homme en costume africain moderne bleu nuit brodé d’or' },
+];
+
+const social = [
+	{ label: 'Instagram', href: 'https://instagram.com/confectionunivers', icon: 'M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 2a2.5 2.5 0 100 5 2.5 2.5 0 000-5z' },
+	{ label: 'LinkedIn', href: 'https://linkedin.com/company/confectionunivers', icon: 'M4 3a2 2 0 110 4 2 2 0 010-4zm-1 6h3v12H3V9zm6 0h3v2c.5-1 1.8-2 3.6-2C19.5 9 21 10.5 21 13.5V21h-3v-6.5c0-1.6-.6-2.5-2-2.5s-2.5 1-2.5 2.6V21H9V9z' },
+	{ label: 'Facebook', href: 'https://facebook.com/confectionunivers', icon: 'M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z' },
+	{ label: 'WhatsApp', href: 'https://wa.me/221772960776', icon: 'M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2z' },
+];
+---
+
+<section id="hero-cu" class="hero-cu relative z-20 min-h-[100svh] w-full text-white" aria-label="Accueil">
+	<!-- Fond : lueurs, grain et portrait (rognés au hero uniquement) -->
+	<div class="hero-bg pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+		<div class="glow glow-1"></div>
+		<div class="glow glow-2"></div>
+		<div class="glow glow-3"></div>
+
+		<div class="hero-photos">
+			{
+				slides.map((s, idx) => (
+					<img
+						data-slide
+						data-label={s.label}
+						src={s.src}
+						alt=""
+						loading={idx === 0 ? 'eager' : 'lazy'}
+						decoding="async"
+						class:list={['hero-photo', idx === 0 && 'is-active']}
+					/>
+				))
+			}
+		</div>
+		<div class="hero-shade absolute inset-0"></div>
+	</div>
+
+	<div class="hero-layout">
+		<!-- Titre + sous-titre -->
+		<div class="reveal hero-title">
+			<h1 class="title-gradient uppercase hero-h1"><span class="block">Confection</span><span class="block">Univers</span></h1>
+			<p class="subtitle font-anton uppercase hero-sub">
+				Confection de vêtements professionnels - Sénégal
+			</p>
+		</div>
+
+		<!-- Texte descriptif -->
+		<div class="reveal reveal-d1 hero-desc text-white/90">
+			<p class="hero-lead">
+				Vêtements de qualité supérieure fabriqués avec précision. Designs personnalisés adaptés à vos spécifications.
+				Production en gros fiable pour les institutions et entreprises de toutes tailles.
+			</p>
+			<div class="hero-actions">
+				<a href="/contact" class="hero-btn hero-btn-primary">Demander un devis</a>
+				<a href="/catalogue" class="hero-btn hero-btn-ghost">Voir nos produits</a>
+			</div>
+			<ul class="hero-badges" aria-label="Points forts">
+				<li>Uniformes sur mesure</li>
+				<li>Qualité premium</li>
+				<li>Production en gros</li>
+			</ul>
+		</div>
+
+		<!-- Carte « Démarrer un projet » -->
+		<a
+			href="/contact"
+			class="start-card reveal reveal-d2"
+		>
+			<span class="card-img">
+				<img src={slides[1].src} alt="" class="h-full w-full object-cover object-top" loading="lazy" decoding="async" />
+			</span>
+			<span class="flex flex-col justify-center gap-1 px-4 py-3">
+				<span class="font-anton card-title uppercase">Démarrer un projet</span>
+				<span class="text-[12.5px] leading-snug text-white/75">Parlez-en directement à notre équipe</span>
+			</span>
+		</a>
+
+		<!-- Bouton circulaire -->
+		<a
+			href="/services"
+			class="circle-cta"
+			aria-label="Découvrir nos services"
+		>
+			<span class="relative z-10 text-[11px] font-medium tracking-wide">Commencer</span>
+		</a>
+
+		<!-- Image secondaire : déborde sur la section suivante -->
+		<div class="secondary-img reveal reveal-d3">
+			<img src="/images/hero-toges-graduation.jpg" alt="Toges de graduation Confection Univers" class="h-full w-full object-cover" loading="lazy" decoding="async" />
+		</div>
+	</div>
+
+	<!-- Barre sociale verticale (grand écran) -->
+	<aside
+		class="social-bar"
+		aria-label="Réseaux sociaux et visuels"
+	>
+		<a href="#hero-cu" class="round-btn flex h-12 w-12 items-center justify-center rounded-full" aria-label="Haut de page">
+			<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M6 15l6-6 6 6" /></svg>
+		</a>
+
+		<div class="flex flex-col items-center gap-3">
+			{
+				social.map((s) => (
+					<a href={s.href} target="_blank" rel="noopener noreferrer" class="social-btn flex h-[30px] w-[30px] items-center justify-center rounded-full" aria-label={s.label}>
+						<svg class="h-3.5 w-3.5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d={s.icon} /></svg>
+					</a>
+				))
+			}
+		</div>
+
+		<p class="vertical-label font-anton text-[13px] uppercase tracking-[0.2em] text-white/90">Follow us :</p>
+
+		<div class="flex flex-col items-center gap-3">
+			{
+				slides.map((s, idx) => (
+					<button type="button" data-thumb class:list={['thumb relative h-12 w-12 rounded-full', idx === 0 && 'is-active']} aria-label={`Afficher ${s.label}`}>
+						<img src={s.src} alt="" class="h-full w-full rounded-full object-cover object-top" loading="lazy" />
+						<span class="thumb-num absolute -right-1 -top-1 rounded-[4px] px-1 font-anton text-[10px] leading-[16px]">
+							{String(idx + 1).padStart(2, '0')}
+						</span>
+					</button>
+				))
+			}
+		</div>
+	</aside>
+</section>
+
+<script>
+	import { initHeroFx } from '../scripts/hero-fx';
+
+	const root = document.getElementById('hero-cu');
+	if (root) {
+		initHeroFx(root);
+		const slides = Array.from(root.querySelectorAll<HTMLImageElement>('[data-slide]'));
+		const thumbs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-thumb]'));
+		const n = slides.length;
+		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		let current = 0;
+		let timer: number | undefined;
+
+		const show = (k: number) => {
+			current = k;
+			slides.forEach((s, j) => s.classList.toggle('is-active', j === k));
+			thumbs.forEach((t, j) => t.classList.toggle('is-active', j === k));
+		};
+		const stop = () => {
+			if (timer !== undefined) window.clearInterval(timer);
+			timer = undefined;
+		};
+		const start = () => {
+			if (reduceMotion) return;
+			stop();
+			timer = window.setInterval(() => show((current + 1) % n), 6000);
+		};
+
+		thumbs.forEach((t, j) =>
+			t.addEventListener('click', () => {
+				show(j);
+				start();
+			}),
+		);
+		root.addEventListener('mouseenter', stop);
+		root.addEventListener('mouseleave', start);
+
+		// Effet 3D léger sur la carte projet
+		const card = root.querySelector<HTMLElement>('.start-card');
+		if (card && !reduceMotion) {
+			card.addEventListener('mousemove', (e) => {
+				const r = card.getBoundingClientRect();
+				const x = (e.clientX - r.left) / r.width - 0.5;
+				const y = (e.clientY - r.top) / r.height - 0.5;
+				card.style.transform = `perspective(700px) rotateX(${-y * 8}deg) rotateY(${x * 10}deg)`;
+			});
+			card.addEventListener('mouseleave', () => (card.style.transform = ''));
+		}
+
+		show(0);
+		start();
+	}
+</script>
+
+<style>
+	/* ---------- Typographie ---------- */
+	.font-anton {
+		font-family: 'Anton', 'Space Grotesk', sans-serif;
+	}
+
+	.hero-cu .subtitle {
+		font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+		font-weight: 500;
+		letter-spacing: 0.16em;
+	}
+
+	/* Titre : blanc vers or champagne (équivalent du dégradé rose de la référence) */
+	.title-gradient {
+		background: linear-gradient(180deg, #ffffff 0%, #fff6d5 42%, #facc6b 78%, #d4af37 100%);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+		text-shadow: none;
+		filter: drop-shadow(0 8px 26px rgba(0, 0, 20, 0.45));
+	}
+
+	.subtitle {
+		color: #ffffff;
+		text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+	}
+
+	/* ---------- Fond ---------- */
+	.glow {
+		position: absolute;
+		border-radius: 9999px;
+		filter: blur(110px);
+		animation: cu-float 16s ease-in-out infinite;
+	}
+	.glow-1 { left: -8%; top: 0; width: 46vw; height: 46vw; background: #2236a8; opacity: 0.45; }
+	.glow-2 { left: 28%; bottom: 0; width: 30vw; height: 30vw; background: #D4AF37; opacity: 0.18; animation-delay: -5s; }
+	.glow-3 { right: 20%; top: 20%; width: 26vw; height: 26vw; background: #3d6bff; opacity: 0.22; animation-delay: -9s; }
+
+	.hero-shade {
+		background:
+			linear-gradient(90deg, #00001C 0%, rgba(0, 0, 28, 0.85) 30%, rgba(0, 0, 28, 0.25) 60%, rgba(0, 0, 28, 0) 75%),
+			linear-gradient(0deg, #00001C 0%, rgba(0, 0, 28, 0) 22%);
+	}
+
+	.hero-photo {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 50% 14%;
+		opacity: 0;
+		transform: scale(1.05);
+		filter: saturate(1.05) contrast(1.05);
+		transition: opacity 1s ease, transform 1.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+		-webkit-mask-image: linear-gradient(180deg, #000 70%, transparent 100%);
+		mask-image: linear-gradient(180deg, #000 70%, transparent 100%);
+	}
+
+	.hero-photo.is-active {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	@media (min-width: 768px) {
+		.hero-photo {
+			-webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 26%, #000 100%);
+			mask-image: linear-gradient(90deg, transparent 0%, #000 26%, #000 100%);
+		}
+	}
+
+	/* ---------- Mise en page du hero (positions en % de la hauteur/largeur) ---------- */
+	.hero-photos {
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		height: 62%;
+	}
+
+	.hero-layout {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		min-height: 100svh;
+		margin: 0 auto;
+		padding: 46svh 6% 3.5rem;
+	}
+
+	.hero-title {
+		position: relative;
+	}
+
+	.hero-h1 {
+		font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+		font-weight: 600;
+		font-size: 12vw;
+		line-height: 1;
+		letter-spacing: -0.02em;
+	}
+
+	.hero-sub {
+		margin-top: 0.25rem;
+		font-size: 7vw;
+		line-height: 1;
+	}
+
+	.hero-desc {
+		margin-top: 2rem;
+		max-width: 24rem;
+		font-size: 15px;
+		line-height: 1.5;
+	}
+
+	.hero-lead {
+		margin: 0 0 1.25rem;
+	}
+
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+
+	.hero-btn {
+		display: inline-flex;
+		align-items: center;
+		height: 44px;
+		padding: 0 22px;
+		border-radius: 9999px;
+		font-family: 'Inter', system-ui, sans-serif;
+		font-size: 14px;
+		font-weight: 700;
+		white-space: nowrap;
+		transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+	}
+
+	.hero-btn-primary {
+		background: linear-gradient(135deg, #FACC6B 0%, #D4AF37 50%, #B8860B 100%);
+		color: #00001C;
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 10px 24px -10px rgba(212, 175, 55, 0.7);
+	}
+
+	.hero-btn-ghost {
+		border: 1px solid rgba(255, 255, 255, 0.4);
+		color: #ffffff;
+		background: rgba(0, 0, 20, 0.35);
+		backdrop-filter: blur(6px);
+	}
+
+	.hero-btn:hover {
+		transform: translateY(-2px);
+	}
+
+	.hero-btn-ghost:hover {
+		border-color: #D4AF37;
+		color: #FACC6B;
+	}
+
+	.hero-badges {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-top: 1rem;
+		padding: 0;
+		list-style: none;
+	}
+
+	.hero-badges li {
+		padding: 5px 12px;
+		border-radius: 9999px;
+		border: 1px solid rgba(212, 175, 55, 0.4);
+		background: rgba(0, 0, 28, 0.5);
+		color: #FFE9A8;
+		font-size: 12px;
+		font-weight: 600;
+	}
+
+	.start-card {
+		display: flex;
+		align-items: stretch;
+		width: min(250px, 100%);
+		margin-top: 2rem;
+		overflow: hidden;
+		border-radius: 14px;
+	}
+
+	.card-img {
+		position: relative;
+		width: 84px;
+		height: 80px;
+		flex-shrink: 0;
+	}
+
+	.card-title {
+		font-size: 20px;
+		line-height: 1;
+	}
+
+	.circle-cta {
+		display: none;
+	}
+
+	.secondary-img {
+		position: relative;
+		width: 100%;
+		margin-top: 2.5rem;
+		aspect-ratio: 2.2 / 1;
+		overflow: hidden;
+		border-radius: 14px;
+	}
+
+	.social-bar {
+		display: none;
+	}
+
+	@media (min-width: 768px) {
+		.hero-photos {
+			top: 0;
+			bottom: 0;
+			left: auto;
+			height: 100%;
+			width: 62%;
+		}
+
+		.hero-layout {
+			display: block;
+			padding: 0;
+		}
+
+		.hero-title {
+			position: absolute;
+			left: 4%;
+			top: 19%;
+		}
+
+		.hero-h1 {
+			font-size: 6.2vw;
+			line-height: 1.02;
+		}
+
+		.hero-sub {
+			margin-top: 0.8vw;
+			font-size: 1.1vw;
+		}
+
+		.hero-desc {
+			position: absolute;
+			left: 4%;
+			top: 45%;
+			width: 42%;
+			max-width: none;
+			margin-top: 0;
+			font-size: clamp(13px, 1.05vw, 16px);
+		}
+
+		.start-card {
+			position: absolute;
+			left: 50.8%;
+			top: 82.5%;
+			width: 250px;
+			margin-top: 0;
+		}
+
+		.card-img {
+			width: 96px;
+			height: 94px;
+		}
+
+		.card-title {
+			font-size: clamp(16px, 1.35vw, 22px);
+		}
+
+		.circle-cta {
+			display: flex;
+			position: absolute;
+			left: 71.4%;
+			top: 82.4%;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.secondary-img {
+			position: absolute;
+			left: 6.4%;
+			top: 69%;
+			width: 41%;
+			margin-top: 0;
+		}
+	}
+
+	@media (min-width: 1280px) {
+		.social-bar {
+			position: absolute;
+			right: 1.9%;
+			top: 12.5%;
+			z-index: 30;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: space-between;
+			width: 76px;
+			height: 75%;
+			padding: 1.25rem 0;
+			border-radius: 24px;
+		}
+	}
+
+	/* ---------- Carte projet ---------- */
+	.start-card {
+		background: #000000;
+		border: 1px solid rgba(255, 255, 255, 0.06);
+		box-shadow: 0 24px 50px -18px rgba(0, 0, 0, 0.8);
+		transition: transform 0.2s ease, box-shadow 0.3s ease;
+	}
+
+	.start-card:hover {
+		box-shadow: 0 30px 60px -18px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(212, 175, 55, 0.5);
+	}
+
+	.start-card > span:first-child::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(90deg, transparent 40%, #000 100%);
+	}
+
+	.start-card > span:first-child {
+		position: relative;
+	}
+
+	/* ---------- Bouton circulaire ---------- */
+	.circle-cta {
+		width: clamp(72px, 5.5vw, 98px);
+		aspect-ratio: 1;
+		border-radius: 9999px;
+		border: 1.5px solid rgba(255, 255, 255, 0.85);
+		background: transparent;
+		color: #ffffff;
+		transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease, background-color 0.3s ease;
+	}
+
+	/* accent lumineux au bas du cercle */
+	.circle-cta::after {
+		content: '';
+		position: absolute;
+		bottom: -4px;
+		left: 50%;
+		width: 26%;
+		height: 6px;
+		transform: translateX(-50%);
+		border-radius: 9999px;
+		background: linear-gradient(90deg, #3d6bff, #D4AF37);
+		box-shadow: 0 0 14px rgba(212, 175, 55, 0.7);
+	}
+
+	.circle-cta:hover {
+		transform: scale(1.06);
+		border-color: #D4AF37;
+		background-color: rgba(212, 175, 55, 0.08);
+	}
+
+	/* ---------- Barre sociale ---------- */
+	.social-bar {
+		background: rgba(10, 12, 30, 0.42);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		backdrop-filter: blur(14px);
+		-webkit-backdrop-filter: blur(14px);
+		box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.7);
+	}
+
+	.round-btn {
+		background: #000;
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		color: #FACC6B;
+		transition: transform 0.3s ease, border-color 0.3s ease;
+	}
+
+	.round-btn:hover {
+		transform: translateY(2px);
+		border-color: #D4AF37;
+	}
+
+	.social-btn {
+		background: #000;
+		color: #ffffff;
+		transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease, color 0.3s ease;
+	}
+
+	.social-btn:hover {
+		transform: translateY(-2px);
+		background: #D4AF37;
+		color: #00001C;
+	}
+
+	.vertical-label {
+		writing-mode: vertical-rl;
+		transform: rotate(180deg);
+	}
+
+	.thumb {
+		opacity: 0.55;
+		transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.thumb:hover {
+		opacity: 1;
+	}
+
+	.thumb.is-active {
+		opacity: 1;
+		box-shadow: 0 0 0 2px #D4AF37, 0 0 16px rgba(212, 175, 55, 0.45);
+	}
+
+	.thumb-num {
+		background: #3d6bff;
+		color: #ffffff;
+	}
+
+	.thumb.is-active .thumb-num {
+		background: #D4AF37;
+		color: #00001C;
+	}
+
+	/* ---------- Image secondaire ---------- */
+	.secondary-img {
+		box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
+	}
+
+	/* ---------- Apparition ---------- */
+	@keyframes cu-rise {
+		from { opacity: 0; transform: translateY(18px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	@keyframes cu-float {
+		0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+		50% { transform: translate3d(28px, -22px, 0) scale(1.06); }
+	}
+
+	.reveal {
+		animation: cu-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+	}
+
+	.reveal-d1 { animation-delay: 0.12s; }
+	.reveal-d2 { animation-delay: 0.22s; }
+	.reveal-d3 { animation-delay: 0.32s; }
+
+	@media (prefers-reduced-motion: reduce) {
+		.glow,
+		.reveal,
+		.hero-photo,
+		.start-card,
+		.circle-cta,
+		.social-btn,
+		.thumb {
+			animation: none;
+			transition: none;
+		}
+	}
+</style>
