@@ -25,6 +25,9 @@ const slides = [
 	png: `/images/hero-slides/${slide.name}.png`,
 }));
 
+const projectMessage = "Bonjour, je souhaite discuter d'un projet de confection. Je vous précise les articles, quantités et délais souhaités :";
+const projectWhatsAppHref = `https://wa.me/221772960776?text=${encodeURIComponent(projectMessage)}`;
+
 const social = [
 	{ label: 'Instagram', href: 'https://instagram.com/confectionunivers', icon: 'M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 2a2.5 2.5 0 100 5 2.5 2.5 0 000-5z' },
 	{ label: 'LinkedIn', href: 'https://linkedin.com/company/confectionunivers', icon: 'M4 3a2 2 0 110 4 2 2 0 010-4zm-1 6h3v12H3V9zm6 0h3v2c.5-1 1.8-2 3.6-2C19.5 9 21 10.5 21 13.5V21h-3v-6.5c0-1.6-.6-2.5-2-2.5s-2.5 1-2.5 2.6V21H9V9z' },
@@ -35,7 +38,7 @@ const social = [
 
 <section id="hero-cu" class="hero-cu relative z-20 min-h-[100svh] w-full text-white" aria-label="Accueil">
 	<!-- Fond bleu et lueurs fixes ; seules les silhouettes PNG transparentes défilent. -->
-	<div class="hero-bg pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+	<div class="hero-bg pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
 		<div class="hero-shade absolute inset-0"></div>
 		<div class="glow glow-1"></div>
 		<div class="glow glow-2"></div>
@@ -85,25 +88,35 @@ const social = [
 					<a href="/contact" class="hero-btn hero-btn-primary">Demander un devis</a>
 					<a href="/catalogue" class="hero-btn hero-btn-ghost">Voir nos produits</a>
 				</div>
-				<ul class="hero-badges" aria-label="Points forts">
-					<li>Uniformes sur mesure</li>
-					<li>Qualité premium</li>
-					<li>Production en gros</li>
-				</ul>
+					<ul class="hero-badges" aria-label="Nos produits">
+						<li>Uniformes scolaires</li>
+						<li>Toges de graduation</li>
+						<li>Tenues de travail</li>
+						<li>Blouses médicales</li>
+						<li>Tenues de sport</li>
+						<li>Costumes africains</li>
+					</ul>
 			</div>
 		</div>
 
-		<!-- Carte « Démarrer un projet » -->
+		<!-- Contact WhatsApp rapide pour qualifier les projets sur mesure. -->
 		<a
-			href="/contact"
+			href={projectWhatsAppHref}
+			target="_blank"
+			rel="noopener noreferrer"
 			class="start-card reveal reveal-d2"
+			aria-label="Écrire sur WhatsApp à propos d'un projet de confection"
 		>
 			<span class="card-img">
 				<img src={slides[1].webp} alt="" class="h-full w-full object-cover object-top" loading="lazy" decoding="async" />
 			</span>
-			<span class="flex flex-col justify-center gap-1 px-4 py-3">
-				<span class="font-anton card-title uppercase">Démarrer un projet</span>
-				<span class="text-[12.5px] leading-snug text-white/75">Parlez-en directement à notre équipe</span>
+			<span class="start-card-copy flex flex-col justify-center gap-1 px-3 py-3">
+				<span class="font-anton card-title uppercase">Projet sur mesure ?</span>
+				<span class="card-description">Articles, quantités, délais.</span>
+				<span class="card-action">
+					Écrire sur WhatsApp
+					<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
+				</span>
 			</span>
 		</a>
 
@@ -116,10 +129,22 @@ const social = [
 			<span class="relative z-10 text-[11px] font-medium tracking-wide">Commencer</span>
 		</a>
 
-		<!-- Image secondaire : déborde sur la section suivante -->
-		<div class="secondary-img reveal reveal-d3">
-			<img src="/images/hero-toges-graduation.jpg" alt="Toges de graduation Confection Univers" class="h-full w-full object-cover" loading="lazy" decoding="async" />
-		</div>
+		<!-- Vignette portfolio : cadrée sur le sujet et liée à la collection. -->
+		<a
+			href="/collections/toges-graduation"
+			class="secondary-img reveal reveal-d3"
+			aria-label="Découvrir nos toges de graduation"
+		>
+			<img src="/images/hero-toges-graduation.jpg" alt="Diplômée portant une tenue et une toge de graduation" class="h-full w-full object-cover" loading="lazy" decoding="async" />
+			<span class="secondary-img-shade" aria-hidden="true"></span>
+			<span class="secondary-img-copy" aria-hidden="true">
+				<span class="secondary-img-kicker">Nos réalisations</span>
+				<span class="secondary-img-title">Toges de graduation</span>
+			</span>
+			<span class="secondary-img-arrow" aria-hidden="true">
+				<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M7 7h10v10" /></svg>
+			</span>
+		</a>
 	</div>
 
 	<!-- Barre sociale verticale (grand écran) -->
@@ -330,6 +355,8 @@ const social = [
 
 	/* ---------- Fond bleu conservé sous les silhouettes détourées ---------- */
 	.hero-bg {
+		/* Le décor (dont la photo) reste sous le texte du hero. */
+		z-index: 0;
 		background-color: #00001C;
 	}
 
@@ -393,6 +420,7 @@ const social = [
 
 	.hero-layout {
 		position: relative;
+		z-index: 1;
 		display: flex;
 		flex-direction: column;
 		min-height: 100svh;
@@ -501,18 +529,50 @@ const social = [
 		margin-top: 2rem;
 		overflow: hidden;
 		border-radius: 14px;
+		color: #fff;
+		text-decoration: none;
 	}
 
 	.card-img {
 		position: relative;
-		width: 84px;
-		height: 80px;
+		width: 76px;
+		min-height: 96px;
+		align-self: stretch;
 		flex-shrink: 0;
 	}
 
+	.start-card-copy {
+		min-width: 0;
+		padding: 10px 12px;
+	}
+
 	.card-title {
-		font-size: 20px;
-		line-height: 1;
+		font-size: clamp(15px, 1.15vw, 18px);
+		line-height: 1.05;
+	}
+
+	.card-description {
+		color: rgba(255, 255, 255, 0.72);
+		font-size: 11px;
+		line-height: 1.25;
+	}
+
+	.card-action {
+		display: flex;
+		align-items: center;
+		gap: 4px;
+		margin-top: 2px;
+		color: #FACC6B;
+		font-size: 9px;
+		font-weight: 700;
+		letter-spacing: 0.035em;
+		line-height: 1.2;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+	.card-action svg {
+		flex: 0 0 auto;
 	}
 
 	.circle-cta {
@@ -525,7 +585,82 @@ const social = [
 		margin-top: 2.5rem;
 		aspect-ratio: 2.2 / 1;
 		overflow: hidden;
-		border-radius: 14px;
+		border: 1px solid rgba(250, 204, 107, 0.38);
+		border-radius: 16px;
+		color: #fff;
+		text-decoration: none;
+		isolation: isolate;
+		transition: border-color 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.secondary-img img {
+		position: relative;
+		z-index: 0;
+		object-position: center 20%;
+	}
+
+	.secondary-img-shade {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		pointer-events: none;
+		background:
+			linear-gradient(90deg, rgba(0, 0, 28, 0.5), rgba(0, 0, 28, 0.04) 75%),
+			linear-gradient(0deg, rgba(0, 0, 28, 0.88), transparent 72%);
+	}
+
+	.secondary-img-copy {
+		position: absolute;
+		z-index: 2;
+		left: clamp(12px, 1.4vw, 20px);
+		bottom: clamp(10px, 1.2vw, 18px);
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.secondary-img-kicker {
+		color: #FACC6B;
+		font-size: 9px;
+		font-weight: 700;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+	}
+
+	.secondary-img-title {
+		font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+		font-size: clamp(14px, 1.15vw, 17px);
+		font-weight: 600;
+		line-height: 1.2;
+		text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
+	}
+
+	.secondary-img-arrow {
+		position: absolute;
+		top: clamp(9px, 1.2vw, 16px);
+		right: clamp(9px, 1.2vw, 16px);
+		z-index: 2;
+		display: grid;
+		width: clamp(28px, 2.8vw, 38px);
+		aspect-ratio: 1;
+		place-items: center;
+		border: 1px solid rgba(255, 255, 255, 0.55);
+		border-radius: 9999px;
+		background: rgba(0, 0, 28, 0.42);
+		color: #fff;
+		backdrop-filter: blur(8px);
+		transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+	}
+
+	.secondary-img:hover {
+		border-color: rgba(250, 204, 107, 0.8);
+		box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7), 0 0 24px rgba(212, 175, 55, 0.16);
+	}
+
+	.secondary-img:hover .secondary-img-arrow {
+		transform: translate(2px, -2px);
+		background: #FACC6B;
+		color: #00001C;
 	}
 
 	.social-bar {
@@ -562,7 +697,7 @@ const social = [
 		}
 
 		.hero-h1 {
-			font-size: 6.2vw;
+			font-size: clamp(2.75rem, 5.8vw, 6.25rem);
 			line-height: 1.02;
 		}
 
@@ -591,12 +726,20 @@ const social = [
 		}
 
 		.card-img {
-			width: 96px;
-			height: 94px;
+			width: 84px;
+			min-height: 108px;
 		}
 
 		.card-title {
-			font-size: clamp(16px, 1.35vw, 22px);
+			font-size: clamp(16px, 1.2vw, 19px);
+		}
+
+		.card-description {
+			font-size: 12px;
+		}
+
+		.card-action {
+			font-size: 9.5px;
 		}
 
 		.circle-cta {
@@ -692,12 +835,54 @@ const social = [
 			margin-top: 1rem;
 		}
 
+		/* Sur mobile, on privilégie un CTA lisible à la miniature. */
+		.start-card .card-img {
+			display: none;
+		}
+
+		.start-card-copy {
+			padding: 10px 12px;
+		}
+
+		.start-card .card-title {
+			font-size: 14px;
+		}
+
+		.start-card .card-description {
+			font-size: 10px;
+		}
+
+		.start-card .card-action {
+			font-size: 8px;
+			white-space: normal;
+		}
+
 		.secondary-img {
 			position: absolute;
 			left: 6%;
 			bottom: 3%;
 			width: min(40%, 160px);
 			margin-top: 0;
+		}
+
+		.secondary-img-copy {
+			left: 10px;
+			bottom: 8px;
+			max-width: calc(100% - 42px);
+		}
+
+		.secondary-img-kicker {
+			display: none;
+		}
+
+		.secondary-img-title {
+			font-size: 11px;
+		}
+
+		.secondary-img-arrow {
+			top: 7px;
+			right: 7px;
+			width: 26px;
 		}
 	}
 

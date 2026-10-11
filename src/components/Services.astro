@@ -94,7 +94,8 @@ const services = [
 			{
 				services.map((s, i) => (
 					<article
-						class="service-card group relative flex flex-col overflow-hidden rounded-[1.5rem] premium-card-secondary opacity-0 translate-y-8"
+						class="service-card group relative flex flex-col overflow-hidden rounded-[1.5rem] premium-card-secondary opacity-0"
+						data-no-fx
 					>
 						<div class="relative aspect-[4/3] overflow-hidden bg-surface/40">
 							<img
@@ -145,32 +146,33 @@ const services = [
 
 	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-	if (!prefersReducedMotion) {
-		const servicesGrid = document.querySelector('.services-grid');
-		if (servicesGrid) {
-			const serviceCards = servicesGrid.querySelectorAll('.service-card');
-			
+	const servicesGrid = document.querySelector('.services-grid');
+	if (servicesGrid) {
+		const serviceCards = servicesGrid.querySelectorAll<HTMLElement>('.service-card');
+
+		if (prefersReducedMotion) {
+			// Les cartes restent visibles même si leurs animations sont désactivées.
+			serviceCards.forEach((card) => card.classList.remove('opacity-0'));
+		} else {
 			serviceCards.forEach((card) => {
-				const cardEl = card as HTMLElement;
-				cardEl.style.opacity = '0';
-				cardEl.style.transform = 'translateY(30px) rotate(-2deg)';
-				cardEl.style.willChange = 'transform, opacity';
+				card.style.opacity = '0';
+				card.style.transform = 'translateY(30px) rotate(-2deg)';
 			});
-		
+
 			const observer = new IntersectionObserver((entries) => {
 				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						gsap.to(serviceCards, {
-							opacity: 1,
-							y: 0,
-							rotation: 0,
-							duration: 0.7,
-							ease: 'back.out(1.1)',
-							stagger: 0.1,
-							clearProps: 'transform'
-						});
-						observer.unobserve(entry.target);
-					}
+					if (!entry.isIntersecting) return;
+
+					gsap.to(serviceCards, {
+						opacity: 1,
+						y: 0,
+						rotation: 0,
+						duration: 0.7,
+						ease: 'back.out(1.1)',
+						stagger: 0.1,
+						clearProps: 'transform',
+					});
+					observer.unobserve(entry.target);
 				});
 			}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
