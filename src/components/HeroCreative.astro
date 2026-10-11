@@ -8,10 +8,10 @@
  */
 
 const slides = [
-	{ src: '/images/hero-slides/slide-1.jpg', label: 'Uniformes scolaires', alt: 'Élève en uniforme scolaire bleu marine avec gilet et insigne doré' },
-	{ src: '/images/hero-slides/slide-2.jpg', label: 'Toges de graduation', alt: 'Diplômée en toge de graduation tenant son diplôme' },
-	{ src: '/images/hero-slides/slide-3.jpg', label: 'Tenues de travail', alt: 'Professionnel en tenue de travail bleu marine à liserés dorés' },
-	{ src: '/images/hero-slides/slide-4.jpg', label: 'Costume africain moderne', alt: 'Homme en costume africain moderne bleu nuit brodé d’or' },
+	{ src: '/images/hero-slides/cutout-business-suit.png', label: 'Costume professionnel', alt: 'Homme en costume professionnel bleu nuit et or, en pied' },
+	{ src: '/images/hero-slides/cutout-graduation-gown.png', label: 'Toges de graduation', alt: 'Diplômée en toge bleu nuit et or, en pied' },
+	{ src: '/images/hero-slides/cutout-workwear.png', label: 'Tenues de travail', alt: 'Professionnel en tenue de travail bleu nuit, en pied' },
+	{ src: '/images/hero-slides/cutout-medical.png', label: 'Blouses médicales', alt: 'Professionnelle de santé en blouse blanche, en pied' },
 ];
 
 const social = [
@@ -23,8 +23,9 @@ const social = [
 ---
 
 <section id="hero-cu" class="hero-cu relative z-20 min-h-[100svh] w-full text-white" aria-label="Accueil">
-	<!-- Fond : lueurs, grain et portrait (rognés au hero uniquement) -->
+	<!-- Fond bleu et lueurs fixes ; seules les silhouettes PNG transparentes défilent. -->
 	<div class="hero-bg pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+		<div class="hero-shade absolute inset-0"></div>
 		<div class="glow glow-1"></div>
 		<div class="glow glow-2"></div>
 		<div class="glow glow-3"></div>
@@ -44,33 +45,34 @@ const social = [
 				))
 			}
 		</div>
-		<div class="hero-shade absolute inset-0"></div>
 	</div>
 
 	<div class="hero-layout">
-		<!-- Titre + sous-titre -->
-		<div class="reveal hero-title">
-			<h1 class="title-gradient uppercase hero-h1"><span class="block">Confection</span><span class="block">Univers</span></h1>
-			<p class="subtitle font-anton uppercase hero-sub">
-				Confection de vêtements professionnels - Sénégal
-			</p>
-		</div>
-
-		<!-- Texte descriptif -->
-		<div class="reveal reveal-d1 hero-desc text-white/90">
-			<p class="hero-lead">
-				Vêtements de qualité supérieure fabriqués avec précision. Designs personnalisés adaptés à vos spécifications.
-				Production en gros fiable pour les institutions et entreprises de toutes tailles.
-			</p>
-			<div class="hero-actions">
-				<a href="/contact" class="hero-btn hero-btn-primary">Demander un devis</a>
-				<a href="/catalogue" class="hero-btn hero-btn-ghost">Voir nos produits</a>
+		<!-- Titre et description restent dans un même flux pour éviter tout chevauchement -->
+		<div class="hero-copy">
+			<div class="reveal hero-title">
+				<h1 class="title-gradient uppercase hero-h1"><span class="block">Confection</span><span class="block">Univers</span></h1>
+				<p class="subtitle font-anton uppercase hero-sub">
+					Confection de vêtements professionnels - Sénégal
+				</p>
 			</div>
-			<ul class="hero-badges" aria-label="Points forts">
-				<li>Uniformes sur mesure</li>
-				<li>Qualité premium</li>
-				<li>Production en gros</li>
-			</ul>
+
+			<!-- Texte descriptif -->
+			<div class="reveal reveal-d1 hero-desc text-white/90">
+				<p class="hero-lead">
+					Vêtements de qualité supérieure fabriqués avec précision. Designs personnalisés adaptés à vos spécifications.
+					Production en gros fiable pour les institutions et entreprises de toutes tailles.
+				</p>
+				<div class="hero-actions">
+					<a href="/contact" class="hero-btn hero-btn-primary">Demander un devis</a>
+					<a href="/catalogue" class="hero-btn hero-btn-ghost">Voir nos produits</a>
+				</div>
+				<ul class="hero-badges" aria-label="Points forts">
+					<li>Uniformes sur mesure</li>
+					<li>Qualité premium</li>
+					<li>Production en gros</li>
+				</ul>
+			</div>
 		</div>
 
 		<!-- Carte « Démarrer un projet » -->
@@ -139,6 +141,7 @@ const social = [
 </section>
 
 <script>
+	import gsap from 'gsap';
 	import { initHeroFx } from '../scripts/hero-fx';
 
 	const root = document.getElementById('hero-cu');
@@ -146,29 +149,95 @@ const social = [
 		initHeroFx(root);
 		const slides = Array.from(root.querySelectorAll<HTMLImageElement>('[data-slide]'));
 		const thumbs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-thumb]'));
-		const n = slides.length;
 		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 		let current = 0;
 		let timer: number | undefined;
+		let slideAnimation: gsap.core.Animation | undefined;
+		let imageDrift: gsap.core.Tween | undefined;
 
-		const show = (k: number) => {
-			current = k;
-			slides.forEach((s, j) => s.classList.toggle('is-active', j === k));
-			thumbs.forEach((t, j) => t.classList.toggle('is-active', j === k));
-		};
 		const stop = () => {
 			if (timer !== undefined) window.clearInterval(timer);
 			timer = undefined;
 		};
-		const start = () => {
-			if (reduceMotion) return;
-			stop();
-			timer = window.setInterval(() => show((current + 1) % n), 6000);
+
+		const setThumb = (activeIndex: number, animate = false) => {
+			thumbs.forEach((thumb, index) => thumb.classList.toggle('is-active', index === activeIndex));
+			const activeThumb = thumbs[activeIndex];
+			if (animate && activeThumb && !reduceMotion) {
+				gsap.fromTo(
+					activeThumb,
+					{ scale: 0.84, transformOrigin: '50% 50%' },
+					{ scale: 1, duration: 0.6, ease: 'back.out(2.4)', clearProps: 'transform' },
+				);
+			}
 		};
 
-		thumbs.forEach((t, j) =>
-			t.addEventListener('click', () => {
-				show(j);
+		const show = (requestedIndex: number) => {
+			if (!slides.length) return;
+			const nextIndex = ((requestedIndex % slides.length) + slides.length) % slides.length;
+			if (nextIndex === current) return;
+
+			slideAnimation?.kill();
+			imageDrift?.kill();
+			gsap.set(slides, { clearProps: 'all' });
+
+			const previousIndex = current;
+			const outgoing = slides[previousIndex];
+			const incoming = slides[nextIndex];
+			const forward = nextIndex > previousIndex;
+			current = nextIndex;
+			setThumb(nextIndex, true);
+
+			if (reduceMotion) {
+				slides.forEach((slide, index) => slide.classList.toggle('is-active', index === nextIndex));
+				return;
+			}
+
+			slides.forEach((slide, index) => slide.classList.toggle('is-active', index === nextIndex));
+			gsap.set(outgoing, { opacity: 1, scale: 1, xPercent: 0, filter: 'blur(0px)', clipPath: 'inset(0)' });
+			gsap.set(incoming, {
+				opacity: 0,
+				scale: 1.025,
+				xPercent: forward ? 1.5 : -1.5,
+				filter: 'blur(8px)',
+				clipPath: forward ? 'inset(0 0 0 58%)' : 'inset(0 42% 0 0)',
+			});
+
+			slideAnimation = gsap.timeline({
+				onComplete: () => {
+					gsap.set([outgoing, incoming], { clearProps: 'all' });
+					imageDrift = gsap.to(incoming, { scale: 1.018, duration: 4.5, ease: 'none' });
+				},
+			});
+			slideAnimation
+				.to(outgoing, {
+					opacity: 0,
+					scale: 1.015,
+					xPercent: forward ? -1 : 1,
+					filter: 'blur(3px)',
+					duration: 0.9,
+					ease: 'power2.in',
+				}, 0)
+				.to(incoming, {
+					opacity: 1,
+					scale: 1,
+					xPercent: 0,
+					filter: 'blur(0px)',
+					clipPath: 'inset(0)',
+					duration: 1.35,
+					ease: 'power4.out',
+				}, 0);
+		};
+
+		const start = () => {
+			if (reduceMotion || slides.length < 2) return;
+			stop();
+			timer = window.setInterval(() => show((current + 1) % slides.length), 6500);
+		};
+
+		thumbs.forEach((thumb, index) =>
+			thumb.addEventListener('click', () => {
+				show(index);
 				start();
 			}),
 		);
@@ -187,7 +256,29 @@ const social = [
 			card.addEventListener('mouseleave', () => (card.style.transform = ''));
 		}
 
-		show(0);
+		// Première image : entrée cinématique, puis léger zoom continu.
+		slides.forEach((slide, index) => slide.classList.toggle('is-active', index === 0));
+		setThumb(0);
+		if (!reduceMotion && slides[0]) {
+			slideAnimation = gsap.fromTo(
+				slides[0],
+					{ opacity: 0, scale: 1.025, xPercent: 1.5, filter: 'blur(8px)', clipPath: 'inset(0 0 0 58%)' },
+					{
+						opacity: 1,
+						scale: 1,
+						xPercent: 0,
+						filter: 'blur(0px)',
+						clipPath: 'inset(0)',
+						duration: 1.55,
+						delay: 0.15,
+						ease: 'power4.out',
+						clearProps: 'all',
+						onComplete: () => {
+							imageDrift = gsap.to(slides[0], { scale: 1.018, duration: 4.5, ease: 'none' });
+						},
+					},
+			);
+		}
 		start();
 	}
 </script>
@@ -219,9 +310,14 @@ const social = [
 		text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
 	}
 
-	/* ---------- Fond ---------- */
+	/* ---------- Fond bleu conservé sous les silhouettes détourées ---------- */
+	.hero-bg {
+		background-color: #00001C;
+	}
+
 	.glow {
 		position: absolute;
+		z-index: 1;
 		border-radius: 9999px;
 		filter: blur(110px);
 		animation: cu-float 16s ease-in-out infinite;
@@ -231,6 +327,7 @@ const social = [
 	.glow-3 { right: 20%; top: 20%; width: 26vw; height: 26vw; background: #3d6bff; opacity: 0.22; animation-delay: -9s; }
 
 	.hero-shade {
+		z-index: 0;
 		background:
 			linear-gradient(90deg, #00001C 0%, rgba(0, 0, 28, 0.85) 30%, rgba(0, 0, 28, 0.25) 60%, rgba(0, 0, 28, 0) 75%),
 			linear-gradient(0deg, #00001C 0%, rgba(0, 0, 28, 0) 22%);
@@ -241,35 +338,31 @@ const social = [
 		inset: 0;
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
-		object-position: 50% 14%;
+		object-fit: contain;
+		object-position: 75% bottom;
 		opacity: 0;
-		transform: scale(1.05);
-		filter: saturate(1.05) contrast(1.05);
-		transition: opacity 1s ease, transform 1.8s cubic-bezier(0.2, 0.7, 0.2, 1);
-		-webkit-mask-image: linear-gradient(180deg, #000 70%, transparent 100%);
-		mask-image: linear-gradient(180deg, #000 70%, transparent 100%);
+		transform: scale(1.025);
+		transform-origin: center center;
+		filter: saturate(1.04) contrast(1.02) drop-shadow(0 18px 36px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 24px rgba(212, 175, 55, 0.1));
+		will-change: opacity, transform, filter, clip-path;
 	}
 
 	.hero-photo.is-active {
+		z-index: 1;
 		opacity: 1;
 		transform: scale(1);
 	}
 
-	@media (min-width: 768px) {
-		.hero-photo {
-			-webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 26%, #000 100%);
-			mask-image: linear-gradient(90deg, transparent 0%, #000 26%, #000 100%);
-		}
-	}
-
-	/* ---------- Mise en page du hero (positions en % de la hauteur/largeur) ---------- */
+	/* ---------- Scène photo : hauteur complète et silhouettes sans rognage ---------- */
 	.hero-photos {
 		position: absolute;
-		top: 0;
+		top: 112px;
 		right: 0;
+		bottom: 0;
 		left: 0;
-		height: 62%;
+		z-index: 2;
+		height: calc(100% - 112px);
+		overflow: hidden;
 	}
 
 	.hero-layout {
@@ -279,6 +372,11 @@ const social = [
 		min-height: 100svh;
 		margin: 0 auto;
 		padding: 46svh 6% 3.5rem;
+	}
+
+	.hero-copy {
+		position: relative;
+		z-index: 1;
 	}
 
 	.hero-title {
@@ -410,11 +508,15 @@ const social = [
 
 	@media (min-width: 768px) {
 		.hero-photos {
-			top: 0;
+			top: 112px;
 			bottom: 0;
 			left: auto;
-			height: 100%;
+			height: calc(100% - 112px);
 			width: 62%;
+		}
+
+		.hero-photo {
+			object-position: 90% bottom;
 		}
 
 		.hero-layout {
@@ -422,10 +524,15 @@ const social = [
 			padding: 0;
 		}
 
-		.hero-title {
+		.hero-copy {
 			position: absolute;
 			left: 4%;
 			top: 19%;
+			width: min(45%, 720px);
+		}
+
+		.hero-title {
+			position: relative;
 		}
 
 		.hero-h1 {
@@ -439,13 +546,14 @@ const social = [
 		}
 
 		.hero-desc {
-			position: absolute;
-			left: 4%;
-			top: 45%;
-			width: 42%;
+			position: relative;
+			left: auto;
+			top: auto;
+			width: 100%;
 			max-width: none;
-			margin-top: 0;
-			font-size: clamp(13px, 1.05vw, 16px);
+			margin-top: clamp(1.25rem, 1.4vw, 1.5rem);
+			font-size: clamp(15px, 1.05vw, 17px);
+			line-height: 1.55;
 		}
 
 		.start-card {
@@ -466,24 +574,123 @@ const social = [
 		}
 
 		.circle-cta {
-			display: flex;
-			position: absolute;
-			left: 71.4%;
-			top: 82.4%;
-			align-items: center;
-			justify-content: center;
+			display: none;
 		}
 
 		.secondary-img {
 			position: absolute;
 			left: 6.4%;
-			top: 69%;
-			width: 41%;
+			top: auto;
+			bottom: 3%;
+			width: min(35%, 540px);
+			margin-top: 0;
+		}
+	}
+
+	/* Garde une colonne libre pour la silhouette sur tablette, sans superposer la carte. */
+	@media (min-width: 768px) and (max-width: 1279px) {
+		.hero-photos {
+			width: 56%;
+		}
+
+		.start-card {
+			left: 36%;
+			width: min(250px, 24vw);
+		}
+
+		.circle-cta {
+			display: none;
+		}
+
+		.secondary-img {
+			width: min(28%, 360px);
+		}
+	}
+
+	/* Sur téléphone, la personne reste à droite et le texte conserve sa propre colonne. */
+	@media (max-width: 767px) {
+		.hero-photos {
+			left: 52%;
+			width: 48%;
+		}
+
+		.hero-layout {
+			padding: clamp(188px, 25svh, 230px) 6% clamp(4.5rem, 15svh, 7rem);
+		}
+
+		.hero-copy {
+			width: 54%;
+		}
+
+		.hero-h1 {
+			font-size: clamp(1.8rem, 8vw, 2.5rem);
+			line-height: 0.98;
+		}
+
+		.hero-sub {
+			margin-top: 0.35rem;
+			font-size: clamp(0.75rem, 3.6vw, 0.9rem);
+			line-height: 1.25;
+		}
+
+		.hero-desc {
+			max-width: none;
+			margin-top: 1rem;
+			font-size: 12px;
+			line-height: 1.45;
+		}
+
+		.hero-lead {
+			margin-bottom: 1rem;
+		}
+
+		.hero-actions {
+			gap: 0.5rem;
+		}
+
+		.hero-btn {
+			height: 40px;
+			padding: 0 12px;
+			font-size: 12px;
+		}
+
+		.hero-badges,
+		.circle-cta {
+			display: none;
+		}
+
+		.start-card {
+			position: relative;
+			z-index: 1;
+			width: min(250px, 54%);
+			margin-top: 1rem;
+		}
+
+		.secondary-img {
+			position: absolute;
+			left: 6%;
+			bottom: 3%;
+			width: min(40%, 160px);
 			margin-top: 0;
 		}
 	}
 
 	@media (min-width: 1280px) {
+		.start-card {
+			left: 50%;
+			width: min(250px, 17.5vw);
+		}
+
+		.circle-cta {
+			display: flex;
+			position: absolute;
+			left: 68.5%;
+			top: 82.4%;
+			align-items: center;
+			justify-content: center;
+			width: clamp(56px, 4.2vw, 76px);
+		}
+
 		.social-bar {
 			position: absolute;
 			right: 1.9%;
@@ -556,11 +763,11 @@ const social = [
 
 	/* ---------- Barre sociale ---------- */
 	.social-bar {
-		background: rgba(10, 12, 30, 0.42);
-		border: 1px solid rgba(255, 255, 255, 0.1);
+		background: rgba(212, 175, 55, 0.24);
+		border: 1px solid rgba(250, 204, 107, 0.38);
 		backdrop-filter: blur(14px);
 		-webkit-backdrop-filter: blur(14px);
-		box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.7);
+		box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.55), 0 0 26px rgba(212, 175, 55, 0.12);
 	}
 
 	.round-btn {
@@ -594,7 +801,7 @@ const social = [
 
 	.thumb {
 		opacity: 0.55;
-		transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+		transition: opacity 0.3s ease, box-shadow 0.3s ease;
 	}
 
 	.thumb:hover {

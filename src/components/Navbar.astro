@@ -26,6 +26,16 @@ const social = [
 ---
 
 <header id="site-header" class="site-header fixed inset-x-0 top-0 z-[60]">
+	<div class="top-info-bar" role="region" aria-label="Informations de contact">
+		<div class="top-info-inner">
+			<span class="top-info-brand">Confection de vêtements professionnels au Sénégal</span>
+			<div class="top-info-details">
+				<a href="tel:+221772960776" class="top-info-link">+221 77 296 07 76</a>
+				<a href="mailto:confectionunivers@gmail.com" class="top-info-link top-info-email">confectionunivers@gmail.com</a>
+				<span class="top-info-link top-info-location">Thiès, Sénégal</span>
+			</div>
+		</div>
+	</div>
 	<div class="header-inner mx-auto flex items-center justify-between gap-4">
 		<a href="/" class="logo-link logo-chip shrink-0" aria-label="Confection Univers — accueil">
 			<img src="/images/logo.png" alt="Confection Univers" class="h-12 w-auto md:h-14" width="200" height="76" decoding="async" />
@@ -165,22 +175,112 @@ const social = [
 <style>
 	/* ---------- Header ---------- */
 	.site-header {
-		padding: 28px 0 0;
+		padding: 0;
 		pointer-events: none;
-		transition: padding 0.4s ease;
 	}
 
-	.site-header.is-scrolled {
-		padding-top: 14px;
+	.top-info-bar {
+		width: 100%;
+		height: 36px;
+		pointer-events: auto;
+		border-bottom: 1px solid rgba(184, 134, 11, 0.28);
+		background: linear-gradient(100deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 248, 226, 0.97) 54%, rgba(250, 204, 107, 0.94) 100%);
+		color: #00001C;
+		box-shadow: 0 5px 18px rgba(0, 0, 0, 0.12);
+	}
+
+	.top-info-inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+		width: 92vw;
+		height: 100%;
+		margin: 0 auto;
+	}
+
+	.top-info-brand {
+		color: rgba(0, 0, 28, 0.72);
+		font-size: 10px;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+	.top-info-details {
+		display: flex;
+		align-items: center;
+		gap: clamp(0.75rem, 1.6vw, 1.5rem);
+	}
+
+	.top-info-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 7px;
+		color: #00001C;
+		font-size: 11px;
+		font-weight: 600;
+		white-space: nowrap;
+		transition: color 0.2s ease;
+	}
+
+	.top-info-link::before {
+		content: '';
+		width: 5px;
+		height: 5px;
+		flex: 0 0 5px;
+		border-radius: 50%;
+		background: #B8860B;
+	}
+
+	.top-info-link:hover {
+		color: #8A6500;
 	}
 
 	.header-inner {
 		width: 92vw;
+		margin-top: 10px;
 		pointer-events: auto;
+		transition: margin-top 0.35s ease;
+	}
+
+	.site-header.is-scrolled .header-inner {
+		margin-top: 6px;
+	}
+
+	@media (max-width: 1023px) {
+		.top-info-brand,
+		.top-info-email {
+			display: none;
+		}
+
+		.top-info-inner {
+			justify-content: flex-end;
+		}
+	}
+
+	@media (max-width: 540px) {
+		.top-info-bar {
+			height: 32px;
+		}
+
+		.top-info-inner {
+			justify-content: center;
+		}
+
+		.top-info-location {
+			display: none;
+		}
+
+		.top-info-link {
+			font-size: 10px;
+		}
 	}
 
 	@media (min-width: 1536px) {
-		.header-inner {
+		.header-inner,
+		.top-info-inner {
 			width: min(66vw, 1240px);
 		}
 	}
