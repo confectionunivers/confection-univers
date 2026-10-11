@@ -73,6 +73,7 @@ const { title, description = 'Confection Univers est une entreprise de confectio
 		<slot />
 		<script>
 			import Lenis from '@studio-freight/lenis';
+			import { initSiteFx } from '../scripts/site-fx';
 
 			const lenis = new Lenis({
 				lerp: 0.1,
@@ -87,6 +88,8 @@ const { title, description = 'Confection Univers est une entreprise de confectio
 				requestAnimationFrame(raf);
 			}
 			requestAnimationFrame(raf);
+
+			initSiteFx();
 		</script>
 	</body>
 </html>

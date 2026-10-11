@@ -139,8 +139,11 @@ const social = [
 </section>
 
 <script>
+	import { initHeroFx } from '../scripts/hero-fx';
+
 	const root = document.getElementById('hero-cu');
 	if (root) {
+		initHeroFx(root);
 		const slides = Array.from(root.querySelectorAll<HTMLImageElement>('[data-slide]'));
 		const thumbs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-thumb]'));
 		const n = slides.length;
