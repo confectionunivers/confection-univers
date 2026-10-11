@@ -9,9 +9,13 @@
  * il suffit donc de remplacer un PNG sur GitHub, le WebP sera régénéré par
  * Vercel au déploiement suivant.
  *
+ * Les WebP sont régénérés à chaque build plutôt que comparés par date de
+ * modification : après un `git checkout`, tous les fichiers portent la même
+ * date et une comparaison de mtime laisserait passer des WebP périmés.
+ *
  * Usage manuel : node scripts/optimize-hero-images.mjs
  */
-import { readdirSync, statSync, existsSync } from 'node:fs';
+import { readdirSync, statSync, existsSync, unlinkSync } from 'node:fs';
 import { join } from 'node:path';
 
 const DIR = 'public/images/hero-slides';
@@ -25,7 +29,8 @@ async function main() {
     return;
   }
 
-  const pngFiles = readdirSync(DIR).filter((name) => name.toLowerCase().endsWith('.png'));
+  const files = readdirSync(DIR);
+  const pngFiles = files.filter((name) => name.toLowerCase().endsWith('.png'));
 
   if (!pngFiles.length) {
     console.warn(`[images] aucun PNG dans ${DIR} — étape ignorée.`);
@@ -34,25 +39,18 @@ async function main() {
 
   const sharp = (await import('sharp')).default;
 
-  let converted = 0;
   let before = 0;
   let after = 0;
 
   for (const name of pngFiles) {
     const src = join(DIR, name);
     const dest = src.replace(/\.png$/i, '.webp');
-
-    // Rien à faire si le WebP est déjà plus récent que le PNG source.
-    if (existsSync(dest) && statSync(dest).mtimeMs >= statSync(src).mtimeMs) {
-      continue;
-    }
-
     const srcSize = statSync(src).size;
+
     const info = await sharp(src)
       .webp({ quality: QUALITY, effort: 6, alphaQuality: 90 })
       .toFile(dest);
 
-    converted += 1;
     before += srcSize;
     after += info.size;
 
@@ -60,13 +58,22 @@ async function main() {
     console.log(`[images] ${name} → ${name.replace(/\.png$/i, '.webp')} : ${ko(srcSize)} → ${ko(info.size)} (-${gain} %)`);
   }
 
-  if (converted) {
-    console.log(
-      `[images] ${converted} fichier(s) converti(s) : ${ko(before)} → ${ko(after)} au total.`,
-    );
-  } else {
-    console.log('[images] WebP déjà à jour, rien à faire.');
+  // Supprime les WebP dont le PNG source n'existe plus, pour éviter de servir
+  // une ancienne silhouette supprimée sur GitHub.
+  const orphans = files.filter(
+    (name) =>
+      name.toLowerCase().endsWith('.webp') &&
+      !pngFiles.some((png) => png.replace(/\.png$/i, '.webp').toLowerCase() === name.toLowerCase()),
+  );
+
+  for (const orphan of orphans) {
+    unlinkSync(join(DIR, orphan));
+    console.log(`[images] ${orphan} supprimé (plus de PNG correspondant).`);
   }
+
+  console.log(
+    `[images] ${pngFiles.length} WebP généré(s) : ${ko(before)} → ${ko(after)} (${((1 - after / before) * 100).toFixed(0)} % de réduction).`,
+  );
 }
 
 // Un échec ici ne doit jamais bloquer le déploiement : les PNG restent servis
