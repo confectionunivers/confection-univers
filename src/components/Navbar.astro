@@ -37,7 +37,7 @@ const social = [
 		</div>
 	</div>
 	<div class="header-inner mx-auto flex items-center justify-between gap-4">
-		<a href="/" class="logo-link logo-chip logo-chip-transparent shrink-0" aria-label="Confection Univers — accueil">
+		<a href="/" class="logo-link logo-chip logo-chip-header shrink-0" aria-label="Confection Univers — accueil">
 			<img src="/images/logo.png" alt="Confection Univers" class="w-auto" width="2000" height="419" decoding="async" />
 		</a>
 
@@ -293,7 +293,7 @@ const social = [
 		}
 	}
 
-	/* Logo sur fond blanc : visible quel que soit le hero */
+	/* Une plaque blanche opaque assure le contraste du logo sur tous les visuels. */
 	.logo-chip {
 		display: inline-flex;
 		align-items: center;
@@ -304,40 +304,65 @@ const social = [
 	}
 
 	.logo-chip img {
+		display: block;
 		height: 48px;
 		width: auto;
 	}
 
-	.logo-chip-transparent {
+	/* Le logo reste sur blanc pur, présenté comme une étiquette d'atelier. */
+	.logo-chip-header {
 		position: relative;
 		isolation: isolate;
-		padding: 0;
-		border-radius: 0;
-		background: transparent;
-		box-shadow: none;
+		padding: 7px 27px 7px 14px;
+		border: 1px solid rgba(198, 149, 54, 0.62);
+		border-left: 3px solid #c99b42;
+		border-radius: 14px 2px 14px 14px;
+		background: #ffffff;
+		box-shadow: 0 12px 28px rgba(0, 0, 28, 0.27), 0 0 0 3px rgba(255, 255, 255, 0.22);
 	}
 
-	.logo-chip-transparent::before {
+	/* Coin replié : le bleu nuit révèle une fine face dorée. */
+	.logo-chip-header::before {
 		content: '';
 		position: absolute;
-		inset: -60px -130px;
-		z-index: -1;
-		border-radius: 50%;
-		background: radial-gradient(ellipse at 40% 50%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.48) 38%, rgba(255, 255, 255, 0.2) 70%, transparent 100%);
-		filter: blur(34px);
+		z-index: 2;
+		top: -1px;
+		right: -1px;
+		width: 22px;
+		height: 22px;
+		background: linear-gradient(135deg, #dfb85b 0 23%, #192758 26%, #0b1743 100%);
+		clip-path: polygon(0 0, 100% 0, 100% 100%);
+		transform-origin: top right;
+		transition: transform 0.25s ease;
 		pointer-events: none;
 	}
 
-	.logo-chip-transparent img {
-		height: 48px;
-		width: auto;
-		filter: none;
-		transform: none;
+	.logo-chip-header:is(:hover, :focus-visible)::before {
+		transform: translate(-2px, 2px);
+	}
+
+	.logo-chip-header:focus-visible {
+		outline: 2px solid #facc6b;
+		outline-offset: 5px;
 	}
 
 	@media (max-width: 540px) {
-		.logo-chip-transparent img {
-			height: 40px;
+		.logo-chip-header {
+			padding: 5px 16px 5px 8px;
+			border-radius: 10px 2px 10px 10px;
+		}
+
+		.logo-chip-header img {
+			height: 42px;
+		}
+
+		.logo-chip-header::before {
+			width: 14px;
+			height: 14px;
+		}
+
+		.logo-chip-header:is(:hover, :focus-visible)::before {
+			transform: none;
 		}
 	}
 
@@ -615,6 +640,11 @@ const social = [
 	}
 
 	@media (prefers-reduced-motion: reduce) {
+		.logo-chip-header::before {
+			transform: none;
+			transition: none;
+		}
+
 		.menu-drawer,
 		.menu-overlay,
 		.pill,
