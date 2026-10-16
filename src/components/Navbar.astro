@@ -37,7 +37,7 @@ const social = [
 		</div>
 	</div>
 	<div class="header-inner mx-auto flex items-center justify-between gap-4">
-		<a href="/" class="logo-link logo-chip logo-chip-transparent shrink-0" aria-label="Confection Univers — accueil">
+		<a href="/" class="logo-link logo-chip logo-chip-header shrink-0" aria-label="Confection Univers — accueil">
 			<img src="/images/logo.png" alt="Confection Univers" class="w-auto" width="2000" height="419" decoding="async" />
 		</a>
 
@@ -293,7 +293,7 @@ const social = [
 		}
 	}
 
-	/* Logo sur fond blanc : visible quel que soit le hero */
+	/* Une plaque blanche opaque assure le contraste du logo sur tous les visuels. */
 	.logo-chip {
 		display: inline-flex;
 		align-items: center;
@@ -304,40 +304,32 @@ const social = [
 	}
 
 	.logo-chip img {
+		display: block;
 		height: 48px;
 		width: auto;
 	}
 
-	.logo-chip-transparent {
-		position: relative;
-		isolation: isolate;
-		padding: 0;
-		border-radius: 0;
-		background: transparent;
-		box-shadow: none;
+	.logo-chip-header {
+		padding: 7px 14px;
+		border: 1px solid rgba(212, 175, 55, 0.5);
+		border-radius: 16px;
+		background: #ffffff;
+		box-shadow: 0 12px 28px rgba(0, 0, 28, 0.27), 0 0 0 3px rgba(255, 255, 255, 0.22);
 	}
 
-	.logo-chip-transparent::before {
-		content: '';
-		position: absolute;
-		inset: -60px -130px;
-		z-index: -1;
-		border-radius: 50%;
-		background: radial-gradient(ellipse at 40% 50%, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.48) 38%, rgba(255, 255, 255, 0.2) 70%, transparent 100%);
-		filter: blur(34px);
-		pointer-events: none;
-	}
-
-	.logo-chip-transparent img {
-		height: 48px;
-		width: auto;
-		filter: none;
-		transform: none;
+	.logo-chip-header:focus-visible {
+		outline: 2px solid #facc6b;
+		outline-offset: 5px;
 	}
 
 	@media (max-width: 540px) {
-		.logo-chip-transparent img {
-			height: 40px;
+		.logo-chip-header {
+			padding: 5px 8px;
+			border-radius: 12px;
+		}
+
+		.logo-chip-header img {
+			height: 42px;
 		}
 	}
 
