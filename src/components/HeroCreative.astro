@@ -14,18 +14,27 @@
  * le PNG sert de repli.
  */
 const slides = [
-	{ name: 'cutout-business-suit', width: 1152, height: 2064, label: 'Costume professionnel', alt: 'Homme en costume professionnel bleu nuit et or, en pied' },
+	{ name: 'cutout-business-suit', width: 1152, height: 2064, label: 'Uniforme scolaire', alt: 'Élève en uniforme scolaire bordeaux et gris, en pied' },
 	{ name: 'cutout-graduation-gown', width: 1152, height: 2064, label: 'Toges de graduation', alt: 'Diplômée en toge bleu nuit et or, en pied' },
 	{ name: 'cutout-workwear', width: 1152, height: 2064, label: 'Tenues de travail', alt: 'Professionnel en tenue de travail bleu nuit, en pied' },
 	{ name: 'cutout-medical', width: 1152, height: 2064, label: 'Blouses médicales', alt: 'Professionnelle de santé en blouse blanche, en pied' },
-	{ name: 'cutout-sport', width: 1152, height: 2064, label: 'Tenues de sport', alt: 'Homme en tenue de sport noire avec liserés blancs, en pied' },
+	{ name: 'cutout-sport', width: 1152, height: 2064, label: 'Tenue de travail', alt: 'Professionnel en tenue de travail grise tenant un casque, en pied' },
 ].map((slide) => ({
 	...slide,
 	webp: `/images/hero-slides/${slide.name}.webp`,
 	png: `/images/hero-slides/${slide.name}.png`,
 }));
 
-const projectMessage = "Bonjour, je souhaite discuter d'un projet de confection. Je vous précise les articles, quantités et délais souhaités :";
+// Les questions sont déjà prêtes dans WhatsApp : le client n'a qu'à compléter sa demande.
+const projectMessage = [
+	'Bonjour Confection Univers, je souhaite discuter d’un projet sur mesure.',
+	'',
+	'Type de tenue : ',
+	'Quantité souhaitée : ',
+	'Personnalisation / logo : ',
+	'Date souhaitée : ',
+	'Ville de livraison : ',
+].join('\n');
 const projectWhatsAppHref = `https://wa.me/221772960776?text=${encodeURIComponent(projectMessage)}`;
 
 const social = [
@@ -37,7 +46,7 @@ const social = [
 ---
 
 <section id="hero-cu" class="hero-cu relative z-20 min-h-[100svh] w-full text-white" aria-label="Accueil">
-	<!-- Fond bleu et lueurs fixes ; seules les silhouettes PNG transparentes défilent. -->
+	<!-- Défilé de l'atelier : lumière et podium sous les silhouettes détourées. -->
 	<div class="hero-bg pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
 		<div class="hero-shade absolute inset-0"></div>
 		<div class="glow glow-1"></div>
@@ -45,6 +54,12 @@ const social = [
 		<div class="glow glow-3"></div>
 
 		<div class="hero-photos">
+			<div class="runway-stage">
+				<span class="runway-beam"></span>
+				<span class="runway-halo"></span>
+				<span class="runway-floor"></span>
+				<span class="runway-number" data-runway-number>01</span>
+			</div>
 			{
 				slides.map((s, idx) => (
 					<picture
@@ -58,13 +73,21 @@ const social = [
 							alt=""
 							width={s.width}
 							height={s.height}
-							loading={idx === 0 ? 'eager' : 'lazy'}
+							loading={idx < 2 ? 'eager' : 'lazy'}
 							fetchpriority={idx === 0 ? 'high' : 'auto'}
 							decoding="async"
 						/>
 					</picture>
 				))
 			}
+			<span class="runway-sweep"></span>
+			<span class="runway-pulse"></span>
+			<div class="runway-tag">
+				<span class="runway-tag-pin"></span>
+				<span class="runway-tag-eyebrow">PIÈCE <span data-runway-tag-number>01</span> / {String(slides.length).padStart(2, '0')}</span>
+				<span class="runway-tag-name" data-runway-tag-name>{slides[0].label}</span>
+				<span class="runway-tag-signature">ATELIER · SÉNÉGAL</span>
+			</div>
 		</div>
 	</div>
 
@@ -99,23 +122,25 @@ const social = [
 			</div>
 		</div>
 
-		<!-- Contact WhatsApp rapide pour qualifier les projets sur mesure. -->
+		<!-- Une seule action : décrire son projet dans un message WhatsApp prérempli. -->
 		<a
 			href={projectWhatsAppHref}
 			target="_blank"
 			rel="noopener noreferrer"
 			class="start-card reveal reveal-d2"
-			aria-label="Écrire sur WhatsApp à propos d'un projet de confection"
+			aria-label="Décrire mon projet sur mesure sur WhatsApp (nouvel onglet)"
 		>
-			<span class="card-img">
-				<img src={slides[1].webp} alt="" class="h-full w-full object-cover object-top" loading="lazy" decoding="async" />
+			<span class="card-img" aria-hidden="true">
+				<img src="/images/production-atelier.jpg" alt="" width="700" height="553" loading="lazy" decoding="async" />
 			</span>
-			<span class="start-card-copy flex flex-col justify-center gap-1 px-3 py-3">
+			<span class="start-card-copy">
 				<span class="font-anton card-title uppercase">Projet sur mesure ?</span>
-				<span class="card-description">Articles, quantités, délais.</span>
+				<span class="card-description">Tenue · quantité · délai</span>
 				<span class="card-action">
-					Écrire sur WhatsApp
-					<svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
+					<span class="card-action-text">Décrire mon projet <span class="card-action-platform">sur WhatsApp</span></span>
+					<span class="card-action-arrow" aria-hidden="true">
+						<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
+					</span>
 				</span>
 			</span>
 		</a>
@@ -124,10 +149,31 @@ const social = [
 		<a
 			href="/services"
 			class="circle-cta"
-			aria-label="Découvrir nos services"
+			aria-label="Habillez votre réussite — découvrir nos services"
 		>
-			<span class="relative z-10 text-[11px] font-medium tracking-wide">Commencer</span>
+			<span class="relative z-10 text-center text-[11px] font-medium leading-tight tracking-wide">Habillez<br />votre<br />réussite</span>
 		</a>
+
+		<!-- Navigation du diaporama, visible aussi sur mobile. -->
+		<div class="hero-slide-controls" role="group" aria-label="Parcourir les créations">
+			<div class="hero-slide-info">
+				<div class="hero-slide-kicker">
+					<span class="hero-slide-kicker-label">Nos collections</span>
+					<span class="hero-slide-index" aria-hidden="true"><span data-slide-number>01</span> / {String(slides.length).padStart(2, '0')}</span>
+				</div>
+				<span class="hero-slide-name" data-slide-name>{slides[0].label}</span>
+			</div>
+			<div class="hero-slide-actions">
+				<button type="button" class="hero-slide-action" data-slide-prev aria-label="Voir l’image précédente">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 5-7 7 7 7" /></svg>
+				</button>
+				<button type="button" class="hero-slide-action" data-slide-next aria-label="Voir l’image suivante">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m10 5 7 7-7 7" /></svg>
+				</button>
+			</div>
+			<span class="hero-slide-progress" aria-hidden="true"><span data-slide-progress></span></span>
+			<span class="sr-only" role="status" aria-live="polite" data-slide-status></span>
+		</div>
 
 		<!-- Vignette portfolio : cadrée sur le sujet et liée à la collection. -->
 		<a
@@ -171,7 +217,7 @@ const social = [
 		<div class="flex flex-col items-center gap-3">
 			{
 				slides.map((s, idx) => (
-					<button type="button" data-thumb class:list={['thumb relative h-12 w-12 rounded-full', idx === 0 && 'is-active']} aria-label={`Afficher ${s.label}`}>
+					<button type="button" data-thumb class:list={['thumb relative h-12 w-12 rounded-full', idx === 0 && 'is-active']} aria-label={`Afficher ${s.label}`} aria-pressed={idx === 0}>
 						<img src={s.webp} alt="" class="h-full w-full rounded-full object-cover object-top" loading="lazy" decoding="async" />
 						<span class="thumb-num absolute -right-1 -top-1 rounded-[4px] px-1 font-anton text-[10px] leading-[16px]">
 							{String(idx + 1).padStart(2, '0')}
@@ -190,139 +236,222 @@ const social = [
 	const root = document.getElementById('hero-cu');
 	if (root) {
 		initHeroFx(root);
-		const slides = Array.from(root.querySelectorAll<HTMLImageElement>('[data-slide]'));
+		const slides = Array.from(root.querySelectorAll<HTMLElement>('[data-slide]'));
 		const thumbs = Array.from(root.querySelectorAll<HTMLButtonElement>('[data-thumb]'));
-		const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		const controls = root.querySelector<HTMLElement>('.hero-slide-controls')!;
+		const socialBar = root.querySelector<HTMLElement>('.social-bar')!;
+		const beam = root.querySelector<HTMLElement>('.runway-beam')!;
+		const halo = root.querySelector<HTMLElement>('.runway-halo')!;
+		const floor = root.querySelector<HTMLElement>('.runway-floor')!;
+		const sweep = root.querySelector<HTMLElement>('.runway-sweep')!;
+		const pulse = root.querySelector<HTMLElement>('.runway-pulse')!;
+		const tag = root.querySelector<HTMLElement>('.runway-tag')!;
+		const lookNumber = root.querySelector<HTMLElement>('[data-runway-number]')!;
+		const tagNumber = root.querySelector<HTMLElement>('[data-runway-tag-number]')!;
+		const tagName = root.querySelector<HTMLElement>('[data-runway-tag-name]')!;
+		const progress = root.querySelector<HTMLElement>('[data-slide-progress]')!;
+		const label = root.querySelector<HTMLElement>('[data-slide-name]')!;
+		const number = root.querySelector<HTMLElement>('[data-slide-number]')!;
+		const status = root.querySelector<HTMLElement>('[data-slide-status]')!;
+		const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+		const compact = window.matchMedia('(max-width: 767px)');
+		const HOLD_SECONDS = 6.2;
 		let current = 0;
-		let timer: number | undefined;
-		let slideAnimation: gsap.core.Animation | undefined;
-		let imageDrift: gsap.core.Tween | undefined;
+		let transition: gsap.core.Timeline | undefined;
+		let hold: gsap.core.Tween | undefined;
+		let inView = true;
+		let pointerOnControls = false;
+		let focusOnControls = false;
 
-		const stop = () => {
-			if (timer !== undefined) window.clearInterval(timer);
-			timer = undefined;
-		};
+		const isPaused = () => motion.matches || document.hidden || !inView || pointerOnControls || focusOnControls;
 
-		const setThumb = (activeIndex: number, animate = false) => {
-			thumbs.forEach((thumb, index) => thumb.classList.toggle('is-active', index === activeIndex));
-			const activeThumb = thumbs[activeIndex];
-			if (animate && activeThumb && !reduceMotion) {
-				gsap.fromTo(
-					activeThumb,
-					{ scale: 0.84, transformOrigin: '50% 50%' },
-					{ scale: 1, duration: 0.6, ease: 'back.out(2.4)', clearProps: 'transform' },
-				);
+		const updateUI = (manual = false, animate = false) => {
+			const name = slides[current].dataset.label ?? '';
+			const index = String(current + 1).padStart(2, '0');
+			gsap.killTweensOf([label, number]);
+			gsap.set([label, number], { clearProps: 'all' });
+			label.textContent = name;
+			number.textContent = index;
+			tagName.textContent = name;
+			tagNumber.textContent = index;
+			lookNumber.textContent = index;
+			thumbs.forEach((thumb, thumbIndex) => {
+				thumb.classList.toggle('is-active', thumbIndex === current);
+				thumb.setAttribute('aria-pressed', String(thumbIndex === current));
+			});
+			if (animate && !motion.matches) {
+				gsap.fromTo([number, label], { opacity: 0, y: 8 }, {
+					opacity: 1, y: 0, duration: 0.55, delay: 0.3, stagger: 0.08,
+					ease: 'power3.out', clearProps: 'all',
+				});
 			}
+			// Annoncer uniquement les changements demandés par l'utilisateur, pas le défilement automatique.
+			if (manual) status.textContent = `Image ${current + 1} sur ${slides.length} : ${name}`;
 		};
 
-		const show = (requestedIndex: number) => {
-			if (!slides.length) return;
-			const nextIndex = ((requestedIndex % slides.length) + slides.length) % slides.length;
-			if (nextIndex === current) return;
-
-			slideAnimation?.kill();
-			imageDrift?.kill();
+		const resetVisuals = () => {
 			gsap.set(slides, { clearProps: 'all' });
+			gsap.set([beam, halo, floor, sweep, pulse, tag, lookNumber], { clearProps: 'all' });
+			slides.forEach((slide, index) => {
+				slide.classList.remove('is-exiting');
+				slide.classList.toggle('is-active', index === current);
+			});
+		};
 
-			const previousIndex = current;
-			const outgoing = slides[previousIndex];
-			const incoming = slides[nextIndex];
-			const forward = nextIndex > previousIndex;
-			current = nextIndex;
-			setThumb(nextIndex, true);
+		const startHold = () => {
+			if (hold) hold.kill();
+			hold = undefined;
+			gsap.set(progress, { clipPath: 'inset(0 100% 0 0)' });
+			if (motion.matches || slides.length < 2) return;
+			hold = gsap.to(progress, {
+				clipPath: 'inset(0 0% 0 0)',
+				duration: HOLD_SECONDS,
+				ease: 'none',
+				onComplete: () => {
+					hold = undefined;
+					show(current + 1, true);
+				},
+			});
+			if (isPaused()) hold.pause();
+		};
 
-			if (reduceMotion) {
-				slides.forEach((slide, index) => slide.classList.toggle('is-active', index === nextIndex));
+		const show = (requestedIndex: number, forward: boolean, manual = false) => {
+			if (slides.length < 2) return;
+			const next = ((requestedIndex % slides.length) + slides.length) % slides.length;
+			if (next === current) {
+				if (manual && !transition) startHold();
 				return;
 			}
 
-			slides.forEach((slide, index) => slide.classList.toggle('is-active', index === nextIndex));
-			gsap.set(outgoing, { opacity: 1, scale: 1, xPercent: 0, filter: 'blur(0px)', clipPath: 'inset(0)' });
+			hold?.kill();
+			hold = undefined;
+			transition?.kill();
+			transition = undefined;
+			// Un nouveau clic pendant la transition repart de l'image sélectionnée,
+			// sans laisser de masque ni de silhouette fantôme à l'écran.
+			resetVisuals();
+			const outgoing = slides[current];
+			const incoming = slides[next];
+			current = next;
+			outgoing.classList.remove('is-active');
+			outgoing.classList.add('is-exiting');
+			incoming.classList.add('is-active');
+			updateUI(manual, true);
+			gsap.set(progress, { clipPath: 'inset(0 100% 0 0)' });
+
+			if (motion.matches) {
+				resetVisuals();
+				return;
+			}
+
+			// L'ancien look recule dans l'ombre ; le suivant avance sous le projecteur.
+			// Sur téléphone, la profondeur est volontairement plus discrète.
+			const small = compact.matches;
+			const shift = small ? 4 : 9;
+			gsap.set(outgoing, { opacity: 1, scale: 1, xPercent: 0, yPercent: 0, rotateY: 0, transformOrigin: '55% 100%' });
 			gsap.set(incoming, {
-				opacity: 0,
-				scale: 1.025,
-				xPercent: forward ? 1.5 : -1.5,
-				filter: 'blur(8px)',
-				clipPath: forward ? 'inset(0 0 0 58%)' : 'inset(0 42% 0 0)',
+				opacity: 0, scale: small ? 0.94 : 0.82, xPercent: forward ? shift : -shift,
+				yPercent: small ? 4 : 11, rotateY: small ? 0 : (forward ? -10 : 10),
+				transformPerspective: 1100, transformOrigin: '55% 100%',
 			});
 
-			slideAnimation = gsap.timeline({
+			transition = gsap.timeline({
 				onComplete: () => {
-					gsap.set([outgoing, incoming], { clearProps: 'all' });
-					imageDrift = gsap.to(incoming, { scale: 1.018, duration: 4.5, ease: 'none' });
+					resetVisuals();
+					transition = undefined;
+					startHold();
 				},
 			});
-			slideAnimation
+			transition
 				.to(outgoing, {
-					opacity: 0,
-					scale: 1.015,
-					xPercent: forward ? -1 : 1,
-					filter: 'blur(3px)',
-					duration: 0.9,
-					ease: 'power2.in',
+					opacity: 0, scale: small ? 0.94 : 0.86, xPercent: forward ? -shift : shift,
+					yPercent: small ? 2 : 7, rotateY: small ? 0 : (forward ? 10 : -10),
+					duration: 0.9, ease: 'power2.in',
 				}, 0)
+				.to(incoming, { opacity: 1, duration: 0.9, ease: 'power2.inOut' }, 0.24)
 				.to(incoming, {
-					opacity: 1,
-					scale: 1,
-					xPercent: 0,
-					filter: 'blur(0px)',
-					clipPath: 'inset(0)',
-					duration: 1.35,
-					ease: 'power4.out',
-				}, 0);
+					scale: 1, xPercent: 0, yPercent: 0, rotateY: 0,
+					duration: 1.35, ease: 'power3.out',
+				}, 0.24)
+				.fromTo(beam, { opacity: 0.42, scaleX: 0.88 }, {
+					opacity: 0.95, scaleX: 1.08, duration: 0.7, ease: 'power2.out', yoyo: true, repeat: 1,
+				}, 0)
+				.fromTo(halo, { opacity: 0.35, scale: 0.94 }, {
+					opacity: 0.85, scale: 1.05, duration: 0.72, ease: 'power2.out', yoyo: true, repeat: 1,
+				}, 0)
+				.fromTo(floor, { opacity: 0.45, scale: 0.9 }, {
+					opacity: 1, scale: 1, duration: 1.2, ease: 'power2.out',
+				}, 0.2)
+				.fromTo(sweep, { opacity: 0, xPercent: forward ? -280 : 280 }, {
+					opacity: 0.75, xPercent: forward ? 280 : -280, duration: 0.65, ease: 'power2.inOut',
+				}, 0.16)
+				.to(sweep, { opacity: 0, duration: 0.35, ease: 'power2.out' }, 0.81)
+				.fromTo(pulse, { opacity: 0, scale: 0.5 }, {
+					opacity: 0.7, scale: 1, duration: 0.32, ease: 'power2.out',
+				}, 0.81)
+				.to(pulse, { opacity: 0, scale: 1.5, duration: 0.55, ease: 'power2.out' }, 1.13)
+				.fromTo(tag, { opacity: 0, y: -20, rotation: -12 }, {
+					opacity: 1, y: 0, rotation: -4, duration: 0.85, ease: 'back.out(1.2)',
+				}, 0.32)
+				.fromTo(lookNumber, { opacity: 0, xPercent: forward ? 8 : -8, scale: 1.1 }, {
+					opacity: 0.8, xPercent: 0, scale: 1, duration: 0.85, ease: 'power3.out',
+				}, 0.24);
 		};
 
-		const start = () => {
-			if (reduceMotion || slides.length < 2) return;
-			stop();
-			timer = window.setInterval(() => show((current + 1) % slides.length), 6500);
+		const syncPlayback = () => {
+			if (hold) {
+				if (isPaused()) hold.pause();
+				else hold.resume();
+			} else if (!transition && !motion.matches) {
+				startHold();
+			}
 		};
 
-		thumbs.forEach((thumb, index) =>
-			thumb.addEventListener('click', () => {
-				show(index);
-				start();
-			}),
-		);
-		root.addEventListener('mouseenter', stop);
-		root.addEventListener('mouseleave', start);
+		root.querySelector('[data-slide-prev]')?.addEventListener('click', () => show(current - 1, false, true));
+		root.querySelector('[data-slide-next]')?.addEventListener('click', () => show(current + 1, true, true));
+		thumbs.forEach((thumb, index) => thumb.addEventListener('click', () => show(index, index >= current, true)));
+		controls.addEventListener('keydown', (event) => {
+			if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+				event.preventDefault();
+				show(current + (event.key === 'ArrowRight' ? 1 : -1), event.key === 'ArrowRight', true);
+			}
+		});
 
-		// Effet 3D léger sur la carte projet
-		const card = root.querySelector<HTMLElement>('.start-card');
-		if (card && !reduceMotion) {
-			card.addEventListener('mousemove', (e) => {
-				const r = card.getBoundingClientRect();
-				const x = (e.clientX - r.left) / r.width - 0.5;
-				const y = (e.clientY - r.top) / r.height - 0.5;
-				card.style.transform = `perspective(700px) rotateX(${-y * 8}deg) rotateY(${x * 10}deg)`;
+		// L'animation continue si la souris survole simplement le hero ; elle ne
+		// s'arrête que pendant l'utilisation des commandes ou hors de l'écran.
+		for (const area of [controls, socialBar]) {
+			area.addEventListener('pointerenter', () => { pointerOnControls = true; syncPlayback(); });
+			area.addEventListener('pointerleave', () => { pointerOnControls = false; syncPlayback(); });
+			area.addEventListener('focusin', () => { focusOnControls = true; syncPlayback(); });
+			area.addEventListener('focusout', () => {
+				queueMicrotask(() => {
+					focusOnControls = [controls, socialBar].some((el) => el.contains(document.activeElement));
+					syncPlayback();
+				});
 			});
-			card.addEventListener('mouseleave', () => (card.style.transform = ''));
 		}
+		document.addEventListener('visibilitychange', syncPlayback);
+		if ('IntersectionObserver' in window) {
+			new IntersectionObserver(([entry]) => {
+				inView = entry.isIntersecting;
+				syncPlayback();
+			}, { threshold: 0.15 }).observe(root);
+		}
+		motion.addEventListener('change', () => {
+			if (motion.matches) {
+				hold?.kill();
+				hold = undefined;
+				transition?.kill();
+				transition = undefined;
+				gsap.killTweensOf([label, number]);
+				gsap.set([label, number], { clearProps: 'all' });
+				resetVisuals();
+				gsap.set(progress, { clipPath: 'inset(0 100% 0 0)' });
+			} else startHold();
+		});
 
-		// Première image : entrée cinématique, puis léger zoom continu.
-		slides.forEach((slide, index) => slide.classList.toggle('is-active', index === 0));
-		setThumb(0);
-		if (!reduceMotion && slides[0]) {
-			slideAnimation = gsap.fromTo(
-				slides[0],
-					{ opacity: 0, scale: 1.025, xPercent: 1.5, filter: 'blur(8px)', clipPath: 'inset(0 0 0 58%)' },
-					{
-						opacity: 1,
-						scale: 1,
-						xPercent: 0,
-						filter: 'blur(0px)',
-						clipPath: 'inset(0)',
-						duration: 1.55,
-						delay: 0.15,
-						ease: 'power4.out',
-						clearProps: 'all',
-						onComplete: () => {
-							imageDrift = gsap.to(slides[0], { scale: 1.018, duration: 4.5, ease: 'none' });
-						},
-					},
-			);
-		}
-		start();
+		updateUI();
+		startHold();
 	}
 </script>
 
@@ -386,9 +515,8 @@ const social = [
 		height: 100%;
 		opacity: 0;
 		transform: scale(1.025);
-		transform-origin: center center;
+		transform-origin: 55% bottom;
 		filter: saturate(1.04) contrast(1.02) drop-shadow(0 18px 36px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 24px rgba(212, 175, 55, 0.1));
-		will-change: opacity, transform, filter, clip-path;
 	}
 
 	/* Le <picture> gère l'animation, l'<img> gère le cadrage de la silhouette. */
@@ -401,9 +529,181 @@ const social = [
 	}
 
 	.hero-photo.is-active {
-		z-index: 1;
+		z-index: 3;
 		opacity: 1;
 		transform: scale(1);
+	}
+
+	.hero-photo.is-exiting {
+		z-index: 2;
+		opacity: 1;
+	}
+
+	.hero-photo.is-active,
+	.hero-photo.is-exiting {
+		will-change: transform, opacity;
+	}
+
+	/* Décor de podium : patron circulaire, faisceau et lumière au sol. */
+	.runway-stage {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		pointer-events: none;
+	}
+
+	.runway-beam {
+		position: absolute;
+		inset: 0;
+		opacity: 0.72;
+		transform-origin: 67% 0;
+		background:
+			radial-gradient(ellipse 18% 10% at 67% 0, rgba(255, 247, 218, 0.3), transparent 95%),
+			radial-gradient(ellipse 40% 82% at 67% 20%, rgba(255, 237, 190, 0.22), rgba(250, 204, 107, 0.08) 46%, transparent 78%);
+		mix-blend-mode: screen;
+	}
+
+	.runway-halo {
+		position: absolute;
+		right: 3%;
+		bottom: 11%;
+		width: 72%;
+		height: 76%;
+		opacity: 0.6;
+		border: 1px dashed rgba(255, 226, 163, 0.28);
+		border-radius: 50%;
+		background: radial-gradient(ellipse at 50% 62%, rgba(212, 175, 55, 0.12), transparent 66%);
+		box-shadow: 0 0 50px rgba(212, 175, 55, 0.07), inset 0 0 65px rgba(212, 175, 55, 0.06);
+	}
+
+	.runway-floor {
+		position: absolute;
+		right: 4%;
+		bottom: -9%;
+		width: 78%;
+		height: 33%;
+		border-radius: 50%;
+		border-top: 2px solid rgba(255, 223, 154, 0.5);
+		transform: perspective(460px) rotateX(68deg);
+		background: radial-gradient(ellipse at 50% 30%, rgba(255, 214, 121, 0.36), rgba(212, 175, 55, 0.1) 42%, transparent 72%);
+		box-shadow: 0 -12px 45px rgba(212, 175, 55, 0.12);
+	}
+
+	.runway-number {
+		position: absolute;
+		right: 7%;
+		top: 26%;
+		color: transparent;
+		font-family: 'Anton', 'Space Grotesk', sans-serif;
+		font-size: clamp(11rem, 23vw, 22rem);
+		line-height: 1;
+		letter-spacing: -0.08em;
+		-webkit-text-stroke: 1px rgba(255, 231, 170, 0.26);
+		text-shadow: 0 0 34px rgba(250, 204, 107, 0.05);
+	}
+
+	/* Un reflet traverse le look, puis l'onde du podium marque son arrivée. */
+	.runway-sweep {
+		position: absolute;
+		z-index: 4;
+		top: 0;
+		bottom: 0;
+		left: 37%;
+		width: 26%;
+		opacity: 0;
+		transform: skewX(-12deg);
+		background: linear-gradient(90deg, transparent, rgba(255, 238, 190, 0.32), transparent);
+		filter: blur(14px);
+		mix-blend-mode: screen;
+		pointer-events: none;
+	}
+
+	.runway-pulse {
+		position: absolute;
+		z-index: 4;
+		right: 15%;
+		bottom: 0;
+		width: 64%;
+		height: 19%;
+		opacity: 0;
+		border: 1px solid rgba(255, 225, 154, 0.75);
+		border-radius: 50%;
+		box-shadow: 0 0 25px rgba(250, 204, 107, 0.35);
+		pointer-events: none;
+	}
+
+	/* Étiquette de collection suspendue à côté du mannequin. */
+	.runway-tag {
+		position: absolute;
+		z-index: 5;
+		left: 27%;
+		top: 16%;
+		display: flex;
+		flex-direction: column;
+		gap: 7px;
+		width: clamp(150px, 14vw, 202px);
+		padding: 20px 16px 16px 19px;
+		transform: rotate(-4deg);
+		transform-origin: 17px 12px;
+		border: 1px solid rgba(236, 196, 113, 0.82);
+		border-radius: 4px 4px 14px 4px;
+		background: linear-gradient(145deg, #fff9e8, #e8d8b1);
+		box-shadow: 0 20px 45px rgba(0, 0, 20, 0.38), 0 0 28px rgba(250, 204, 107, 0.14);
+		color: #0e1431;
+	}
+
+	.runway-tag::before {
+		content: '';
+		position: absolute;
+		inset: 6px;
+		border: 1px dashed rgba(150, 106, 38, 0.4);
+		border-radius: 2px 2px 9px 2px;
+	}
+
+	.runway-tag::after {
+		content: '';
+		position: absolute;
+		top: -22px;
+		left: 16px;
+		height: 22px;
+		border-left: 1px dashed rgba(255, 231, 174, 0.75);
+	}
+
+	.runway-tag-pin {
+		position: absolute;
+		left: 11px;
+		top: 10px;
+		width: 9px;
+		height: 9px;
+		border: 2px solid #af873e;
+		border-radius: 50%;
+		background: #091333;
+	}
+
+	.runway-tag-eyebrow,
+	.runway-tag-signature {
+		font-size: 9px;
+		font-weight: 800;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.runway-tag-eyebrow {
+		color: #a4772a;
+	}
+
+	.runway-tag-name {
+		font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+		font-size: clamp(13px, 1.1vw, 17px);
+		font-weight: 700;
+		line-height: 1.12;
+		text-wrap: balance;
+	}
+
+	.runway-tag-signature {
+		color: #6d6a61;
+		font-size: 8px;
+		letter-spacing: 0.11em;
 	}
 
 	/* ---------- Scène photo : hauteur complète et silhouettes sans rognage ---------- */
@@ -426,6 +726,130 @@ const social = [
 		min-height: 100svh;
 		margin: 0 auto;
 		padding: 46svh 6% 3.5rem;
+	}
+
+	/* Une petite console éditoriale relie la silhouette, son nom et la navigation. */
+	.hero-slide-controls {
+		position: relative;
+		z-index: 5;
+		display: flex;
+		align-items: center;
+		align-self: flex-end;
+		gap: 8px;
+		width: min(61%, 238px);
+		min-height: 72px;
+		margin-top: 1.25rem;
+		padding: 11px 12px 15px;
+		border: 1px solid rgba(250, 204, 107, 0.38);
+		border-radius: 18px;
+		background: linear-gradient(125deg, rgba(16, 24, 54, 0.92), rgba(0, 0, 28, 0.8));
+		box-shadow: 0 20px 45px rgba(0, 0, 12, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
+	}
+
+	.hero-slide-controls::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 18px;
+		right: 18px;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, rgba(255, 231, 174, 0.9), transparent);
+	}
+
+	.hero-slide-info {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		gap: 4px;
+		min-width: 0;
+	}
+
+	.hero-slide-kicker {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 8px;
+		color: #facc6b;
+		font-size: 9px;
+		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+	.hero-slide-index {
+		color: #f7f5f0;
+		font-variant-numeric: tabular-nums;
+	}
+
+	.hero-slide-name {
+		min-width: 0;
+		overflow: hidden;
+		color: #fff;
+		font-family: 'Space Grotesk', sans-serif;
+		font-size: 12px;
+		font-weight: 600;
+		line-height: 1.2;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+
+	/* La jauge remplit les points de couture un à un, sans étirer leur motif. */
+	.hero-slide-progress {
+		position: absolute;
+		right: 12px;
+		bottom: 0;
+		left: 12px;
+		height: 5px;
+		overflow: hidden;
+		background: radial-gradient(ellipse 4px 1.5px at 4px 50%, rgba(250, 204, 107, 0.3) 98%, transparent 100%) 0 0 / 12px 5px repeat-x;
+	}
+
+	.hero-slide-progress > span {
+		display: block;
+		width: 100%;
+		height: 100%;
+		clip-path: inset(0 100% 0 0);
+		background: radial-gradient(ellipse 4px 1.5px at 4px 50%, #facc6b 98%, transparent 100%) 0 0 / 12px 5px repeat-x;
+	}
+
+	.hero-slide-actions {
+		display: flex;
+		flex-shrink: 0;
+		gap: 4px;
+	}
+
+	.hero-slide-action {
+		display: grid;
+		width: 34px;
+		height: 34px;
+		place-items: center;
+		border: 1px solid rgba(250, 204, 107, 0.48);
+		border-radius: 50%;
+		background: rgba(255, 255, 255, 0.06);
+		color: #facc6b;
+		cursor: pointer;
+		transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+	}
+
+	.hero-slide-action svg {
+		width: 16px;
+		height: 16px;
+	}
+
+	.hero-slide-action:hover {
+		transform: translateY(-2px);
+		border-color: #facc6b;
+		background: #facc6b;
+		color: #00001c;
+	}
+
+	.hero-slide-action:focus-visible,
+	.thumb:focus-visible {
+		outline: 2px solid #fff4d0;
+		outline-offset: 3px;
 	}
 
 	.hero-copy {
@@ -522,28 +946,88 @@ const social = [
 		font-weight: 600;
 	}
 
+	/* Carte de contact, dans le prolongement des finitions bleu nuit et or du hero. */
 	.start-card {
+		position: relative;
+		isolation: isolate;
 		display: flex;
 		align-items: stretch;
 		width: min(250px, 100%);
+		min-height: 110px;
 		margin-top: 2rem;
 		overflow: hidden;
-		border-radius: 14px;
+		border: 1px solid rgba(250, 204, 107, 0.48);
+		border-radius: 16px;
+		background: linear-gradient(135deg, rgba(26, 39, 79, 0.97), rgba(5, 11, 37, 0.97));
+		box-shadow: 0 20px 45px -16px rgba(0, 0, 20, 0.82), inset 0 1px rgba(255, 255, 255, 0.12);
+		backdrop-filter: blur(12px);
 		color: #fff;
 		text-decoration: none;
+		transition: border-color 0.25s ease, box-shadow 0.25s ease;
+	}
+
+	.start-card::before {
+		content: '';
+		position: absolute;
+		z-index: 2;
+		top: 0;
+		right: 9%;
+		left: 35%;
+		height: 1px;
+		background: linear-gradient(90deg, transparent, #facc6b, transparent);
+		pointer-events: none;
+	}
+
+	.start-card:hover {
+		border-color: #facc6b;
+		box-shadow: 0 24px 50px -16px rgba(0, 0, 20, 0.85), 0 0 22px rgba(250, 204, 107, 0.13);
+	}
+
+	.start-card:focus-visible {
+		outline: 2px solid #fff4d0;
+		outline-offset: 4px;
 	}
 
 	.card-img {
 		position: relative;
 		width: 76px;
-		min-height: 96px;
+		min-height: 112px;
 		align-self: stretch;
 		flex-shrink: 0;
+		overflow: hidden;
+	}
+
+	.card-img img {
+		position: absolute;
+		inset: 0;
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 42% center;
+		transition: transform 0.35s ease;
+	}
+
+	.card-img::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(90deg, rgba(5, 11, 37, 0.05), rgba(5, 11, 37, 0.2) 58%, rgba(5, 11, 37, 0.8));
+		pointer-events: none;
+	}
+
+	.start-card:hover .card-img img {
+		transform: scale(1.07);
 	}
 
 	.start-card-copy {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		justify-content: center;
+		gap: 3px;
 		min-width: 0;
-		padding: 10px 12px;
+		padding: 11px 12px;
 	}
 
 	.card-title {
@@ -552,27 +1036,59 @@ const social = [
 	}
 
 	.card-description {
-		color: rgba(255, 255, 255, 0.72);
+		color: #d4dbea;
 		font-size: 11px;
-		line-height: 1.25;
+		line-height: 1.3;
 	}
 
 	.card-action {
 		display: flex;
 		align-items: center;
-		gap: 4px;
-		margin-top: 2px;
-		color: #FACC6B;
-		font-size: 9px;
+		justify-content: space-between;
+		gap: 6px;
+		margin-top: 5px;
+		padding-top: 7px;
+		border-top: 1px solid rgba(250, 204, 107, 0.28);
+		color: #facc6b;
+		font-size: 11px;
 		font-weight: 700;
-		letter-spacing: 0.035em;
-		line-height: 1.2;
-		text-transform: uppercase;
-		white-space: nowrap;
+		line-height: 1.15;
 	}
 
-	.card-action svg {
-		flex: 0 0 auto;
+	.card-action-text {
+		min-width: 0;
+	}
+
+	.card-action-platform {
+		display: block;
+		margin-top: 2px;
+		color: #e9dfc5;
+		font-size: 10px;
+		font-weight: 600;
+		letter-spacing: 0.025em;
+	}
+
+	.card-action-arrow {
+		display: grid;
+		width: 23px;
+		height: 23px;
+		flex: 0 0 23px;
+		place-items: center;
+		border: 1px solid rgba(250, 204, 107, 0.58);
+		border-radius: 50%;
+		background: rgba(250, 204, 107, 0.07);
+		transition: transform 0.25s ease, background-color 0.25s ease, color 0.25s ease;
+	}
+
+	.card-action-arrow svg {
+		width: 12px;
+		height: 12px;
+	}
+
+	.start-card:is(:hover, :focus-visible) .card-action-arrow {
+		transform: translateX(2px);
+		background: #facc6b;
+		color: #080f30;
 	}
 
 	.circle-cta {
@@ -681,8 +1197,22 @@ const social = [
 		}
 
 		.hero-layout {
+			--portfolio-width: min(35%, 540px);
+			--project-width: 250px;
+			--bottom-row-gap: 12px;
 			display: block;
+			/* La vignette basse grandit avec l'écran : conserver de l'air sous le texte. */
+			min-height: max(100svh, clamp(820px, calc(40vw + 320px), 1000px));
 			padding: 0;
+		}
+
+		.hero-slide-controls {
+			position: absolute;
+			right: 8.7%;
+			bottom: 3%;
+			width: min(26vw, 295px);
+			min-width: 260px;
+			margin-top: 0;
 		}
 
 		.hero-copy {
@@ -717,17 +1247,18 @@ const social = [
 			line-height: 1.55;
 		}
 
+		/* Vignette et projet partagent un alignement bas et un espacement constant. */
 		.start-card {
 			position: absolute;
-			left: 50.8%;
-			top: 82.5%;
-			width: 250px;
+			left: calc(6.4% + var(--portfolio-width) + var(--bottom-row-gap));
+			bottom: 3%;
+			width: var(--project-width);
 			margin-top: 0;
 		}
 
 		.card-img {
 			width: 84px;
-			min-height: 108px;
+			min-height: 124px;
 		}
 
 		.card-title {
@@ -736,10 +1267,6 @@ const social = [
 
 		.card-description {
 			font-size: 12px;
-		}
-
-		.card-action {
-			font-size: 9.5px;
 		}
 
 		.circle-cta {
@@ -751,7 +1278,7 @@ const social = [
 			left: 6.4%;
 			top: auto;
 			bottom: 3%;
-			width: min(35%, 540px);
+			width: var(--portfolio-width);
 			margin-top: 0;
 		}
 	}
@@ -762,17 +1289,27 @@ const social = [
 			width: 56%;
 		}
 
-		.start-card {
-			left: 36%;
-			width: min(250px, 24vw);
+		.hero-slide-controls {
+			right: 4%;
 		}
 
-		.circle-cta {
+		.hero-layout {
+			--portfolio-width: min(28%, 360px);
+			--project-width: min(265px, 24vw);
+		}
+	}
+
+	/* Une étiquette flottante recouvrirait le mannequin sur tablette étroite. */
+	@media (min-width: 768px) and (max-width: 999px) {
+		.runway-tag {
 			display: none;
 		}
+	}
 
-		.secondary-img {
-			width: min(28%, 360px);
+	/* Préserver le texte et la flèche WhatsApp quand la carte se resserre. */
+	@media (min-width: 768px) and (max-width: 1100px) {
+		.start-card .card-img {
+			display: none;
 		}
 	}
 
@@ -783,7 +1320,58 @@ const social = [
 			width: 48%;
 		}
 
+		/* Sur un petit écran, privilégier le portrait plutôt qu'une silhouette
+		   entière réduite à quelques centimètres en bas de page. */
+		.hero-photo img {
+			object-fit: cover;
+			object-position: center top;
+		}
+
+		/* Éclairage simplifié : rien ne couvre le visage sur petit écran. */
+		.runway-tag,
+		.runway-number {
+			display: none;
+		}
+
+		.runway-beam {
+			opacity: 0.5;
+			background: radial-gradient(ellipse 56% 75% at 48% 15%, rgba(255, 237, 190, 0.22), transparent 78%);
+		}
+
+		.runway-halo {
+			right: -40%;
+			bottom: 18%;
+			width: 165%;
+			height: 50%;
+			opacity: 0.3;
+		}
+
+		.runway-floor {
+			right: -30%;
+			bottom: -11%;
+			width: 150%;
+			height: 28%;
+			opacity: 0.65;
+		}
+
+		.runway-pulse {
+			right: -20%;
+			width: 140%;
+		}
+
+		.hero-slide-kicker-label {
+			display: none;
+		}
+
+		.hero-slide-name {
+			display: -webkit-box;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			white-space: normal;
+		}
+
 		.hero-layout {
+			min-height: max(100svh, 830px);
 			padding: clamp(188px, 25svh, 230px) 6% clamp(4.5rem, 15svh, 7rem);
 		}
 
@@ -829,32 +1417,31 @@ const social = [
 		}
 
 		.start-card {
-			position: relative;
+			position: absolute;
 			z-index: 1;
-			width: min(250px, 54%);
-			margin-top: 1rem;
+			left: calc(6% + min(40%, 160px) + 12px);
+			bottom: 3%;
+			width: calc(88% - min(40%, 160px) - 12px);
+			min-height: 0;
+			margin-top: 0;
 		}
 
-		/* Sur mobile, on privilégie un CTA lisible à la miniature. */
+		/* Sur mobile, le message reste lisible sans miniature ni texte microscopique. */
 		.start-card .card-img {
 			display: none;
 		}
 
 		.start-card-copy {
-			padding: 10px 12px;
+			padding: 11px 12px;
 		}
 
 		.start-card .card-title {
-			font-size: 14px;
+			font-size: clamp(14px, 3.6vw, 16px);
 		}
 
-		.start-card .card-description {
-			font-size: 10px;
-		}
-
+		.start-card .card-description,
 		.start-card .card-action {
-			font-size: 8px;
-			white-space: normal;
+			font-size: 11px;
 		}
 
 		.secondary-img {
@@ -886,20 +1473,80 @@ const social = [
 		}
 	}
 
-	@media (min-width: 1280px) {
-		.start-card {
-			left: 50%;
-			width: min(250px, 17.5vw);
+	/* Sur les petits téléphones peu hauts, séparer les deux cartes de la navigation. */
+	@media (max-width: 400px) and (max-height: 700px) {
+		.hero-layout {
+			padding-bottom: calc(clamp(4.5rem, 15svh, 7rem) + 3rem);
+		}
+	}
+
+	@media (max-width: 360px) {
+		.hero-h1 {
+			font-size: clamp(1.45rem, 7.5vw, 1.65rem);
 		}
 
+		.hero-btn {
+			padding: 0 10px;
+			font-size: 11px;
+		}
+
+		.hero-slide-controls {
+			width: 64%;
+			padding-right: 9px;
+			padding-left: 9px;
+		}
+
+		.hero-slide-action {
+			width: 30px;
+			height: 30px;
+		}
+	}
+
+	@media (max-width: 380px) {
+		.hero-layout {
+			min-height: max(100svh, 860px);
+		}
+
+		.start-card-copy {
+			gap: 2px;
+			padding: 10px;
+		}
+
+		.start-card .card-description {
+			font-size: 10.5px;
+		}
+
+		.start-card .card-action {
+			margin-top: 4px;
+			padding-top: 5px;
+			font-size: 10px;
+		}
+
+		/* On garde « sur WhatsApp » lisible plutôt qu'une flèche trop serrée. */
+		.card-action-arrow {
+			display: none;
+		}
+	}
+
+	/* Dès que l'espace le permet, les trois cadres sont côte à côte sur la même ligne de base. */
+	@media (min-width: 1000px) {
 		.circle-cta {
 			display: flex;
 			position: absolute;
-			left: 68.5%;
-			top: 82.4%;
+			left: calc(6.4% + var(--portfolio-width) + var(--bottom-row-gap) + var(--project-width) + var(--bottom-row-gap));
+			bottom: 3%;
 			align-items: center;
 			justify-content: center;
-			width: clamp(56px, 4.2vw, 76px);
+		}
+	}
+
+	@media (min-width: 1280px) {
+		.hero-layout {
+			--project-width: min(270px, 21vw);
+		}
+
+		.hero-slide-controls {
+			right: 5.2%;
 		}
 
 		/*
@@ -942,29 +1589,6 @@ const social = [
 			width: 26px;
 			height: 26px;
 		}
-	}
-
-	/* ---------- Carte projet ---------- */
-	.start-card {
-		background: #000000;
-		border: 1px solid rgba(255, 255, 255, 0.06);
-		box-shadow: 0 24px 50px -18px rgba(0, 0, 0, 0.8);
-		transition: transform 0.2s ease, box-shadow 0.3s ease;
-	}
-
-	.start-card:hover {
-		box-shadow: 0 30px 60px -18px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(212, 175, 55, 0.5);
-	}
-
-	.start-card > span:first-child::after {
-		content: '';
-		position: absolute;
-		inset: 0;
-		background: linear-gradient(90deg, transparent 40%, #000 100%);
-	}
-
-	.start-card > span:first-child {
-		position: relative;
 	}
 
 	/* ---------- Bouton circulaire ---------- */
@@ -1089,11 +1713,25 @@ const social = [
 		.reveal,
 		.hero-photo,
 		.start-card,
+		.card-img img,
+		.card-action-arrow,
 		.circle-cta,
 		.social-btn,
-		.thumb {
+		.thumb,
+		.hero-slide-action {
 			animation: none;
 			transition: none;
+		}
+
+		.start-card:hover .card-img img,
+		.start-card:is(:hover, :focus-visible) .card-action-arrow {
+			transform: none;
+		}
+
+		.runway-sweep,
+		.runway-pulse,
+		.hero-slide-progress {
+			display: none;
 		}
 	}
 </style>

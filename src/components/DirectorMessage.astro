@@ -1,0 +1,457 @@
+---
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+
+// La photo remplace automatiquement le visuel d'attente après le déploiement.
+// Déposer un vrai JPEG dans public/images/mot-du-directeur.jpg.
+const photo = '/images/mot-du-directeur.jpg';
+const hasPhoto = existsSync(join(process.cwd(), 'public', 'images', 'mot-du-directeur.jpg'));
+---
+
+<section id="mot-du-directeur" class="director-section" aria-labelledby="director-title">
+	<div class="director-wrap">
+		<div class="director-panel">
+			<div class="director-content">
+				<p class="director-pill"><span aria-hidden="true"></span> Le mot du directeur</p>
+				<h2 id="director-title">Habiller des ambitions, <span>pas seulement des tenues.</span></h2>
+
+				<!-- Texte proposé : à personnaliser dès réception du mot du directeur. -->
+				<div class="director-quote-card">
+					<span class="director-quote-mark" aria-hidden="true">“</span>
+					<blockquote>Une tenue réussie ne se contente pas de vêtir : elle donne confiance, rassemble une équipe et porte une ambition.</blockquote>
+				</div>
+
+				<div class="director-copy">
+					<p>Chaque commande porte une histoire : celle d’une équipe, d’une promotion, d’une entreprise. Chez Confection Univers, nous prenons le temps d’écouter vos attentes pour transformer cette histoire en une tenue juste, durable et soignée.</p>
+					<p>Du choix des matières à la dernière finition, notre engagement reste le même : faire de chaque vêtement une source de confiance et de fierté, ici au Sénégal.</p>
+				</div>
+
+				<p class="director-signature"><span aria-hidden="true"></span> Ngagne Niang <small>Fondateur &amp; CEO · Confection Univers</small></p>
+			</div>
+
+			<figure class="director-portrait">
+				<div class="director-photo">
+					{hasPhoto ? (
+						<img src={photo} alt="Portrait de Ngagne Niang, fondateur et CEO de Confection Univers" loading="lazy" decoding="async" />
+					) : (
+						<div class="director-placeholder" role="img" aria-label="Emplacement réservé au portrait du directeur">
+							<span class="placeholder-orbit" aria-hidden="true"></span>
+							<span class="placeholder-monogram" aria-hidden="true">CU</span>
+							<span class="placeholder-caption">Portrait à venir</span>
+						</div>
+					)}
+					<span class="director-photo-shade" aria-hidden="true"></span>
+				</div>
+				<span class="director-photo-tag"><span class="tag-dot" aria-hidden="true">✦</span> Fondateur &amp; CEO · Thiès — Sénégal</span>
+				<figcaption class="director-identity">
+					<span class="identity-mark">CU <span aria-hidden="true">—</span> CONFECTION UNIVERS</span>
+					<strong>Ngagne Niang</strong>
+					<span>FONDATEUR &amp; CEO · Confection Univers</span>
+				</figcaption>
+			</figure>
+		</div>
+	</div>
+</section>
+
+<script>
+	const section = document.getElementById('mot-du-directeur');
+	if (section && 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		section.classList.add('is-ready');
+		const observer = new IntersectionObserver(([entry]) => {
+			if (entry.isIntersecting) {
+				section.classList.add('is-visible');
+				observer.disconnect();
+			}
+		}, { threshold: 0.12 });
+		observer.observe(section);
+	}
+</script>
+
+<style>
+	.director-section {
+		position: relative;
+		overflow: hidden;
+		padding: clamp(5rem, 7vw, 7rem) 0 2.5rem;
+		background: #f7f5f1;
+	}
+
+	.director-wrap {
+		width: min(100% - 2.5rem, 1280px);
+		margin-inline: auto;
+	}
+
+	.director-panel {
+		position: relative;
+		isolation: isolate;
+		display: grid;
+		grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
+		align-items: center;
+		gap: clamp(2.25rem, 4.6vw, 5rem);
+		min-height: 620px;
+		padding: clamp(1.6rem, 3.3vw, 3.3rem);
+		overflow: hidden;
+		border: 1px solid rgba(250, 204, 107, 0.19);
+		border-radius: clamp(22px, 2.3vw, 34px);
+		background: linear-gradient(125deg, #111937 0%, #050a2e 49%, #00001c 100%);
+		box-shadow: 0 38px 75px -48px rgba(0, 0, 28, 0.5);
+		color: #fff;
+	}
+
+	.director-panel::before {
+		content: '';
+		position: absolute;
+		z-index: -1;
+		inset: 0;
+		background:
+			radial-gradient(circle at 14% 17%, rgba(250, 204, 107, 0.13), transparent 35%),
+			radial-gradient(circle at 94% 85%, rgba(55, 76, 161, 0.22), transparent 39%);
+		pointer-events: none;
+	}
+
+	.director-content {
+		grid-column: 2;
+		grid-row: 1;
+		min-width: 0;
+		padding-block: 0.5rem;
+	}
+
+	.director-pill {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.55rem;
+		margin: 0 0 1.45rem;
+		padding: 0.5rem 0.8rem;
+		border: 1px solid rgba(250, 204, 107, 0.34);
+		border-radius: 99px;
+		background: rgba(255, 255, 255, 0.03);
+		color: #f1e6ca;
+		font-size: 10px;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.director-pill > span {
+		width: 5px;
+		height: 5px;
+		border-radius: 50%;
+		background: #facc6b;
+		box-shadow: 0 0 12px #facc6b;
+	}
+
+	.director-content h2 {
+		max-width: 14ch;
+		margin: 0;
+		font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+		font-size: clamp(2.55rem, 4.1vw, 4.55rem);
+		font-weight: 700;
+		line-height: 1.02;
+		letter-spacing: -0.065em;
+		text-transform: uppercase;
+		text-wrap: balance;
+	}
+
+	.director-content h2 span {
+		color: #facc6b;
+	}
+
+	.director-quote-card {
+		position: relative;
+		margin: clamp(1.65rem, 2.7vw, 2.75rem) 0 1.55rem;
+		padding: 1.6rem 1.7rem 1.4rem;
+		border: 1px solid rgba(250, 204, 107, 0.22);
+		border-radius: 18px;
+		background: rgba(255, 255, 255, 0.045);
+		box-shadow: inset 0 1px rgba(255, 255, 255, 0.045);
+	}
+
+	.director-quote-mark {
+		position: absolute;
+		top: -16px;
+		left: -10px;
+		display: grid;
+		width: 32px;
+		height: 32px;
+		place-items: center;
+		border-radius: 50%;
+		background: #facc6b;
+		color: #00001c;
+		font-family: Georgia, serif;
+		font-size: 27px;
+		line-height: 1;
+		padding-top: 8px;
+	}
+
+	.director-quote-card blockquote {
+		margin: 0;
+		color: #f9f5eb;
+		font-family: 'Marcellus', Georgia, serif;
+		font-size: clamp(1rem, 1.35vw, 1.3rem);
+		line-height: 1.55;
+	}
+
+	.director-copy {
+		max-width: 42rem;
+		color: #b8c1d8;
+		font-size: clamp(0.9rem, 0.98vw, 1rem);
+		line-height: 1.72;
+	}
+
+	.director-copy p {
+		margin: 0 0 0.95rem;
+	}
+
+	.director-signature {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 0.65rem;
+		margin: 1.15rem 0 0;
+		color: #f7e3ac;
+		font-family: 'Marcellus', Georgia, serif;
+		font-size: 1.05rem;
+	}
+
+	.director-signature > span {
+		width: 2rem;
+		height: 1px;
+		background: #c89e54;
+	}
+
+	.director-signature small {
+		color: #a8b2cb;
+		font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+		font-size: 0.65rem;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+	}
+
+	.director-portrait {
+		position: relative;
+		grid-column: 1;
+		grid-row: 1;
+		width: min(100%, 430px);
+		margin: 0;
+	}
+
+	.director-photo {
+		position: relative;
+		aspect-ratio: 0.78;
+		overflow: hidden;
+		border: 1px solid rgba(250, 204, 107, 0.48);
+		border-radius: 21px;
+		background: #14214c;
+	}
+
+	.director-photo img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center 24%;
+	}
+
+	.director-photo-shade {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		background: linear-gradient(180deg, transparent 58%, rgba(0, 0, 28, 0.38) 100%);
+	}
+
+	.director-placeholder {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		background:
+			radial-gradient(circle at 49% 41%, rgba(250, 204, 107, 0.22), transparent 44%),
+			linear-gradient(135deg, #18285b, #00001c 85%);
+	}
+
+	.placeholder-orbit {
+		position: absolute;
+		width: 74%;
+		aspect-ratio: 1;
+		border: 1px dashed rgba(250, 204, 107, 0.3);
+		border-radius: 50%;
+	}
+
+	.placeholder-monogram {
+		position: relative;
+		margin-right: 0.12em;
+		color: #f0d9a4;
+		font-family: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+		font-size: clamp(6rem, 11vw, 9rem);
+		font-weight: 600;
+		letter-spacing: -0.18em;
+		line-height: 1;
+	}
+
+	.placeholder-caption {
+		position: relative;
+		margin-top: 0.75rem;
+		color: #facc6b;
+		font-size: 10px;
+		font-weight: 700;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+	}
+
+	.director-photo-tag {
+		position: absolute;
+		z-index: 2;
+		top: -11px;
+		left: -10px;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		max-width: calc(100% + 10px);
+		padding: 0.55rem 0.75rem;
+		border-radius: 999px;
+		background: #fffaf0;
+		box-shadow: 0 7px 22px rgba(0, 0, 28, 0.22);
+		color: #142046;
+		font-size: 10px;
+		font-weight: 700;
+		white-space: nowrap;
+	}
+
+	.tag-dot {
+		display: grid;
+		flex: none;
+		width: 1.1rem;
+		height: 1.1rem;
+		place-items: center;
+		border-radius: 50%;
+		background: #facc6b;
+		color: #00001c;
+		font-size: 0.65rem;
+	}
+
+	.director-identity {
+		position: absolute;
+		z-index: 2;
+		right: 16px;
+		bottom: 16px;
+		left: 16px;
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+		padding: 1rem 1.2rem;
+		border: 1px solid rgba(255, 255, 255, 0.75);
+		border-radius: 16px;
+		background: rgba(255, 250, 240, 0.97);
+		box-shadow: 0 14px 35px rgba(0, 0, 20, 0.17);
+		color: #111b3b;
+	}
+
+	.identity-mark {
+		color: #a47936;
+		font-size: 9px;
+		font-weight: 800;
+		letter-spacing: 0.08em;
+	}
+
+	.identity-mark span {
+		margin-inline: 0.2rem;
+	}
+
+	.director-identity strong {
+		font-size: 1rem;
+		font-weight: 700;
+	}
+
+	.director-identity > span:last-child {
+		color: #626c80;
+		font-size: 0.75rem;
+	}
+
+	@media (min-width: 901px) {
+		.director-section.is-ready .director-content,
+		.director-section.is-ready .director-portrait {
+			opacity: 0;
+			transform: translateY(22px);
+			transition: opacity 0.75s ease, transform 0.75s ease;
+		}
+
+		.director-section.is-visible .director-content,
+		.director-section.is-visible .director-portrait {
+			opacity: 1;
+			transform: translateY(0);
+		}
+
+		.director-section.is-visible .director-content {
+			transition-delay: 0.1s;
+		}
+	}
+
+	@media (max-width: 900px) {
+		.director-panel {
+			grid-template-columns: 1fr;
+			gap: 2.5rem;
+			min-height: 0;
+		}
+
+		.director-content,
+		.director-portrait {
+			grid-column: 1;
+			grid-row: auto;
+		}
+
+		.director-content h2 {
+			max-width: 16ch;
+		}
+
+		.director-portrait {
+			width: min(100%, 440px);
+			margin-inline: auto;
+		}
+	}
+
+	@media (max-width: 599px) {
+		.director-section {
+			padding: 5.5rem 0 1.4rem;
+		}
+
+		.director-panel {
+			gap: 2.75rem;
+			padding: 1.45rem;
+		}
+
+		.director-content h2 {
+			font-size: clamp(2.35rem, 10vw, 3.3rem);
+		}
+
+		.director-quote-card {
+			padding: 1.4rem 1.15rem 1.2rem;
+		}
+
+		.director-copy {
+			font-size: 0.9rem;
+		}
+
+		.director-signature {
+			font-size: 0.95rem;
+		}
+
+		.director-identity {
+			right: 12px;
+			bottom: 12px;
+			left: 12px;
+			padding: 0.85rem 1rem;
+		}
+
+		.director-photo-tag {
+			font-size: 9px;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.director-content,
+		.director-portrait {
+			transition: none !important;
+		}
+	}
+</style>
