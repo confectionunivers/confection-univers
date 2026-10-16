@@ -114,25 +114,6 @@ const social = [
 
 <script>
 	const header = document.getElementById('site-header');
-	const logo = header?.querySelector('.logo-chip-header');
-	const preloader = document.getElementById('preloader');
-
-	// Lancer le fil d'or seulement quand le logo est visible, après le préchargement.
-	if (logo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-		const drawThread = () => logo.classList.add('is-stitched');
-		if (preloader?.parentNode && 'MutationObserver' in window) {
-			const observer = new MutationObserver(() => {
-				if (!preloader.isConnected) {
-					observer.disconnect();
-					drawThread();
-				}
-			});
-			observer.observe(preloader.parentNode, { childList: true });
-		} else {
-			drawThread();
-		}
-	}
-
 	const toggle = document.getElementById('menu-toggle');
 	const drawer = document.getElementById('menu-drawer');
 	const overlay = document.getElementById('menu-overlay');
@@ -329,59 +310,11 @@ const social = [
 	}
 
 	.logo-chip-header {
-		position: relative;
-		isolation: isolate;
 		padding: 7px 14px;
 		border: 1px solid rgba(212, 175, 55, 0.5);
 		border-radius: 16px;
 		background: #ffffff;
 		box-shadow: 0 12px 28px rgba(0, 0, 28, 0.27), 0 0 0 3px rgba(255, 255, 255, 0.22);
-	}
-
-	/* Une petite ligne de points de couture se dessine sous la signature. */
-	.logo-chip-header::before {
-		content: '';
-		position: absolute;
-		bottom: 4px;
-		left: 31%;
-		right: 10%;
-		height: 2px;
-		border-radius: 99px;
-		background: repeating-linear-gradient(90deg, #c28e28 0 8px, transparent 8px 11px);
-		box-shadow: 0 0 5px rgba(194, 142, 40, 0.2);
-		transform: scaleX(0);
-		transform-origin: left center;
-		pointer-events: none;
-	}
-
-	.logo-chip-header.is-stitched::before {
-		animation: logo-thread-draw 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
-	}
-
-	/* L'aiguille s'éclaire au survol sans masquer le monogramme. */
-	.logo-chip-header::after {
-		content: '';
-		position: absolute;
-		left: 25%;
-		top: 16%;
-		width: 17px;
-		height: 17px;
-		border-radius: 50%;
-		background: radial-gradient(circle, rgba(255, 223, 128, 0.85), rgba(230, 171, 49, 0.3) 40%, transparent 75%);
-		opacity: 0;
-		transform: scale(0.7);
-		pointer-events: none;
-		transition: opacity 0.35s ease, transform 0.45s ease;
-	}
-
-	.logo-chip-header:is(:hover, :focus-visible)::after {
-		opacity: 0.75;
-		transform: scale(1.45);
-	}
-
-	@keyframes logo-thread-draw {
-		from { transform: scaleX(0); }
-		to { transform: scaleX(1); }
 	}
 
 	.logo-chip-header:focus-visible {
@@ -397,17 +330,6 @@ const social = [
 
 		.logo-chip-header img {
 			height: 42px;
-		}
-
-		.logo-chip-header::before {
-			bottom: 3px;
-			height: 1px;
-			opacity: 0.8;
-		}
-
-		.logo-chip-header::after {
-			width: 12px;
-			height: 12px;
 		}
 	}
 
@@ -685,16 +607,6 @@ const social = [
 	}
 
 	@media (prefers-reduced-motion: reduce) {
-		.logo-chip-header::before,
-		.logo-chip-header.is-stitched::before {
-			transform: none;
-			animation: none;
-		}
-
-		.logo-chip-header::after {
-			display: none;
-		}
-
 		.menu-drawer,
 		.menu-overlay,
 		.pill,
