@@ -63,10 +63,10 @@ export const SITE = {
 
 	/* --- NAP : Name, Address, Phone (cohérence = SEO local) --- */
 	address: {
-		street: 'Keur Massamba Geuye 2, Lot 129 Bis',
+		street: 'Keur Massamba Gueye 2, Lot 129 Bis',
 		city: 'Thiès',
 		region: 'Thiès',
-		postalCode: '',
+		postalCode: '30000',
 		country: 'SN',
 		countryLabel: 'Sénégal',
 	},
@@ -76,7 +76,8 @@ export const SITE = {
 	 * coordonnées GPS exactes relevées sur Google Maps (clic droit sur
 	 * l'épingle → copier) pour que le schéma LocalBusiness soit juste.
 	 */
-	geo: { latitude: 14.7919, longitude: -16.9253 },
+	/* Coordenées relevées sur la fiche Google Maps de l'atelier (oct. 2026). */
+	geo: { latitude: 14.7763152, longitude: -16.9404293 },
 	phone: '+221772960776',
 	phoneDisplay: '+221 77 296 07 76',
 	whatsapp: 'https://wa.me/221772960776',
@@ -92,7 +93,14 @@ export const SITE = {
 	 *   [{ days: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '08:00', closes: '18:00' },
 	 *    { days: ['Saturday'], opens: '09:00', closes: '15:00' }]
 	 */
-	openingHours: null as null | { days: string[]; opens: string; closes: string }[],
+	/* Atelier disponible 24h/24, du lundi au lundi (confirmé le 2026-10-17). */
+	openingHours: [
+		{
+			days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+			opens: '00:00',
+			closes: '23:59',
+		},
+	] as null | { days: string[]; opens: string; closes: string }[],
 
 	/** « Sur devis » : le site n'affiche pas de tarif public. */
 	priceRange: 'Sur devis',
@@ -106,7 +114,9 @@ export const SITE = {
 		// Profils confirmés (page Facebook à ID professionnel, profil
 		// LinkedIn personnel ; pas les pseudo-URL déduites).
 		facebook: 'https://www.facebook.com/profile.php?id=61566072221581',
-		instagram: 'https://instagram.com/confectionunivers',
+		/* Pas de compte Instagram (décision de l'entreprise, 2026-10-17) :
+		   aucun lien émis ni dans l'UI ni dans sameAs. */
+		instagram: '',
 		linkedin: 'https://www.linkedin.com/in/confection-univers-undefined-45b4ba405/',
 		// Profils confirmés par l'entreprise le 2026-10-17.
 		youtube: 'https://www.youtube.com/@ConfectionUnivers',
@@ -117,8 +127,24 @@ export const SITE = {
 	/** Zones desservies — alimente `areaServed` du schéma LocalBusiness. */
 	areaServed: ['Sénégal', 'Dakar', 'Thiès', 'Saint-Louis', 'Touba', 'Mbour', 'Ziguinchor'],
 
-	/** Année de création approximative (le site indique « environ cinq ans »). */
-	foundingDate: '2020',
+	/**
+	 * Date d'immatriculation au RCCM (avis d'immatriculation ANSD du 15/07/2026).
+	 * L'expérience de l'atelier est antérieure, mais l'entité légale date de 2026.
+	 */
+	foundingDate: '2026-07-08',
+
+	/**
+	 * Identité légale — avis d'immatriculation RCCM (document de création,
+	 * ANSD Thiès, 15/07/2026). Alimente les mentions légales.
+	 */
+	legal: {
+		form: 'Société à responsabilité limitée (SARL)',
+		capital: '300 000 FCFA',
+		rccm: 'SN THS 2026 B 4293',
+		rccmDate: '08/07/2026',
+		ninea: '013229382',
+		commune: 'Keur Moussa',
+	},
 
 	/**
 	 * Mesure & Search Console — à remplir depuis vos comptes (README §Mesure).
@@ -132,8 +158,9 @@ export const SITE = {
 	 */
 	measurement: {
 		googleSiteVerification: '',
-		analyticsProvider: '' as '' | 'ga4' | 'plausible',
-		analyticsId: '',
+		analyticsProvider: 'ga4' as '' | 'ga4' | 'plausible',
+		/* Identifiant de mesure GA4 créé le 2026-10-17 (propriété « Confection Univers »). */
+		analyticsId: 'G-15HFGN7MMM',
 	},
 
 	images: {
