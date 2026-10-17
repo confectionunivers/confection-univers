@@ -101,10 +101,11 @@ export const SITE = {
 	 * fait perdre le bénéfice du graphe de connaissance.
 	 */
 	social: {
-		facebook: 'https://facebook.com/confectionunivers',
+		// Page confirmée (ID de page professionnel, pas le pseudo).
+		facebook: 'https://www.facebook.com/profile.php?id=61566072221581',
 		instagram: 'https://instagram.com/confectionunivers',
 		linkedin: 'https://linkedin.com/company/confectionunivers',
-		// Chaîne confirmée par l'entreprise le 2026-10-17.
+		// Profils confirmés par l'entreprise le 2026-10-17.
 		youtube: 'https://www.youtube.com/@ConfectionUnivers',
 	},
 
