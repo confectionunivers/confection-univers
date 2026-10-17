@@ -328,6 +328,8 @@ const STATIC_ROUTES: SiteRoute[] = [
 	{ path: '/about', lastmod: '2026-10-17', changefreq: 'yearly', priority: 0.7, images: ['/images/about-facility.jpg'] },
 	{ path: '/contact', lastmod: '2026-10-17', changefreq: 'yearly', priority: 0.8 },
 	{ path: '/blog', lastmod: '2026-10-17', changefreq: 'weekly', priority: 0.8 },
+	{ path: '/mentions-legales', lastmod: '2026-10-17', changefreq: 'yearly', priority: 0.3 },
+	{ path: '/confidentialite', lastmod: '2026-10-17', changefreq: 'yearly', priority: 0.3 },
 	// Redirection Astro → jamais dans le sitemap.
 	{ path: '/projects', exclude: true },
 ];

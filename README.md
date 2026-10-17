@@ -149,6 +149,7 @@ Ces valeurs sont déclarées dans `src/lib/seo.ts` et conditionnent le SEO local
 3. **URL des profils sociaux** (`SITE.social`) : un `sameAs` vers un profil
    inexistant annule le bénéfice du graphe de connaissance ;
 4. année de création (`SITE.foundingDate`, déduite de « environ cinq ans »).
+5. **numéro RCCM / NINEA** : à ajouter aux mentions légales dès qu'il est fourni.
 
 ---
 

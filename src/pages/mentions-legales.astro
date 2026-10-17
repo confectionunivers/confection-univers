@@ -1,0 +1,101 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { SITE } from '../lib/seo';
+
+const trail = [
+	{ name: 'Accueil', path: '/' },
+	{ name: 'Mentions légales', path: '/mentions-legales' },
+];
+---
+
+<Layout
+	title="Mentions légales — Confection Univers"
+	description="Mentions légales du site confectionunivers.com : éditeur, directeur de la publication, hébergement, propriété intellectuelle et droit applicable."
+	path="/mentions-legales"
+	breadcrumbs={trail}
+>
+	<main class="relative">
+		<Navbar />
+
+		<section class="relative overflow-hidden pb-20 pt-32 md:pt-40">
+			<div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_70%_50%_at_100%_0%,rgba(198,161,95,0.12),transparent_55%)]"></div>
+			<div class="mx-auto max-w-3xl px-6">
+				<Breadcrumbs trail={trail} />
+				<h1 class="font-display text-4xl font-bold tracking-tight text-foreground md:text-5xl">Mentions légales</h1>
+				<p class="mt-4 text-sm text-[#F9FAFB]/60">Dernière mise à jour : 17 octobre 2026.</p>
+
+				<div class="prose-legale mt-10 space-y-8 text-[15px] leading-relaxed text-[#F9FAFB]/80">
+					<section>
+						<h2 class="mb-3 font-display text-xl font-semibold text-[#FACC6B]">1. Éditeur du site</h2>
+						<p>
+							Le site <strong>confectionunivers.com</strong> est édité par <strong>{SITE.name}</strong>,
+							atelier de confection industrielle dont le siège est situé
+							{SITE.address.street}, {SITE.address.city}, {SITE.address.countryLabel}.<br />
+							Téléphone : <a class="underline decoration-[#FACC6B]/50 underline-offset-4 hover:text-[#FACC6B]" href={`tel:${SITE.phone}`}>{SITE.phoneDisplay}</a> ·
+							Courriel : <a class="underline decoration-[#FACC6B]/50 underline-offset-4 hover:text-[#FACC6B]" href={`mailto:${SITE.email}`}>{SITE.email}</a>
+						</p>
+						<p class="mt-3">
+							Directeur de la publication : Ngagne Niang, fondateur et CEO.
+						</p>
+					</section>
+
+					<section>
+						<h2 class="mb-3 font-display text-xl font-semibold text-[#FACC6B]">2. Hébergement</h2>
+						<p>
+							Le site est hébergé par <strong>Vercel Inc.</strong>, 440 N Barranca Ave #4133, Santa Clara,
+							Californie 95054, États-Unis (infrastructure de diffusion mondiale, dont des points de
+							présence en Europe). Le domaine <em>confectionunivers.com</em> est enregistré auprès de
+							Vercel Domains.
+						</p>
+					</section>
+
+					<section>
+						<h2 class="mb-3 font-display text-xl font-semibold text-[#FACC6B]">3. Propriété intellectuelle</h2>
+						<p>
+							L'ensemble des contenus du site (textes, photographies, visuels, logo, charte graphique,
+							code source) est la propriété exclusive de Confection Univers, sauf mention contraire.
+							Toute reproduction, représentation, modification ou exploitation, totale ou partielle,
+							sans autorisation écrite préalable est interdite. Les demandes d'autorisation peuvent
+							être adressées à {SITE.email}.
+						</p>
+					</section>
+
+					<section>
+						<h2 class="mb-3 font-display text-xl font-semibold text-[#FACC6B]">4. Responsabilité</h2>
+						<p>
+							Les informations publiées sont fournies à titre indicatif et ne constituent pas une
+							offre contractuelle : chaque commande fait l'objet d'un devis spécifique (quantités,
+							tissus, personnalisation, délais). Confection Univers ne peut être tenue responsable
+							des dommages indirects résultant de l'utilisation du site, ni de l'indisponibilité
+							temporaire de celui-ci. Les liens sortants (réseaux sociaux, WhatsApp) pointent vers
+							des services tiers régis par leurs propres conditions.
+						</p>
+					</section>
+
+					<section>
+						<h2 class="mb-3 font-display text-xl font-semibold text-[#FACC6B]">5. Données personnelles</h2>
+						<p>
+							Le traitement des données collectées via le formulaire de devis est décrit dans la
+							<a class="underline decoration-[#FACC6B]/50 underline-offset-4 hover:text-[#FACC6B]" href="/confidentialite">politique de confidentialité</a>,
+							conforme à la loi n° 2008-12 du 25 janvier 2008 sur la protection des données à
+							caractère personnel au Sénégal.
+						</p>
+					</section>
+
+					<section>
+						<h2 class="mb-3 font-display text-xl font-semibold text-[#FACC6B]">6. Droit applicable</h2>
+						<p>
+							Le site est soumis au droit sénégalais. Tout différend relatif à son utilisation relève
+							des juridictions compétentes de Thiès, sauf disposition d'ordre public contraire.
+						</p>
+					</section>
+				</div>
+			</div>
+		</section>
+
+		<Footer />
+	</main>
+</Layout>
