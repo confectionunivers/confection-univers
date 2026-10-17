@@ -21,7 +21,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		title: 'Comment choisir les uniformes scolaires idéaux pour votre établissement',
 		excerpt: 'Découvrez les critères essentiels pour sélectionner des uniformes scolaires confortables, durables et adaptés à l\'image de votre établissement.',
 		content: `
-			<p>Le choix des uniformes scolaires est une décision importante qui impacte non seulement l\'image de votre établissement, mais aussi le confort et le bien-être des élèves. Dans cet article, nous vous guidons à travers les critères essentiels à considérer.</p>
+			<p>Le choix des uniformes scolaires est une décision importante qui impacte non seulement l\'image de votre établissement, mais aussi le confort et le bien-être des élèves. À l'approche de la rentrée 2026-2027, nous vous guidons à travers les critères essentiels à considérer.</p>
 			
 			<h2>1. Le confort avant tout</h2>
 			<p>Les élèves passent de longues heures en classe. Il est donc crucial de choisir des tissus respirants, doux et adaptés aux différentes saisons. Le coton de haute qualité et les mélanges polyester-coton sont souvent les meilleurs choix.</p>
@@ -39,17 +39,17 @@ export const BLOG_POSTS: BlogPost[] = [
 		`,
 		image: '/images/blog-uniformes-scolaires.jpg',
 		category: 'Uniformes Scolaires',
-		date: '15 Janvier 2025',
+		date: '28 Août 2026',
 		author: 'Marie Diop',
 		seoTitle: 'Choisir les uniformes scolaires : 4 critères clés',
 		slug: 'choisir-uniformes-scolaires'
 	},
 	{
 		id: '2',
-		title: 'Les tendances 2025 en tenues de travail professionnelles',
-		excerpt: 'Explorez les dernières tendances en matière de tenues professionnelles pour donner à votre entreprise une image moderne et cohérente.',
+		title: 'Les tendances 2026 en tenues de travail professionnelles',
+		excerpt: 'Panorama des tendances 2026 en tenues professionnelles : coupes revisitées, couleurs subtiles, confort et durabilité, pour une image d\'entreprise moderne et cohérente.',
 		content: `
-			<p>L\'année 2025 apporte son lot de nouveautés dans le monde des tenues professionnelles. Découvrez les tendances qui marquent cette année et comment les intégrer dans votre entreprise.</p>
+			<p>L\'année 2026 confirme une exigence simple : des tenues qui portent l\'image de l\'entreprise sans rien céder au confort de celles et ceux qui les portent. Découvrez les tendances qui marquent cette année et comment les intégrer dans votre entreprise.</p>
 			
 			<h2>1. Le retour du classique revisité</h2>
 			<p>Les classiques comme le costume noir ou la chemise blanche reviennent en force, mais avec des coupes plus modernes et des tissus plus techniques.</p>
@@ -67,10 +67,10 @@ export const BLOG_POSTS: BlogPost[] = [
 		`,
 		image: '/images/blog-tenues-travail.jpg',
 		category: 'Tenues de Travail',
-		date: '10 Janvier 2025',
+		date: '12 Septembre 2026',
 		author: 'Jean-Pierre Ndiaye',
-		seoTitle: 'Tenues de travail : les tendances 2025',
-		slug: 'tendances-2025-tenues-travail'
+		seoTitle: 'Tenues de travail : les tendances 2026',
+		slug: 'tendances-2026-tenues-travail'
 	},
 	{
 		id: '3',
@@ -105,7 +105,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		title: 'Organiser une cérémonie de graduation réussie',
 		excerpt: 'Tous les éléments à prévoir pour une cérémonie de graduation mémorable, des toges académiques à l\'organisation logistique.',
 		content: `
-			<p>Une cérémonie de graduation est un moment important dans la vie d\'un étudiant. Voici comment l\'organiser pour qu\'elle soit inoubliable.</p>
+			<p>Une cérémonie de graduation est un moment important dans la vie d\'un étudiant — et un marqueur fort pour toute une promotion. Voici comment organiser celle de 2026 pour qu\'elle soit inoubliable.</p>
 			
 			<h2>1. Les toges académiques</h2>
 			<p>Le choix des toges et des accessoires académiques est crucial. Elles doivent être de qualité, confortables et respecter les traditions académiques.</p>
@@ -123,7 +123,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		`,
 		image: '/images/blog-graduation.jpg',
 		category: 'Événements & Cérémonies',
-		date: '28 Décembre 2024',
+		date: '25 Septembre 2026',
 		author: 'Amadou Diallo',
 		seoTitle: 'Organiser une cérémonie de graduation : le guide',
 		slug: 'organiser-ceremonie-graduation'

@@ -55,7 +55,7 @@ const routeOf = (file) => {
 	return `/${rel}`.replace(/\/+$/, '') || '/';
 };
 
-const REDIRECT_ROUTES = new Set(['/projects']); // redirection Astro, pas de contenu
+const REDIRECT_ROUTES = new Set(['/projects', '/blog/tendances-2025-tenues-travail']); // redirection Astro, pas de contenu
 
 const files = walk(DIST);
 const routes = new Set(files.map(routeOf));
@@ -83,7 +83,7 @@ for (const file of files) {
 	if (!title && !isRedirect) errors.push(`${route} : <title> absent`);
 	else {
 		if (!isRedirect && (title.length < 30 || title.length > 60)) warnings.push(`${route} : title ${title.length} c. (cible 30–60) — « ${title} »`);
-		titles.set(title, [...(titles.get(title) ?? []), route]);
+		if (!isRedirect) titles.set(title, [...(titles.get(title) ?? []), route]);
 	}
 
 	/* --- 2. description --- */
@@ -92,7 +92,7 @@ for (const file of files) {
 	else {
 		if (!isRedirect && (desc.length < 70 || desc.length > 160)) warnings.push(`${route} : description ${desc.length} c. (cible 70–160)`);
 		const key = desc.slice(0, 80);
-		descriptions.set(key, [...(descriptions.get(key) ?? []), route]);
+		if (!isRedirect) descriptions.set(key, [...(descriptions.get(key) ?? []), route]);
 	}
 
 	/* --- 3. canonical --- */

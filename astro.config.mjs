@@ -20,6 +20,8 @@ export default defineConfig({
     },
     redirects: {
         '/projects': '/services',
+        /** Article rafraîchi en 2026 : l'ancienne URL reste servie. */
+        '/blog/tendances-2025-tenues-travail': '/blog/tendances-2026-tenues-travail',
     },
     integrations: [react()],
     vite: {

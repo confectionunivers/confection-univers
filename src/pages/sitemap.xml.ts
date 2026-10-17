@@ -19,7 +19,11 @@ import { BLOG_POSTS } from '../lib/blog-data';
 import { SITE, absoluteUrl, canonicalUrl, frenchDateToIso } from '../lib/seo';
 
 export const GET: APIRoute = async () => {
-	const today = new Date().toISOString().slice(0, 10);
+	// Routes hors blog : date de la dernière refonte réelle du contenu/SEO.
+	// Une date fixe est un signal fiable : un lastmod qui change à chaque
+	// build sans changement de contenu finit par être ignoré par Google.
+	const SITE_LASTMOD = '2026-10-17';
+	const today = SITE_LASTMOD;
 
 	const routes: SiteRoute[] = [...getAllRoutes()];
 
