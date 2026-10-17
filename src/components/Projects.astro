@@ -311,8 +311,8 @@ const PROJECTS = [
 </section>
 
 <script>
-	if (typeof window !== 'undefined') {
-		const init = () => {
+	/* Les scripts modules Astro sont différés : le DOM est prêt. */
+	const init = () => {
 			/* Les points et le compteur n'existent que pour la section
 			   « Nos savoir-faire » : on ne les montre que la dedans. */
 			const savoirFaire = document.getElementById('savoir-faire');
@@ -379,8 +379,5 @@ const PROJECTS = [
 			}
 		};
 
-		const ready = () => init();
-		if (document.readyState !== 'loading') ready();
-		else window.addEventListener('DOMContentLoaded', ready, { once: true });
-	}
+	init();
 </script>
