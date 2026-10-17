@@ -101,10 +101,11 @@ export const SITE = {
 	 * fait perdre le bénéfice du graphe de connaissance.
 	 */
 	social: {
-		// Page confirmée (ID de page professionnel, pas le pseudo).
+		// Profils confirmés (page Facebook à ID professionnel, profil
+		// LinkedIn personnel ; pas les pseudo-URL déduites).
 		facebook: 'https://www.facebook.com/profile.php?id=61566072221581',
 		instagram: 'https://instagram.com/confectionunivers',
-		linkedin: 'https://linkedin.com/company/confectionunivers',
+		linkedin: 'https://www.linkedin.com/in/confection-univers-undefined-45b4ba405/',
 		// Profils confirmés par l'entreprise le 2026-10-17.
 		youtube: 'https://www.youtube.com/@ConfectionUnivers',
 		// Profil confirmé par l'entreprise le 2026-10-17.
