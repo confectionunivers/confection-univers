@@ -120,6 +120,15 @@ const PROJECTS = [
 		flex-direction: column;
 		gap: 1rem;
 		z-index: 50;
+		/* Asservis a la section « Nos savoir-faire » : invisibles ailleurs. */
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.35s ease, visibility 0.35s ease;
+	}
+
+	.nav-dots.is-inview {
+		opacity: 1;
+		visibility: visible;
 	}
 
 	@media (max-width: 1023px) {
@@ -161,6 +170,12 @@ const PROJECTS = [
 		letter-spacing: 0.1em;
 		z-index: 50;
 		opacity: 0.6;
+		visibility: hidden;
+		transition: opacity 0.35s ease, visibility 0.35s ease;
+	}
+
+	.slide-counter.is-inview {
+		visibility: visible;
 	}
 
 	@media (max-width: 1023px) {
@@ -194,7 +209,7 @@ const PROJECTS = [
 	}
 </style>
 
-<section style="background: var(--bg);">
+<section id="savoir-faire" style="background: var(--bg);">
 	<!-- Background Glow -->
 	<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
 		<div class="absolute left-[10%] top-[20%] w-[500px] h-[500px] rounded-full" style="background: radial-gradient(ellipse, rgba(245, 181, 68, 0.08) 0%, transparent 70%); filter: blur(120px);"></div>
@@ -298,6 +313,24 @@ const PROJECTS = [
 <script>
 	if (typeof window !== 'undefined') {
 		const init = () => {
+			/* Les points et le compteur n'existent que pour la section
+			   « Nos savoir-faire » : on ne les montre que la dedans. */
+			const savoirFaire = document.getElementById('savoir-faire');
+			const dotsWrap = document.querySelector<HTMLElement>('.nav-dots');
+			const counterWrap = document.querySelector<HTMLElement>('.slide-counter');
+			if (savoirFaire && (dotsWrap || counterWrap)) {
+				const observer = new IntersectionObserver(
+					(entries) => {
+						for (const entry of entries) {
+							dotsWrap?.classList.toggle('is-inview', entry.isIntersecting);
+							counterWrap?.classList.toggle('is-inview', entry.isIntersecting);
+						}
+					},
+					{ threshold: 0.12 },
+				);
+				observer.observe(savoirFaire);
+			}
+
 			const slides = Array.from(document.querySelectorAll('.slide'));
 			const dots = Array.from(document.querySelectorAll('.nav-dot'));
 			const currentSlideEl = document.getElementById('current-slide');
