@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
-import { contactPageSchema } from '../lib/seo';
+import { contactPageSchema, SITE } from '../lib/seo';
 
 const trail = [
 	{ name: 'Accueil', path: '/' },
@@ -104,7 +104,7 @@ const trail = [
 					<!-- Contact Form -->
 					<div class="rounded-3xl border border-ink/10 bg-surface/10 p-8 md:p-12">
 						<h3 class="font-display text-2xl font-semibold text-ink mb-8">Demande de devis</h3>
-						<form id="contact-form" class="space-y-6">
+						<form id="contact-form" class="space-y-6" data-whatsapp={SITE.whatsappDigits}>
 							<div class="grid gap-6 md:grid-cols-2">
 								<div class="space-y-2">
 									<label for="name" class="text-sm font-semibold uppercase tracking-widest text-ink/60">
@@ -264,7 +264,8 @@ const trail = [
 				'',
 				`Message : ${data.message}`,
 			].filter(Boolean).join('\n');
-			const whatsappUrl = `https://wa.me/221772960776?${new URLSearchParams({ text: contactMessage }).toString()}`;
+			const waDigits = form?.dataset.whatsapp || '221772960776';
+			const whatsappUrl = `https://wa.me/${waDigits}?${new URLSearchParams({ text: contactMessage }).toString()}`;
 			
 
 			/* Site 100 % statique : aucun backend d'e-mails. La demande part

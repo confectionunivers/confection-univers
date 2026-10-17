@@ -1,7 +1,6 @@
 /**
  * Animations de scroll pour le reste du site : titres de section qui montent,
  * cartes qui apparaissent en cascade. Le hero a ses propres effets (hero-fx.ts).
- * Les éléments déjà animés par RevealOnScroll sont ignorés pour éviter les doublons.
  * Désactivé si l'utilisateur préfère moins de mouvement.
  */
 import { isLightMode } from './perf';
@@ -19,7 +18,7 @@ export async function initSiteFx() {
 
 	// Titres de section : montée douce à l'entrée dans l'écran
 	gsap.utils.toArray<HTMLElement>(`${SCOPE} h2`).forEach((el) => {
-		if (el.closest('.reveal-on-scroll, [data-no-fx]')) return;
+		if (el.closest('[data-no-fx]')) return;
 		gsap.from(el, {
 			y: 40,
 			opacity: 0,
@@ -34,7 +33,7 @@ export async function initSiteFx() {
 	gsap.utils.toArray<HTMLElement>(`${SCOPE} .grid`).forEach((grid) => {
 		const items = Array.from(grid.children).filter(
 			(c): c is HTMLElement =>
-				c instanceof HTMLElement && !c.closest('.reveal-on-scroll') && !c.hasAttribute('data-no-fx'),
+				c instanceof HTMLElement && !c.hasAttribute('data-no-fx'),
 		);
 		if (!items.length) return;
 		gsap.from(items, {

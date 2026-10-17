@@ -80,6 +80,8 @@ export const SITE = {
 	phone: '+221772960776',
 	phoneDisplay: '+221 77 296 07 76',
 	whatsapp: 'https://wa.me/221772960776',
+	/** Numéro sans préfixe — construit les liens wa.me avec message pré-rempli. */
+	whatsappDigits: '221772960776',
 	email: 'confectionunivers@gmail.com',
 
 	/**

@@ -1,4 +1,5 @@
 ---
+import { SITE } from '../lib/seo';
 /**
  * Section contact premium — le formulaire compose une demande structurée
  * et l'ouvre dans WhatsApp (site 100 % statique : aucun serveur d'e-mails).
@@ -7,7 +8,7 @@
 const contact = {
 	phoneDisplay: '+221 77 296 07 76',
 	phoneTel: '+221772960776',
-	whatsappDigits: '221772960776',
+	whatsappDigits: SITE.whatsappDigits,
 	email: 'confectionunivers@gmail.com',
 	addressLines: ['Keur Massamba Geuye 2, Lot 129 Bis', 'Thiès', 'Sénégal'],
 };
@@ -156,6 +157,7 @@ const whatsappUrl = `https://wa.me/${contact.whatsappDigits}?text=${encodeURICom
 				<form
 					id="contact-form"
 					class="mt-8 flex flex-col gap-5 md:gap-6"
+					data-whatsapp={SITE.whatsappDigits}
 				>
 
 					<div class="grid gap-5 sm:grid-cols-2">
@@ -352,7 +354,7 @@ const whatsappUrl = `https://wa.me/${contact.whatsappDigits}?text=${encodeURICom
 				/* Site 100 % statique : pas de backend d'e-mails. La demande part
 				   donc dans WhatsApp, déjà structurée — le canal que l'atelier
 				   utilise réellement avec ses clients. */
-				const WHATSAPP_DIGITS = '221772960776'; // même numéro que src/lib/seo.ts
+				const WHATSAPP_DIGITS = form.dataset.whatsapp || '221772960776'; // rendu depuis SITE.whatsappDigits
 				const formData = new FormData(form);
 				const select = form.querySelector<HTMLSelectElement>('#contact-clothing-type');
 				const typeLabel = select?.selectedOptions[0]?.textContent?.trim() ?? '';
