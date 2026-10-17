@@ -132,8 +132,9 @@ export const SITE = {
 	 */
 	measurement: {
 		googleSiteVerification: '',
-		analyticsProvider: '' as '' | 'ga4' | 'plausible',
-		analyticsId: '',
+		analyticsProvider: 'ga4' as '' | 'ga4' | 'plausible',
+		/* Identifiant de mesure GA4 créé le 2026-10-17 (propriété « Confection Univers »). */
+		analyticsId: 'G-15HFGN7MMM',
 	},
 
 	images: {
