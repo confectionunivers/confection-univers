@@ -144,10 +144,11 @@ Ces valeurs sont déclarées dans `src/lib/seo.ts` et conditionnent le SEO local
 
 1. **Coordonnées GPS exactes** de l'atelier (`SITE.geo`, actuellement le centre
    de Thiès) ;
-2. **Horaires d'ouverture** (`SITE.openingHours`, désactivés tant que non
-   confirmés) ;
-3. **URL des profils sociaux** (`SITE.social`) : un `sameAs` vers un profil
-   inexistant annule le bénéfice du graphe de connaissance ;
+2. ~~Horaires d'ouverture~~ — **confirmé** : atelier disponible 24h/24 du lundi
+   au lundi (`SITE.openingHours` actif, émis dans le JSON-LD) ;
+3. **URL des profils sociaux** (`SITE.social`) : Facebook, YouTube, TikTok et
+   LinkedIn confirmés ; ~~Instagram~~ — **pas de compte**, lien retiré du site
+   et de `sameAs` le 2026-10-17 ;
 4. ~~année de création~~ — **confirmé** : immatriculation RCCM du 08/07/2026
    (`SITE.foundingDate = '2026-07-08'`, avis d'immatriculation ANSD du 15/07/2026) ;
 5. ~~numéro RCCM / NINEA~~ — **confirmé** : RCCM `SN THS 2026 B 4293`,
