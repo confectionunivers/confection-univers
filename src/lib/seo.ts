@@ -107,6 +107,8 @@ export const SITE = {
 		linkedin: 'https://linkedin.com/company/confectionunivers',
 		// Profils confirmés par l'entreprise le 2026-10-17.
 		youtube: 'https://www.youtube.com/@ConfectionUnivers',
+		// Profil confirmé par l'entreprise le 2026-10-17.
+		tiktok: 'https://www.tiktok.com/@confectionunivers',
 	},
 
 	/** Zones desservies — alimente `areaServed` du schéma LocalBusiness. */
