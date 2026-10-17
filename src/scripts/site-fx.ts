@@ -4,15 +4,18 @@
  * Les éléments déjà animés par RevealOnScroll sont ignorés pour éviter les doublons.
  * Désactivé si l'utilisateur préfère moins de mouvement.
  */
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import { isLightMode } from './perf';
 
 const SCOPE = 'section:not(#hero-cu)';
 
-export function initSiteFx() {
+export async function initSiteFx() {
 	if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+	/* Mobile / connexion lente : ni téléchargement de gsap, ni calculs. */
+	if (isLightMode()) return;
+
+	const { default: gsap } = await import('gsap');
+	const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+	gsap.registerPlugin(ScrollTrigger);
 
 	// Titres de section : montée douce à l'entrée dans l'écran
 	gsap.utils.toArray<HTMLElement>(`${SCOPE} h2`).forEach((el) => {

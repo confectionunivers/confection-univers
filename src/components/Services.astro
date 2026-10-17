@@ -141,42 +141,50 @@ const services = [
 </section>
 
 <script>
-	import gsap from 'gsap';
+	import { isLightMode } from '../scripts/perf';
 
-	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	/* Mode léger : décorations coupées, contenu intact. */
+	if (isLightMode()) {
+		/* rien : les éléments restent visibles sans animation */
+	} else {
+		const { default: gsap } = await import('gsap');
 
-	const servicesGrid = document.querySelector('.services-grid');
-	if (servicesGrid) {
-		const serviceCards = servicesGrid.querySelectorAll<HTMLElement>('.service-card');
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-		if (prefersReducedMotion) {
-			// Les cartes restent visibles même si leurs animations sont désactivées.
-			serviceCards.forEach((card) => card.classList.remove('opacity-0'));
-		} else {
-			serviceCards.forEach((card) => {
-				card.style.opacity = '0';
-				card.style.transform = 'translateY(30px) rotate(-2deg)';
-			});
+		const servicesGrid = document.querySelector('.services-grid');
+		if (servicesGrid) {
+			const serviceCards = servicesGrid.querySelectorAll<HTMLElement>('.service-card');
 
-			const observer = new IntersectionObserver((entries) => {
-				entries.forEach((entry) => {
-					if (!entry.isIntersecting) return;
-
-					gsap.to(serviceCards, {
-						opacity: 1,
-						y: 0,
-						rotation: 0,
-						duration: 0.7,
-						ease: 'back.out(1.1)',
-						stagger: 0.1,
-						clearProps: 'transform',
-					});
-					observer.unobserve(entry.target);
+			if (prefersReducedMotion) {
+				// Les cartes restent visibles même si leurs animations sont désactivées.
+				serviceCards.forEach((card) => card.classList.remove('opacity-0'));
+			} else {
+				serviceCards.forEach((card) => {
+					card.style.opacity = '0';
+					card.style.transform = 'translateY(30px) rotate(-2deg)';
 				});
-			}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
-			observer.observe(servicesGrid);
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach((entry) => {
+						if (!entry.isIntersecting) return;
+
+						gsap.to(serviceCards, {
+							opacity: 1,
+							y: 0,
+							rotation: 0,
+							duration: 0.7,
+							ease: 'back.out(1.1)',
+							stagger: 0.1,
+							clearProps: 'transform',
+						});
+						observer.unobserve(entry.target);
+					});
+				}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+				observer.observe(servicesGrid);
+			}
 		}
+
 	}
 </script>
 	</div>

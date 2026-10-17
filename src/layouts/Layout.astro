@@ -203,22 +203,28 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow, max-image-
 		<ScrollProgress />
 		<slot />
 		<script>
-			import Lenis from '@studio-freight/lenis';
+			import { isLightMode } from '../scripts/perf';
 			import { initSiteFx } from '../scripts/site-fx';
 
-			const lenis = new Lenis({
-				lerp: 0.1,
-				duration: 1.5,
-				smoothWheel: true,
-			});
+			/* Smooth-scroll : agréable sur desktop, mais sur mobile il coûte
+			   plus (saccades, batterie, CPU) qu'il n'apporte : chargé
+			   seulement sur grand écran et connexion normale. */
+			if (!isLightMode()) {
+				const { default: Lenis } = await import('@studio-freight/lenis');
+				const lenis = new Lenis({
+					lerp: 0.1,
+					duration: 1.5,
+					smoothWheel: true,
+				});
 
-			document.documentElement.classList.add('lenis', 'lenis-smooth');
+				document.documentElement.classList.add('lenis', 'lenis-smooth');
 
-			function raf(time) {
-				lenis.raf(time);
+				function raf(time) {
+					lenis.raf(time);
+					requestAnimationFrame(raf);
+				}
 				requestAnimationFrame(raf);
 			}
-			requestAnimationFrame(raf);
 
 			initSiteFx();
 		</script>
