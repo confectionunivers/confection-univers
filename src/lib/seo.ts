@@ -66,7 +66,7 @@ export const SITE = {
 		street: 'Keur Massamba Gueye 2, Lot 129 Bis',
 		city: 'Thiès',
 		region: 'Thiès',
-		postalCode: '',
+		postalCode: '30000',
 		country: 'SN',
 		countryLabel: 'Sénégal',
 	},
@@ -76,7 +76,8 @@ export const SITE = {
 	 * coordonnées GPS exactes relevées sur Google Maps (clic droit sur
 	 * l'épingle → copier) pour que le schéma LocalBusiness soit juste.
 	 */
-	geo: { latitude: 14.7919, longitude: -16.9253 },
+	/* Coordenées relevées sur la fiche Google Maps de l'atelier (oct. 2026). */
+	geo: { latitude: 14.7763152, longitude: -16.9404293 },
 	phone: '+221772960776',
 	phoneDisplay: '+221 77 296 07 76',
 	whatsapp: 'https://wa.me/221772960776',

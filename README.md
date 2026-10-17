@@ -142,8 +142,8 @@ Le head du `Layout` émet alors automatiquement le script correspondant
 
 Ces valeurs sont déclarées dans `src/lib/seo.ts` et conditionnent le SEO local :
 
-1. **Coordonnées GPS exactes** de l'atelier (`SITE.geo`, actuellement le centre
-   de Thiès) ;
+1. ~~Coordonnées GPS exactes~~ — **confirmé** : 14.7763152, -16.9404293
+   (fiche Google Maps de l'atelier, lot 129 bis, Keur Massamba Gueye, Thiès 30000) ;
 2. ~~Horaires d'ouverture~~ — **confirmé** : atelier disponible 24h/24 du lundi
    au lundi (`SITE.openingHours` actif, émis dans le JSON-LD) ;
 3. **URL des profils sociaux** (`SITE.social`) : Facebook, YouTube, TikTok et
