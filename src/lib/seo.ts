@@ -63,7 +63,7 @@ export const SITE = {
 
 	/* --- NAP : Name, Address, Phone (cohérence = SEO local) --- */
 	address: {
-		street: 'Keur Massamba Geuye 2, Lot 129 Bis',
+		street: 'Keur Massamba Gueye 2, Lot 129 Bis',
 		city: 'Thiès',
 		region: 'Thiès',
 		postalCode: '',
@@ -117,8 +117,24 @@ export const SITE = {
 	/** Zones desservies — alimente `areaServed` du schéma LocalBusiness. */
 	areaServed: ['Sénégal', 'Dakar', 'Thiès', 'Saint-Louis', 'Touba', 'Mbour', 'Ziguinchor'],
 
-	/** Année de création approximative (le site indique « environ cinq ans »). */
-	foundingDate: '2020',
+	/**
+	 * Date d'immatriculation au RCCM (avis d'immatriculation ANSD du 15/07/2026).
+	 * L'expérience de l'atelier est antérieure, mais l'entité légale date de 2026.
+	 */
+	foundingDate: '2026-07-08',
+
+	/**
+	 * Identité légale — avis d'immatriculation RCCM (document de création,
+	 * ANSD Thiès, 15/07/2026). Alimente les mentions légales.
+	 */
+	legal: {
+		form: 'Société à responsabilité limitée (SARL)',
+		capital: '300 000 FCFA',
+		rccm: 'SN THS 2026 B 4293',
+		rccmDate: '08/07/2026',
+		ninea: '013229382',
+		commune: 'Keur Moussa',
+	},
 
 	/**
 	 * Mesure & Search Console — à remplir depuis vos comptes (README §Mesure).
