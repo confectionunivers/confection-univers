@@ -1,4 +1,5 @@
 ---
+import Picture from './Picture.astro';
 ---
 
 <section class="scroll-mt-24 premium-section py-32 border-0">
@@ -25,10 +26,12 @@
 			<div
 				class="group relative overflow-hidden rounded-[1.5rem] border border-[rgba(250,204,107,0.25)] p-6 md:p-8 w-full h-full transform-gpu transition-all duration-300 will-change-transform hover:-translate-y-1 hover:shadow-2xl hover:border-[rgba(250,204,107,0.4)] md:col-span-8 premium-card"
 			>
-				<img
+				<Picture
 					src="/images/respect-delais.jpg"
 					class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-90"
 					alt=""
+					sizes="100vw"
+					loading="lazy"
 				/>
 
 				<div class="absolute right-0 top-0 flex h-full w-1/2 items-center justify-center opacity-10 transition-opacity duration-700 group-hover:opacity-20">
@@ -81,10 +84,12 @@
 			<div
 				class="group relative flex flex-col justify-between overflow-hidden rounded-[1.5rem] border border-[rgba(250,204,107,0.25)] p-6 md:p-8 w-full h-full transform-gpu transition-all duration-300 will-change-transform hover:-translate-y-1 hover:shadow-2xl hover:border-[rgba(250,204,107,0.4)] md:col-span-4 premium-card-secondary"
 			>
-				<img
+				<Picture
 					src="/images/qualite-tissu.jpg"
 					class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-90"
 					alt=""
+					sizes="100vw"
+					loading="lazy"
 				/>
 
 				<div class="relative z-20">
@@ -106,10 +111,12 @@
 			<div
 				class="group relative flex flex-col justify-between overflow-hidden rounded-[1.5rem] border border-[rgba(250,204,107,0.25)] p-6 md:p-8 w-full h-full transform-gpu transition-all duration-300 will-change-transform hover:-translate-y-1 hover:shadow-2xl hover:border-[rgba(250,204,107,0.4)] md:col-span-5 premium-card"
 			>
-				<img
+				<Picture
 					src="/images/finitions-professionnelles.jpg"
 					class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-90"
 					alt=""
+					sizes="100vw"
+					loading="lazy"
 				/>
 
 				<div class="relative z-20">
@@ -145,10 +152,12 @@
 			<div
 				class="group relative overflow-hidden rounded-[1.5rem] bg-[rgba(0,0,0,0.3)] transform-gpu transition-all duration-300 will-change-transform hover:-translate-y-1 hover:shadow-2xl hover:border-[rgba(250,204,107,0.3)] border border-[rgba(250,204,107,0.15)] md:col-span-3 premium-card-secondary"
 			>
-				<img
+				<Picture
 					src="/images/blouse-medicale.jpg"
 					class="h-full w-full object-contain transition-transform duration-700 hover:scale-110"
-					alt="Inspection du contrôle qualité"
+					alt="Inspection du contrôle qualité d'un tissu dans l'atelier Confection Univers"
+					sizes="(min-width: 1024px) 50vw, 100vw"
+					loading="lazy"
 				/>
 			</div>
 		</div>

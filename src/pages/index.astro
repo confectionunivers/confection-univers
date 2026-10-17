@@ -18,10 +18,18 @@ import Pricing from '../components/Pricing.astro';
 import FAQ from '../components/FAQ.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
+import { faqSchema, SITE } from '../lib/seo';
+import { FAQ_ITEMS } from '../lib/faq-data';
 ---
 
-<Layout title="Confection Univers | Entreprise de confection industrielle au Sénégal" description="Confection Univers est une entreprise de confection industrielle spécialisée dans les uniformes scolaires, toges de graduation, tenues de travail, tenues de sport, uniformes d'écoles coraniques et blouses médicales au Sénégal.">
-	<main class="border-0" style="border: none !important; outline: none !important; box-shadow: none !important;">
+<Layout
+	title="Confection Univers | Confection industrielle au Sénégal"
+	description="Confection Univers, atelier industriel à Thiès (Sénégal) : uniformes scolaires, toges de graduation, blouses médicales, tenues de travail et de sport sur mesure."
+	path="/"
+	keywords={[...SITE.keywords]}
+	schema={faqSchema(FAQ_ITEMS)}
+>
+	<main id="main-content" tabindex="-1" class="border-0" style="border: none !important; outline: none !important; box-shadow: none !important;">
 		<Preloader />
 		<Navbar />
 		<HeroCreative />

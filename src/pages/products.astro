@@ -2,55 +2,27 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Picture from '../components/Picture.astro';
+import { itemListSchema } from '../lib/seo';
 
-const productCategories = [
-	{
-		name: 'Toges de graduation',
-		description: 'Tenues académiques prestigieuses pour les cérémonies de remise des diplômes',
-		image: '/images/toge-graduation.jpg',
-		count: 12,
-		slug: 'toges-graduation',
-	},
-	{
-		name: 'Uniformes scolaires',
-		description: 'Uniformes complets pour écoles primaires, collèges et lycées',
-		image: '/images/uniforme-scolaire.jpg',
-		count: 25,
-		slug: 'uniformes-scolaires',
-	},
-	{
-		name: 'Tenues médicales',
-		description: 'Blouses, tuniques et tenues pour professionnels de santé',
-		image: '/images/blouse-medicale.jpg',
-		count: 18,
-		slug: 'tenues-medicales',
-	},
-	{
-		name: 'Tenue de Travail',
-		description: 'Vêtements professionnels pour entreprises et industries',
-		image: '/images/tenue-travail.jpg',
-		count: 15,
-		slug: 'tenue-travail',
-	},
-	{
-		name: 'Costumes africains',
-		description: 'Tenues traditionnelles en bazin, wax et tissus locaux',
-		image: '/images/costume-africain.jpg',
-		count: 30,
-		slug: 'costumes-africains',
-	},
-	{
-		name: 'Tenues de sport',
-		description: 'Maillots et équipements pour clubs et associations sportives',
-		image: '/images/tenue-sport.jpg',
-		count: 20,
-		slug: 'tenues-sport',
-	},
+const trail = [
+	{ name: 'Accueil', path: '/' },
+	{ name: 'Produits', path: '/products' },
 ];
+
+// Source de vérité partagée avec le sitemap et les schémas JSON-LD.
+import { PRODUCT_CATEGORIES as productCategories } from '../lib/site-data';
 ---
 
-<Layout title="Produits | Confection Univers" description="Catalogue Confection Univers : uniformes scolaires, toges de graduation, blouses médicales, tenues de travail, tenues de sport et uniformes d'écoles coraniques confectionnés au Sénégal.">
-	<main class="relative">
+<Layout
+	title="Produits par catégorie : gammes Confection Univers"
+	description="Parcourez nos gammes de vêtements professionnels : toges, uniformes scolaires, tenues médicales, tenues de travail, costumes africains et tenues de sport."
+	path="/products"
+	breadcrumbs={trail}
+	schema={itemListSchema('Gammes de produits', productCategories.map((c) => ({ name: c.name, url: `/collections/${c.slug}`, image: c.image })))}
+>
+	<main id="main-content" tabindex="-1" class="relative">
 		<Navbar />
 		
 		<!-- Hero Section -->
@@ -59,6 +31,7 @@ const productCategories = [
 			<div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_85%_60%_at_100%_0%,rgba(198,161,95,0.14),transparent_55%),radial-gradient(ellipse_70%_50%_at_0%_100%,rgba(0,0,42,0.08),transparent_50%)]"></div>
 			
 			<div class="mx-auto max-w-7xl px-6">
+				<Breadcrumbs trail={trail} />
 				<p class="mb-5 text-[11px] font-semibold uppercase tracking-[0.38em] text-primary md:text-xs">
 					Nos produits
 				</p>
@@ -92,14 +65,12 @@ const productCategories = [
 						productCategories.map((category, i) => (
 							<article class="group relative overflow-hidden rounded-3xl border border-ink/10 bg-paper shadow-[0_8px_32px_-12px_rgba(5,10,20,0.12)] transition duration-500 ease-out will-change-transform hover:-translate-y-2 hover:border-primary/30 hover:shadow-[0_20px_60px_-16px_rgba(5,10,20,0.2)]">
 								<div class="relative aspect-[16/10] overflow-hidden bg-surface/40">
-									<img
+									<Picture
 										src={category.image}
-										alt={category.name}
+										alt={`Gamme ${category.name} confectionnée par Confection Univers au Sénégal`}
 										class="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-105"
-										width="800"
-										height="500"
+										sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
 										loading={i < 3 ? 'eager' : 'lazy'}
-										decoding="async"
 									/>
 									<div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/20 to-transparent opacity-80"></div>
 									<div class="absolute bottom-6 left-6 right-6">

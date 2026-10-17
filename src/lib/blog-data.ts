@@ -1,6 +1,11 @@
 export interface BlogPost {
 	id: string;
 	title: string;
+	/**
+	 * `<title>` SERP et og:title : version courte (< 55 c.) calée sur le
+	 * mot-clé visé. Le `title` complet reste le H1 visible de l'article.
+	 */
+	seoTitle?: string;
 	excerpt: string;
 	content: string;
 	image: string;
@@ -16,7 +21,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		title: 'Comment choisir les uniformes scolaires idéaux pour votre établissement',
 		excerpt: 'Découvrez les critères essentiels pour sélectionner des uniformes scolaires confortables, durables et adaptés à l\'image de votre établissement.',
 		content: `
-			<p>Le choix des uniformes scolaires est une décision importante qui impacte non seulement l\'image de votre établissement, mais aussi le confort et le bien-être des élèves. Dans cet article, nous vous guidons à travers les critères essentiels à considérer.</p>
+			<p>Le choix des uniformes scolaires est une décision importante qui impacte non seulement l\'image de votre établissement, mais aussi le confort et le bien-être des élèves. À l'approche de la rentrée 2026-2027, nous vous guidons à travers les critères essentiels à considérer.</p>
 			
 			<h2>1. Le confort avant tout</h2>
 			<p>Les élèves passent de longues heures en classe. Il est donc crucial de choisir des tissus respirants, doux et adaptés aux différentes saisons. Le coton de haute qualité et les mélanges polyester-coton sont souvent les meilleurs choix.</p>
@@ -34,16 +39,17 @@ export const BLOG_POSTS: BlogPost[] = [
 		`,
 		image: '/images/blog-uniformes-scolaires.jpg',
 		category: 'Uniformes Scolaires',
-		date: '15 Janvier 2025',
+		date: '28 Août 2026',
 		author: 'Marie Diop',
+		seoTitle: 'Choisir les uniformes scolaires : 4 critères clés',
 		slug: 'choisir-uniformes-scolaires'
 	},
 	{
 		id: '2',
-		title: 'Les tendances 2025 en tenues de travail professionnelles',
-		excerpt: 'Explorez les dernières tendances en matière de tenues professionnelles pour donner à votre entreprise une image moderne et cohérente.',
+		title: 'Les tendances 2026 en tenues de travail professionnelles',
+		excerpt: 'Panorama des tendances 2026 en tenues professionnelles : coupes revisitées, couleurs subtiles, confort et durabilité, pour une image d\'entreprise moderne et cohérente.',
 		content: `
-			<p>L\'année 2025 apporte son lot de nouveautés dans le monde des tenues professionnelles. Découvrez les tendances qui marquent cette année et comment les intégrer dans votre entreprise.</p>
+			<p>L\'année 2026 confirme une exigence simple : des tenues qui portent l\'image de l\'entreprise sans rien céder au confort de celles et ceux qui les portent. Découvrez les tendances qui marquent cette année et comment les intégrer dans votre entreprise.</p>
 			
 			<h2>1. Le retour du classique revisité</h2>
 			<p>Les classiques comme le costume noir ou la chemise blanche reviennent en force, mais avec des coupes plus modernes et des tissus plus techniques.</p>
@@ -61,9 +67,10 @@ export const BLOG_POSTS: BlogPost[] = [
 		`,
 		image: '/images/blog-tenues-travail.jpg',
 		category: 'Tenues de Travail',
-		date: '10 Janvier 2025',
+		date: '12 Septembre 2026',
 		author: 'Jean-Pierre Ndiaye',
-		slug: 'tendances-2025-tenues-travail'
+		seoTitle: 'Tenues de travail : les tendances 2026',
+		slug: 'tendances-2026-tenues-travail'
 	},
 	{
 		id: '3',
@@ -90,6 +97,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Médical & Santé',
 		date: '5 Janvier 2025',
 		author: 'Dr. Fatou Sow',
+		seoTitle: 'Tenues médicales : pourquoi la qualité compte',
 		slug: 'importance-tenues-medicales'
 	},
 	{
@@ -97,7 +105,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		title: 'Organiser une cérémonie de graduation réussie',
 		excerpt: 'Tous les éléments à prévoir pour une cérémonie de graduation mémorable, des toges académiques à l\'organisation logistique.',
 		content: `
-			<p>Une cérémonie de graduation est un moment important dans la vie d\'un étudiant. Voici comment l\'organiser pour qu\'elle soit inoubliable.</p>
+			<p>Une cérémonie de graduation est un moment important dans la vie d\'un étudiant — et un marqueur fort pour toute une promotion. Voici comment organiser celle de 2026 pour qu\'elle soit inoubliable.</p>
 			
 			<h2>1. Les toges académiques</h2>
 			<p>Le choix des toges et des accessoires académiques est crucial. Elles doivent être de qualité, confortables et respecter les traditions académiques.</p>
@@ -115,8 +123,9 @@ export const BLOG_POSTS: BlogPost[] = [
 		`,
 		image: '/images/blog-graduation.jpg',
 		category: 'Événements & Cérémonies',
-		date: '28 Décembre 2024',
+		date: '25 Septembre 2026',
 		author: 'Amadou Diallo',
+		seoTitle: 'Organiser une cérémonie de graduation : le guide',
 		slug: 'organiser-ceremonie-graduation'
 	},
 	{
@@ -147,6 +156,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Conseils & Tendances',
 		date: '20 Décembre 2024',
 		author: 'Sophie Mendy',
+		seoTitle: 'Entretenir ses tenues professionnelles : conseils',
 		slug: 'conseils-entretien-tenues'
 	},
 	{
@@ -174,6 +184,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Conseils & Tendances',
 		date: '15 Décembre 2024',
 		author: 'Moussa Ba',
+		seoTitle: 'Uniformes personnalisés : souder ses équipes',
 		slug: 'personnaliser-uniformes-esprit-equipe'
 	},
 	{
@@ -201,6 +212,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Services',
 		date: '1 Janvier 2025',
 		author: 'Adja D. Faye',
+		seoTitle: 'Toges de graduation : tradition et excellence',
 		slug: 'toges-graduation'
 	},
 	{
@@ -228,6 +240,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Services',
 		date: '2 Janvier 2025',
 		author: 'Adja D. Faye',
+		seoTitle: 'Uniformes scolaires : confort et durabilité',
 		slug: 'uniformes-scolaires'
 	},
 	{
@@ -255,6 +268,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Services',
 		date: '3 Janvier 2025',
 		author: 'Adja D. Faye',
+		seoTitle: 'Tenues d\'entreprise : image et confort',
 		slug: 'tenues-entreprise'
 	},
 	{
@@ -282,6 +296,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Services',
 		date: '4 Janvier 2025',
 		author: 'Adja D. Faye',
+		seoTitle: 'Kimonos : tradition et élégance de cérémonie',
 		slug: 'kimonos'
 	},
 	{
@@ -309,6 +324,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Services',
 		date: '5 Janvier 2025',
 		author: 'Adja D. Faye',
+		seoTitle: 'Blouses médicales : confort et praticité',
 		slug: 'blouses-medicales'
 	},
 	{
@@ -336,12 +352,13 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Services',
 		date: '6 Janvier 2025',
 		author: 'Adja D. Faye',
+		seoTitle: 'Toges d\'avocat : prestige et professionnalisme',
 		slug: 'toges-avocat'
 	},
 	{
 		id: '13',
 		title: 'Costumes africains : Patrimoine et élégance sénégalaise',
-		excerpt: 'Costumes africains traditionnels et contemporains inspirés du patrimoine sénégalais, utilisant tissus locaux comme bazin et wax.',
+		excerpt: "Bazin, wax et coupes contemporaines : comment l'atelier Confection Univers réinterprète le costume africain pour cérémonies et grandes occasions.",
 		content: `
 			<p>Les costumes africains sont une célébration de notre patrimoine culturel. Confection Univers crée des costumes traditionnels et contemporains qui allient héritage sénégalais et modernité.</p>
 			
@@ -363,6 +380,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Services',
 		date: '7 Janvier 2025',
 		author: 'Adja D. Faye',
+		seoTitle: 'Costumes africains : patrimoine et élégance',
 		slug: 'costumes-africains'
 	},
 	{
@@ -390,6 +408,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Services',
 		date: '8 Janvier 2025',
 		author: 'Adja D. Faye',
+		seoTitle: 'Tenues de sport : performance et confort',
 		slug: 'tenues-sport'
 	}
 ];

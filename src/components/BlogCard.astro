@@ -1,4 +1,6 @@
 ---
+import Picture from './Picture.astro';
+
 interface Props {
 	title: string;
 	excerpt: string;
@@ -29,7 +31,13 @@ const searchText = [title, excerpt, category, author].join(' ').toLocaleLowerCas
 >
 	<!-- Image Pleine Largeur (Full-Bleed) -->
 	<div class="w-full h-[380px] relative bg-[#00001C]">
-		<img src={image} class="w-full h-full object-cover" alt={title} />
+		<Picture
+			src={image}
+			alt={`${title} — article du blog Confection Univers`}
+			class="w-full h-full object-cover"
+			sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+			loading="lazy"
+		/>
 	</div>
 	<!-- Contenu sous l'image avec padding -->
 	<div class="p-8">

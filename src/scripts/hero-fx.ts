@@ -4,13 +4,17 @@
  * gérés par le script du composant HeroCreative.
  * Désactivé si l'utilisateur préfère moins de mouvement.
  */
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { isLightMode } from './perf';
 
-gsap.registerPlugin(ScrollTrigger);
-
-export function initHeroFx(root: HTMLElement) {
+export async function initHeroFx(root: HTMLElement) {
 	if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+	/* Mobile / connexion lente : parallaxe et entrées coupées ; le carrousel
+	   du hero (script du composant) continue de fonctionner. */
+	if (isLightMode()) return;
+
+	const { default: gsap } = await import('gsap');
+	const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+	gsap.registerPlugin(ScrollTrigger);
 
 	const q = <T extends Element = HTMLElement>(sel: string) => root.querySelector<T>(sel);
 

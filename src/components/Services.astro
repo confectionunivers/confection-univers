@@ -1,4 +1,5 @@
 ---
+import Picture from './Picture.astro';
 /**
  * Grille de services — images dans public/images/services/
  * Fichiers : graduation.jpg, scolaire.jpg, travail.jpg, sport.jpg,
@@ -98,14 +99,12 @@ const services = [
 						data-no-fx
 					>
 						<div class="relative aspect-[4/3] overflow-hidden bg-surface/40">
-							<img
+							<Picture
 								src={s.image}
-								alt={s.title}
+								alt={`${s.title} : réalisation de l'atelier Confection Univers`}
 								class="service-card-img h-full w-full object-cover transition duration-700 ease-out"
-								width="640"
-								height="480"
+								sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
 								loading={i < 4 ? 'eager' : 'lazy'}
-								decoding="async"
 							/>
 							<div
 								class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#050816]/25 via-transparent to-transparent opacity-0 transition duration-500 group-hover:opacity-100"
@@ -142,42 +141,50 @@ const services = [
 </section>
 
 <script>
-	import gsap from 'gsap';
+	import { isLightMode } from '../scripts/perf';
 
-	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	/* Mode léger : décorations coupées, contenu intact. */
+	if (isLightMode()) {
+		/* rien : les éléments restent visibles sans animation */
+	} else {
+		const { default: gsap } = await import('gsap');
 
-	const servicesGrid = document.querySelector('.services-grid');
-	if (servicesGrid) {
-		const serviceCards = servicesGrid.querySelectorAll<HTMLElement>('.service-card');
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-		if (prefersReducedMotion) {
-			// Les cartes restent visibles même si leurs animations sont désactivées.
-			serviceCards.forEach((card) => card.classList.remove('opacity-0'));
-		} else {
-			serviceCards.forEach((card) => {
-				card.style.opacity = '0';
-				card.style.transform = 'translateY(30px) rotate(-2deg)';
-			});
+		const servicesGrid = document.querySelector('.services-grid');
+		if (servicesGrid) {
+			const serviceCards = servicesGrid.querySelectorAll<HTMLElement>('.service-card');
 
-			const observer = new IntersectionObserver((entries) => {
-				entries.forEach((entry) => {
-					if (!entry.isIntersecting) return;
-
-					gsap.to(serviceCards, {
-						opacity: 1,
-						y: 0,
-						rotation: 0,
-						duration: 0.7,
-						ease: 'back.out(1.1)',
-						stagger: 0.1,
-						clearProps: 'transform',
-					});
-					observer.unobserve(entry.target);
+			if (prefersReducedMotion) {
+				// Les cartes restent visibles même si leurs animations sont désactivées.
+				serviceCards.forEach((card) => card.classList.remove('opacity-0'));
+			} else {
+				serviceCards.forEach((card) => {
+					card.style.opacity = '0';
+					card.style.transform = 'translateY(30px) rotate(-2deg)';
 				});
-			}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
-			observer.observe(servicesGrid);
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach((entry) => {
+						if (!entry.isIntersecting) return;
+
+						gsap.to(serviceCards, {
+							opacity: 1,
+							y: 0,
+							rotation: 0,
+							duration: 0.7,
+							ease: 'back.out(1.1)',
+							stagger: 0.1,
+							clearProps: 'transform',
+						});
+						observer.unobserve(entry.target);
+					});
+				}, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+				observer.observe(servicesGrid);
+			}
 		}
+
 	}
 </script>
 	</div>
@@ -185,7 +192,7 @@ const services = [
 
 <style>
 	@media (prefers-reduced-motion: no-preference) {
-		.service-card:hover .service-card-img {
+		.service-card:hover :global(.service-card-img) {
 			transform: scale(1.06);
 		}
 	}

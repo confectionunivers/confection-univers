@@ -7,13 +7,25 @@ import BlogSidebar from '../components/BlogSidebar.astro';
 import BlogCard from '../components/BlogCard.astro';
 import BlogPagination from '../components/BlogPagination.astro';
 import { BLOG_POSTS } from '../lib/blog-data';
+import { blogIndexSchema } from '../lib/seo';
+
+const trail = [
+	{ name: 'Accueil', path: '/' },
+	{ name: 'Blog', path: '/blog' },
+];
 
 const POSTS_PER_PAGE = 6;
 const totalPages = Math.ceil(BLOG_POSTS.length / POSTS_PER_PAGE);
 ---
 
-<Layout title="Blog | Confection Univers" description="Blog Confection Univers : articles sur la confection industrielle, l'entretien des tenues, les tendances uniformes et conseils pour vos vêtements professionnels au Sénégal.">
-	<main class="relative">
+<Layout
+	title="Blog confection : conseils et actualités"
+	description="Conseils d'experts en confection au Sénégal : choisir ses uniformes scolaires, entretenir ses tenues de travail, organiser une cérémonie de graduation."
+	path="/blog"
+	breadcrumbs={trail}
+	schema={blogIndexSchema(BLOG_POSTS)}
+>
+	<main id="main-content" tabindex="-1" class="relative">
 		<Navbar />
 		
 		<!-- Hero Header -->

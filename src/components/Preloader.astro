@@ -20,8 +20,14 @@
 </div>
 
 <script>
+	import { isLightMode } from '../scripts/perf';
+
 	const root = document.getElementById('preloader');
 	if (root) {
+		/* Mobile / connexion lente : pas d'écran d'intro, le contenu d'abord. */
+		if (isLightMode()) {
+			root.remove();
+		} else {
 		window.setTimeout(() => {
 			root.classList.add('preloader--exit');
 			const done = () => {
@@ -30,5 +36,6 @@
 			root.addEventListener('transitionend', done, { once: true });
 			window.setTimeout(done, 1000);
 		}, 2000);
+		}
 	}
 </script>

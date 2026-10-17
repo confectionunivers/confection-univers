@@ -7,28 +7,37 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "node scripts/optimize-hero-images.mjs",
+    "predev": "node scripts/optimize-hero-images.mjs && node scripts/optimize-images.mjs",
+    "prebuild": "node scripts/generate-brand-assets.mjs && node scripts/optimize-hero-images.mjs && node scripts/optimize-images.mjs",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "seo:audit": "node scripts/seo-audit.mjs",
+    "images:optimize": "node scripts/optimize-hero-images.mjs && node scripts/optimize-images.mjs",
+    "brand:generate": "node scripts/generate-brand-assets.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^4.0.0",
     "@studio-freight/lenis": "^1.0.42",
     "@tailwindcss/vite": "^4.3.0",
-    "astro": "^7.0.9",
+    "astro": "^7.4.0",
     "gsap": "^3.15.0",
     "lottie-react": "^2.4.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "resend": "^6.12.3",
-    "sharp": "^0.34.5",
     "split-type": "^0.3.4",
     "swiper": "^12.2.0",
     "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
+    "@fontsource/anton": "^5.3.0",
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/marcellus": "^5.3.0",
+    "@fontsource/playfair-display": "^5.3.0",
+    "@fontsource/space-grotesk": "^5.3.0",
     "@types/react": "^18.3.0",
-    "@types/react-dom": "^18.3.0"
+    "@types/react-dom": "^18.3.0",
+    "sharp": "^0.35.5"
   }
 }

@@ -1,4 +1,5 @@
 ---
+import Picture from './Picture.astro';
 ---
 
 <style>
@@ -101,10 +102,11 @@
 			<!-- Left: Image with asymmetric design -->
 			<div class="about-image-wrapper relative">
 				<div class="about-image-container aspect-[4/5]">
-					<img
+					<Picture
 						src="/images/about-facility.jpg"
-						alt="Atelier de confection Confection Univers"
+						alt="Atelier de confection Confection Univers à Thiès, Sénégal"
 						class="w-full h-full object-cover"
+						sizes="(min-width: 1024px) 50vw, 100vw"
 						loading="lazy"
 					/>
 				</div>
@@ -184,207 +186,215 @@
 </section>
 
 <script>
-	import gsap from 'gsap';
-	import { ScrollTrigger } from 'gsap/ScrollTrigger';
+	import { isLightMode } from '../scripts/perf';
 
-	if (typeof window !== 'undefined') {
-		gsap.registerPlugin(ScrollTrigger);
+	/* Mode léger : décorations coupées, contenu intact. */
+	if (isLightMode()) {
+		/* rien : les éléments restent visibles sans animation */
+	} else {
+		const { default: gsap } = await import('gsap');
+		const { ScrollTrigger } = await import('gsap/ScrollTrigger');
 
-		let ctx: gsap.Context | null = null;
+		if (typeof window !== 'undefined') {
+			gsap.registerPlugin(ScrollTrigger);
 
-		const init = () => {
-			const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			let ctx: gsap.Context | null = null;
 
-			if (!prefersReducedMotion) {
-				ctx = gsap.context(() => {
-					const section = document.querySelector('.about-section');
-					const imageWrapper = document.querySelector('.about-image-wrapper');
-					const content = document.querySelector('.about-content');
-					const badge = document.querySelector('.about-badge');
-					const missionCard = document.querySelector('.mission-card');
-					const visionCard = document.querySelector('.vision-card');
-					const ctaButton = document.querySelector('.cta-button');
+			const init = () => {
+				const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-					if (section) {
-						// Create timeline
-						const tl = gsap.timeline({
-							scrollTrigger: {
-								trigger: section,
-								start: 'top 80%',
-								end: 'bottom 20%',
-								toggleActions: 'play none none reverse'
+				if (!prefersReducedMotion) {
+					ctx = gsap.context(() => {
+						const section = document.querySelector('.about-section');
+						const imageWrapper = document.querySelector('.about-image-wrapper');
+						const content = document.querySelector('.about-content');
+						const badge = document.querySelector('.about-badge');
+						const missionCard = document.querySelector('.mission-card');
+						const visionCard = document.querySelector('.vision-card');
+						const ctaButton = document.querySelector('.cta-button');
+
+						if (section) {
+							// Create timeline
+							const tl = gsap.timeline({
+								scrollTrigger: {
+									trigger: section,
+									start: 'top 80%',
+									end: 'bottom 20%',
+									toggleActions: 'play none none reverse'
+								}
+							});
+
+							// Image parallax/fade up
+							if (imageWrapper) {
+								gsap.set(imageWrapper, { y: 50, opacity: 0 });
+								tl.to(imageWrapper, {
+									y: 0,
+									opacity: 1,
+									duration: 1,
+									ease: 'power3.out'
+								}, 0);
 							}
-						});
 
-						// Image parallax/fade up
-						if (imageWrapper) {
-							gsap.set(imageWrapper, { y: 50, opacity: 0 });
-							tl.to(imageWrapper, {
-								y: 0,
-								opacity: 1,
-								duration: 1,
-								ease: 'power3.out'
-							}, 0);
-						}
+							// Badge fade in
+							if (badge) {
+								gsap.set(badge, { y: 30, opacity: 0 });
+								tl.to(badge, {
+									y: 0,
+									opacity: 1,
+									duration: 0.8,
+									ease: 'power3.out'
+								}, 0.3);
+							}
 
-						// Badge fade in
-						if (badge) {
-							gsap.set(badge, { y: 30, opacity: 0 });
-							tl.to(badge, {
-								y: 0,
-								opacity: 1,
-								duration: 0.8,
-								ease: 'power3.out'
-							}, 0.3);
-						}
+							// Content stagger reveal
+							if (content) {
+								const subtitle = content.querySelector('.text-xs') as HTMLElement;
+								const title = content.querySelector('h2') as HTMLElement;
+								const subGrid = content.querySelector('.grid') as HTMLElement;
 
-						// Content stagger reveal
-						if (content) {
-							const subtitle = content.querySelector('.text-xs') as HTMLElement;
-							const title = content.querySelector('h2') as HTMLElement;
-							const subGrid = content.querySelector('.grid') as HTMLElement;
+								if (subtitle) {
+									gsap.set(subtitle, { y: 30, opacity: 0 });
+									tl.to(subtitle, {
+										y: 0,
+										opacity: 1,
+										duration: 0.6,
+										ease: 'power3.out'
+									}, 0.2);
+								}
 
-							if (subtitle) {
-								gsap.set(subtitle, { y: 30, opacity: 0 });
-								tl.to(subtitle, {
+								if (title) {
+									gsap.set(title, { y: 30, opacity: 0 });
+									tl.to(title, {
+										y: 0,
+										opacity: 1,
+										duration: 0.8,
+										ease: 'power3.out'
+									}, 0.4);
+								}
+
+								if (subGrid) {
+									gsap.set(subGrid, { y: 30, opacity: 0 });
+									tl.to(subGrid, {
+										y: 0,
+										opacity: 1,
+										duration: 0.8,
+										ease: 'power3.out'
+									}, 0.6);
+								}
+							}
+
+							// Cards sequential appearance
+							if (missionCard && visionCard) {
+								gsap.set([missionCard as HTMLElement, visionCard as HTMLElement], { y: 20, opacity: 0 });
+								tl.to(missionCard as HTMLElement, {
 									y: 0,
 									opacity: 1,
 									duration: 0.6,
 									ease: 'power3.out'
-								}, 0.2);
-							}
-
-							if (title) {
-								gsap.set(title, { y: 30, opacity: 0 });
-								tl.to(title, {
+								}, 0.8);
+								tl.to(visionCard as HTMLElement, {
 									y: 0,
 									opacity: 1,
-									duration: 0.8,
+									duration: 0.6,
 									ease: 'power3.out'
-								}, 0.4);
+								}, 1);
 							}
 
-							if (subGrid) {
-								gsap.set(subGrid, { y: 30, opacity: 0 });
-								tl.to(subGrid, {
-									y: 0,
+							// CTA button
+							if (ctaButton) {
+								gsap.set(ctaButton as HTMLElement, { scale: 0.9, opacity: 0 });
+								tl.to(ctaButton as HTMLElement, {
+									scale: 1,
 									opacity: 1,
-									duration: 0.8,
-									ease: 'power3.out'
-								}, 0.6);
+									duration: 0.5,
+									ease: 'back.out(1.7)'
+								}, 1.2);
+							}
+
+							// Hover effects with GSAP
+							if (missionCard) {
+								missionCard.addEventListener('mouseenter', () => {
+									gsap.to(missionCard as HTMLElement, {
+										y: -4,
+										duration: 0.3,
+										ease: 'power2.out'
+									});
+								});
+								missionCard.addEventListener('mouseleave', () => {
+									gsap.to(missionCard as HTMLElement, {
+										y: 0,
+										duration: 0.3,
+										ease: 'power2.out'
+									});
+								});
+							}
+
+							if (visionCard) {
+								visionCard.addEventListener('mouseenter', () => {
+									gsap.to(visionCard as HTMLElement, {
+										y: -4,
+										duration: 0.3,
+										ease: 'power2.out'
+									});
+								});
+								visionCard.addEventListener('mouseleave', () => {
+									gsap.to(visionCard as HTMLElement, {
+										y: 0,
+										duration: 0.3,
+										ease: 'power2.out'
+									});
+								});
+							}
+
+							if (ctaButton) {
+								ctaButton.addEventListener('mouseenter', () => {
+									gsap.to(ctaButton as HTMLElement, {
+										y: -2,
+										duration: 0.3,
+										ease: 'power2.out'
+									});
+								});
+								ctaButton.addEventListener('mouseleave', () => {
+									gsap.to(ctaButton as HTMLElement, {
+										y: 0,
+										duration: 0.3,
+										ease: 'power2.out'
+									});
+								});
+							}
+
+							// Parallax effect on image
+							if (imageWrapper) {
+								gsap.to(imageWrapper as HTMLElement, {
+									y: -30,
+									scrollTrigger: {
+										trigger: section,
+										start: 'top bottom',
+										end: 'bottom top',
+										scrub: 1.5
+									}
+								});
 							}
 						}
+					});
+				}
+			};
 
-						// Cards sequential appearance
-						if (missionCard && visionCard) {
-							gsap.set([missionCard as HTMLElement, visionCard as HTMLElement], { y: 20, opacity: 0 });
-							tl.to(missionCard as HTMLElement, {
-								y: 0,
-								opacity: 1,
-								duration: 0.6,
-								ease: 'power3.out'
-							}, 0.8);
-							tl.to(visionCard as HTMLElement, {
-								y: 0,
-								opacity: 1,
-								duration: 0.6,
-								ease: 'power3.out'
-							}, 1);
-						}
+			const cleanup = () => {
+				if (ctx) {
+					ctx.revert();
+					ctx = null;
+				}
+				ScrollTrigger.getAll().forEach(t => t.kill());
+			};
 
-						// CTA button
-						if (ctaButton) {
-							gsap.set(ctaButton as HTMLElement, { scale: 0.9, opacity: 0 });
-							tl.to(ctaButton as HTMLElement, {
-								scale: 1,
-								opacity: 1,
-								duration: 0.5,
-								ease: 'back.out(1.7)'
-							}, 1.2);
-						}
+			const ready = () => init();
+			if (document.readyState !== 'loading') ready();
+			else window.addEventListener('DOMContentLoaded', ready, { once: true });
 
-						// Hover effects with GSAP
-						if (missionCard) {
-							missionCard.addEventListener('mouseenter', () => {
-								gsap.to(missionCard as HTMLElement, {
-									y: -4,
-									duration: 0.3,
-									ease: 'power2.out'
-								});
-							});
-							missionCard.addEventListener('mouseleave', () => {
-								gsap.to(missionCard as HTMLElement, {
-									y: 0,
-									duration: 0.3,
-									ease: 'power2.out'
-								});
-							});
-						}
+			document.addEventListener('astro:before-swap', cleanup, { once: true });
+			window.addEventListener('pagehide', cleanup, { once: true });
+		}
 
-						if (visionCard) {
-							visionCard.addEventListener('mouseenter', () => {
-								gsap.to(visionCard as HTMLElement, {
-									y: -4,
-									duration: 0.3,
-									ease: 'power2.out'
-								});
-							});
-							visionCard.addEventListener('mouseleave', () => {
-								gsap.to(visionCard as HTMLElement, {
-									y: 0,
-									duration: 0.3,
-									ease: 'power2.out'
-								});
-							});
-						}
-
-						if (ctaButton) {
-							ctaButton.addEventListener('mouseenter', () => {
-								gsap.to(ctaButton as HTMLElement, {
-									y: -2,
-									duration: 0.3,
-									ease: 'power2.out'
-								});
-							});
-							ctaButton.addEventListener('mouseleave', () => {
-								gsap.to(ctaButton as HTMLElement, {
-									y: 0,
-									duration: 0.3,
-									ease: 'power2.out'
-								});
-							});
-						}
-
-						// Parallax effect on image
-						if (imageWrapper) {
-							gsap.to(imageWrapper as HTMLElement, {
-								y: -30,
-								scrollTrigger: {
-									trigger: section,
-									start: 'top bottom',
-									end: 'bottom top',
-									scrub: 1.5
-								}
-							});
-						}
-					}
-				});
-			}
-		};
-
-		const cleanup = () => {
-			if (ctx) {
-				ctx.revert();
-				ctx = null;
-			}
-			ScrollTrigger.getAll().forEach(t => t.kill());
-		};
-
-		const ready = () => init();
-		if (document.readyState !== 'loading') ready();
-		else window.addEventListener('DOMContentLoaded', ready, { once: true });
-
-		document.addEventListener('astro:before-swap', cleanup, { once: true });
-		window.addEventListener('pagehide', cleanup, { once: true });
 	}
 </script>

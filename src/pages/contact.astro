@@ -2,10 +2,23 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { contactPageSchema, SITE } from '../lib/seo';
+
+const trail = [
+	{ name: 'Accueil', path: '/' },
+	{ name: 'Contact', path: '/contact' },
+];
 ---
 
-<Layout title="Contact | Confection Univers" description="Contactez Confection Univers pour vos demandes de devis en uniformes scolaires, toges de graduation, blouses médicales, tenues de travail et vêtements professionnels au Sénégal.">
-	<main class="relative">
+<Layout
+	title="Contact et devis | Confection Univers Thiès"
+	description="Contactez Confection Univers à Thiès : devis gratuit par téléphone, WhatsApp ou formulaire pour uniformes, toges, blouses et tenues professionnelles."
+	path="/contact"
+	breadcrumbs={trail}
+	schema={contactPageSchema()}
+>
+	<main id="main-content" tabindex="-1" class="relative">
 		<Navbar />
 		
 		<!-- Hero Section -->
@@ -14,6 +27,7 @@ import Footer from '../components/Footer.astro';
 			<div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_85%_60%_at_100%_0%,rgba(198,161,95,0.14),transparent_55%),radial-gradient(ellipse_70%_50%_at_0%_100%,rgba(0,0,42,0.08),transparent_50%)]"></div>
 			
 			<div class="mx-auto max-w-7xl px-6">
+				<Breadcrumbs trail={trail} />
 				<p class="mb-5 text-[11px] font-semibold uppercase tracking-[0.38em] text-primary md:text-xs">
 					Contactez-nous
 				</p>
@@ -90,7 +104,7 @@ import Footer from '../components/Footer.astro';
 					<!-- Contact Form -->
 					<div class="rounded-3xl border border-ink/10 bg-surface/10 p-8 md:p-12">
 						<h3 class="font-display text-2xl font-semibold text-ink mb-8">Demande de devis</h3>
-						<form id="contact-form" class="space-y-6">
+						<form id="contact-form" class="space-y-6" data-whatsapp={SITE.whatsappDigits}>
 							<div class="grid gap-6 md:grid-cols-2">
 								<div class="space-y-2">
 									<label for="name" class="text-sm font-semibold uppercase tracking-widest text-ink/60">
@@ -220,7 +234,6 @@ import Footer from '../components/Footer.astro';
 		const form = document.getElementById('contact-form') as HTMLFormElement | null;
 		if (!form) return;
 
-		const submitButton = form.querySelector('#submit-button') as HTMLButtonElement | null;
 
 		form.addEventListener('submit', async (event) => {
 			event.preventDefault();
@@ -251,42 +264,17 @@ import Footer from '../components/Footer.astro';
 				'',
 				`Message : ${data.message}`,
 			].filter(Boolean).join('\n');
-			const whatsappUrl = `https://wa.me/221772960776?${new URLSearchParams({ text: contactMessage }).toString()}`;
-			const emailUrl = `mailto:confectionunivers@gmail.com?${new URLSearchParams({
-				subject: `Demande de devis - ${data.name}`,
-				body: contactMessage,
-			}).toString()}`;
+			const waDigits = form?.dataset.whatsapp || '221772960776';
+			const whatsappUrl = `https://wa.me/${waDigits}?${new URLSearchParams({ text: contactMessage }).toString()}`;
+			
 
-			if (submitButton) {
-				submitButton.disabled = true;
-				submitButton.setAttribute('aria-busy', 'true');
-				submitButton.textContent = 'Envoi en cours...';
-			}
-
-			try {
-				const response = await fetch('/api/send-devis', {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify(data),
-				});
-				const result = await response.json().catch(() => ({}));
-
-				if (!response.ok || !result.success) {
-					showContactOptions(whatsappUrl, emailUrl);
-					return;
-				}
-
-				form.reset();
-				showNotification('Votre demande a bien été transmise. Nous vous répondrons sous 1 à 2 jours ouvrables.');
-			} catch {
-				showContactOptions(whatsappUrl, emailUrl);
-			} finally {
-				if (submitButton) {
-					submitButton.disabled = false;
-					submitButton.removeAttribute('aria-busy');
-					submitButton.textContent = 'Envoyer ma demande';
-				}
-			}
+			/* Site 100 % statique : aucun backend d'e-mails. La demande part
+			   directement dans WhatsApp, déjà structurée — le canal que
+			   l'atelier utilise réellement avec ses clients. */
+			const opened = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+			if (!opened) window.location.href = whatsappUrl;
+			form.reset();
+			showNotification("Votre demande est prête dans WhatsApp : il ne reste qu'à l'envoyer. Réponse sous 24 h ouvrées.");
 		});
 
 		function clearNotification() {
@@ -305,46 +293,5 @@ import Footer from '../components/Footer.astro';
 			window.setTimeout(() => notification.remove(), 8000);
 		}
 
-		function showContactOptions(whatsappUrl: string, emailUrl: string) {
-			clearNotification();
-			const notification = document.createElement('div');
-			notification.id = 'contact-notification';
-			notification.setAttribute('role', 'alert');
-			notification.setAttribute('aria-live', 'assertive');
-			notification.className = 'fixed top-4 right-4 z-50 max-w-md space-y-4 rounded-xl bg-white p-6 font-medium text-gray-900 shadow-2xl';
-
-			const title = document.createElement('h3');
-			title.className = 'text-lg font-bold';
-			title.textContent = 'L’envoi par formulaire n’a pas été confirmé.';
-
-			const message = document.createElement('p');
-			message.className = 'text-sm text-gray-600';
-			message.textContent = 'Les champs sont conservés. Vous pouvez réessayer ou transmettre votre demande en ouvrant WhatsApp ou votre application e-mail.';
-
-			const actions = document.createElement('div');
-			actions.className = 'flex flex-wrap gap-3';
-
-			const whatsappLink = document.createElement('a');
-			whatsappLink.href = whatsappUrl;
-			whatsappLink.target = '_blank';
-			whatsappLink.rel = 'noopener noreferrer';
-			whatsappLink.className = 'rounded-lg bg-green-600 px-4 py-3 text-sm font-semibold text-white hover:bg-green-700';
-			whatsappLink.textContent = 'Ouvrir WhatsApp';
-
-			const emailLink = document.createElement('a');
-			emailLink.href = emailUrl;
-			emailLink.className = 'rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700';
-			emailLink.textContent = 'Préparer un e-mail';
-
-			const closeButton = document.createElement('button');
-			closeButton.type = 'button';
-			closeButton.className = 'rounded-lg px-3 py-2 text-sm font-semibold text-gray-600 underline hover:text-gray-900';
-			closeButton.textContent = 'Fermer';
-			closeButton.addEventListener('click', clearNotification);
-
-			actions.append(whatsappLink, emailLink, closeButton);
-			notification.append(title, message, actions);
-			document.body.appendChild(notification);
-		}
 	});
 </script>

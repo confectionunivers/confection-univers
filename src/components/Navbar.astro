@@ -1,4 +1,6 @@
 ---
+import { SITE } from '../lib/seo';
+import Picture from './Picture.astro';
 /**
  * Header : logo (sur fond blanc), 6 liens de navigation, bouton « Demander un devis »
  * et bouton menu qui ouvre un tiroir blanc. Palette : bleu nuit (#00001C) et or (#D4AF37).
@@ -18,27 +20,44 @@ const isActive = (href: string) => currentPath === href || (href !== '/' && curr
 
 const gallery = ['/images/gallery1.jpg', '/images/gallery2.jpg', '/images/gallery3.jpg', '/images/gallery4.jpg'];
 const social = [
-	{ label: 'Facebook', href: 'https://facebook.com/confectionunivers', icon: 'M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z' },
-	{ label: 'Instagram', href: 'https://instagram.com/confectionunivers', icon: 'M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 2a2.5 2.5 0 100 5 2.5 2.5 0 000-5z' },
-	{ label: 'LinkedIn', href: 'https://linkedin.com/company/confectionunivers', icon: 'M4 3a2 2 0 110 4 2 2 0 010-4zm-1 6h3v12H3V9zm6 0h3v2c.5-1 1.8-2 3.6-2C19.5 9 21 10.5 21 13.5V21h-3v-6.5c0-1.6-.6-2.5-2-2.5s-2.5 1-2.5 2.6V21H9V9z' },
-	{ label: 'WhatsApp', href: 'https://wa.me/221772960776', icon: 'M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2z' },
+	{ label: 'Facebook', href: SITE.social.facebook, icon: 'M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z' },
+	{ label: 'Instagram', href: SITE.social.instagram, icon: 'M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm0 2a3 3 0 00-3 3v10a3 3 0 003 3h10a3 3 0 003-3V7a3 3 0 00-3-3H7zm5 3.5a4.5 4.5 0 110 9 4.5 4.5 0 010-9zm0 2a2.5 2.5 0 100 5 2.5 2.5 0 000-5z' },
+	{ label: 'LinkedIn', href: SITE.social.linkedin, icon: 'M4 3a2 2 0 110 4 2 2 0 010-4zm-1 6h3v12H3V9zm6 0h3v2c.5-1 1.8-2 3.6-2C19.5 9 21 10.5 21 13.5V21h-3v-6.5c0-1.6-.6-2.5-2-2.5s-2.5 1-2.5 2.6V21H9V9z' },
+	{ label: 'YouTube', href: SITE.social.youtube, icon: 'M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z' },
+	{ label: 'TikTok', href: SITE.social.tiktok, icon: 'M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z' },
+	{ label: 'WhatsApp', href: SITE.whatsapp, icon: 'M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2z' },
 ];
 ---
 
 <header id="site-header" class="site-header fixed inset-x-0 top-0 z-[60]">
 	<div class="top-info-bar" role="region" aria-label="Informations de contact">
 		<div class="top-info-inner">
-			<span class="top-info-brand">Confection de vêtements professionnels au Sénégal</span>
+			<p class="top-info-typer">
+				<span class="typer-text">Confection de vêtements professionnels au Sénégal</span><span class="typer-caret" aria-hidden="true"></span>
+			</p>
 			<div class="top-info-details">
-				<a href="tel:+221772960776" class="top-info-link">+221 77 296 07 76</a>
-				<a href="mailto:confectionunivers@gmail.com" class="top-info-link top-info-email">confectionunivers@gmail.com</a>
-				<span class="top-info-link top-info-location">Thiès, Sénégal</span>
+				<a href="tel:+221772960776" class="top-info-chip">
+					<svg class="top-info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z" /></svg>
+					<span>+221 77 296 07 76</span>
+				</a>
+				<a href="mailto:confectionunivers@gmail.com" class="top-info-chip top-info-email">
+					<svg class="top-info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m22 7-10 6L2 7" /></svg>
+					<span>confectionunivers@gmail.com</span>
+				</a>
+				<span class="top-info-chip top-info-location">
+					<svg class="top-info-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z" /><circle cx="12" cy="10" r="3" /></svg>
+					<span>Thiès, Sénégal</span>
+				</span>
+				<a href={SITE.whatsapp} target="_blank" rel="noopener noreferrer" class="top-info-chip top-info-wa">
+					<svg class="top-info-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.4 14.1c-.2.7-1.3 1.3-1.9 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.7-.6-2.9-1.3-4.8-4.2-5-4.4-.1-.2-1.2-1.6-1.2-3.1s.8-2.2 1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5-.3.6-.7.9-.5 1.2.7 1.2 1.6 2 2.8 2.6.3.2.5.1.7-.1.2-.2.8-.9 1-1.2.2-.3.4-.2.7-.1.3.1 1.7.8 2 1 .3.2.5.2.6.4 0 .1 0 .7-.2 1.4z" /></svg>
+					<span>WhatsApp</span>
+				</a>
 			</div>
 		</div>
 	</div>
 	<div class="header-inner mx-auto flex items-center justify-between gap-4">
 		<a href="/" class="logo-link logo-chip logo-chip-header shrink-0" aria-label="Confection Univers — accueil">
-			<img src="/images/logo.png" alt="Confection Univers" class="w-auto" width="2000" height="419" decoding="async" />
+			<Picture src="/images/logo.png" alt="Confection Univers — atelier de confection industrielle au Sénégal" class="w-auto" loading="eager" fetchpriority="high" />
 		</a>
 
 		<!-- Liens de navigation (grand écran) -->
@@ -65,7 +84,7 @@ const social = [
 
 <aside id="menu-drawer" class="menu-drawer fixed inset-y-0 right-0 z-[70] flex w-[min(360px,92vw)] flex-col" aria-label="Menu" aria-hidden="true">
 	<div class="flex items-center justify-between px-7 pb-4 pt-7">
-		<a href="/" aria-label="Accueil" class="logo-chip"><img src="/images/logo.png" alt="Confection Univers" class="h-12 w-auto" width="200" height="76" /></a>
+		<a href="/" aria-label="Accueil" class="logo-chip"><Picture src="/images/logo.png" alt="Confection Univers" class="h-11 w-auto" loading="eager" /></a>
 		<button type="button" id="menu-close" class="close-btn" aria-label="Fermer le menu">
 			<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18" /></svg>
 		</button>
@@ -88,7 +107,7 @@ const social = [
 				{
 					gallery.map((src) => (
 						<a href="/catalogue" class="tile block overflow-hidden rounded-xl">
-							<img src={src} alt="" class="h-full w-full object-cover" loading="lazy" decoding="async" />
+							<Picture src={src} alt="" class="h-full w-full object-cover" sizes="64px" loading="lazy" />
 						</a>
 					))
 				}
@@ -170,6 +189,44 @@ const social = [
 	const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 24);
 	window.addEventListener('scroll', onScroll, { passive: true });
 	onScroll();
+
+	/* Barre du haut : les accroches se tapent puis s'effacent, en boucle. */
+	const typer = document.querySelector<HTMLElement>('.typer-text');
+	if (typer && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+		const messages = [
+			'Confection de vêtements professionnels au Sénégal',
+			'Devis gratuit sous 24 h',
+			'Fabrication locale — atelier de Thiès',
+			'Production en gros & détail',
+			'Broderie & personnalisation incluses',
+		];
+		let mi = 0;
+		let ci = messages[0].length;
+		let deleting = true;
+		const tick = () => {
+			if (!deleting) {
+				ci += 1;
+				if (ci === messages[mi].length) {
+					deleting = true;
+					window.setTimeout(tick, 2300);
+					typer.textContent = messages[mi].slice(0, ci);
+					return;
+				}
+			} else {
+				ci -= 1;
+				if (ci === 0) {
+					deleting = false;
+					mi = (mi + 1) % messages.length;
+					window.setTimeout(tick, 400);
+					typer.textContent = '';
+					return;
+				}
+			}
+			typer.textContent = messages[mi].slice(0, ci);
+			window.setTimeout(tick, deleting ? 26 : 58);
+		};
+		window.setTimeout(tick, 2600);
+	}
 </script>
 
 <style>
@@ -180,17 +237,42 @@ const social = [
 	}
 
 	.top-info-bar {
+		position: relative;
 		width: 100%;
-		height: 36px;
+		height: 38px;
+		overflow: hidden;
 		pointer-events: auto;
-		border: 1px solid rgba(184, 134, 11, 0.62);
-		border-bottom-color: rgba(184, 134, 11, 0.88);
-		background: linear-gradient(180deg, rgba(255, 255, 255, 0.99) 0%, rgba(255, 248, 226, 0.98) 56%, rgba(250, 204, 107, 0.94) 100%);
-		color: #00001C;
+		border-bottom: 1px solid rgba(184, 134, 11, 0.62);
+		background: linear-gradient(180deg, #ffffff 0%, #fff8e2 52%, #facc6b 100%);
+		color: #00001c;
 		box-shadow:
 			inset 0 1px 0 rgba(255, 255, 255, 0.96),
 			inset 0 -1px 0 rgba(145, 96, 0, 0.28),
 			0 5px 18px rgba(0, 0, 0, 0.16);
+		transition: height 0.35s ease, opacity 0.25s ease, border-color 0.35s ease;
+	}
+
+	/* Reflet doré qui glisse périodiquement sur le ruban. */
+	.top-info-bar::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.85) 50%, transparent 58%);
+		transform: translateX(-100%);
+		animation: top-sheen 7s ease-in-out infinite;
+		pointer-events: none;
+	}
+
+	@keyframes top-sheen {
+		0%, 55% { transform: translateX(-100%); }
+		85%, 100% { transform: translateX(100%); }
+	}
+
+	/* Au scroll, le ruban se replie pour laisser respirer le logo. */
+	.site-header.is-scrolled .top-info-bar {
+		height: 0;
+		opacity: 0;
+		border-bottom-color: transparent;
 	}
 
 	.top-info-inner {
@@ -203,60 +285,116 @@ const social = [
 		margin: 0 auto;
 	}
 
-	.top-info-brand {
-		color: rgba(0, 0, 28, 0.72);
+	.top-info-typer {
+		display: inline-flex;
+		align-items: center;
+		min-width: 0;
+		margin: 0;
+		color: rgba(0, 0, 28, 0.78);
 		font-size: 10px;
 		font-weight: 700;
-		letter-spacing: 0.08em;
+		letter-spacing: 0.14em;
 		text-transform: uppercase;
 		white-space: nowrap;
+	}
+
+	.typer-caret {
+		width: 2px;
+		height: 12px;
+		margin-left: 6px;
+		background: #b8860b;
+		animation: caret-blink 1s steps(1) infinite;
+	}
+
+	@keyframes caret-blink {
+		50% { opacity: 0; }
 	}
 
 	.top-info-details {
 		display: flex;
 		align-items: center;
-		gap: clamp(0.75rem, 1.6vw, 1.5rem);
+		gap: 8px;
 	}
 
-	.top-info-link {
+	/* Pastilles de contact : balayage doré au survol. */
+	.top-info-chip {
+		position: relative;
 		display: inline-flex;
 		align-items: center;
-		gap: 7px;
-		color: #00001C;
+		gap: 6px;
+		padding: 4px 10px;
+		border: 1px solid rgba(184, 134, 11, 0.4);
+		border-radius: 999px;
+		background: rgba(255, 255, 255, 0.55);
+		color: #00001c;
 		font-size: 11px;
 		font-weight: 600;
 		white-space: nowrap;
-		transition: color 0.2s ease;
+		overflow: hidden;
+		transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
 	}
 
-	.top-info-link::before {
+	.top-info-chip::before {
 		content: '';
-		width: 5px;
-		height: 5px;
-		flex: 0 0 5px;
-		border-radius: 50%;
-		background: #B8860B;
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		background: linear-gradient(90deg, rgba(212, 175, 55, 0.92), rgba(250, 204, 107, 0.96));
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform 0.3s ease;
 	}
 
-	.top-info-link:hover {
-		color: #8A6500;
+	.top-info-chip > * {
+		position: relative;
+		z-index: 1;
 	}
 
-	.header-inner {
-		width: 100%;
-		padding-inline: clamp(12px, 1.8vw, 28px);
-		margin-top: 10px;
-		pointer-events: auto;
-		transition: margin-top 0.35s ease;
+	.top-info-chip:is(:hover, :focus-visible) {
+		color: #00001c;
+		border-color: transparent;
 	}
 
-	.site-header.is-scrolled .header-inner {
-		margin-top: 6px;
+	.top-info-chip:is(:hover, :focus-visible)::before {
+		transform: scaleX(1);
+	}
+
+	.top-info-chip:focus-visible {
+		outline: 2px solid #8a6500;
+		outline-offset: 2px;
+	}
+
+	.top-info-icon {
+		width: 12px;
+		height: 12px;
+		flex: 0 0 12px;
+	}
+
+	.top-info-chip:hover .top-info-icon {
+		animation: icon-pop 0.45s ease;
+	}
+
+	@keyframes icon-pop {
+		40% { transform: translateY(-2px) scale(1.15); }
+	}
+
+	.top-info-wa {
+		border-color: rgba(37, 211, 102, 0.5);
+		background: rgba(37, 211, 102, 0.1);
+	}
+
+	.top-info-wa:is(:hover, :focus-visible) {
+		color: #ffffff;
+	}
+
+	.top-info-wa::before {
+		background: linear-gradient(90deg, #25d366, #7ae0a3);
 	}
 
 	@media (max-width: 1023px) {
-		.top-info-brand,
-		.top-info-email {
+		.top-info-typer,
+		.top-info-email,
+		.top-info-location {
 			display: none;
 		}
 
@@ -267,20 +405,44 @@ const social = [
 
 	@media (max-width: 540px) {
 		.top-info-bar {
-			height: 32px;
+			height: 34px;
 		}
 
 		.top-info-inner {
 			justify-content: center;
 		}
 
-		.top-info-location {
-			display: none;
+		.top-info-chip {
+			font-size: 10px;
+			padding: 3px 9px;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.top-info-bar::before,
+		.typer-caret,
+		.top-info-chip:hover .top-info-icon {
+			animation: none;
 		}
 
-		.top-info-link {
-			font-size: 10px;
+		.top-info-bar,
+		.top-info-chip,
+		.top-info-chip::before {
+			transition: none;
 		}
+	}
+
+	/* Respiration entre le ruban du haut et la barre du logo. */
+	.header-inner {
+		width: 100%;
+		padding-inline: clamp(12px, 1.8vw, 28px);
+		margin-top: 14px;
+		pointer-events: auto;
+		transition: margin-top 0.35s ease;
+	}
+
+	.site-header.is-scrolled .header-inner {
+		margin-top: 8px;
 	}
 
 	@media (min-width: 1536px) {
@@ -303,9 +465,9 @@ const social = [
 		box-shadow: 0 10px 26px -10px rgba(0, 0, 0, 0.5), inset 0 -2px 0 rgba(212, 175, 55, 0.5);
 	}
 
-	.logo-chip img {
+	.logo-chip :global(img) {
 		display: block;
-		height: 48px;
+		height: 44px;
 		width: auto;
 	}
 
@@ -313,12 +475,16 @@ const social = [
 	.logo-chip-header {
 		position: relative;
 		isolation: isolate;
-		padding: 7px 27px 7px 14px;
+		padding: 5px 22px 5px 12px;
 		border: 1px solid rgba(198, 149, 54, 0.62);
 		border-left: 3px solid #c99b42;
 		border-radius: 14px 2px 14px 14px;
 		background: #ffffff;
 		box-shadow: 0 12px 28px rgba(0, 0, 28, 0.27), 0 0 0 3px rgba(255, 255, 255, 0.22);
+	}
+
+	.logo-chip-header :global(img) {
+		height: 40px;
 	}
 
 	/* Coin replié : le bleu nuit révèle une fine face dorée. */
@@ -328,8 +494,8 @@ const social = [
 		z-index: 2;
 		top: -1px;
 		right: -1px;
-		width: 22px;
-		height: 22px;
+		width: 19px;
+		height: 19px;
 		background: linear-gradient(135deg, #dfb85b 0 23%, #192758 26%, #0b1743 100%);
 		clip-path: polygon(0 0, 100% 0, 100% 100%);
 		transform-origin: top right;
@@ -348,17 +514,17 @@ const social = [
 
 	@media (max-width: 540px) {
 		.logo-chip-header {
-			padding: 5px 16px 5px 8px;
+			padding: 4px 14px 4px 7px;
 			border-radius: 10px 2px 10px 10px;
 		}
 
-		.logo-chip-header img {
-			height: 42px;
+		.logo-chip-header :global(img) {
+			height: 34px;
 		}
 
 		.logo-chip-header::before {
-			width: 14px;
-			height: 14px;
+			width: 12px;
+			height: 12px;
 		}
 
 		.logo-chip-header:is(:hover, :focus-visible)::before {
@@ -619,11 +785,11 @@ const social = [
 		transform: translateY(-2px);
 	}
 
-	.tile img {
+	.tile :global(img) {
 		transition: transform 0.5s ease;
 	}
 
-	.tile:hover img {
+	.tile:hover :global(img) {
 		transform: scale(1.06);
 	}
 

@@ -2,6 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import Picture from '../components/Picture.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { itemListSchema } from '../lib/seo';
+
+const trail = [
+	{ name: 'Accueil', path: '/' },
+	{ name: 'Catalogue', path: '/catalogue' },
+];
 
 const catalogSections = [
 	{
@@ -103,10 +111,13 @@ const catalogSections = [
 ---
 
 <Layout
-	title="Catalogue Premium | Confection Univers"
-	description="Découvrez le catalogue Confection Univers : toges, tenues de travail, blouses médicales, uniformes scolaires, tenues EPS, costumes africains et vêtements de sport confectionnés au Sénégal."
+	title="Catalogue : 25 modèles de confection sur mesure"
+	description="Catalogue Confection Univers : toges, tenues de travail, blouses médicales, uniformes scolaires, tenues EPS, costumes africains et tenues de sport, confectionnés au Sénégal."
+	path="/catalogue"
+	breadcrumbs={trail}
+	schema={itemListSchema('Catalogue des collections', catalogSections.flatMap((section) => section.products.map((product) => ({ name: product.name, image: product.image }))))}
 >
-	<main class="relative overflow-hidden bg-background">
+	<main id="main-content" tabindex="-1" class="relative overflow-hidden bg-background">
 		<Navbar />
 
 		<!-- Editorial bento hero inspired by the visual references -->
@@ -117,6 +128,7 @@ const catalogSections = [
 				<path d="M-90 604C176 472 400 478 584 590c174 105 281 113 442 10 148-93 228-189 418-171 110 10 195 65 269 116" stroke="white" stroke-opacity=".055" stroke-width="1" />
 			</svg>
 			<div class="catalogue-hero__intro">
+				<Breadcrumbs trail={trail} />
 				<p class="catalogue-eyebrow"><span></span>Catalogue Confection Univers<span></span></p>
 				<h1 class="catalogue-hero__title"><span>L’élégance de vos équipes,</span><strong>confectionnée sur mesure.</strong></h1>
 				<p class="catalogue-hero__copy">Des tenues professionnelles, académiques et sportives pensées pour valoriser votre identité — des pièces du quotidien aux grandes cérémonies.</p>
@@ -129,39 +141,39 @@ const catalogSections = [
 
 			<div id="collections" class="catalogue-bento">
 				<a href="#toges" class="bento-tile tile-toges">
-					<img class="bento-tile__image" src="/images/toge-graduation-1.jpg" alt="" width="450" height="600" loading="eager" decoding="async" />
+					<Picture class="bento-tile__image" src="/images/toge-graduation-1.jpg" alt="Toge de graduation de la collection académique Confection Univers" sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw" loading="eager" fetchpriority="high" />
 					<span class="bento-tile__kicker">01 · Académique</span>
 					<div class="bento-tile__content"><h2>Toges & cérémonies</h2><p>6 modèles · Le grand jour, avec distinction</p></div>
 					<span class="bento-tile__arrow" aria-hidden="true">↗</span>
 				</a>
 				<a href="#travail" class="bento-tile tile-travail">
-					<img class="bento-tile__image" src="/images/tenue-travail-1.jpg" alt="" width="450" height="600" loading="eager" decoding="async" />
+					<Picture class="bento-tile__image" src="/images/tenue-travail-1.jpg" alt="Tenue de travail professionnelle confectionnée par Confection Univers" sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw" loading="eager" />
 					<span class="bento-tile__kicker">02 · Professionnels</span>
 					<div class="bento-tile__content"><h2>Tenues de travail</h2><p>4 modèles · L’allure au quotidien</p></div>
 				</a>
 				<a href="#medical" class="bento-tile tile-medical">
-					<img class="bento-tile__image" src="/images/blouse-medicale-1.jpg" alt="" width="450" height="600" loading="eager" decoding="async" />
+					<Picture class="bento-tile__image" src="/images/blouse-medicale-1.jpg" alt="Blouse médicale de la collection santé et soins Confection Univers" sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw" loading="eager" />
 					<span class="bento-tile__kicker">03 · Santé & soins</span>
 					<div class="bento-tile__content"><h2>Blouses médicales</h2><p>3 modèles · Le confort des équipes</p></div>
 				</a>
 				<a href="#africain" class="bento-tile tile-africain">
-					<img class="bento-tile__image" src="/images/costume-africain.jpg" alt="" width="450" height="900" loading="eager" decoding="async" />
+					<Picture class="bento-tile__image" src="/images/costume-africain.jpg" alt="Costume africain de luxe sur mesure en bazin et wax" sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw" loading="lazy" />
 					<span class="bento-tile__kicker">06 · Création & élégance</span>
 					<span class="bento-tile__seal" aria-hidden="true">CU</span>
 					<div class="bento-tile__content"><p class="bento-tile__overline">Une pièce d’exception</p><h2>Costume africain de luxe et moderne</h2><p>Une création élégante, pensée pour les grands moments</p></div>
 				</a>
 				<a href="#scolaire" class="bento-tile tile-scolaire">
-					<img class="bento-tile__image" src="/images/uniforme-scolaire-1.jpg" alt="" width="450" height="420" loading="eager" decoding="async" />
+					<Picture class="bento-tile__image" src="/images/uniforme-scolaire-1.jpg" alt="Uniforme scolaire confectionné aux couleurs d’un établissement" sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw" loading="lazy" />
 					<span class="bento-tile__kicker">04 · Écoles</span>
 					<div class="bento-tile__content"><h2>Uniformes scolaires</h2><p>7 modèles · L’identité de votre école</p></div>
 				</a>
 				<a href="#eps" class="bento-tile tile-eps">
-					<img class="bento-tile__image" src="/images/tenue-sport-1.jpg" alt="" width="450" height="600" loading="eager" decoding="async" />
+					<Picture class="bento-tile__image" src="/images/tenue-sport-1.jpg" alt="Ensemble EPS cinq pièces pour l’éducation physique et sportive" sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw" loading="lazy" />
 					<span class="bento-tile__kicker">05 · Éducation physique</span>
 					<div class="bento-tile__content"><h2>Tenue EPS</h2><p>5 pièces · Ensemble coordonné</p></div>
 				</a>
 				<a href="#sport" class="bento-tile tile-sport">
-					<img class="bento-tile__image" src="/images/tenue-sport-2.jpg" alt="" width="450" height="600" loading="eager" decoding="async" />
+					<Picture class="bento-tile__image" src="/images/tenue-sport-2.jpg" alt="Tenue de sport de football personnalisable pour club ou école" sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw" loading="lazy" />
 					<span class="bento-tile__kicker">07 · Clubs & disciplines</span>
 					<div class="bento-tile__content"><h2>Tenues de sport</h2><p>Football · Arts martiaux · Basketball</p></div>
 				</a>
@@ -221,14 +233,12 @@ const catalogSections = [
 											data-alt={product.alt}
 											data-caption={product.name}
 										>
-											<img
+											<Picture
 												src={product.image}
 												alt={product.alt}
 												class="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-												width="800"
-												height="600"
+												sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
 												loading={productIndex < 2 ? 'eager' : 'lazy'}
-												decoding="async"
 											/>
 										</button>
 										<div class="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-[#090811]/75 via-[#090811]/5 to-transparent"></div>

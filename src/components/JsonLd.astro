@@ -1,0 +1,27 @@
+---
+/**
+ * Injecte un ou plusieurs blocs de données structurées schema.org.
+ *
+ * Usage :
+ *   <JsonLd schema={[localBusinessSchema(), breadcrumbSchema(trail)]} />
+ *
+ * La sérialisation passe par `serializeJsonLd()` (src/lib/seo.ts) qui échappe
+ * `<`, `>` et `&` en séquences Unicode : impossible pour une description
+ * contenant `</script>` de casser le document ou d'ouvrir une injection.
+ */
+import { serializeJsonLd, type JsonLd as JsonLdType } from '../lib/seo';
+
+interface Props {
+	schema: JsonLdType | JsonLdType[];
+}
+
+const { schema } = Astro.props;
+const blocks = Array.isArray(schema) ? schema : [schema];
+const payload = blocks.filter(Boolean);
+---
+
+{
+	payload.length > 0 && (
+		<script type="application/ld+json" set:html={serializeJsonLd(payload)} />
+	)
+}

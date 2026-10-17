@@ -1,4 +1,5 @@
 ---
+import Picture from './Picture.astro';
 // Les visuels actuels illustrent les métiers de l'entreprise, sans attribuer
 // d'identité fictive aux personnes photographiées.
 const expertise = [
@@ -24,7 +25,7 @@ const expertise = [
 				<div class="team-expertise" aria-label="Nos expertises">
 				{expertise.map((item) => (
 					<div class="expertise-item">
-						<img src={item.image} alt="" loading="lazy" decoding="async" />
+						<Picture src={item.image} alt="" sizes="48px" loading="lazy" />
 						<span>{item.label}</span>
 					</div>
 				))}
@@ -33,11 +34,11 @@ const expertise = [
 
 			<div class="team-visuals">
 				<div class="team-card">
-					<img src="/images/about-facility.jpg" alt="Portrait professionnel illustrant l’accompagnement de la direction" loading="lazy" decoding="async" />
+					<Picture src="/images/about-facility.jpg" alt="Portrait professionnel illustrant l’accompagnement de la direction" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" />
 					<div class="team-card-caption"><strong>La direction</strong><span>Écoute & accompagnement</span></div>
 				</div>
 				<div class="team-card">
-					<img src="/images/production-atelier.jpg" alt="Professionnel ajustant un vêtement sur un mannequin" loading="lazy" decoding="async" />
+					<Picture src="/images/production-atelier.jpg" alt="Professionnel ajustant un vêtement sur un mannequin dans l’atelier Confection Univers" sizes="(min-width: 768px) 50vw, 100vw" loading="lazy" />
 					<div class="team-card-caption"><strong>L’atelier</strong><span>Création & confection</span></div>
 				</div>
 			</div>
@@ -220,7 +221,7 @@ const expertise = [
 		background: #172348;
 	}
 
-	.expertise-item img {
+	.expertise-item :global(img) {
 		display: block;
 		width: 100%;
 		height: 100%;
@@ -228,7 +229,7 @@ const expertise = [
 		transition: transform 0.4s ease;
 	}
 
-	.expertise-item:hover img {
+	.expertise-item:hover :global(img) {
 		transform: scale(1.06);
 	}
 
@@ -270,7 +271,7 @@ const expertise = [
 		background: #15204a;
 	}
 
-	.team-card img {
+	.team-card :global(img) {
 		display: block;
 		width: 100%;
 		height: 100%;
