@@ -1,6 +1,11 @@
 export interface BlogPost {
 	id: string;
 	title: string;
+	/**
+	 * `<title>` SERP et og:title : version courte (< 55 c.) calée sur le
+	 * mot-clé visé. Le `title` complet reste le H1 visible de l'article.
+	 */
+	seoTitle?: string;
 	excerpt: string;
 	content: string;
 	image: string;
@@ -36,6 +41,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Uniformes Scolaires',
 		date: '15 Janvier 2025',
 		author: 'Marie Diop',
+		seoTitle: 'Choisir les uniformes scolaires : 4 critères clés',
 		slug: 'choisir-uniformes-scolaires'
 	},
 	{
@@ -63,6 +69,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Tenues de Travail',
 		date: '10 Janvier 2025',
 		author: 'Jean-Pierre Ndiaye',
+		seoTitle: 'Tenues de travail : les tendances 2025',
 		slug: 'tendances-2025-tenues-travail'
 	},
 	{
@@ -90,6 +97,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Médical & Santé',
 		date: '5 Janvier 2025',
 		author: 'Dr. Fatou Sow',
+		seoTitle: 'Tenues médicales : pourquoi la qualité compte',
 		slug: 'importance-tenues-medicales'
 	},
 	{
@@ -117,6 +125,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Événements & Cérémonies',
 		date: '28 Décembre 2024',
 		author: 'Amadou Diallo',
+		seoTitle: 'Organiser une cérémonie de graduation : le guide',
 		slug: 'organiser-ceremonie-graduation'
 	},
 	{
@@ -147,6 +156,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Conseils & Tendances',
 		date: '20 Décembre 2024',
 		author: 'Sophie Mendy',
+		seoTitle: 'Entretenir ses tenues professionnelles : conseils',
 		slug: 'conseils-entretien-tenues'
 	},
 	{
@@ -174,6 +184,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Conseils & Tendances',
 		date: '15 Décembre 2024',
 		author: 'Moussa Ba',
+		seoTitle: 'Uniformes personnalisés : souder ses équipes',
 		slug: 'personnaliser-uniformes-esprit-equipe'
 	},
 	{
@@ -201,6 +212,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Services',
 		date: '1 Janvier 2025',
 		author: 'Adja D. Faye',
+		seoTitle: 'Toges de graduation : tradition et excellence',
 		slug: 'toges-graduation'
 	},
 	{
@@ -228,6 +240,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Services',
 		date: '2 Janvier 2025',
 		author: 'Adja D. Faye',
+		seoTitle: 'Uniformes scolaires : confort et durabilité',
 		slug: 'uniformes-scolaires'
 	},
 	{
@@ -255,6 +268,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Services',
 		date: '3 Janvier 2025',
 		author: 'Adja D. Faye',
+		seoTitle: 'Tenues d\'entreprise : image et confort',
 		slug: 'tenues-entreprise'
 	},
 	{
@@ -282,6 +296,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Services',
 		date: '4 Janvier 2025',
 		author: 'Adja D. Faye',
+		seoTitle: 'Kimonos : tradition et élégance de cérémonie',
 		slug: 'kimonos'
 	},
 	{
@@ -309,6 +324,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Services',
 		date: '5 Janvier 2025',
 		author: 'Adja D. Faye',
+		seoTitle: 'Blouses médicales : confort et praticité',
 		slug: 'blouses-medicales'
 	},
 	{
@@ -336,12 +352,13 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Services',
 		date: '6 Janvier 2025',
 		author: 'Adja D. Faye',
+		seoTitle: 'Toges d\'avocat : prestige et professionnalisme',
 		slug: 'toges-avocat'
 	},
 	{
 		id: '13',
 		title: 'Costumes africains : Patrimoine et élégance sénégalaise',
-		excerpt: 'Costumes africains traditionnels et contemporains inspirés du patrimoine sénégalais, utilisant tissus locaux comme bazin et wax.',
+		excerpt: "Bazin, wax et coupes contemporaines : comment l'atelier Confection Univers réinterprète le costume africain pour cérémonies et grandes occasions.",
 		content: `
 			<p>Les costumes africains sont une célébration de notre patrimoine culturel. Confection Univers crée des costumes traditionnels et contemporains qui allient héritage sénégalais et modernité.</p>
 			
@@ -363,6 +380,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Services',
 		date: '7 Janvier 2025',
 		author: 'Adja D. Faye',
+		seoTitle: 'Costumes africains : patrimoine et élégance',
 		slug: 'costumes-africains'
 	},
 	{
@@ -390,6 +408,7 @@ export const BLOG_POSTS: BlogPost[] = [
 		category: 'Services',
 		date: '8 Janvier 2025',
 		author: 'Adja D. Faye',
+		seoTitle: 'Tenues de sport : performance et confort',
 		slug: 'tenues-sport'
 	}
 ];

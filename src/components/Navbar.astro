@@ -1,4 +1,5 @@
 ---
+import Picture from './Picture.astro';
 /**
  * Header : logo (sur fond blanc), 6 liens de navigation, bouton « Demander un devis »
  * et bouton menu qui ouvre un tiroir blanc. Palette : bleu nuit (#00001C) et or (#D4AF37).
@@ -38,7 +39,7 @@ const social = [
 	</div>
 	<div class="header-inner mx-auto flex items-center justify-between gap-4">
 		<a href="/" class="logo-link logo-chip logo-chip-header shrink-0" aria-label="Confection Univers — accueil">
-			<img src="/images/logo.png" alt="Confection Univers" class="w-auto" width="2000" height="419" decoding="async" />
+			<Picture src="/images/logo.png" alt="Confection Univers — atelier de confection industrielle au Sénégal" class="w-auto" loading="eager" fetchpriority="high" />
 		</a>
 
 		<!-- Liens de navigation (grand écran) -->
@@ -65,7 +66,7 @@ const social = [
 
 <aside id="menu-drawer" class="menu-drawer fixed inset-y-0 right-0 z-[70] flex w-[min(360px,92vw)] flex-col" aria-label="Menu" aria-hidden="true">
 	<div class="flex items-center justify-between px-7 pb-4 pt-7">
-		<a href="/" aria-label="Accueil" class="logo-chip"><img src="/images/logo.png" alt="Confection Univers" class="h-12 w-auto" width="200" height="76" /></a>
+		<a href="/" aria-label="Accueil" class="logo-chip"><Picture src="/images/logo.png" alt="Confection Univers" class="h-12 w-auto" loading="eager" /></a>
 		<button type="button" id="menu-close" class="close-btn" aria-label="Fermer le menu">
 			<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18" /></svg>
 		</button>
@@ -88,7 +89,7 @@ const social = [
 				{
 					gallery.map((src) => (
 						<a href="/catalogue" class="tile block overflow-hidden rounded-xl">
-							<img src={src} alt="" class="h-full w-full object-cover" loading="lazy" decoding="async" />
+							<Picture src={src} alt="" class="h-full w-full object-cover" sizes="64px" loading="lazy" />
 						</a>
 					))
 				}

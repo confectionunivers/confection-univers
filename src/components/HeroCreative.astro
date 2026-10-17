@@ -1,4 +1,5 @@
 ---
+import Picture from './Picture.astro';
 /**
  * Hero « vitrine » reproduit d'après la référence Xriver Home 03.
  * Composition : grand titre condensé à gauche, portrait dominant à droite,
@@ -181,7 +182,7 @@ const social = [
 			class="secondary-img reveal reveal-d3"
 			aria-label="Découvrir nos toges de graduation"
 		>
-			<img src="/images/hero-toges-graduation.jpg" alt="Diplômée portant une tenue et une toge de graduation" class="h-full w-full object-cover" loading="lazy" decoding="async" />
+			<Picture src="/images/hero-toges-graduation.jpg" alt="Diplômée portant une tenue et une toge de graduation Confection Univers" class="h-full w-full object-cover" sizes="(min-width: 1024px) 40vw, 90vw" loading="lazy" />
 			<span class="secondary-img-shade" aria-hidden="true"></span>
 			<span class="secondary-img-copy" aria-hidden="true">
 				<span class="secondary-img-kicker">Nos réalisations</span>
@@ -218,7 +219,7 @@ const social = [
 			{
 				slides.map((s, idx) => (
 					<button type="button" data-thumb class:list={['thumb relative h-12 w-12 rounded-full', idx === 0 && 'is-active']} aria-label={`Afficher ${s.label}`} aria-pressed={idx === 0}>
-						<img src={s.webp} alt="" class="h-full w-full rounded-full object-cover object-top" loading="lazy" decoding="async" />
+						<Picture src={s.webp} alt="" class="h-full w-full rounded-full object-cover object-top" sizes="96px" width={s.width} height={s.height} loading="lazy" />
 						<span class="thumb-num absolute -right-1 -top-1 rounded-[4px] px-1 font-anton text-[10px] leading-[16px]">
 							{String(idx + 1).padStart(2, '0')}
 						</span>

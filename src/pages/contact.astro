@@ -2,9 +2,22 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { contactPageSchema } from '../lib/seo';
+
+const trail = [
+	{ name: 'Accueil', path: '/' },
+	{ name: 'Contact', path: '/contact' },
+];
 ---
 
-<Layout title="Contact | Confection Univers" description="Contactez Confection Univers pour vos demandes de devis en uniformes scolaires, toges de graduation, blouses médicales, tenues de travail et vêtements professionnels au Sénégal.">
+<Layout
+	title="Contact et devis | Confection Univers Thiès"
+	description="Contactez Confection Univers à Thiès : devis gratuit par téléphone, WhatsApp ou formulaire pour uniformes, toges, blouses et tenues professionnelles."
+	path="/contact"
+	breadcrumbs={trail}
+	schema={contactPageSchema()}
+>
 	<main class="relative">
 		<Navbar />
 		
@@ -14,6 +27,7 @@ import Footer from '../components/Footer.astro';
 			<div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_85%_60%_at_100%_0%,rgba(198,161,95,0.14),transparent_55%),radial-gradient(ellipse_70%_50%_at_0%_100%,rgba(0,0,42,0.08),transparent_50%)]"></div>
 			
 			<div class="mx-auto max-w-7xl px-6">
+				<Breadcrumbs trail={trail} />
 				<p class="mb-5 text-[11px] font-semibold uppercase tracking-[0.38em] text-primary md:text-xs">
 					Contactez-nous
 				</p>

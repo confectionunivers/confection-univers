@@ -5,6 +5,9 @@ import Footer from '../../components/Footer.astro';
 import BlogSidebar from '../../components/BlogSidebar.astro';
 import CommentForm from '../../components/CommentForm.astro';
 import { getPostBySlug, BLOG_POSTS } from '../../lib/blog-data';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import Picture from '../../components/Picture.astro';
+import { articleSchema, frenchDateToIso, relatedPosts } from '../../lib/seo';
 
 export function getStaticPaths() {
 	return BLOG_POSTS.map((post) => {
@@ -25,9 +28,34 @@ const post = getPostBySlug(slug);
 if (!post) {
 	return Astro.redirect('/404');
 }
+
+const published = frenchDateToIso(post.date);
+
+const trail = [
+	{ name: 'Accueil', path: '/' },
+	{ name: 'Blog', path: '/blog' },
+	{ name: post.title.length > 42 ? `${post.title.slice(0, 42).trim()}…` : post.title, path: `/blog/${post.slug}` },
+];
+
+// Maillage éditorial : garde le visiteur (et le robot) dans le même thème.
+const related = relatedPosts(post, 3);
 ---
 
-<Layout title={`${post.title} - Confection Univers`}>
+<Layout
+	title={post.seoTitle ?? post.title}
+	description={post.excerpt}
+	path={`/blog/${post.slug}`}
+	ogType="article"
+	publishedTime={published}
+	modifiedTime={published}
+	author={post.author}
+	image={post.image}
+	imageAlt={post.title}
+	keywords={[post.category, 'confection Sénégal', 'Confection Univers']}
+	section={post.category}
+	breadcrumbs={trail}
+	schema={articleSchema(post)}
+>
 	<main class="relative">
 		<Navbar />
 		
@@ -39,6 +67,7 @@ if (!post) {
 			</div>
 
 			<div class="mx-auto max-w-7xl px-6 md:px-10">
+				<Breadcrumbs trail={trail} />
 				<!-- Category -->
 				<div class="mb-4 inline-block rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider" style="background: rgba(245, 181, 68, 0.9); color: #00001C;">
 					{post.category}
@@ -75,10 +104,13 @@ if (!post) {
 					<div class="lg:col-span-8">
 						<!-- Featured Image -->
 						<div class="mb-8 overflow-hidden rounded-2xl shadow-2xl" style="border: 1px solid rgba(255, 255, 255, 0.1);">
-							<img
+							<Picture
 								src={post.image}
 								alt={post.title}
 								class="h-full w-full object-cover"
+								sizes="(min-width: 1024px) 66vw, 100vw"
+								loading="eager"
+								fetchpriority="high"
 							/>
 						</div>
 
@@ -88,6 +120,27 @@ if (!post) {
 								<div set:html={post.content} class="article-content" />
 							</div>
 						</article>
+
+						<!-- Articles liés : maillage thématique + temps de visite -->
+						{related.length > 0 && (
+							<nav class="mt-12" aria-label="Articles liés">
+								<h2 class="mb-5 font-display text-lg font-bold uppercase tracking-tight text-white">À lire aussi</h2>
+								<ul class="grid gap-4 sm:grid-cols-3">
+									{related.map((entry) => (
+										<li>
+											<a
+												href={`/blog/${entry.slug}`}
+												class="group flex h-full flex-col rounded-2xl border border-white/10 bg-[#00002a] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#F5B544]/40"
+											>
+												<span class="text-[10px] font-bold uppercase tracking-widest" style="color: #F5B544;">{entry.category}</span>
+												<span class="mt-2 text-sm font-semibold leading-snug text-white group-hover:text-[#F5B544]">{entry.title}</span>
+												<span class="mt-auto pt-3 text-xs" style="color: #A0ACC6;">Lire l'article →</span>
+											</a>
+										</li>
+									))}
+								</ul>
+							</nav>
+						)}
 
 						<!-- CTA Block -->
 						<div class="mt-12 rounded-2xl p-8 shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[#F5B544]/20" style="background: linear-gradient(135deg, #00002a 0%, #0E172A 100%); border: 2px solid rgba(245, 181, 68, 0.3);">

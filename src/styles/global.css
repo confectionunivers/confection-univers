@@ -1,9 +1,64 @@
+/* ------------------------------------------------------------------ */
+/*  Polices auto-hébergées                                              */
+/*                                                                      */
+/*  Les fichiers woff2 vivent dans public/fonts/ et sont déclarés ici   */
+/*  plutôt que chargés depuis fonts.googleapis.com :                    */
+/*    - aucune feuille de style externe bloquante (gain LCP),           */
+/*    - pas de résolution DNS + poignée TLS vers fonts.gstatic.com,     */
+/*    - en-tête `Cache-Control: immutable` posé sur notre propre        */
+/*      domaine (voir vercel.json) => zéro re-téléchargement,           */
+/*    - aucune donnée visiteur transmise à un tiers (RGPD).             */
+/*                                                                      */
+/*  `font-display: swap` évite le texte invisible pendant le chargement.*/
+/*  Seuls les poids réellement utilisés par la page sont téléchargés.   */
+/* ------------------------------------------------------------------ */
+
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('/fonts/inter-400.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url('/fonts/inter-500.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url('/fonts/inter-600.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('/fonts/inter-700.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Space Grotesk';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('/fonts/space-grotesk-400.woff2') format('woff2');
+}
+
 @font-face {
 	font-family: 'Space Grotesk';
 	font-style: normal;
 	font-weight: 500;
 	font-display: swap;
-	src: url('/fonts/space-grotesk-500.woff') format('woff');
+	src: url('/fonts/space-grotesk-500.woff2') format('woff2');
 }
 
 @font-face {
@@ -11,23 +66,15 @@
 	font-style: normal;
 	font-weight: 600;
 	font-display: swap;
-	src: url('/fonts/space-grotesk-600.woff') format('woff');
+	src: url('/fonts/space-grotesk-600.woff2') format('woff2');
 }
 
 @font-face {
-	font-family: 'Marcellus';
-	font-style: normal;
-	font-weight: 400;
-	font-display: swap;
-	src: url('/fonts/marcellus-400.woff') format('woff');
-}
-
-@font-face {
-	font-family: 'Playfair Display';
+	font-family: 'Space Grotesk';
 	font-style: normal;
 	font-weight: 700;
 	font-display: swap;
-	src: url('/fonts/playfair-700.woff') format('woff');
+	src: url('/fonts/space-grotesk-700.woff2') format('woff2');
 }
 
 @font-face {
@@ -35,7 +82,23 @@
 	font-style: normal;
 	font-weight: 400;
 	font-display: swap;
-	src: url('/fonts/anton-400.woff') format('woff');
+	src: url('/fonts/anton-400.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Marcellus';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('/fonts/marcellus-400.woff2') format('woff2');
+}
+
+@font-face {
+	font-family: 'Playfair Display';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('/fonts/playfair-700.woff2') format('woff2');
 }
 
 @import 'tailwindcss';
@@ -85,6 +148,15 @@
 	}
 	::selection {
 		@apply bg-primary text-background;
+	}
+
+	/*
+	 * <Picture> ne doit pas créer de boîte : l'<img> qu'il contient doit se
+	 * comporter exactement comme avant (mêmes sélecteurs CSS parents, mêmes
+	 * dimensions). `display: contents` garantit cette transparence de rendu.
+	 */
+	picture {
+		display: contents;
 	}
 }
 

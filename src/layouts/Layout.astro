@@ -1,72 +1,184 @@
 ---
+/**
+ * Layout racine — tout le <head> SEO du site est posé ici.
+ *
+ * Chaque page fournit au minimum `title` ; le reste (canonical, og:url,
+ * robots, JSON-LD Organization/WebSite/BreadcrumbList, favicones, polices)
+ * est dérivé automatiquement. Voir `src/lib/seo.ts` pour les valeurs.
+ *
+ * Checklist couverte :
+ *   title ≤ 60 c. · description ≤ 155 c. · canonical absolu sans slash final
+ *   og:* complets et propres à la page · twitter:* · og:image 1200×630
+ *   robots index/follow · theme-color · favicones multi-formats + manifest
+ *   preload des 2 polices critiques · polices auto-hébergées (pas de Google)
+ *   JSON-LD : Organization+LocalBusiness, WebSite, BreadcrumbList, + page
+ */
 import '../styles/global.css';
 import ScrollProgress from '../components/ScrollProgress.astro';
+import JsonLd from '../components/JsonLd.astro';
+import {
+	SITE,
+	buildDescription,
+	buildTitle,
+	canonicalUrl,
+	absoluteUrl,
+	stripTrailingSlash,
+	localBusinessSchema,
+	websiteSchema,
+	breadcrumbSchema,
+	type JsonLd as JsonLdType,
+} from '../lib/seo';
+import { getImageMeta } from '../lib/image-meta';
 
 interface Props {
+	/** Texte du `<title>`. La marque est ajoutée si elle est absente. */
 	title: string;
+	/** Meta description. Repli sur `SITE.defaultDescription` si vide/courte. */
 	description?: string;
+	/**
+	 * Chemin de la page pour le canonical et og:url.
+	 * Défault : le chemin réellement demandé (`Astro.url.pathname`).
+	 */
+	path?: string;
+	/** Image de partage (og:image / twitter:image). Doit idéalement faire 1200×630. */
+	image?: string;
+	imageAlt?: string;
+	/** `article` pour les contenus datés, sinon `website`. */
+	ogType?: 'website' | 'article';
+	/** Passe la page en `noindex, nofollow` et l'exclut du partage social. */
+	noindex?: boolean;
+	publishedTime?: string;
+	modifiedTime?: string;
+	author?: string;
+	/** Mots-clés schema.org (Google ignore la balise meta keywords). */
+	keywords?: string[];
+	/** Rubrique éditoriale (`article:section`), ex. la catégorie d'un article. */
+	section?: string;
+	/** Fil d'Ariane : génère à la fois le schema BreadcrumbList et l'ancre. */
+	breadcrumbs?: { name: string; path: string }[];
+	/** Schémas spécifiques à la page, ajoutés aux schémas globaux. */
+	schema?: JsonLdType | JsonLdType[];
 }
 
-const { title, description = 'Confection Univers est une entreprise de confection industrielle spécialisée dans les uniformes scolaires, toges de graduation, tenues de travail, tenues de sport, uniformes d\'écoles coraniques et blouses médicales au Sénégal.' } = Astro.props;
+const {
+	title,
+	description,
+	path,
+	image = SITE.images.ogDefault,
+	imageAlt = SITE.images.ogDefaultAlt,
+	ogType = 'website',
+	noindex = false,
+	publishedTime,
+	modifiedTime,
+	author,
+	keywords,
+	section,
+	breadcrumbs,
+	schema,
+} = Astro.props;
+
+/* ---------------------------------------------------------------- */
+/*  Dérivations                                                      */
+/* ---------------------------------------------------------------- */
+
+// Chemin canonique de la page : celui déclaré, sinon celui réellement servi.
+// On retire query string et fragment (`/blog?category=x` ne doit pas devenir
+// une URL canonique distincte) puis le slash final.
+const rawPath = path ?? Astro.url.pathname;
+const pagePath = stripTrailingSlash(rawPath.split('?')[0].split('#')[0]) || '/';
+
+const pageTitle = buildTitle(title);
+const pageDescription = buildDescription(description);
+const canonical = canonicalUrl(pagePath);
+const ogImage = absoluteUrl(image);
+
+// Dimensions RÉELLES de l'image partagée : les annoncer fausses fait échouer
+// la validation des cartes sociales. Le manifeste d'images les connaît ; à
+// défaut on retombe sur celles de la carte de partage par défaut (1200×630).
+const ogImageMeta = getImageMeta(image);
+const ogWidth = ogImageMeta?.w ?? 1200;
+const ogHeight = ogImageMeta?.h ?? 630;
+
+// Le schéma Organization/WebSite est identique sur tout le site : il porte
+// l'identité et le NAP. Les schémas de page viennent s'y ajouter.
+const globalSchema: JsonLdType[] = [localBusinessSchema(), websiteSchema()];
+const pageSchema: JsonLdType[] = [
+	...(breadcrumbs?.length ? [breadcrumbSchema(breadcrumbs)] : []),
+	...(Array.isArray(schema) ? schema : schema ? [schema] : []),
+];
+
+const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+
+// `max-image-preview:large` autorise Google à afficher la grande miniature
+// dans les résultats enrichis — indispensable pour un site très visuel.
 ---
 
 <!doctype html>
-<html lang="fr" class="dark scroll-smooth border-0 m-0 p-0 bg-[#00002a]" style="border: none !important; outline: none !important; box-shadow: none !important;">
+<html lang={SITE.lang} class="dark scroll-smooth border-0 m-0 p-0 bg-[#00002a]" style="border: none !important; outline: none !important; box-shadow: none !important;">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="icon" type="image/png" href="/favicon.png" />
-		<meta name="description" content={description} />
-		<title>{title}</title>
-		
-		<!-- Open Graph / Facebook -->
-		<meta property="og:type" content="website" />
-		<meta property="og:url" content="https://confectionunivers.com/" />
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
-		<meta property="og:image" content="https://confectionunivers.com/images/logo.png" />
-		<meta property="og:site_name" content="Confection Univers" />
-		
-		<!-- Twitter -->
-		<meta property="twitter:card" content="summary_large_image" />
-		<meta property="twitter:url" content="https://confectionunivers.com/" />
-		<meta property="twitter:title" content={title} />
-		<meta property="twitter:description" content={description} />
-		<meta property="twitter:image" content="https://confectionunivers.com/images/logo.png" />
-		
-		<!-- Schema.org JSON-LD -->
-		<script type="application/ld+json">
-		{
-			"@context": "https://schema.org",
-			"@type": "Organization",
-			"name": "Confection Univers",
-			"description": "Entreprise de confection industrielle spécialisée dans les uniformes et vêtements professionnels",
-			"url": "https://confectionunivers.com",
-			"logo": "https://confectionunivers.com/images/logo.png",
-			"address": {
-				"@type": "PostalAddress",
-				"streetAddress": "Keur Massamba Geuye 2, Lot 129 Bis",
-				"addressLocality": "Thiès",
-				"addressCountry": "SN"
-			},
-			"contactPoint": {
-				"@type": "ContactPoint",
-				"telephone": "+221772960776",
-				"email": "confectionunivers@gmail.com",
-				"contactType": "sales"
-			},
-			"sameAs": [
-				"https://facebook.com/confectionunivers",
-				"https://instagram.com/confectionunivers",
-				"https://linkedin.com/company/confectionunivers"
-			]
-		}
-		</script>
-		
-		<link
-			href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-			rel="stylesheet"
-		/>
+
+		{/* --- Identité SERP ---------------------------------------- */}
+		<title>{pageTitle}</title>
+		<meta name="description" content={pageDescription} />
+		<meta name="robots" content={robotsContent} />
+		<link rel="canonical" href={canonical} />
+		<meta name="author" content={author ?? SITE.name} />
+		<meta name="theme-color" content="#00001C" />
+		<meta name="color-scheme" content="dark" />
+		<meta name="referrer" content="strict-origin-when-cross-origin" />
+		{keywords?.length && <meta name="keywords" content={keywords.join(', ')} />}
+
+		{/* --- Favicones -------------------------------------------- */}
+		{/* SVG en premier : net à toute taille et 4x plus léger qu'un PNG. */}
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="icon" href="/favicon-32x32.png" sizes="32x32" type="image/png" />
+		<link rel="icon" href="/favicon.png" sizes="64x64" type="image/png" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+
+		{/* --- Polices critiques ------------------------------------ */}
+		{/* Inter 400 = corps de texte, Space Grotesk 600 = titres H1.      */}
+		{/* Préchargées pour que le navigateur les découvre dès le HTML      */}
+		{/* pré-analyseur, sans attendre la feuille de style : c'est ce qui  */}
+		{/* supprime le basculement de police visible (CLS/FOUT).            */}
+		<link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin />
+		<link rel="preload" href="/fonts/space-grotesk-600.woff2" as="font" type="font/woff2" crossorigin />
+
+		{/* --- Open Graph ------------------------------------------- */}
+		<meta property="og:type" content={ogType} />
+		<meta property="og:site_name" content={SITE.brand} />
+		<meta property="og:locale" content={SITE.locale} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={pageDescription} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:url" content={ogImage} />
+		<meta property="og:image:secure_url" content={ogImage} />
+		<meta property="og:image:alt" content={imageAlt} />
+		<meta property="og:image:width" content={String(ogWidth)} />
+		<meta property="og:image:height" content={String(ogHeight)} />
+
+		{/* --- Twitter / X ------------------------------------------ */}
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:url" content={canonical} />
+		<meta name="twitter:title" content={pageTitle} />
+		<meta name="twitter:description" content={pageDescription} />
+		<meta name="twitter:image" content={ogImage} />
+		<meta name="twitter:image:alt" content={imageAlt} />
+
+		{/* --- Métadonnées article ---------------------------------- */}
+		{ogType === 'article' && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+		{ogType === 'article' && modifiedTime && <meta property="article:modified_time" content={modifiedTime} />}
+		{ogType === 'article' && author && <meta property="article:author" content={author} />}
+		{ogType === 'article' && <meta property="article:section" content={section ?? 'Confection industrielle'} />}
+
+		{/* --- Données structurées ---------------------------------- */}
+		<JsonLd schema={[...globalSchema, ...pageSchema]} />
+
+		{/* Extensions par page (ex. schéma additionnel, hreflang…). */}
+		<slot name="head" />
 	</head>
 	<body class="bg-background font-sans text-foreground border-0 m-0 p-0" style="border: none !important; outline: none !important; box-shadow: none !important;">
 		<ScrollProgress />

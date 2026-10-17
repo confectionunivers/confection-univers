@@ -29,3 +29,12 @@ pnpm-debug.log*
 
 # other projects
 percepstra/
+
+# variantes d'images responsives (régénérées par `npm run images:optimize`)
+public/images/gen/
+
+# cache d'optimisation (empreintes + manifeste consommé par <Picture>)
+.image-cache/
+
+# fichiers de travail temporaires
+.tmp/

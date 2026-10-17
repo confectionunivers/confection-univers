@@ -1,0 +1,67 @@
+---
+/**
+ * Page 404 — auparavant inexistante : une URL cassée renvoyait la page
+ * d'accueil (ou une erreur brute selon l'hébergeur), ce qui faisait indexer
+ * du contenu dupliqué avec un code 200 (« soft 404 », pénalisant).
+ *
+ * Astro sert ce fichier avec le statut 404 sur les hébergeurs statiques
+ * compatibles (Vercel, Netlify). `noindex` interdit toute indexation.
+ */
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import { SERVICES } from '../lib/site-data';
+---
+
+<Layout
+	title="Page introuvable"
+	description="La page demandée n'existe pas ou a été déplacée. Retrouvez le catalogue, les services et les collections de Confection Univers."
+	path="/404"
+	noindex
+>
+	<main class="relative">
+		<Navbar />
+
+		<section class="relative flex min-h-[70vh] flex-col items-center justify-center overflow-hidden px-6 pb-20 pt-40 text-center">
+			<div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_70%_50%_at_50%_0%,rgba(198,161,95,0.12),transparent_60%)]"></div>
+
+			<p class="font-display text-[clamp(4rem,14vw,9rem)] font-bold leading-none tracking-tight text-primary/25">404</p>
+			<h1 class="mt-2 font-display text-2xl font-semibold tracking-tight text-foreground md:text-4xl">
+				Cette page n'existe pas
+			</h1>
+			<p class="mt-4 max-w-xl text-base leading-relaxed text-foreground/70">
+				Le lien est peut-être ancien ou mal orthographié. Voici les rubriques les plus consultées du site Confection Univers.
+			</p>
+
+			<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+				<a href="/" class="rounded-full bg-primary px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.18em] text-background transition-transform hover:scale-105">
+					Retour à l'accueil
+				</a>
+				<a href="/catalogue" class="rounded-full border border-primary/40 px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.18em] text-foreground transition-colors hover:border-primary hover:text-primary">
+					Voir le catalogue
+				</a>
+				<a href="/contact" class="rounded-full border border-white/15 px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.18em] text-foreground/70 transition-colors hover:border-primary/50 hover:text-primary">
+					Nous contacter
+				</a>
+			</div>
+
+			<nav aria-label="Prestations populaires" class="mt-12 w-full max-w-3xl">
+				<h2 class="mb-4 text-[11px] font-semibold uppercase tracking-[0.2em] text-primary/70">Prestations populaires</h2>
+				<ul class="flex flex-wrap justify-center gap-2">
+					{SERVICES.map((service) => (
+						<li>
+							<a
+								href={`/services/${service.slug}`}
+								class="rounded-full border border-white/10 px-4 py-2 text-xs font-semibold text-foreground/70 transition-colors hover:border-primary/50 hover:text-primary"
+							>
+								{service.title}
+							</a>
+						</li>
+					))}
+				</ul>
+			</nav>
+		</section>
+
+		<Footer />
+	</main>
+</Layout>

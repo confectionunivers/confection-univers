@@ -1,4 +1,5 @@
 ---
+import { SERVICES, COLLECTIONS } from '../lib/site-data';
 ---
 
 <footer class="relative overflow-hidden border-0" style="background: #00001C;">
@@ -51,17 +52,50 @@
 			</div>
 
 			<!-- Navigation Columns -->
-			<div class="grid grid-cols-2 gap-12 sm:grid-cols-3">
+			<!--
+				Liens pied de page : chaque page de service et chaque collection
+				reçoit ici un lien interne depuis toutes les pages du site.
+				C'est le maillage qui permet à Google de découvrir et de pondérer
+				ces pages profondes (sinon atteignables uniquement depuis /services).
+			-->
+			<div class="grid grid-cols-2 gap-12 md:grid-cols-4">
 				<div>
 					<h4 class="mb-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-[rgba(250,204,107,0.7)]">Navigation</h4>
 					<ul class="space-y-4">
+						<li><a href="/" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Accueil</a></li>
 						<li><a href="/about" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">À propos</a></li>
 						<li><a href="/services" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Services</a></li>
-						<li><a href="/catalogue" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Produits</a></li>
+						<li><a href="/catalogue" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Catalogue</a></li>
+						<li><a href="/products" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Produits</a></li>
+						<li><a href="/blog" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Blog</a></li>
 						<li><a href="/contact" class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">Contact</a></li>
 					</ul>
 				</div>
-				<div class="col-span-2 sm:col-span-1">
+				<div>
+					<h4 class="mb-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-[rgba(250,204,107,0.7)]">Nos prestations</h4>
+					<ul class="space-y-4">
+						{SERVICES.map((service) => (
+							<li>
+								<a href={`/services/${service.slug}`} class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">
+									{service.title}
+								</a>
+							</li>
+						))}
+					</ul>
+				</div>
+				<div>
+					<h4 class="mb-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-[rgba(250,204,107,0.7)]">Collections</h4>
+					<ul class="space-y-4">
+						{COLLECTIONS.map((collection) => (
+							<li>
+								<a href={`/collections/${collection.slug}`} class="text-sm font-medium text-foreground/80 transition-colors hover:text-[#FACC6B] hover:text-white">
+									{collection.name}
+								</a>
+							</li>
+						))}
+					</ul>
+				</div>
+				<div class="col-span-2 md:col-span-1">
 					<h4 class="mb-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-[rgba(250,204,107,0.7)]">Suivez-nous</h4>
 					<div class="flex gap-3">
 						<a href="https://facebook.com/confectionunivers" target="_blank" rel="noopener noreferrer" class="cta-button-secondary group relative flex h-10 w-10 items-center justify-center rounded-full border-2 border-[rgba(250,204,107,0.3)] bg-[rgba(0,0,0,0.3)] text-[#F9FAFB] transition-all duration-400 hover:bg-[rgba(0,0,0,0.5)] hover:border-[rgba(250,204,107,0.5)]" aria-label="Facebook">

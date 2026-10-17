@@ -1,10 +1,26 @@
 ---
+import Picture from '../components/Picture.astro';
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { aboutPageSchema, itemListSchema, SERVICES } from '../lib/seo';
+
+const trail = [
+	{ name: 'Accueil', path: '/' },
+	{ name: 'À propos', path: '/about' },
+];
 ---
 
-<Layout title="À Propos | Confection Univers" description="Confection Univers est une entreprise sénégalaise de confection de vêtements professionnels. Depuis environ cinq ans, elle propose des uniformes scolaires, des toges de graduation, des blouses médicales et des tenues de travail.">
+<Layout
+	title="À propos de Confection Univers, atelier de Thiès"
+	description="Atelier Confection Univers à Thiès : cinq ans de confection industrielle d'uniformes scolaires, toges, blouses médicales et tenues de travail au Sénégal."
+	path="/about"
+	image="/images/about-facility.jpg"
+	imageAlt="Atelier de confection Confection Univers à Thiès, Sénégal"
+	breadcrumbs={trail}
+	schema={[aboutPageSchema(), itemListSchema('Prestations de confection', SERVICES.map((s) => ({ name: s.title, url: `/services/${s.slug}`, image: s.image })))]}
+>
 	<main class="relative">
 		<Navbar />
 		
@@ -14,6 +30,7 @@ import Footer from '../components/Footer.astro';
 			<div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_85%_60%_at_100%_0%,rgba(198,161,95,0.14),transparent_55%),radial-gradient(ellipse_70%_50%_at_0%_100%,rgba(0,0,42,0.08),transparent_50%)]"></div>
 			
 			<div class="mx-auto max-w-7xl px-6">
+				<Breadcrumbs trail={trail} />
 				<p class="mb-5 text-[11px] font-semibold uppercase tracking-[0.38em] text-primary md:text-xs">
 					Notre histoire
 				</p>
@@ -69,10 +86,12 @@ import Footer from '../components/Footer.astro';
 						<div class="space-y-16">
 							<!-- Image with overlay text -->
 							<div class="about-image-wrapper relative aspect-[16/9] overflow-hidden rounded-2xl shadow-2xl ring-1 ring-primary/10">
-								<img
+								<Picture
 									src="/images/about-facility.jpg"
 									class="about-parallax-img h-full w-full object-cover"
-									alt="Installation de confection de vêtements"
+									alt="Installation de confection de vêtements de l'atelier Confection Univers"
+									sizes="(min-width: 1024px) 50vw, 100vw"
+									loading="lazy"
 								/>
 								<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
 								<div class="absolute bottom-0 left-0 right-0 p-8">
@@ -152,10 +171,12 @@ import Footer from '../components/Footer.astro';
 				<div class="grid gap-12 md:grid-cols-3">
 					<div class="story-card group relative overflow-hidden rounded-3xl border border-primary/15 bg-surface/30 transition-all duration-500 hover:border-primary/40 hover:shadow-2xl hover:-translate-y-2">
 						<div class="aspect-[4/3] overflow-hidden">
-							<img
+							<Picture
 								src="/images/toge-graduation.jpg"
 								class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-								alt="Toges de graduation"
+								alt="Toges de graduation confectionnés par Confection Univers"
+								sizes="(min-width: 768px) 33vw, 100vw"
+								loading="lazy"
 							/>
 							<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent"></div>
 						</div>
@@ -174,10 +195,12 @@ import Footer from '../components/Footer.astro';
 
 					<div class="story-card group relative overflow-hidden rounded-3xl border border-primary/15 bg-surface/30 transition-all duration-500 hover:border-primary/40 hover:shadow-2xl hover:-translate-y-2">
 						<div class="aspect-[4/3] overflow-hidden">
-							<img
+							<Picture
 								src="/images/tenue-travail.jpg"
 								class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-								alt="Tenues de travail"
+								alt="Tenues de travail confectionnés par Confection Univers"
+								sizes="(min-width: 768px) 33vw, 100vw"
+								loading="lazy"
 							/>
 							<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent"></div>
 						</div>
@@ -196,10 +219,12 @@ import Footer from '../components/Footer.astro';
 
 					<div class="story-card group relative overflow-hidden rounded-3xl border border-primary/15 bg-surface/30 transition-all duration-500 hover:border-primary/40 hover:shadow-2xl hover:-translate-y-2">
 						<div class="aspect-[4/3] overflow-hidden">
-							<img
+							<Picture
 								src="/images/kimono.jpg"
 								class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-								alt="Kimono arts martiaux"
+								alt="Kimono arts martiaux confectionnés par Confection Univers"
+								sizes="(min-width: 768px) 33vw, 100vw"
+								loading="lazy"
 							/>
 							<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent"></div>
 						</div>

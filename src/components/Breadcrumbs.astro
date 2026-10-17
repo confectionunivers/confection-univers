@@ -1,0 +1,63 @@
+---
+/**
+ * Fil d'Ariane visible — maillage interne + signaux de hiérarchie.
+ *
+ * Double intérêt SEO :
+ *   1. liens contextuels depuis chaque page profonde vers ses parentes
+ *      (le crawl des pages services / collections / blog s'en trouve renforcé) ;
+ *   2. cohérence avec le schéma `BreadcrumbList` émis par le Layout, ce qui
+ *      permet à Google d'afficher le chemin sous le titre du résultat.
+ *
+ * Le composant ne rend rien si le chemin ne comporte qu'un seul niveau
+ * (l'accueil) : un fil d'Ariane d'un seul cran n'apporte aucun signal.
+ *
+ * À placer en tête du conteneur de hero de la page : il ne porte aucune
+ * marge verticale propre au-delà d'un petit espacement sous la ligne.
+ */
+interface Props {
+	trail: { name: string; path: string }[];
+	class?: string;
+}
+
+const { trail, class: className = '' } = Astro.props;
+---
+
+{
+	trail.length > 1 && (
+		<nav aria-label="Fil d'Ariane" class:list={['breadcrumbs', className]}>
+			<ol class="flex flex-wrap items-center gap-x-2 gap-y-1">
+				{trail.map((crumb, index) => {
+					const isLast = index === trail.length - 1;
+					return (
+						<li class="flex items-center gap-2">
+							{isLast ? (
+								<span aria-current="page" class="text-foreground/60">
+									{crumb.name}
+								</span>
+							) : (
+								<a href={crumb.path} class="text-foreground/45 transition-colors hover:text-primary">
+									{crumb.name}
+								</a>
+							)}
+							{!isLast && (
+								<span aria-hidden="true" class="text-foreground/25">
+									/
+								</span>
+							)}
+						</li>
+					);
+				})}
+			</ol>
+		</nav>
+	)
+}
+
+<style>
+	.breadcrumbs {
+		margin-bottom: 1.25rem;
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+	}
+</style>

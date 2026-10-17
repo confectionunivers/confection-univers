@@ -2,69 +2,41 @@
 import Layout from '../../../layouts/Layout.astro';
 import Navbar from '../../../components/Navbar.astro';
 import Footer from '../../../components/Footer.astro';
+import Breadcrumbs from '../../../components/Breadcrumbs.astro';
+import Picture from '../../../components/Picture.astro';
+import { SERVICES, getService } from '../../../lib/site-data';
+import { relatedServices, serviceSchema } from '../../../lib/seo';
 
 export async function getStaticPaths() {
-	const services = [
-		{
-			slug: 'toges-graduation',
-			title: 'Toges de graduation',
-			description: 'Toges de graduation et tenues académiques personnalisées pour les universités et grandes écoles de Dakar et Thiès, confectionnées avec des tissus de qualité premium.',
-			image: '/images/toge-graduation.jpg',
-		},
-		{
-			slug: 'uniformes-scolaires',
-			title: 'Uniformes scolaires',
-			description: 'Programmes complets d\'uniformes scolaires pour les établissements primaires et secondaires du Sénégal, incluant chemises, pantalons et jupes sur mesure.',
-			image: '/images/uniforme-scolaire.jpg',
-		},
-		{
-			slug: 'tenue-travail',
-			title: 'Tenue de Travail',
-			description: 'Tenues de travail professionnelles pour les entreprises et industries sénégalaises, alliant confort, durabilité et image de marque.',
-			image: '/images/tenue-travail.jpg',
-		},
-		{
-			slug: 'kimonos',
-			title: 'Kimonos',
-			description: 'Kimonos traditionnels et modernes confectionnés avec des tissus de qualité, parfaits pour les cérémonies culturelles et événements spéciaux au Sénégal.',
-			image: '/images/kimono.jpg',
-		},
-		{
-			slug: 'blouses-medicales',
-			title: 'Blouses médicales',
-			description: 'Blouses médicales confortables et fonctionnelles pour le personnel des hôpitaux et cliniques de Dakar et Thiès, avec poches pratiques et tissus faciles d\'entretien.',
-			image: '/images/blouse-medicale.jpg',
-		},
-		{
-			slug: 'toges-avocat',
-			title: 'Toges d\'avocat',
-			description: 'Toges d\'avocat et tenues juridiques conformes aux standards du barreau sénégalais, confectionnées avec précision pour les professionnels du droit.',
-			image: '/images/toge-avocat.jpg',
-		},
-		{
-			slug: 'costumes-africains',
-			title: 'Costumes africains',
-			description: 'Costumes africains traditionnels et contemporains inspirés du patrimoine sénégalais, utilisant des tissus locaux comme le bazin et le wax.',
-			image: '/images/costume-africain.jpg',
-		},
-		{
-			slug: 'tenues-sport',
-			title: 'Tenues de sport',
-			description: 'Tenues de sport et maillots d\'équipe pour les clubs, écoles et associations sportives du Sénégal, conçus pour la performance et le confort.',
-			image: '/images/tenue-sport.jpg',
-		},
-	];
-
-	return services.map((service) => ({
+	// src/lib/site-data.ts est la source unique : pages, sitemap, schémas.
+	return SERVICES.map((service) => ({
 		params: { slug: service.slug },
 		props: { service },
 	}));
 }
 
 const { service } = Astro.props;
+
+const trail = [
+	{ name: 'Accueil', path: '/' },
+	{ name: 'Services', path: '/services' },
+	{ name: service.title, path: `/services/${service.slug}` },
+];
+
+// Maillage : trois prestations sœurs en pied de page.
+const related = relatedServices(service, 3);
 ---
 
-<Layout title={`${service.title} - Confection Univers`} description={service.description}>
+<Layout
+	title={service.seoTitle}
+	description={service.description}
+	path={`/services/${service.slug}`}
+	image={service.image}
+	imageAlt={`${service.title} confectionnés par l'atelier Confection Univers au Sénégal`}
+	keywords={service.keywords}
+	breadcrumbs={trail}
+	schema={serviceSchema(getService(service.slug) ?? service)}
+>
 	<Navbar />
 	
 	<section class="relative z-10 py-24 md:py-32">
@@ -75,6 +47,7 @@ const { service } = Astro.props;
 		</div>
 
 		<div class="mx-auto max-w-7xl px-6">
+			<Breadcrumbs trail={trail} />
 			<a href="/services" class="mb-8 inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.2em] text-[#FACC6B] hover:gap-3 transition-all">
 				<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -84,12 +57,13 @@ const { service } = Astro.props;
 
 			<div class="grid gap-12 lg:grid-cols-2">
 				<div class="relative aspect-[4/3] overflow-hidden rounded-[2rem]">
-					<img
+					<Picture
 						src={service.image}
-						alt={service.title}
+						alt={`${service.title} : réalisation de l'atelier Confection Univers au Sénégal`}
 						class="h-full w-full object-cover"
-						width="800"
-						height="600"
+						sizes="(min-width: 1024px) 50vw, 100vw"
+						loading="eager"
+						fetchpriority="high"
 					/>
 				</div>
 
@@ -142,5 +116,23 @@ const { service } = Astro.props;
 		</div>
 	</section>
 	
+	<!-- Prestations sœurs : maillage interne vers les autres pages de service -->
+	<section class="relative z-10 pb-24 md:pb-32">
+		<div class="mx-auto max-w-7xl px-6">
+			<h2 class="mb-6 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#FACC6B]">Autres prestations de confection</h2>
+			<div class="grid gap-4 sm:grid-cols-3">
+				{related.map((entry) => (
+					<a
+						href={`/services/${entry.slug}`}
+						class="group rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#FACC6B]/40"
+					>
+						<span class="block font-display text-lg font-semibold text-[#F9FAFB] group-hover:text-[#FACC6B]">{entry.title}</span>
+						<span class="mt-2 block text-sm leading-relaxed text-foreground/60">{entry.description}</span>
+					</a>
+				))}
+			</div>
+		</div>
+	</section>
+
 	<Footer />
 </Layout>

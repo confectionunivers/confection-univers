@@ -1,4 +1,5 @@
 ---
+import Picture from './Picture.astro';
 const PROJECTS = [
 	{
 		title: 'Uniformes scolaires',
@@ -237,9 +238,11 @@ const PROJECTS = [
 						<div class="project-card">
 							<!-- Left: Image Case -->
 							<div class="project-image-case">
-								<img
+								<Picture
 									src={`/images/${p.img}`}
 									alt={p.title}
+									class="h-full w-full object-cover"
+									sizes="(min-width: 1024px) 40vw, 100vw"
 									loading="lazy"
 								/>
 							</div>

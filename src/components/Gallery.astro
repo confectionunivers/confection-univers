@@ -1,22 +1,24 @@
 ---
+import Picture from './Picture.astro';
+
 // Gallery items with uniform height
 const galleryItems = [
 	{ image: '/images/gallery1.jpg', label: 'Toges de graduation' },
 	{ image: '/images/gallery2.jpg', label: 'Tenue de travail' },
 	{ image: '/images/gallery3.jpg', label: 'Toges de graduation' },
-	{ image: '/images/gallery4.jpg', label: 'Uniorme scolaire' },
-	{ image: '/images/gallery5.jpg', label: 'Uniorme scolaire' },
+	{ image: '/images/gallery4.jpg', label: 'Uniforme scolaire' },
+	{ image: '/images/gallery5.jpg', label: 'Uniforme scolaire' },
 	{ image: '/images/gallery6.jpg', label: 'Toges pour enfants' },
 	{ image: '/images/gallery7.jpg', label: 'Toge de graduation' },
 	{ image: '/images/gallery8.jpg', label: 'Kimono' },
 	{ image: '/images/gallery9.jpg', label: 'Kimono' },
-	{ image: '/images/gallery10.jpg', label: 'Blouse sage femme' },
-	{ image: '/images/gallery11.jpg', label: 'Blouse medicale' },
+	{ image: '/images/gallery10.jpg', label: 'Blouse de sage-femme' },
+	{ image: '/images/gallery11.jpg', label: 'Blouse médicale' },
 	{ image: '/images/gallery12.jpg', label: 'Tenue de travail' },
 	{ image: '/images/gallery13.jpg', label: 'Tenue de travail' },
 	{ image: '/images/gallery14.jpg', label: 'Tenue de travail' },
-	{ image: '/images/gallery15.jpg', label: 'Uniorme scolaire' },
-	{ image: '/images/gallery16.jpg', label: 'Uniorme scolaire' },
+	{ image: '/images/gallery15.jpg', label: 'Uniforme scolaire' },
+	{ image: '/images/gallery16.jpg', label: 'Uniforme scolaire' },
 ];
 ---
 
@@ -48,12 +50,12 @@ const galleryItems = [
 						>
 							<!-- Image Container -->
 							<div class="relative h-full w-full overflow-hidden">
-								<img
+								<Picture
 									src={item.image}
 									alt={item.label}
 									class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+									sizes="256px"
 									loading="lazy"
-									decoding="async"
 								/>
 								<!-- Cinematic Overlay -->
 								<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-40"></div>
@@ -85,12 +87,12 @@ const galleryItems = [
 							style={`animation-delay: ${(index + galleryItems.length) * 0.1}s`}
 						>
 							<div class="relative h-full w-full overflow-hidden">
-								<img
+								<Picture
 									src={item.image}
-									alt={item.label}
+									alt=""
 									class="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+									sizes="256px"
 									loading="lazy"
-									decoding="async"
 								/>
 								<div class="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-40"></div>
 								<div class="absolute inset-0 rounded-3xl border border-primary/0 transition-all duration-500 group-hover:border-primary/30"></div>

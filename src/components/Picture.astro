@@ -1,0 +1,89 @@
+---
+/**
+ * <Picture> — image responsive + WebP avec repli automatique.
+ *
+ * Pourquoi un composant plutôt que des <img> écrits à la main :
+ *   - srcset/sizes + width/height ⇒ le navigateur télécharge la bonne
+ *     largeur et réserve l'espace avant chargement (zéro CLS, un des
+ *     trois Core Web Vitals notés par Google) ;
+ *   - le WebP responsif vient du manifeste produit par
+ *     scripts/optimize-images.mjs : si le manifeste est absent (clone
+ *     frais, build sans prebuild), on retombe sur l'<img> d'origine,
+ *     jamais sur une image cassée ;
+ *   - `alt` est obligatoire à la compilation (le champ n'est pas optionnel
+ *     dans Props) : plus de visuel muet pour les lecteurs d'écran.
+ *
+ * Le <picture> est rendu en `display: contents` (global.css) : il ne crée
+ * pas de boîte, donc les sélecteurs CSS existants visant l'<img> continuent
+ * de fonctionner à l'identique.
+ */
+import { getImageMeta, webpSrcset } from '../lib/image-meta';
+
+interface Props {
+	/** Chemin de l'image d'origine, ex. `/images/toge-graduation-1.jpg`. */
+	src: string;
+	/** Texte alternatif descriptif — obligatoire. `""` uniquement si décoratif. */
+	alt: string;
+	/** Largeur d'affichage prévue, pour le choix de variante. */
+	sizes?: string;
+	loading?: 'lazy' | 'eager';
+	fetchpriority?: 'high' | 'auto' | 'low';
+	decoding?: 'sync' | 'async' | 'auto';
+	class?: string;
+	/** Dimensions intrinsèques de repli (si le manifeste est absent). */
+	width?: number;
+	height?: number;
+	/** Titre infobulle, rarement nécessaire. */
+	title?: string;
+}
+
+const {
+	src,
+	alt,
+	sizes = '(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw',
+	loading = 'lazy',
+	fetchpriority = 'auto',
+	decoding = 'async',
+	class: className,
+	width,
+	height,
+	title,
+} = Astro.props;
+
+const entry = getImageMeta(src);
+const srcset = webpSrcset(src);
+
+const intrinsicWidth = entry?.w ?? width;
+const intrinsicHeight = entry?.h ?? height;
+---
+
+{
+	srcset ? (
+		<picture>
+			<source type="image/webp" srcset={srcset} sizes={sizes} />
+			<img
+				src={src}
+				alt={alt}
+				width={intrinsicWidth}
+				height={intrinsicHeight}
+				loading={loading}
+				fetchpriority={fetchpriority}
+				decoding={decoding}
+				class={className}
+				title={title}
+			/>
+		</picture>
+	) : (
+		<img
+			src={src}
+			alt={alt}
+			width={intrinsicWidth}
+			height={intrinsicHeight}
+			loading={loading}
+			fetchpriority={fetchpriority}
+			decoding={decoding}
+			class={className}
+			title={title}
+		/>
+	)
+}

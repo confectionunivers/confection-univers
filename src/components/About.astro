@@ -1,4 +1,5 @@
 ---
+import Picture from './Picture.astro';
 ---
 
 <style>
@@ -101,10 +102,11 @@
 			<!-- Left: Image with asymmetric design -->
 			<div class="about-image-wrapper relative">
 				<div class="about-image-container aspect-[4/5]">
-					<img
+					<Picture
 						src="/images/about-facility.jpg"
-						alt="Atelier de confection Confection Univers"
+						alt="Atelier de confection Confection Univers à Thiès, Sénégal"
 						class="w-full h-full object-cover"
+						sizes="(min-width: 1024px) 50vw, 100vw"
 						loading="lazy"
 					/>
 				</div>
