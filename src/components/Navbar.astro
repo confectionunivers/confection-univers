@@ -239,10 +239,13 @@ const social = [
 		height: 38px;
 		overflow: hidden;
 		pointer-events: auto;
-		border-bottom: 1px solid rgba(212, 175, 55, 0.55);
-		background: linear-gradient(90deg, #00001c 0%, #0b1743 45%, #101f52 55%, #00001c 100%);
-		color: #f5e7c4;
-		box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+		border-bottom: 1px solid rgba(184, 134, 11, 0.62);
+		background: linear-gradient(180deg, #ffffff 0%, #fff8e2 52%, #facc6b 100%);
+		color: #00001c;
+		box-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.96),
+			inset 0 -1px 0 rgba(145, 96, 0, 0.28),
+			0 5px 18px rgba(0, 0, 0, 0.16);
 		transition: height 0.35s ease, opacity 0.25s ease, border-color 0.35s ease;
 	}
 
@@ -251,7 +254,7 @@ const social = [
 		content: '';
 		position: absolute;
 		inset: 0;
-		background: linear-gradient(105deg, transparent 42%, rgba(250, 204, 107, 0.18) 50%, transparent 58%);
+		background: linear-gradient(105deg, transparent 42%, rgba(255, 255, 255, 0.85) 50%, transparent 58%);
 		transform: translateX(-100%);
 		animation: top-sheen 7s ease-in-out infinite;
 		pointer-events: none;
@@ -284,7 +287,7 @@ const social = [
 		align-items: center;
 		min-width: 0;
 		margin: 0;
-		color: rgba(245, 231, 196, 0.92);
+		color: rgba(0, 0, 28, 0.78);
 		font-size: 10px;
 		font-weight: 700;
 		letter-spacing: 0.14em;
@@ -296,7 +299,7 @@ const social = [
 		width: 2px;
 		height: 12px;
 		margin-left: 6px;
-		background: #facc6b;
+		background: #b8860b;
 		animation: caret-blink 1s steps(1) infinite;
 	}
 
@@ -317,10 +320,10 @@ const social = [
 		align-items: center;
 		gap: 6px;
 		padding: 4px 10px;
-		border: 1px solid rgba(212, 175, 55, 0.35);
+		border: 1px solid rgba(184, 134, 11, 0.4);
 		border-radius: 999px;
-		background: rgba(250, 204, 107, 0.06);
-		color: #f5e7c4;
+		background: rgba(255, 255, 255, 0.55);
+		color: #00001c;
 		font-size: 11px;
 		font-weight: 600;
 		white-space: nowrap;
@@ -354,7 +357,7 @@ const social = [
 	}
 
 	.top-info-chip:focus-visible {
-		outline: 2px solid #facc6b;
+		outline: 2px solid #8a6500;
 		outline-offset: 2px;
 	}
 
@@ -373,8 +376,12 @@ const social = [
 	}
 
 	.top-info-wa {
-		border-color: rgba(37, 211, 102, 0.45);
-		background: rgba(37, 211, 102, 0.08);
+		border-color: rgba(37, 211, 102, 0.5);
+		background: rgba(37, 211, 102, 0.1);
+	}
+
+	.top-info-wa:is(:hover, :focus-visible) {
+		color: #ffffff;
 	}
 
 	.top-info-wa::before {
