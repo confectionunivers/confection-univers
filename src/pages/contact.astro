@@ -234,7 +234,6 @@ const trail = [
 		const form = document.getElementById('contact-form') as HTMLFormElement | null;
 		if (!form) return;
 
-		const submitButton = form.querySelector('#submit-button') as HTMLButtonElement | null;
 
 		form.addEventListener('submit', async (event) => {
 			event.preventDefault();
@@ -266,41 +265,15 @@ const trail = [
 				`Message : ${data.message}`,
 			].filter(Boolean).join('\n');
 			const whatsappUrl = `https://wa.me/221772960776?${new URLSearchParams({ text: contactMessage }).toString()}`;
-			const emailUrl = `mailto:confectionunivers@gmail.com?${new URLSearchParams({
-				subject: `Demande de devis - ${data.name}`,
-				body: contactMessage,
-			}).toString()}`;
+			
 
-			if (submitButton) {
-				submitButton.disabled = true;
-				submitButton.setAttribute('aria-busy', 'true');
-				submitButton.textContent = 'Envoi en cours...';
-			}
-
-			try {
-				const response = await fetch('/api/send-devis', {
-					method: 'POST',
-					headers: { 'Content-Type': 'application/json' },
-					body: JSON.stringify(data),
-				});
-				const result = await response.json().catch(() => ({}));
-
-				if (!response.ok || !result.success) {
-					showContactOptions(whatsappUrl, emailUrl);
-					return;
-				}
-
-				form.reset();
-				showNotification('Votre demande a bien été transmise. Nous vous répondrons sous 1 à 2 jours ouvrables.');
-			} catch {
-				showContactOptions(whatsappUrl, emailUrl);
-			} finally {
-				if (submitButton) {
-					submitButton.disabled = false;
-					submitButton.removeAttribute('aria-busy');
-					submitButton.textContent = 'Envoyer ma demande';
-				}
-			}
+			/* Site 100 % statique : aucun backend d'e-mails. La demande part
+			   directement dans WhatsApp, déjà structurée — le canal que
+			   l'atelier utilise réellement avec ses clients. */
+			const opened = window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+			if (!opened) window.location.href = whatsappUrl;
+			form.reset();
+			showNotification("Votre demande est prête dans WhatsApp : il ne reste qu'à l'envoyer. Réponse sous 24 h ouvrées.");
 		});
 
 		function clearNotification() {
@@ -319,46 +292,5 @@ const trail = [
 			window.setTimeout(() => notification.remove(), 8000);
 		}
 
-		function showContactOptions(whatsappUrl: string, emailUrl: string) {
-			clearNotification();
-			const notification = document.createElement('div');
-			notification.id = 'contact-notification';
-			notification.setAttribute('role', 'alert');
-			notification.setAttribute('aria-live', 'assertive');
-			notification.className = 'fixed top-4 right-4 z-50 max-w-md space-y-4 rounded-xl bg-white p-6 font-medium text-gray-900 shadow-2xl';
-
-			const title = document.createElement('h3');
-			title.className = 'text-lg font-bold';
-			title.textContent = 'L’envoi par formulaire n’a pas été confirmé.';
-
-			const message = document.createElement('p');
-			message.className = 'text-sm text-gray-600';
-			message.textContent = 'Les champs sont conservés. Vous pouvez réessayer ou transmettre votre demande en ouvrant WhatsApp ou votre application e-mail.';
-
-			const actions = document.createElement('div');
-			actions.className = 'flex flex-wrap gap-3';
-
-			const whatsappLink = document.createElement('a');
-			whatsappLink.href = whatsappUrl;
-			whatsappLink.target = '_blank';
-			whatsappLink.rel = 'noopener noreferrer';
-			whatsappLink.className = 'rounded-lg bg-green-600 px-4 py-3 text-sm font-semibold text-white hover:bg-green-700';
-			whatsappLink.textContent = 'Ouvrir WhatsApp';
-
-			const emailLink = document.createElement('a');
-			emailLink.href = emailUrl;
-			emailLink.className = 'rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white hover:bg-blue-700';
-			emailLink.textContent = 'Préparer un e-mail';
-
-			const closeButton = document.createElement('button');
-			closeButton.type = 'button';
-			closeButton.className = 'rounded-lg px-3 py-2 text-sm font-semibold text-gray-600 underline hover:text-gray-900';
-			closeButton.textContent = 'Fermer';
-			closeButton.addEventListener('click', clearNotification);
-
-			actions.append(whatsappLink, emailLink, closeButton);
-			notification.append(title, message, actions);
-			document.body.appendChild(notification);
-		}
 	});
 </script>
