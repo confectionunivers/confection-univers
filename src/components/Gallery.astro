@@ -160,12 +160,12 @@ const galleryItems = [
 	}
 
 	/* Image 3D Effect */
-	.marquee-card img {
+	.marquee-card :global(img) {
 		transform: translateZ(0);
 		transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 	}
 
-	.marquee-card:hover img {
+	.marquee-card:hover :global(img) {
 		transform: translateZ(20px) scale(1.1);
 	}
 
@@ -199,7 +199,7 @@ const galleryItems = [
 			transform: none;
 		}
 
-		.marquee-card:hover img {
+		.marquee-card:hover :global(img) {
 			transform: none;
 		}
 
