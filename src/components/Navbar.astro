@@ -429,6 +429,19 @@ const social = [
 		}
 	}
 
+	/* Respiration entre le ruban du haut et la barre du logo. */
+	.header-inner {
+		width: 100%;
+		padding-inline: clamp(12px, 1.8vw, 28px);
+		margin-top: 14px;
+		pointer-events: auto;
+		transition: margin-top 0.35s ease;
+	}
+
+	.site-header.is-scrolled .header-inner {
+		margin-top: 8px;
+	}
+
 	@media (min-width: 1536px) {
 		.header-inner {
 			width: 100%;
