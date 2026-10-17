@@ -626,3 +626,25 @@ html.lenis body {
 .nav-link-hover:hover .nav-link-hover__dup {
 	transform: translateY(-100%);
 }
+
+/* Skip-link : visible uniquement au focus clavier (Tab), au-dessus de tout. */
+.skip-link {
+	position: fixed;
+	top: 0.75rem;
+	left: 0.75rem;
+	z-index: 9999;
+	padding: 0.75rem 1.25rem;
+	border-radius: 9999px;
+	background: var(--cu-gold, #d4af37);
+	color: #00001c;
+	font-weight: 700;
+	font-size: 0.875rem;
+	line-height: 1;
+	text-decoration: none;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+	transform: translateY(-300%);
+	transition: transform 0.2s ease;
+}
+.skip-link:focus {
+	transform: translateY(0);
+}

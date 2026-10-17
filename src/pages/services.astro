@@ -22,7 +22,7 @@ import { SERVICES as services } from '../lib/site-data';
 	breadcrumbs={trail}
 	schema={itemListSchema('Services de confection', services.map((s) => ({ name: s.title, url: `/services/${s.slug}`, image: s.image })))}
 >
-	<main class="relative">
+	<main id="main-content" tabindex="-1" class="relative">
 		<Navbar />
 		
 		<!-- Hero Section -->

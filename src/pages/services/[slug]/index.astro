@@ -38,7 +38,8 @@ const related = relatedServices(service, 3);
 	schema={serviceSchema(getService(service.slug) ?? service)}
 >
 	<Navbar />
-	
+
+	<main id="main-content" tabindex="-1">
 	<section class="relative z-10 py-24 md:py-32">
 		<!-- Background Glow -->
 		<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
@@ -133,6 +134,8 @@ const related = relatedServices(service, 3);
 			</div>
 		</div>
 	</section>
+
+	</main>
 
 	<Footer />
 </Layout>

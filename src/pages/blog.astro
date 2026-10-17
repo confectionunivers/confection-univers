@@ -25,7 +25,7 @@ const totalPages = Math.ceil(BLOG_POSTS.length / POSTS_PER_PAGE);
 	breadcrumbs={trail}
 	schema={blogIndexSchema(BLOG_POSTS)}
 >
-	<main class="relative">
+	<main id="main-content" tabindex="-1" class="relative">
 		<Navbar />
 		
 		<!-- Hero Header -->

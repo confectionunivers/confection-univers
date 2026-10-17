@@ -117,7 +117,7 @@ const catalogSections = [
 	breadcrumbs={trail}
 	schema={itemListSchema('Catalogue des collections', catalogSections.flatMap((section) => section.products.map((product) => ({ name: product.name, image: product.image }))))}
 >
-	<main class="relative overflow-hidden bg-background">
+	<main id="main-content" tabindex="-1" class="relative overflow-hidden bg-background">
 		<Navbar />
 
 		<!-- Editorial bento hero inspired by the visual references -->
