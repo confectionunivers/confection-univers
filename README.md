@@ -104,6 +104,40 @@ une règle casse — utilisable tel quel en CI).
 
 ---
 
+## Mesure & Search Console
+
+Le site embarque un dispositif de mesure **désactivé par défaut** : tant que
+les valeurs sont vides, aucune balise ni requête tierce n'est émise.
+Tout se configure dans `src/lib/seo.ts`, bloc `SITE.measurement` :
+
+```ts
+measurement: {
+    googleSiteVerification: '',            // code de vérification Search Console
+    analyticsProvider: '' as '' | 'ga4' | 'plausible',
+    analyticsId: '',                       // G-XXXXXXX (GA4) ou domaine (Plausible)
+},
+```
+
+### 1. Google Search Console (indispensable pour suivre vos positions)
+1. <https://search.google.com/search-console> → « Ajouter une propriété » →
+   « Préfixe de l'URL » → `https://confectionunivers.com` ;
+2. choisir la méthode « Balise » : Google donne un code du type
+   `Xx1Yy2Zz3...` ;
+3. le coller dans `googleSiteVerification`, commiter/déployer ;
+4. revenir dans Search Console → « Vérifier ». Le sitemap
+   (`/sitemap.xml`) est ensuite déclaré dans « Sitemaps ».
+
+### 2. Analytics, au choix
+- **GA4** : <https://analytics.google.com> → créer la propriété → flux Web →
+   récupérer l'identifiant de mesure `G-XXXXXXX` ; renseigner
+   `analyticsProvider: 'ga4'` + `analyticsId`.
+- **Plausible** (recommandé : sans cookies, ~1 Ko, conforme RGPD/loi 2008-12) :
+   <https://plausible.io> → ajouter le site `confectionunivers.com` ;
+   renseigner `analyticsProvider: 'plausible'` + `analyticsId`.
+
+Le head du `Layout` émet alors automatiquement le script correspondant
+(une seule balise, `defer`/`async`, aucune autre modification nécessaire).
+
 ## À confirmer par l'entreprise
 
 Ces valeurs sont déclarées dans `src/lib/seo.ts` et conditionnent le SEO local :

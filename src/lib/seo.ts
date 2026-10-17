@@ -118,6 +118,22 @@ export const SITE = {
 	/** Année de création approximative (le site indique « environ cinq ans »). */
 	foundingDate: '2020',
 
+	/**
+	 * Mesure & Search Console — à remplir depuis vos comptes (README §Mesure).
+	 * - googleSiteVerification : contenu de la balise « google-site-verification »
+	 *   (Search Console > Ajouter une propriété > Préfixe de l'URL > copier le code).
+	 * - analyticsProvider : 'ga4' (Google Analytics 4) ou 'plausible' (sans
+	 *   cookies, ~1 Ko) ; analyticsId : identifiant de mesure « G-XXXXXXX »
+	 *   ou domaine Plausible (« confectionunivers.com »).
+	 * Tant que ces valeurs sont vides, rien n'est émis : zéro impact sur les
+	 * pages et aucune requête tierce.
+	 */
+	measurement: {
+		googleSiteVerification: '',
+		analyticsProvider: '' as '' | 'ga4' | 'plausible',
+		analyticsId: '',
+	},
+
 	images: {
 		logo: '/images/logo.png',
 		/** Carte de partage par défaut, 1200×630 (ratio exigé par OG/Twitter). */

@@ -130,6 +130,25 @@ const robotsContent = noindex ? 'noindex, nofollow' : 'index, follow, max-image-
 		<meta name="referrer" content="strict-origin-when-cross-origin" />
 		{keywords?.length && <meta name="keywords" content={keywords.join(', ')} />}
 
+		{/* --- Mesure & vérification : actif uniquement si configuré ------ */}
+		{SITE.measurement.googleSiteVerification && (
+			<meta name="google-site-verification" content={SITE.measurement.googleSiteVerification} />
+		)}
+		{SITE.measurement.analyticsProvider === 'ga4' && SITE.measurement.analyticsId && (
+			<>
+				<script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.measurement.analyticsId}`}></script>
+				<script is:inline define:vars={{ id: SITE.measurement.analyticsId }}>
+					window.dataLayer = window.dataLayer || [];
+					function gtag() { dataLayer.push(arguments); }
+					gtag('js', new Date());
+					gtag('config', id);
+				</script>
+			</>
+		)}
+		{SITE.measurement.analyticsProvider === 'plausible' && SITE.measurement.analyticsId && (
+			<script defer data-domain={SITE.measurement.analyticsId} src="https://plausible.io/js/script.js"></script>
+		)}
+
 		{/* --- Favicones -------------------------------------------- */}
 		{/* SVG en premier : net à toute taille et 4x plus léger qu'un PNG. */}
 		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
