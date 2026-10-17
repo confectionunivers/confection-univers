@@ -113,10 +113,10 @@ const totalPages = Math.ceil(BLOG_POSTS.length / POSTS_PER_PAGE);
 			if (active) {
 				link.setAttribute('aria-current', 'page');
 				link.classList.remove('h-3', 'w-3', 'bg-white/20', 'hover:bg-white/40');
-				link.classList.add('h-4', 'w-4', 'bg-[#F5B544]', 'shadow-[0_0_12px_rgba(245,181,68,0.5)]');
+				link.classList.add('h-4', 'w-4', 'bg-[#FACC6B]', 'shadow-[0_0_12px_rgba(250,204,107,0.5)]');
 			} else {
 				link.removeAttribute('aria-current');
-				link.classList.remove('h-4', 'w-4', 'bg-[#F5B544]', 'shadow-[0_0_12px_rgba(245,181,68,0.5)]');
+				link.classList.remove('h-4', 'w-4', 'bg-[#FACC6B]', 'shadow-[0_0_12px_rgba(250,204,107,0.5)]');
 				link.classList.add('h-3', 'w-3', 'bg-white/20', 'hover:bg-white/40');
 			}
 		});

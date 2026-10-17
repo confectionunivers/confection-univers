@@ -124,7 +124,7 @@ const catalogSections = [
 		<section class="catalogue-hero">
 			<svg aria-hidden="true" class="catalogue-hero__waves" viewBox="0 0 1600 900" preserveAspectRatio="none" fill="none">
 				<path d="M-80 510C180 375 375 390 560 500c177 105 282 115 444 12 145-92 228-192 420-176 111 9 194 63 273 113" stroke="white" stroke-opacity=".1" stroke-width="2" />
-				<path d="M-100 560C170 425 390 435 572 545c177 105 284 111 445 9 145-92 226-188 415-172 111 9 205 69 277 120" stroke="#F5B544" stroke-opacity=".16" stroke-width="1.5" />
+				<path d="M-100 560C170 425 390 435 572 545c177 105 284 111 445 9 145-92 226-188 415-172 111 9 205 69 277 120" stroke="#FACC6B" stroke-opacity=".16" stroke-width="1.5" />
 				<path d="M-90 604C176 472 400 478 584 590c174 105 281 113 442 10 148-93 228-189 418-171 110 10 195 65 269 116" stroke="white" stroke-opacity=".055" stroke-width="1" />
 			</svg>
 			<div class="catalogue-hero__intro">
@@ -184,26 +184,26 @@ const catalogSections = [
 		<div class="catalogue-collections text-ink">
 			{catalogSections.map((section, sectionIndex) => (
 				<section id={section.id} style={`background-color: ${sectionIndex % 2 === 0 ? '#faf7f0' : '#f1ecdf'}; color: #111116;`} class:list={[
-					'catalogue-category relative isolate scroll-mt-32 overflow-hidden border-t border-[#C9A552]/35 py-16 md:py-24',
+					'catalogue-category relative isolate scroll-mt-32 overflow-hidden border-t border-[#F59E0B]/35 py-16 md:py-24',
 					sectionIndex % 2 === 0 ? 'bg-[#faf7f0]' : 'bg-[#f1ecdf]'
 				]}>
-					<div aria-hidden="true" class="pointer-events-none absolute right-[-8rem] top-12 z-0 h-[360px] w-[360px] rounded-full border border-[#C9A552]/15"></div>
-					<div aria-hidden="true" class="pointer-events-none absolute right-[2%] top-28 z-0 h-72 w-72 rounded-full bg-[#D4AF37]/[0.055] blur-[80px]"></div>
+					<div aria-hidden="true" class="pointer-events-none absolute right-[-8rem] top-12 z-0 h-[360px] w-[360px] rounded-full border border-[#F59E0B]/15"></div>
+					<div aria-hidden="true" class="pointer-events-none absolute right-[2%] top-28 z-0 h-72 w-72 rounded-full bg-[#F59E0B]/[0.055] blur-[80px]"></div>
 					<div class="relative z-10 mx-auto max-w-7xl px-6">
 						<div class="mb-10 grid gap-6 md:mb-14 md:grid-cols-[110px_1fr] md:items-end">
 							<div class="relative flex items-center gap-4 md:flex-col md:items-start md:gap-2">
-								<span aria-hidden="true" class="pointer-events-none absolute -left-1 -top-10 font-display text-[6.5rem] font-bold leading-none tracking-[-0.08em] text-[#C9A552]/10 md:-top-14 md:text-[8rem]">{section.number}</span>
-								<span class="relative flex h-[66px] w-[66px] shrink-0 items-center justify-center rounded-full border border-[#C9A552]/65 bg-white/75 font-display text-xl font-semibold text-[#9A742C] shadow-[0_8px_28px_rgba(114,83,26,0.08)] before:absolute before:inset-1 before:rounded-full before:border before:border-[#C9A552]/20">{section.number}</span>
+								<span aria-hidden="true" class="pointer-events-none absolute -left-1 -top-10 font-display text-[6.5rem] font-bold leading-none tracking-[-0.08em] text-[#F59E0B]/10 md:-top-14 md:text-[8rem]">{section.number}</span>
+								<span class="relative flex h-[66px] w-[66px] shrink-0 items-center justify-center rounded-full border border-[#F59E0B]/65 bg-white/75 font-display text-xl font-semibold text-[#9A742C] shadow-[0_8px_28px_rgba(114,83,26,0.08)] before:absolute before:inset-1 before:rounded-full before:border before:border-[#F59E0B]/20">{section.number}</span>
 								<span class="relative text-[8px] font-semibold uppercase tracking-[0.2em] text-[#9A742C] md:pl-1">Collection</span>
 							</div>
 							<div>
 								<p class="flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.28em] text-[#A27B31] md:text-[10px]">
-									<span class="h-px w-8 bg-[#C9A552]"></span>{section.eyebrow}
+									<span class="h-px w-8 bg-[#F59E0B]"></span>{section.eyebrow}
 								</p>
 								<div class="mt-3 flex flex-wrap items-end justify-between gap-4">
 									<h2 class="max-w-4xl font-display text-[clamp(2rem,4.2vw,3.75rem)] font-semibold leading-[1.04] tracking-[-0.04em] text-[#11101A]">{section.title}</h2>
-									<span class="inline-flex shrink-0 items-center gap-2 rounded-full border border-[#C9A552]/35 bg-white/65 px-4 py-2 text-[9px] font-semibold uppercase tracking-[0.14em] text-[#8E6C2A]">
-										<span class="h-1.5 w-1.5 rounded-full bg-[#C9A552]"></span>
+									<span class="inline-flex shrink-0 items-center gap-2 rounded-full border border-[#F59E0B]/35 bg-white/65 px-4 py-2 text-[9px] font-semibold uppercase tracking-[0.14em] text-[#8E6C2A]">
+										<span class="h-1.5 w-1.5 rounded-full bg-[#F59E0B]"></span>
 										{section.products.length} {section.products.length === 1 ? 'modèle' : 'modèles'}
 									</span>
 								</div>
@@ -217,7 +217,7 @@ const catalogSections = [
 						]}>
 							{section.products.map((product, productIndex) => (
 								<article class:list={[
-									'catalogue-product-card group relative overflow-hidden rounded-[1.6rem] border border-[#C9A552]/35 bg-white shadow-[0_14px_42px_-24px_rgba(32,25,12,0.28)] transition duration-500 hover:-translate-y-1 hover:border-[#C9A552]/75 hover:shadow-[0_25px_55px_-25px_rgba(32,25,12,0.36)]',
+									'catalogue-product-card group relative overflow-hidden rounded-[1.6rem] border border-[#F59E0B]/35 bg-white shadow-[0_14px_42px_-24px_rgba(32,25,12,0.28)] transition duration-500 hover:-translate-y-1 hover:border-[#F59E0B]/75 hover:shadow-[0_25px_55px_-25px_rgba(32,25,12,0.36)]',
 									section.products.length === 1 ? 'md:grid md:grid-cols-[1.12fr_0.88fr]' : ''
 								]}>
 									<div class:list={[
@@ -251,7 +251,7 @@ const catalogSections = [
 											<h3 class="font-display text-xl font-semibold leading-snug tracking-[-0.025em] text-[#11101A] md:text-2xl">{product.name}</h3>
 											<p class="mt-3 text-sm leading-relaxed text-[#11101A]/60">{product.description}</p>
 										</div>
-										<a href="/contact" class="group/cta mt-7 inline-flex w-fit items-center gap-3 rounded-full bg-[#11101A] px-5 py-3.5 text-[9px] font-bold uppercase tracking-[0.14em] text-[#FFE2A0] transition duration-300 hover:bg-gradient-to-r hover:from-[#FFE2A0] hover:to-[#D99A32] hover:text-[#11101A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#C9A552]">
+										<a href="/contact" class="group/cta mt-7 inline-flex w-fit items-center gap-3 rounded-full bg-[#11101A] px-5 py-3.5 text-[9px] font-bold uppercase tracking-[0.14em] text-[#FFE2A0] transition duration-300 hover:bg-gradient-to-r hover:from-[#FFE2A0] hover:to-[#D99A32] hover:text-[#11101A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#F59E0B]">
 											Demander un devis
 											<svg class="h-4 w-4 transition-transform duration-300 group-hover/cta:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" /></svg>
 										</a>
@@ -305,19 +305,19 @@ const catalogSections = [
 
 		<!-- Closing CTA -->
 		<section class="relative isolate overflow-hidden bg-[#07070D] py-20 text-foreground md:py-28">
-			<div aria-hidden="true" class="pointer-events-none absolute inset-0" style="background: radial-gradient(ellipse at 50% 100%, rgba(245,181,68,0.18), transparent 55%), linear-gradient(135deg, #07070d 0%, #0d0c13 100%);"></div>
-			<div aria-hidden="true" class="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#F5B544]/10"></div>
+			<div aria-hidden="true" class="pointer-events-none absolute inset-0" style="background: radial-gradient(ellipse at 50% 100%, rgba(250,204,107,0.18), transparent 55%), linear-gradient(135deg, #07070d 0%, #0d0c13 100%);"></div>
+			<div aria-hidden="true" class="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#FACC6B]/10"></div>
 			<div class="relative mx-auto max-w-6xl px-6">
-				<div class="relative overflow-hidden rounded-[2rem] border border-[#F5B544]/30 bg-white/[0.025] px-6 py-14 text-center shadow-[0_25px_100px_rgba(0,0,0,0.3)] backdrop-blur-sm sm:px-12 sm:py-20">
-					<div aria-hidden="true" class="pointer-events-none absolute -right-16 -top-24 h-64 w-64 rounded-full border border-[#F5B544]/15"></div>
-					<div aria-hidden="true" class="pointer-events-none absolute -bottom-32 -left-20 h-72 w-72 rounded-full bg-[#F5B544]/[0.08] blur-[80px]"></div>
+				<div class="relative overflow-hidden rounded-[2rem] border border-[#FACC6B]/30 bg-white/[0.025] px-6 py-14 text-center shadow-[0_25px_100px_rgba(0,0,0,0.3)] backdrop-blur-sm sm:px-12 sm:py-20">
+					<div aria-hidden="true" class="pointer-events-none absolute -right-16 -top-24 h-64 w-64 rounded-full border border-[#FACC6B]/15"></div>
+					<div aria-hidden="true" class="pointer-events-none absolute -bottom-32 -left-20 h-72 w-72 rounded-full bg-[#FACC6B]/[0.08] blur-[80px]"></div>
 					<div class="relative mx-auto max-w-4xl">
-						<p class="inline-flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.3em] text-[#F5B544] sm:text-[10px]">
-							<span class="h-px w-7 bg-[#F5B544]"></span>Votre prochain projet commence ici<span class="h-px w-7 bg-[#F5B544]"></span>
+						<p class="inline-flex items-center gap-3 text-[9px] font-bold uppercase tracking-[0.3em] text-[#FACC6B] sm:text-[10px]">
+							<span class="h-px w-7 bg-[#FACC6B]"></span>Votre prochain projet commence ici<span class="h-px w-7 bg-[#FACC6B]"></span>
 						</p>
-						<h2 class="mt-6 font-display text-[clamp(2.2rem,5vw,4.5rem)] font-semibold leading-[1.04] tracking-[-0.045em] text-white">Créons ensemble vos tenues <span class="bg-gradient-to-r from-[#FFE5A5] via-[#F5B544] to-[#D58D20] bg-clip-text text-transparent">sur mesure.</span></h2>
+						<h2 class="mt-6 font-display text-[clamp(2.2rem,5vw,4.5rem)] font-semibold leading-[1.04] tracking-[-0.045em] text-white">Créons ensemble vos tenues <span class="bg-gradient-to-r from-[#FFE5A5] via-[#FACC6B] to-[#D58D20] bg-clip-text text-transparent">sur mesure.</span></h2>
 						<p class="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-white/65 md:text-base">Partagez vos besoins, vos quantités et vos couleurs : notre équipe vous accompagnera dans le choix de votre collection.</p>
-						<a href="/contact" class="group mt-9 inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-[#FFE2A0] via-[#F5B544] to-[#D8962C] px-8 py-4 text-[10px] font-bold uppercase tracking-[0.18em] text-[#141019] shadow-[0_10px_34px_rgba(245,181,68,0.2)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_42px_rgba(245,181,68,0.32)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F5B544]">
+						<a href="/contact" class="group mt-9 inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-[#FFE2A0] via-[#FACC6B] to-[#D8962C] px-8 py-4 text-[10px] font-bold uppercase tracking-[0.18em] text-[#141019] shadow-[0_10px_34px_rgba(250,204,107,0.2)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_16px_42px_rgba(250,204,107,0.32)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#FACC6B]">
 							Parler de mon projet
 							<svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7" /></svg>
 						</a>
@@ -336,7 +336,7 @@ const catalogSections = [
 			overflow: hidden;
 			padding: clamp(132px, 15vw, 180px) 24px 76px;
 			color: #fff;
-			background: radial-gradient(ellipse at 50% 0%, rgba(245, 181, 68, 0.13), transparent 42%), linear-gradient(180deg, #08080b 0%, #050505 78%, #09090c 100%);
+			background: radial-gradient(ellipse at 50% 0%, rgba(250, 204, 107, 0.13), transparent 42%), linear-gradient(180deg, #08080b 0%, #050505 78%, #09090c 100%);
 		}
 
 		.catalogue-hero__waves {
@@ -360,7 +360,7 @@ const catalogSections = [
 			align-items: center;
 			justify-content: center;
 			gap: 12px;
-			color: #f5b544;
+			color: #FACC6B;
 			font-size: 10px;
 			font-weight: 700;
 			letter-spacing: 0.28em;
@@ -371,7 +371,7 @@ const catalogSections = [
 		.catalogue-eyebrow span {
 			width: 30px;
 			height: 1px;
-			background: linear-gradient(90deg, transparent, #f5b544);
+			background: linear-gradient(90deg, transparent, #FACC6B);
 		}
 
 		.catalogue-eyebrow span:last-child { transform: rotate(180deg); }
@@ -393,9 +393,9 @@ const catalogSections = [
 
 		.catalogue-hero__title strong {
 			margin-top: 0.06em;
-			color: #f5b544;
+			color: #FACC6B;
 			font-weight: 700;
-			text-shadow: 0 8px 36px rgba(245, 181, 68, 0.18);
+			text-shadow: 0 8px 36px rgba(250, 204, 107, 0.18);
 		}
 
 		.catalogue-hero__copy {
@@ -434,8 +434,8 @@ const catalogSections = [
 
 		.catalogue-button--gold {
 			color: #151219;
-			background: linear-gradient(105deg, #ffe8b2, #f5b544 58%, #d99525);
-			box-shadow: 0 8px 28px rgba(245, 181, 68, 0.2);
+			background: linear-gradient(105deg, #ffe8b2, #FACC6B 58%, #d99525);
+			box-shadow: 0 8px 28px rgba(250, 204, 107, 0.2);
 		}
 
 		.catalogue-button--outline {
@@ -445,10 +445,10 @@ const catalogSections = [
 		}
 
 		.catalogue-button:hover { transform: translateY(-2px); }
-		.catalogue-button--gold:hover { box-shadow: 0 12px 36px rgba(245, 181, 68, 0.36); }
-		.catalogue-button--outline:hover { border-color: #f5b544; color: #ffe8b2; }
+		.catalogue-button--gold:hover { box-shadow: 0 12px 36px rgba(250, 204, 107, 0.36); }
+		.catalogue-button--outline:hover { border-color: #FACC6B; color: #ffe8b2; }
 		.catalogue-button:focus-visible,
-		.bento-tile:focus-visible { outline: 3px solid #f5b544; outline-offset: 4px; }
+		.bento-tile:focus-visible { outline: 3px solid #FACC6B; outline-offset: 4px; }
 
 		.catalogue-hero__meta {
 			display: flex;
@@ -464,7 +464,7 @@ const catalogSections = [
 			text-transform: uppercase;
 		}
 
-		.catalogue-hero__meta i { width: 4px; height: 4px; border-radius: 50%; background: #f5b544; }
+		.catalogue-hero__meta i { width: 4px; height: 4px; border-radius: 50%; background: var(--cu-gold-grad); }
 
 		.catalogue-bento {
 			display: grid;
@@ -510,7 +510,7 @@ const catalogSections = [
 		.bento-tile__content h2 { margin: 0; font-family: var(--font-display); font-size: clamp(17px, 1.65vw, 22px); font-weight: 700; line-height: 1.12; letter-spacing: -0.035em; }
 		.bento-tile__content p { margin: 8px 0 0; font-size: 10px; font-weight: 600; line-height: 1.45; }
 		.bento-tile__content .bento-tile__overline { margin: 0 0 7px; font-size: 8px; font-weight: 800; letter-spacing: 0.17em; text-transform: uppercase; }
-		.bento-tile__seal { position: absolute; top: 16px; right: 16px; display: grid; width: 42px; height: 42px; place-items: center; border: 1px solid #fff1c8; border-radius: 50%; color: #151219; background: #f5b544; font-family: var(--font-display); font-size: 12px; font-weight: 800; }
+		.bento-tile__seal { position: absolute; top: 16px; right: 16px; display: grid; width: 42px; height: 42px; place-items: center; border: 1px solid #fff1c8; border-radius: 50%; color: #151219; background: var(--cu-gold-grad); font-family: var(--font-display); font-size: 12px; font-weight: 800; }
 
 		.tile-toges { grid-area: toges; color: #15141a; background: #f4f2ed; }
 		.tile-toges .bento-tile__image { right: 0; bottom: 0; width: 56%; height: 100%; object-position: center 18%; }
@@ -539,9 +539,9 @@ const catalogSections = [
 		.tile-africain .bento-tile__content { max-width: 100%; }
 		.tile-africain .bento-tile__content p:last-child { color: rgba(255, 255, 255, 0.78); }
 
-		.tile-scolaire { grid-area: scolaire; color: #19140b; background: linear-gradient(135deg, #ffe8b2, #f5b544 60%, #dc9827); }
+		.tile-scolaire { grid-area: scolaire; color: #19140b; background: linear-gradient(135deg, #ffe8b2, #FACC6B 60%, #dc9827); }
 		.tile-scolaire .bento-tile__image { right: 0; bottom: 0; width: 56%; height: 70%; border-top-left-radius: 48px; object-position: center; }
-		.tile-scolaire::after { background: linear-gradient(90deg, #f5b544 0%, rgba(245, 181, 68, 0.97) 35%, rgba(245, 181, 68, 0.72) 53%, rgba(245, 181, 68, 0.02) 100%); }
+		.tile-scolaire::after { background: linear-gradient(90deg, #FACC6B 0%, rgba(250, 204, 107, 0.97) 35%, rgba(250, 204, 107, 0.72) 53%, rgba(250, 204, 107, 0.02) 100%); }
 		.tile-scolaire .bento-tile__kicker { color: rgba(35, 27, 12, 0.7); }
 
 		.tile-eps { grid-area: eps; color: #fff; background: #9b9b96; }
@@ -557,7 +557,7 @@ const catalogSections = [
 
 		.catalogue-image-trigger:focus-visible {
 			z-index: 30;
-			outline: 3px solid #f5b544;
+			outline: 3px solid #FACC6B;
 			outline-offset: -5px;
 		}
 
@@ -583,7 +583,7 @@ const catalogSections = [
 			width: fit-content;
 			max-width: 94vw;
 			overflow: hidden;
-			border: 1px solid rgba(245, 181, 68, 0.7);
+			border: 1px solid rgba(250, 204, 107, 0.7);
 			border-radius: 18px;
 			background: #080810;
 			box-shadow: 0 24px 90px rgba(0, 0, 0, 0.6);
@@ -628,8 +628,8 @@ const catalogSections = [
 		}
 
 		.catalogue-lightbox__close svg { width: 20px; height: 20px; }
-		.catalogue-lightbox__close:hover { transform: rotate(90deg); color: #111116; background: #f5b544; }
-		.catalogue-lightbox__close:focus-visible { outline: 3px solid #f5b544; outline-offset: 3px; }
+		.catalogue-lightbox__close:hover { transform: rotate(90deg); color: #111116; background: var(--cu-gold-grad); }
+		.catalogue-lightbox__close:focus-visible { outline: 3px solid #FACC6B; outline-offset: 3px; }
 
 		@media (min-width: 640px) and (max-width: 899px) {
 			.catalogue-bento {

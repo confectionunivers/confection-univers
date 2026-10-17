@@ -63,13 +63,13 @@ const related = relatedPosts(post, 3);
 		<section class="relative overflow-hidden py-16 md:py-24" style="background: linear-gradient(135deg, #00001C 0%, #00002a 100%);">
 			<!-- Background Glow -->
 			<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-				<div class="absolute left-[10%] top-[20%] w-[500px] h-[500px] rounded-full" style="background: radial-gradient(ellipse, rgba(245, 181, 68, 0.08) 0%, transparent 70%); filter: blur(120px);"></div>
+				<div class="absolute left-[10%] top-[20%] w-[500px] h-[500px] rounded-full" style="background: radial-gradient(ellipse, rgba(250, 204, 107, 0.08) 0%, transparent 70%); filter: blur(120px);"></div>
 			</div>
 
 			<div class="mx-auto max-w-7xl px-6 md:px-10">
 				<Breadcrumbs trail={trail} />
 				<!-- Category -->
-				<div class="mb-4 inline-block rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider" style="background: rgba(245, 181, 68, 0.9); color: #00001C;">
+				<div class="mb-4 inline-block rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider" style="background: rgba(250, 204, 107, 0.9); color: #00001C;">
 					{post.category}
 				</div>
 
@@ -130,10 +130,10 @@ const related = relatedPosts(post, 3);
 										<li>
 											<a
 												href={`/blog/${entry.slug}`}
-												class="group flex h-full flex-col rounded-2xl border border-white/10 bg-[#00002a] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#F5B544]/40"
+												class="group flex h-full flex-col rounded-2xl border border-white/10 bg-[#00002a] p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[#FACC6B]/40"
 											>
-												<span class="text-[10px] font-bold uppercase tracking-widest" style="color: #F5B544;">{entry.category}</span>
-												<span class="mt-2 text-sm font-semibold leading-snug text-white group-hover:text-[#F5B544]">{entry.title}</span>
+												<span class="text-[10px] font-bold uppercase tracking-widest" style="color: #FACC6B;">{entry.category}</span>
+												<span class="mt-2 text-sm font-semibold leading-snug text-white group-hover:text-[#FACC6B]">{entry.title}</span>
 												<span class="mt-auto pt-3 text-xs" style="color: #A0ACC6;">Lire l'article →</span>
 											</a>
 										</li>
@@ -143,9 +143,9 @@ const related = relatedPosts(post, 3);
 						)}
 
 						<!-- CTA Block -->
-						<div class="mt-12 rounded-2xl p-8 shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[#F5B544]/20" style="background: linear-gradient(135deg, #00002a 0%, #0E172A 100%); border: 2px solid rgba(245, 181, 68, 0.3);">
-							<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl" style="background: rgba(245, 181, 68, 0.1);">
-								<svg class="h-6 w-6" style="color: #F5B544;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+						<div class="mt-12 rounded-2xl p-8 shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:shadow-[#FACC6B]/20" style="background: linear-gradient(135deg, #00002a 0%, #0E172A 100%); border: 2px solid rgba(250, 204, 107, 0.3);">
+							<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-xl" style="background: rgba(250, 204, 107, 0.1);">
+								<svg class="h-6 w-6" style="color: #FACC6B;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
 									<path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
 								</svg>
 							</div>
@@ -181,7 +181,7 @@ const related = relatedPosts(post, 3);
 
 <style>
 	.hero-title {
-		text-shadow: 0 4px 20px rgba(245, 181, 68, 0.3);
+		text-shadow: 0 4px 20px rgba(250, 204, 107, 0.3);
 	}
 
 	.article-content {
@@ -191,7 +191,7 @@ const related = relatedPosts(post, 3);
 	}
 
 	.article-content h2 {
-		color: #F5B544;
+		color: #FACC6B;
 		font-size: 1.75rem;
 		font-weight: 700;
 		margin-top: 2.5rem;
@@ -206,7 +206,7 @@ const related = relatedPosts(post, 3);
 	}
 
 	.article-content strong {
-		color: #F5B544;
+		color: #FACC6B;
 		font-weight: 600;
 	}
 </style>
