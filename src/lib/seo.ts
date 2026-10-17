@@ -104,6 +104,8 @@ export const SITE = {
 		facebook: 'https://facebook.com/confectionunivers',
 		instagram: 'https://instagram.com/confectionunivers',
 		linkedin: 'https://linkedin.com/company/confectionunivers',
+		// Chaîne confirmée par l'entreprise le 2026-10-17.
+		youtube: 'https://www.youtube.com/@ConfectionUnivers',
 	},
 
 	/** Zones desservies — alimente `areaServed` du schéma LocalBusiness. */
