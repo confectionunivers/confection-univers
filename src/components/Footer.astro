@@ -1,6 +1,6 @@
 ---
 import { SITE } from '../lib/seo';
-import { SERVICES, COLLECTIONS } from '../lib/site-data';
+import { BLOG_POSTS } from '../lib/blog-data';
 import Picture from './Picture.astro';
 
 /* Canal réel de l'atelier : les actualités partent sur WhatsApp, pas par e-mail. */
@@ -57,41 +57,37 @@ const whatsappNewsHref = `${SITE.whatsapp}?text=${encodeURIComponent(
 		<div aria-hidden="true" class="footer-stitch footer-stitch--inline mt-12"></div>
 
 		<!--
-			RANGÉE 2 : deux colonnes de 9 liens, strictement égales et sans aucun
-			doublon. Les collections déjà couvertes par une prestation ne sont
-			pas répétées (elles restent maillées depuis /catalogue) ; les pages
-			légales rejoignent la colonne Navigation.
+			RANGÉE 2 : défilement continu des articles du blog — cartes
+			rectangulaires arrondies avec l'image de chaque article. Boucle
+			infinie en CSS (deux copies de la liste), pause au survol,
+			défilement manuel si l'utilisateur préfère moins de mouvement.
 		-->
-		<div class="mx-auto mt-12 grid max-w-2xl grid-cols-1 gap-10 sm:grid-cols-2">
-			<nav aria-label="Navigation pied de page" class="text-center">
-				<h4 class="footer-h">Navigation</h4>
-				<ul class="space-y-2.5">
-					<li><a href="/" class="footer-link">Accueil</a></li>
-					<li><a href="/about" class="footer-link">À propos</a></li>
-					<li><a href="/services" class="footer-link">Services</a></li>
-					<li><a href="/catalogue" class="footer-link">Catalogue</a></li>
-					<li><a href="/products" class="footer-link">Produits</a></li>
-					<li><a href="/blog" class="footer-link">Blog</a></li>
-					<li><a href="/contact" class="footer-link">Contact</a></li>
-					<li><a href="/mentions-legales" class="footer-link">Mentions légales</a></li>
-					<li><a href="/confidentialite" class="footer-link">Politique de confidentialité</a></li>
+		<div class="mt-12 text-center">
+			<h4 class="footer-h">Dernières actualités</h4>
+		</div>
+		<div class="blog-marquee mt-6">
+			<div class="blog-marquee__track">
+				<ul class="flex pr-4">
+					{BLOG_POSTS.map((post) => (
+					<li>
+						<a href={`/blog/${post.slug}`} class="blog-card">
+							<Picture src={post.image} alt={post.title} class="aspect-[16/10] w-full rounded-xl object-cover" loading="lazy" />
+							<span class="line-clamp-2 px-2 pb-2 pt-3 text-left text-sm font-semibold leading-snug text-[#00001C]">{post.title}</span>
+						</a>
+					</li>
+				))}
 				</ul>
-			</nav>
-
-			<nav aria-label="Prestations et collections" class="text-center">
-				<h4 class="footer-h">Prestations &amp; collections</h4>
-				<ul class="space-y-2.5">
-					<li><a href="/services/toges-graduation" class="footer-link">Toges de graduation</a></li>
-					<li><a href="/services/uniformes-scolaires" class="footer-link">Uniformes scolaires</a></li>
-					<li><a href="/services/tenue-travail" class="footer-link">Tenue de travail</a></li>
-					<li><a href="/services/kimonos" class="footer-link">Kimonos</a></li>
-					<li><a href="/services/blouses-medicales" class="footer-link">Blouses médicales</a></li>
-					<li><a href="/services/toges-avocat" class="footer-link">Toges d'avocat</a></li>
-					<li><a href="/services/costumes-africains" class="footer-link">Costumes africains</a></li>
-					<li><a href="/services/tenues-sport" class="footer-link">Tenues de sport</a></li>
-					<li><a href="/collections/tenues-medicales" class="footer-link">Tenues médicales</a></li>
+				<ul aria-hidden="true" class="flex pr-4">
+					{BLOG_POSTS.map((post) => (
+					<li>
+						<a href={`/blog/${post.slug}`} class="blog-card" tabindex="-1">
+							<Picture src={post.image} alt={post.title} class="aspect-[16/10] w-full rounded-xl object-cover" loading="lazy" />
+							<span class="line-clamp-2 px-2 pb-2 pt-3 text-left text-sm font-semibold leading-snug text-[#00001C]">{post.title}</span>
+						</a>
+					</li>
+				))}
 				</ul>
-			</nav>
+			</div>
 		</div>
 
 		<!-- RANGÉE 3 : panneau nuit, trois zones égales centrées -->
@@ -135,6 +131,10 @@ const whatsappNewsHref = `${SITE.whatsapp}?text=${encodeURIComponent(
 		<div class="mt-12 flex flex-col items-center gap-4 border-t border-dashed border-[#00001C]/25 pt-8 text-center">
 			<p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#00001C]/60">
 				© 2026 Confection Univers — Tous droits réservés.
+			</p>
+			<p class="flex flex-wrap justify-center gap-x-5 gap-y-1 text-xs">
+				<a href="/mentions-legales" class="font-medium text-[#00001C]/70 underline-offset-4 transition-colors hover:text-[#00001C] hover:underline">Mentions légales</a>
+				<a href="/confidentialite" class="font-medium text-[#00001C]/70 underline-offset-4 transition-colors hover:text-[#00001C] hover:underline">Politique de confidentialité</a>
 			</p>
 			<button
 				type="button"
@@ -257,11 +257,60 @@ const whatsappNewsHref = `${SITE.whatsapp}?text=${encodeURIComponent(
 		transform: translateY(-1px);
 	}
 
+	/* Carte article : plaque blanche arrondie, image + titre. */
+	.blog-card {
+		display: block;
+		width: 16rem;
+		border-radius: 1.25rem;
+		background: #ffffff;
+		padding: 0.5rem;
+		box-shadow: 0 10px 26px -12px rgba(0, 0, 17, 0.45);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+
+	.blog-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 16px 34px -12px rgba(0, 0, 17, 0.55);
+	}
+
+	/* Défilement continu : deux copies de la liste, translation de -50 %. */
+	.blog-marquee {
+		overflow: hidden;
+	}
+
+	.blog-marquee__track {
+		display: flex;
+		width: max-content;
+		animation: blog-scroll 70s linear infinite;
+	}
+
+	.blog-marquee:hover .blog-marquee__track {
+		animation-play-state: paused;
+	}
+
+	@keyframes blog-scroll {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-50%);
+		}
+	}
+
 	@media (prefers-reduced-motion: reduce) {
 		.footer-social,
 		.footer-sub-btn,
-		#footer-scroll-top {
+		#footer-scroll-top,
+		.blog-card {
 			transition: none;
+		}
+
+		.blog-marquee {
+			overflow-x: auto;
+		}
+
+		.blog-marquee__track {
+			animation: none;
 		}
 	}
 </style>
