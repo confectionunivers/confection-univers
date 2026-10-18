@@ -492,16 +492,18 @@ const social = ([
 		background-color: #00001C;
 	}
 
+	/* Halos : radial-gradients natifs (le filter blur(110px) coûtait une
+	   re-rasterisation GPU pendant l'animation de flottement — rendu quasi
+	   identique pour un coût quasi nul). */
 	.glow {
 		position: absolute;
 		z-index: 1;
 		border-radius: 9999px;
-		filter: blur(110px);
 		animation: cu-float 16s ease-in-out infinite;
 	}
-	.glow-1 { left: -8%; top: 0; width: 46vw; height: 46vw; background: #2236a8; opacity: 0.45; }
-	.glow-2 { left: 28%; bottom: 0; width: 30vw; height: 30vw; background: var(--cu-gold-grad); opacity: 0.18; animation-delay: -5s; }
-	.glow-3 { right: 20%; top: 20%; width: 26vw; height: 26vw; background: #3d6bff; opacity: 0.22; animation-delay: -9s; }
+	.glow-1 { left: -8%; top: 0; width: 46vw; height: 46vw; background: radial-gradient(circle, rgba(34,54,168,0.42) 0%, rgba(34,54,168,0.16) 45%, transparent 70%); }
+	.glow-2 { left: 28%; bottom: 0; width: 30vw; height: 30vw; background: radial-gradient(circle, rgba(245,158,11,0.18) 0%, rgba(250,204,107,0.09) 45%, transparent 70%); animation-delay: -5s; }
+	.glow-3 { right: 20%; top: 20%; width: 26vw; height: 26vw; background: radial-gradient(circle, rgba(61,107,255,0.20) 0%, rgba(61,107,255,0.08) 45%, transparent 70%); animation-delay: -9s; }
 
 	.hero-shade {
 		z-index: 0;
