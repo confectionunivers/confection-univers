@@ -6,7 +6,7 @@ import Picture from './Picture.astro';
  * Composition : grand titre condensé à gauche, portrait dominant à droite,
  * texte descriptif, carte projet, bouton circulaire, barre sociale verticale
  * et image secondaire qui déborde sur la section suivante.
- * Palette de marque : bleu nuit (#00001C) et or (#D4AF37).
+ * Palette de marque : bleu nuit (#00001C) et or (#F59E0B).
  */
 
 /**
@@ -472,7 +472,7 @@ const social = ([
 
 	/* Titre : blanc vers or champagne (équivalent du dégradé rose de la référence) */
 	.title-gradient {
-		background: linear-gradient(180deg, #ffffff 0%, #fff6d5 42%, #facc6b 78%, #d4af37 100%);
+		background: linear-gradient(180deg, #ffffff 0%, #fff6d5 42%, #facc6b 78%, #F59E0B 100%);
 		-webkit-background-clip: text;
 		background-clip: text;
 		color: transparent;
@@ -500,7 +500,7 @@ const social = ([
 		animation: cu-float 16s ease-in-out infinite;
 	}
 	.glow-1 { left: -8%; top: 0; width: 46vw; height: 46vw; background: #2236a8; opacity: 0.45; }
-	.glow-2 { left: 28%; bottom: 0; width: 30vw; height: 30vw; background: #D4AF37; opacity: 0.18; animation-delay: -5s; }
+	.glow-2 { left: 28%; bottom: 0; width: 30vw; height: 30vw; background: var(--cu-gold-grad); opacity: 0.18; animation-delay: -5s; }
 	.glow-3 { right: 20%; top: 20%; width: 26vw; height: 26vw; background: #3d6bff; opacity: 0.22; animation-delay: -9s; }
 
 	.hero-shade {
@@ -519,7 +519,7 @@ const social = ([
 		opacity: 0;
 		transform: scale(1.025);
 		transform-origin: 55% bottom;
-		filter: saturate(1.04) contrast(1.02) drop-shadow(0 18px 36px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 24px rgba(212, 175, 55, 0.1));
+		filter: saturate(1.04) contrast(1.02) drop-shadow(0 18px 36px rgba(0, 0, 0, 0.35)) drop-shadow(0 0 24px rgba(245, 158, 11, 0.1));
 	}
 
 	/* Le <picture> gère l'animation, l'<img> gère le cadrage de la silhouette. */
@@ -575,8 +575,8 @@ const social = ([
 		opacity: 0.6;
 		border: 1px dashed rgba(255, 226, 163, 0.28);
 		border-radius: 50%;
-		background: radial-gradient(ellipse at 50% 62%, rgba(212, 175, 55, 0.12), transparent 66%);
-		box-shadow: 0 0 50px rgba(212, 175, 55, 0.07), inset 0 0 65px rgba(212, 175, 55, 0.06);
+		background: radial-gradient(ellipse at 50% 62%, rgba(245, 158, 11, 0.12), transparent 66%);
+		box-shadow: 0 0 50px rgba(245, 158, 11, 0.07), inset 0 0 65px rgba(245, 158, 11, 0.06);
 	}
 
 	.runway-floor {
@@ -588,8 +588,8 @@ const social = ([
 		border-radius: 50%;
 		border-top: 2px solid rgba(255, 223, 154, 0.5);
 		transform: perspective(460px) rotateX(68deg);
-		background: radial-gradient(ellipse at 50% 30%, rgba(255, 214, 121, 0.36), rgba(212, 175, 55, 0.1) 42%, transparent 72%);
-		box-shadow: 0 -12px 45px rgba(212, 175, 55, 0.12);
+		background: radial-gradient(ellipse at 50% 30%, rgba(255, 214, 121, 0.36), rgba(245, 158, 11, 0.1) 42%, transparent 72%);
+		box-shadow: 0 -12px 45px rgba(245, 158, 11, 0.12);
 	}
 
 	.runway-number {
@@ -845,7 +845,7 @@ const social = ([
 	.hero-slide-action:hover {
 		transform: translateY(-2px);
 		border-color: #facc6b;
-		background: #facc6b;
+		background: var(--cu-gold-grad);
 		color: #00001c;
 	}
 
@@ -909,9 +909,9 @@ const social = ([
 	}
 
 	.hero-btn-primary {
-		background: linear-gradient(135deg, #FACC6B 0%, #D4AF37 50%, #B8860B 100%);
+		background: linear-gradient(135deg, #FACC6B 0%, #F59E0B 50%, #B8860B 100%);
 		color: #00001C;
-		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 10px 24px -10px rgba(212, 175, 55, 0.7);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 10px 24px -10px rgba(245, 158, 11, 0.7);
 	}
 
 	.hero-btn-ghost {
@@ -926,7 +926,7 @@ const social = ([
 	}
 
 	.hero-btn-ghost:hover {
-		border-color: #D4AF37;
+		border-color: #F59E0B;
 		color: #FACC6B;
 	}
 
@@ -942,7 +942,7 @@ const social = ([
 	.hero-badges li {
 		padding: 5px 12px;
 		border-radius: 9999px;
-		border: 1px solid rgba(212, 175, 55, 0.4);
+		border: 1px solid rgba(245, 158, 11, 0.4);
 		background: rgba(0, 0, 28, 0.5);
 		color: #FFE9A8;
 		font-size: 12px;
@@ -1090,7 +1090,7 @@ const social = ([
 
 	.start-card:is(:hover, :focus-visible) .card-action-arrow {
 		transform: translateX(2px);
-		background: #facc6b;
+		background: var(--cu-gold-grad);
 		color: #080f30;
 	}
 
@@ -1173,12 +1173,12 @@ const social = ([
 
 	.secondary-img:hover {
 		border-color: rgba(250, 204, 107, 0.8);
-		box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7), 0 0 24px rgba(212, 175, 55, 0.16);
+		box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7), 0 0 24px rgba(245, 158, 11, 0.16);
 	}
 
 	.secondary-img:hover .secondary-img-arrow {
 		transform: translate(2px, -2px);
-		background: #FACC6B;
+		background: var(--cu-gold-grad);
 		color: #00001C;
 	}
 
@@ -1615,23 +1615,23 @@ const social = ([
 		height: 6px;
 		transform: translateX(-50%);
 		border-radius: 9999px;
-		background: linear-gradient(90deg, #3d6bff, #D4AF37);
-		box-shadow: 0 0 14px rgba(212, 175, 55, 0.7);
+		background: linear-gradient(90deg, #3d6bff, #F59E0B);
+		box-shadow: 0 0 14px rgba(245, 158, 11, 0.7);
 	}
 
 	.circle-cta:hover {
 		transform: scale(1.06);
-		border-color: #D4AF37;
-		background-color: rgba(212, 175, 55, 0.08);
+		border-color: #F59E0B;
+		background-color: rgba(245, 158, 11, 0.08);
 	}
 
 	/* ---------- Barre sociale ---------- */
 	.social-bar {
-		background: rgba(212, 175, 55, 0.24);
+		background: rgba(245, 158, 11, 0.24);
 		border: 1px solid rgba(250, 204, 107, 0.38);
 		backdrop-filter: blur(14px);
 		-webkit-backdrop-filter: blur(14px);
-		box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.55), 0 0 26px rgba(212, 175, 55, 0.12);
+		box-shadow: 0 30px 60px -24px rgba(0, 0, 0, 0.55), 0 0 26px rgba(245, 158, 11, 0.12);
 	}
 
 	.round-btn {
@@ -1643,7 +1643,7 @@ const social = ([
 
 	.round-btn:hover {
 		transform: translateY(2px);
-		border-color: #D4AF37;
+		border-color: #F59E0B;
 	}
 
 	.social-btn {
@@ -1654,7 +1654,7 @@ const social = ([
 
 	.social-btn:hover {
 		transform: translateY(-2px);
-		background: #D4AF37;
+		background: var(--cu-gold-grad);
 		color: #00001C;
 	}
 
@@ -1674,7 +1674,7 @@ const social = ([
 
 	.thumb.is-active {
 		opacity: 1;
-		box-shadow: 0 0 0 2px #D4AF37, 0 0 16px rgba(212, 175, 55, 0.45);
+		box-shadow: 0 0 0 2px #F59E0B, 0 0 16px rgba(245, 158, 11, 0.45);
 	}
 
 	.thumb-num {
@@ -1683,7 +1683,7 @@ const social = ([
 	}
 
 	.thumb.is-active .thumb-num {
-		background: #D4AF37;
+		background: var(--cu-gold-grad);
 		color: #00001C;
 	}
 

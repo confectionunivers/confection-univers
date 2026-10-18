@@ -3,7 +3,7 @@ import { SITE } from '../lib/seo';
 import Picture from './Picture.astro';
 /**
  * Header : logo (sur fond blanc), 6 liens de navigation, bouton « Demander un devis »
- * et bouton menu qui ouvre un tiroir blanc. Palette : bleu nuit (#00001C) et or (#D4AF37).
+ * et bouton menu qui ouvre un tiroir blanc. Palette : bleu nuit (#00001C) et or (#F59E0B).
  */
 
 const NAV = [
@@ -339,7 +339,7 @@ const social = ([
 		position: absolute;
 		inset: 0;
 		z-index: 0;
-		background: linear-gradient(90deg, rgba(212, 175, 55, 0.92), rgba(250, 204, 107, 0.96));
+		background: linear-gradient(90deg, rgba(245, 158, 11, 0.92), rgba(250, 204, 107, 0.96));
 		transform: scaleX(0);
 		transform-origin: left;
 		transition: transform 0.3s ease;
@@ -462,7 +462,7 @@ const social = ([
 		padding: 8px 18px;
 		border-radius: 18px;
 		background: #ffffff;
-		box-shadow: 0 10px 26px -10px rgba(0, 0, 0, 0.5), inset 0 -2px 0 rgba(212, 175, 55, 0.5);
+		box-shadow: 0 10px 26px -10px rgba(0, 0, 0, 0.5), inset 0 -2px 0 rgba(245, 158, 11, 0.5);
 	}
 
 	.logo-chip :global(img) {
@@ -540,7 +540,7 @@ const social = ([
 		height: 36px;
 		padding: 0 14px;
 		border-radius: 9999px;
-		border: 1px solid rgba(212, 175, 55, 0.12);
+		border: 1px solid rgba(245, 158, 11, 0.12);
 		background: rgba(6, 8, 26, 0.72);
 		backdrop-filter: blur(10px);
 		-webkit-backdrop-filter: blur(10px);
@@ -553,13 +553,13 @@ const social = ([
 	}
 
 	.pill:hover {
-		background: rgba(212, 175, 55, 0.18);
-		border-color: rgba(212, 175, 55, 0.45);
+		background: rgba(245, 158, 11, 0.18);
+		border-color: rgba(245, 158, 11, 0.45);
 		color: #FACC6B;
 	}
 
 	.pill.is-active {
-		background: linear-gradient(135deg, #FACC6B 0%, #D4AF37 100%);
+		background: linear-gradient(135deg, #FACC6B 0%, #F59E0B 100%);
 		border-color: transparent;
 		color: #00001C;
 	}
@@ -586,7 +586,7 @@ const social = ([
 		padding: 8px;
 		border-radius: 16px;
 		background: rgba(6, 8, 26, 0.95);
-		border: 1px solid rgba(212, 175, 55, 0.25);
+		border: 1px solid rgba(245, 158, 11, 0.25);
 		box-shadow: 0 24px 50px -16px rgba(0, 0, 0, 0.7);
 		backdrop-filter: blur(14px);
 		opacity: 0;
@@ -616,7 +616,7 @@ const social = ([
 
 	.dropdown-link:hover,
 	.dropdown-link.is-active {
-		background: rgba(212, 175, 55, 0.18);
+		background: rgba(245, 158, 11, 0.18);
 		color: #FACC6B;
 	}
 
@@ -626,19 +626,19 @@ const social = ([
 		height: 36px;
 		padding: 0 18px;
 		border-radius: 9999px;
-		background: linear-gradient(135deg, #FACC6B 0%, #D4AF37 50%, #B8860B 100%);
+		background: linear-gradient(135deg, #FACC6B 0%, #F59E0B 50%, #B8860B 100%);
 		color: #00001C;
 		font-family: 'Inter', system-ui, sans-serif;
 		font-size: 14px;
 		font-weight: 700;
 		white-space: nowrap;
-		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 8px 20px -8px rgba(212, 175, 55, 0.6);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 8px 20px -8px rgba(245, 158, 11, 0.6);
 		transition: transform 0.3s ease, box-shadow 0.3s ease;
 	}
 
 	.btn-cta:hover {
 		transform: translateY(-1px);
-		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 12px 26px -8px rgba(212, 175, 55, 0.75);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 12px 26px -8px rgba(245, 158, 11, 0.75);
 	}
 
 	.burger-pill {
@@ -648,8 +648,8 @@ const social = ([
 		width: 44px;
 		height: 36px;
 		border-radius: 9999px;
-		background: linear-gradient(135deg, #FACC6B 0%, #D4AF37 50%, #B8860B 100%);
-		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 8px 20px -8px rgba(212, 175, 55, 0.6);
+		background: linear-gradient(135deg, #FACC6B 0%, #F59E0B 50%, #B8860B 100%);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 8px 20px -8px rgba(245, 158, 11, 0.6);
 		transition: transform 0.3s ease;
 	}
 
@@ -719,7 +719,7 @@ const social = ([
 	}
 
 	.close-btn:hover {
-		background: #D4AF37;
+		background: var(--cu-gold-grad);
 		color: #00001C;
 	}
 
@@ -759,7 +759,7 @@ const social = ([
 	.drawer-sub-link {
 		display: block;
 		padding: 10px 0 10px 14px;
-		border-left: 2px solid #D4AF37;
+		border-left: 2px solid #F59E0B;
 		margin-left: 2px;
 		font-family: 'Inter', system-ui, sans-serif;
 		font-size: 14px;
@@ -801,7 +801,7 @@ const social = ([
 
 	.social-icon:hover {
 		transform: translateY(-2px);
-		background: #D4AF37;
+		background: var(--cu-gold-grad);
 		color: #00001C;
 	}
 

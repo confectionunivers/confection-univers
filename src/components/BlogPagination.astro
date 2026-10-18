@@ -14,7 +14,7 @@ const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 		href={`?page=${Math.max(1, currentPage - 1)}`}
 		data-blog-prev
 		hidden={currentPage <= 1}
-		class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all duration-300 hover:border-[#F5B544] hover:bg-[#F5B544]/10 hover:text-[#F5B544]"
+		class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all duration-300 hover:border-[#FACC6B] hover:bg-[#FACC6B]/10 hover:text-[#FACC6B]"
 		aria-label="Page précédente"
 	>
 		<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -29,7 +29,7 @@ const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 			data-blog-page={page}
 			class={`flex h-3 w-3 items-center justify-center rounded-full transition-all duration-300 ${
 				page === currentPage
-					? 'h-4 w-4 bg-[#F5B544] shadow-[0_0_12px_rgba(245,181,68,0.5)]'
+					? 'h-4 w-4 bg-[#FACC6B] shadow-[0_0_12px_rgba(250,204,107,0.5)]'
 					: 'bg-white/20 hover:h-4 hover:w-4 hover:bg-white/40'
 			}`}
 			aria-label={`Page ${page}`}
@@ -44,7 +44,7 @@ const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 		href={`?page=${Math.min(totalPages, currentPage + 1)}`}
 		data-blog-next
 		hidden={currentPage >= totalPages}
-		class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all duration-300 hover:border-[#F5B544] hover:bg-[#F5B544]/10 hover:text-[#F5B544]"
+		class="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white transition-all duration-300 hover:border-[#FACC6B] hover:bg-[#FACC6B]/10 hover:text-[#FACC6B]"
 		aria-label="Page suivante"
 	>
 		<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">

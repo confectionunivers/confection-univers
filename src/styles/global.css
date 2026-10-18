@@ -109,7 +109,7 @@
 	--color-background: #00001C; /* Deep blue night */
 	--color-background-muted: #00002a; /* Darker blue */
 	--color-foreground: #f7f5f0; /* Light text */
-	--color-primary: #F5B544; /* Gold accent */
+	--color-primary: #F59E0B; /* Or : milieu du dégradé de la carte or */
 	--color-primary-light: #FACC6B; /* Light gold */
 	--color-primary-dark: #D97706; /* Dark gold */
 	--color-secondary: #00002a; /* Secondary dark */
@@ -132,7 +132,7 @@
 
 :root {
 	/* Hero-based Design Tokens */
-	--cu-gold: #F5B544;
+	--cu-gold: #F59E0B;
 	--cu-gold-light: #FACC6B;
 	--cu-gold-dark: #D97706;
 	--cu-navy: #00001C;
@@ -435,7 +435,7 @@ html.lenis body {
 
 	.btn-hero-primary:hover {
 		transform: translateY(-2px) scale(1.02);
-		box-shadow: 0 12px 40px -6px rgba(198, 161, 95, 0.55), 0 0 30px rgba(198, 161, 95, 0.3);
+		box-shadow: 0 12px 40px -6px rgba(245, 158, 11, 0.55), 0 0 30px rgba(245, 158, 11, 0.3);
 	}
 
 	.btn-hero-secondary {
@@ -461,7 +461,7 @@ html.lenis body {
 		background: rgba(0, 0, 0, 0.5);
 		border-color: rgba(250, 204, 107, 0.5);
 		transform: translateY(-2px) scale(1.02);
-		box-shadow: 0 8px 24px -8px rgba(198, 161, 95, 0.3);
+		box-shadow: 0 8px 24px -8px rgba(245, 158, 11, 0.3);
 	}
 
 	.btn-hero-secondary:hover span {
@@ -635,7 +635,7 @@ html.lenis body {
 	z-index: 9999;
 	padding: 0.75rem 1.25rem;
 	border-radius: 9999px;
-	background: var(--cu-gold, #d4af37);
+	background: var(--cu-gold, #F59E0B);
 	color: #00001c;
 	font-weight: 700;
 	font-size: 0.875rem;
@@ -647,4 +647,20 @@ html.lenis body {
 }
 .skip-link:focus {
 	transform: translateY(0);
+}
+
+/* Or unifié : chaque surface jaune du site porte le dégradé de la carte
+   « L'excellence à chaque couture » (135deg #FACC6B → #F59E0B → #D97706). */
+:root {
+	--cu-gold-grad: linear-gradient(135deg, #FACC6B 0%, #F59E0B 50%, #D97706 100%);
+}
+.bg-primary,
+.bg-\[\#FACC6B\],
+.bg-\[\#F59E0B\],
+.hover\:bg-primary:hover,
+.hover\:bg-\[\#F59E0B\]:hover,
+.hover\:bg-\[\#FACC6B\]:hover,
+.skip-link {
+	background-image: var(--cu-gold-grad);
+	background-color: transparent;
 }

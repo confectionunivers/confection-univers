@@ -45,21 +45,21 @@ const relatedCollections = COLLECTIONS.filter((entry) => entry.slug !== collecti
 		
 		<!-- Hero Section -->
 		<section class="relative min-h-[40vh] flex flex-col justify-center overflow-hidden pb-16 pt-32 md:pt-40" style="background: linear-gradient(135deg, #00001C 0%, #00002a 60%, #020617 100%);">
-			<div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_85%_60%_at_100%_0%,rgba(212,175,55,0.12),transparent_55%),radial-gradient(ellipse_70%_50%_at_0%_100%,rgba(212,175,55,0.08),transparent_50%)]"></div>
+			<div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_85%_60%_at_100%_0%,rgba(245,158,11,0.12),transparent_55%),radial-gradient(ellipse_70%_50%_at_0%_100%,rgba(245,158,11,0.08),transparent_50%)]"></div>
 			
 			<div class="mx-auto max-w-7xl px-6">
 				<Breadcrumbs trail={trail} />
-				<p class="mb-5 text-[11px] font-semibold uppercase tracking-[0.38em] text-[#D4AF37] md:text-xs">
+				<p class="mb-5 text-[11px] font-semibold uppercase tracking-[0.38em] text-[#F59E0B] md:text-xs">
 					Collection
 				</p>
 				<h1 class="font-display text-[clamp(2.5rem,6vw,4.75rem)] font-semibold leading-[1.05] tracking-tight text-white md:leading-[1.02]">
-					<span class="mt-1 block bg-gradient-to-r from-[#D4AF37] via-[#FFFDF2] to-[#D4AF37] bg-clip-text text-transparent">
+					<span class="mt-1 block bg-gradient-to-r from-[#F59E0B] via-[#FFFDF2] to-[#F59E0B] bg-clip-text text-transparent">
 						{collection.name}
 					</span>
 				</h1>
 				<a
 					href="/catalogue"
-					class="mt-6 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-white/60 transition-all duration-300 hover:text-[#D4AF37] hover:gap-3"
+					class="mt-6 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-white/60 transition-all duration-300 hover:text-[#F59E0B] hover:gap-3"
 				>
 					<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6" />
@@ -76,7 +76,7 @@ const relatedCollections = COLLECTIONS.filter((entry) => entry.slug !== collecti
 					{
 						collection.images.map((image, i) => (
 							<div 
-								class="photo-frame group relative overflow-hidden rounded-2xl border border-[#D4AF37]/20 bg-white/5 backdrop-blur-sm shadow-[0_8px_32px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out will-change-transform hover:-translate-y-1.5 hover:border-[#D4AF37] hover:shadow-[0_12px_40px_rgba(212,175,55,0.15)] cursor-pointer"
+								class="photo-frame group relative overflow-hidden rounded-2xl border border-[#F59E0B]/20 bg-white/5 backdrop-blur-sm shadow-[0_8px_32px_-12px_rgba(0,0,0,0.3)] transition-all duration-500 ease-out will-change-transform hover:-translate-y-1.5 hover:border-[#F59E0B] hover:shadow-[0_12px_40px_rgba(245,158,11,0.15)] cursor-pointer"
 								data-image={image}
 								tabindex="0"
 								role="button"
@@ -95,8 +95,8 @@ const relatedCollections = COLLECTIONS.filter((entry) => entry.slug !== collecti
 									
 									<!-- Zoom Icon Overlay -->
 									<div class="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-500 group-hover:opacity-100">
-										<div class="rounded-full bg-[#D4AF37]/20 backdrop-blur-md p-4 border border-[#D4AF37]/30">
-											<svg class="h-6 w-6 text-[#D4AF37]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+										<div class="rounded-full bg-[#F59E0B]/20 backdrop-blur-md p-4 border border-[#F59E0B]/30">
+											<svg class="h-6 w-6 text-[#F59E0B]" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
 												<path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
 											</svg>
 										</div>
@@ -115,14 +115,14 @@ const relatedCollections = COLLECTIONS.filter((entry) => entry.slug !== collecti
 		<!-- Maillage interne : renforce le crawl des pages sœurs et de la prestation -->
 		<section class="relative z-10 pb-4">
 			<div class="mx-auto max-w-7xl px-6">
-				<div class="flex flex-col gap-6 rounded-3xl border border-[#D4AF37]/15 bg-white/5 p-8 backdrop-blur-sm md:flex-row md:items-center md:justify-between">
+				<div class="flex flex-col gap-6 rounded-3xl border border-[#F59E0B]/15 bg-white/5 p-8 backdrop-blur-sm md:flex-row md:items-center md:justify-between">
 					<div>
-						<h2 class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#D4AF37]">Explorer aussi</h2>
+						<h2 class="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#F59E0B]">Explorer aussi</h2>
 						<div class="mt-3 flex flex-wrap gap-2">
 							{relatedCollections.map((entry) => (
 								<a
 									href={`/collections/${entry.slug}`}
-									class="rounded-full border border-white/10 px-4 py-2 text-xs font-semibold text-white/70 transition-colors hover:border-[#D4AF37]/50 hover:text-[#D4AF37]"
+									class="rounded-full border border-white/10 px-4 py-2 text-xs font-semibold text-white/70 transition-colors hover:border-[#F59E0B]/50 hover:text-[#F59E0B]"
 								>
 									{entry.name}
 								</a>
@@ -132,7 +132,7 @@ const relatedCollections = COLLECTIONS.filter((entry) => entry.slug !== collecti
 					{collection.serviceSlug && (
 						<a
 							href={`/services/${collection.serviceSlug}`}
-							class="inline-flex shrink-0 items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#D4AF37] transition-all hover:gap-3"
+							class="inline-flex shrink-0 items-center gap-2 text-xs font-bold uppercase tracking-[0.18em] text-[#F59E0B] transition-all hover:gap-3"
 						>
 							Découvrir la prestation {collection.name}
 							<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
@@ -147,8 +147,8 @@ const relatedCollections = COLLECTIONS.filter((entry) => entry.slug !== collecti
 		<!-- CTA Section -->
 		<section class="relative z-10 py-20" style="background: linear-gradient(180deg, #00001C 0%, #00002a 100%);">
 			<div class="mx-auto max-w-4xl px-6 text-center">
-				<div class="relative overflow-hidden rounded-[3rem] border border-[#D4AF37]/20 bg-white/5 backdrop-blur-sm p-12 md:p-16">
-					<div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_85%_60%_at_50%_0%,rgba(212,175,55,0.1),transparent_55%)]"></div>
+				<div class="relative overflow-hidden rounded-[3rem] border border-[#F59E0B]/20 bg-white/5 backdrop-blur-sm p-12 md:p-16">
+					<div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_85%_60%_at_50%_0%,rgba(245,158,11,0.1),transparent_55%)]"></div>
 					
 					<div class="relative z-10">
 						<h2 class="font-display text-3xl font-bold leading-tight tracking-tight text-white md:text-4xl">
@@ -159,7 +159,7 @@ const relatedCollections = COLLECTIONS.filter((entry) => entry.slug !== collecti
 						</p>
 						<a
 							href="/contact"
-							class="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-[#D4AF37] px-8 py-4 text-[12px] font-bold uppercase tracking-[0.18em] text-[#00001C] transition-all duration-300 hover:bg-[#FFFDF2] hover:shadow-[0_8px_25px_rgba(212,175,55,0.3)] hover:scale-105"
+							class="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-[#F59E0B] px-8 py-4 text-[12px] font-bold uppercase tracking-[0.18em] text-[#00001C] transition-all duration-300 hover:bg-[#FFFDF2] hover:shadow-[0_8px_25px_rgba(245,158,11,0.3)] hover:scale-105"
 						>
 							Demander un devis
 							<svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -175,17 +175,17 @@ const relatedCollections = COLLECTIONS.filter((entry) => entry.slug !== collecti
 
 		<!-- Lightbox Modal -->
 		<div id="lightbox" role="dialog" aria-modal="true" aria-label={`Image agrandie — ${collection.name}`} class="lightbox fixed inset-0 z-[100] hidden items-center justify-center bg-[#00001C]/95 backdrop-blur-xl">
-			<button id="lightbox-close" type="button" aria-label="Fermer l’image agrandie" class="absolute top-6 right-6 rounded-full bg-white/10 p-3 text-white transition-all duration-300 hover:bg-[#D4AF37] hover:text-[#00001C]">
+			<button id="lightbox-close" type="button" aria-label="Fermer l’image agrandie" class="absolute top-6 right-6 rounded-full bg-white/10 p-3 text-white transition-all duration-300 hover:bg-[#F59E0B] hover:text-[#00001C]">
 				<svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
 				</svg>
 			</button>
-			<button id="lightbox-prev" type="button" aria-label="Image précédente" class="absolute left-6 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-4 text-white transition-all duration-300 hover:bg-[#D4AF37] hover:text-[#00001C]">
+			<button id="lightbox-prev" type="button" aria-label="Image précédente" class="absolute left-6 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-4 text-white transition-all duration-300 hover:bg-[#F59E0B] hover:text-[#00001C]">
 				<svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
 				</svg>
 			</button>
-			<button id="lightbox-next" type="button" aria-label="Image suivante" class="absolute right-6 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-4 text-white transition-all duration-300 hover:bg-[#D4AF37] hover:text-[#00001C]">
+			<button id="lightbox-next" type="button" aria-label="Image suivante" class="absolute right-6 top-1/2 -translate-y-1/2 rounded-full bg-white/10 p-4 text-white transition-all duration-300 hover:bg-[#F59E0B] hover:text-[#00001C]">
 				<svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
 				</svg>
