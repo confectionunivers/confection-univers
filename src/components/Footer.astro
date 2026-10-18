@@ -25,8 +25,8 @@ const whatsappNewsHref = `${SITE.whatsapp}?text=${encodeURIComponent(
 				<p class="font-display text-3xl font-bold tracking-tight text-[#00001C]">
 					Confection Univers
 				</p>
-				<p class="mx-auto mt-3 max-w-md text-sm font-medium leading-[1.7] text-[#00001C]/70">
-					L'excellence du textile professionnel au Sénégal.
+				<p class="mx-auto mt-3 max-w-md text-sm font-medium italic leading-[1.7] text-[#00001C]/70">
+					Habillez votre réussite
 				</p>
 			</div>
 			<div class="flex justify-center gap-3 lg:justify-end">
@@ -57,12 +57,12 @@ const whatsappNewsHref = `${SITE.whatsapp}?text=${encodeURIComponent(
 		<div aria-hidden="true" class="footer-stitch footer-stitch--inline mt-12"></div>
 
 		<!--
-			RANGÉE 2 : trois colonnes de liens strictement égales (8 liens chacune),
-			titres et listes centrés : symétrie parfaite, aucun retour de ligne.
-			Maillage SEO conservé : chaque service et chaque collection reste
-			lié depuis toutes les pages du site.
+			RANGÉE 2 : deux colonnes de 9 liens, strictement égales et sans aucun
+			doublon. Les collections déjà couvertes par une prestation ne sont
+			pas répétées (elles restent maillées depuis /catalogue) ; les pages
+			légales rejoignent la colonne Navigation.
 		-->
-		<div class="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-10 sm:grid-cols-3">
+		<div class="mx-auto mt-12 grid max-w-2xl grid-cols-1 gap-10 sm:grid-cols-2">
 			<nav aria-label="Navigation pied de page" class="text-center">
 				<h4 class="footer-h">Navigation</h4>
 				<ul class="space-y-2.5">
@@ -73,35 +73,23 @@ const whatsappNewsHref = `${SITE.whatsapp}?text=${encodeURIComponent(
 					<li><a href="/products" class="footer-link">Produits</a></li>
 					<li><a href="/blog" class="footer-link">Blog</a></li>
 					<li><a href="/contact" class="footer-link">Contact</a></li>
-					<li><a href="/contact" class="footer-link font-semibold">Demander un devis</a></li>
+					<li><a href="/mentions-legales" class="footer-link">Mentions légales</a></li>
+					<li><a href="/confidentialite" class="footer-link">Politique de confidentialité</a></li>
 				</ul>
 			</nav>
 
-			<nav aria-label="Nos prestations" class="text-center">
-				<h4 class="footer-h">Nos prestations</h4>
+			<nav aria-label="Prestations et collections" class="text-center">
+				<h4 class="footer-h">Prestations &amp; collections</h4>
 				<ul class="space-y-2.5">
-					{SERVICES.map((service) => (
-						<li>
-							<a href={`/services/${service.slug}`} class="footer-link">
-								{service.title}
-							</a>
-						</li>
-					))}
-				</ul>
-			</nav>
-
-			<nav aria-label="Collections" class="text-center">
-				<h4 class="footer-h">Collections</h4>
-				<ul class="space-y-2.5">
-					{COLLECTIONS.map((collection) => (
-						<li>
-							<a href={`/collections/${collection.slug}`} class="footer-link">
-								{collection.name}
-							</a>
-						</li>
-					))}
-					<li><a href="/catalogue" class="footer-link">Tout le catalogue</a></li>
-					<li><a href="/contact" class="footer-link">Collection sur mesure</a></li>
+					<li><a href="/services/toges-graduation" class="footer-link">Toges de graduation</a></li>
+					<li><a href="/services/uniformes-scolaires" class="footer-link">Uniformes scolaires</a></li>
+					<li><a href="/services/tenue-travail" class="footer-link">Tenue de travail</a></li>
+					<li><a href="/services/kimonos" class="footer-link">Kimonos</a></li>
+					<li><a href="/services/blouses-medicales" class="footer-link">Blouses médicales</a></li>
+					<li><a href="/services/toges-avocat" class="footer-link">Toges d'avocat</a></li>
+					<li><a href="/services/costumes-africains" class="footer-link">Costumes africains</a></li>
+					<li><a href="/services/tenues-sport" class="footer-link">Tenues de sport</a></li>
+					<li><a href="/collections/tenues-medicales" class="footer-link">Tenues médicales</a></li>
 				</ul>
 			</nav>
 		</div>
@@ -147,10 +135,6 @@ const whatsappNewsHref = `${SITE.whatsapp}?text=${encodeURIComponent(
 		<div class="mt-12 flex flex-col items-center gap-4 border-t border-dashed border-[#00001C]/25 pt-8 text-center">
 			<p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#00001C]/60">
 				© 2026 Confection Univers — Tous droits réservés.
-			</p>
-			<p class="flex flex-wrap justify-center gap-x-5 gap-y-1 text-xs">
-				<a href="/mentions-legales" class="font-medium text-[#00001C]/70 underline-offset-4 transition-colors hover:text-[#00001C] hover:underline">Mentions légales</a>
-				<a href="/confidentialite" class="font-medium text-[#00001C]/70 underline-offset-4 transition-colors hover:text-[#00001C] hover:underline">Politique de confidentialité</a>
 			</p>
 			<button
 				type="button"
