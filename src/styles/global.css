@@ -664,3 +664,19 @@ html.lenis body {
 	background-image: var(--cu-gold-grad);
 	background-color: transparent;
 }
+
+
+/* ===== FLUIDITÉ DE SCROLL =====
+   Sections du catalogue : layout/paint différés tant qu'elles sont hors
+   écran (la taille de réserve évite tout saut de barre de défilement). */
+.catalogue-category {
+	content-visibility: auto;
+	contain-intrinsic-size: auto 900px;
+}
+
+/* Ancres douces quand Lenis n'est pas actif (mobile / mode léger). */
+@media (prefers-reduced-motion: no-preference) {
+	html:not(.lenis-smooth) {
+		scroll-behavior: smooth;
+	}
+}

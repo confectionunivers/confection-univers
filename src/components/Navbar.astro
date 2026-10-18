@@ -186,7 +186,15 @@ const social = ([
 		}
 	});
 
-	const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 24);
+	/* Garde d'état : le toggle ne touche le DOM que lorsque le seuil change. */
+	let wasStuck: boolean | null = null;
+	const onScroll = () => {
+		const stuck = window.scrollY > 24;
+		if (stuck !== wasStuck) {
+			wasStuck = stuck;
+			header?.classList.toggle('is-scrolled', stuck);
+		}
+	};
 	window.addEventListener('scroll', onScroll, { passive: true });
 	onScroll();
 

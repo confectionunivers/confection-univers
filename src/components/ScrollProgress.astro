@@ -1,23 +1,26 @@
 ---
 /**
  * Scroll Progress Indicator
- * Displays a thin progress bar at the top of the screen
- * Syncs with scroll position for premium narrative feel
+ * Barre fine en haut de l'écran, synchronisée avec la position de scroll.
+ * Rendue via transform: scaleX() (compositeur GPU uniquement — aucune
+ * écriture de layout par frame) + throttling rAF + listener passif.
  */
 ---
-<div id="scroll-progress" class="scroll-progress"></div>
+<div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
 
 <style>
 	.scroll-progress {
 		position: fixed;
 		top: 0;
 		left: 0;
-		width: 0%;
+		width: 100%;
 		height: 2px;
-		background: linear-gradient(90deg, #FACC6B, #F59E0B, #D97706);
+		background: linear-gradient(90deg, #facc6b, #f59e0b, #d97706);
 		z-index: 9999;
 		pointer-events: none;
-		transition: width 0.1s ease-out;
+		transform: scaleX(0);
+		transform-origin: left center;
+		will-change: transform;
 	}
 
 	@media (prefers-reduced-motion: reduce) {
@@ -31,17 +34,30 @@
 	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 	if (!prefersReducedMotion) {
-		const scrollProgress = document.getElementById('scroll-progress');
-		
-		if (scrollProgress) {
-			window.addEventListener('scroll', () => {
-				const scrollTop = window.scrollY;
-				const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-				const scrollPercent = (scrollTop / docHeight) * 100;
-				
-				const scrollProgressEl = scrollProgress as HTMLElement;
-				scrollProgressEl.style.width = scrollPercent + '%';
-			});
+		const bar = document.getElementById('scroll-progress') as HTMLElement | null;
+
+		if (bar) {
+			let ticking = false;
+
+			const update = () => {
+				const max = document.documentElement.scrollHeight - window.innerHeight;
+				const progress = max > 0 ? Math.min(window.scrollY / max, 1) : 0;
+				bar.style.transform = `scaleX(${progress})`;
+				ticking = false;
+			};
+
+			window.addEventListener(
+				'scroll',
+				() => {
+					if (!ticking) {
+						ticking = true;
+						requestAnimationFrame(update);
+					}
+				},
+				{ passive: true }
+			);
+
+			update();
 		}
 	}
 </script>
