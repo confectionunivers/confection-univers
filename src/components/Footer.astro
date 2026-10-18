@@ -89,6 +89,11 @@ const whatsappNewsHref = `${SITE.whatsapp}?text=${encodeURIComponent(
 				</ul>
 			</div>
 		</div>
+		<p class="mt-5 text-center">
+			<a href="/blog" class="text-xs font-semibold uppercase tracking-[0.18em] text-[#00001C]/70 underline-offset-4 transition-colors hover:text-[#00001C] hover:underline">
+				Voir toutes les actualités →
+			</a>
+		</p>
 
 		<!-- RANGÉE 3 : panneau nuit, trois zones égales centrées -->
 		<div class="mt-14 rounded-[2rem] bg-[#00001C] p-8 md:p-10">
@@ -132,8 +137,9 @@ const whatsappNewsHref = `${SITE.whatsapp}?text=${encodeURIComponent(
 			<p class="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#00001C]/60">
 				© 2026 Confection Univers — Tous droits réservés.
 			</p>
-			<p class="flex flex-wrap justify-center gap-x-5 gap-y-1 text-xs">
+			<p class="text-xs">
 				<a href="/mentions-legales" class="font-medium text-[#00001C]/70 underline-offset-4 transition-colors hover:text-[#00001C] hover:underline">Mentions légales</a>
+				<span aria-hidden="true" class="mx-3 text-[#00001C]/40">•</span>
 				<a href="/confidentialite" class="font-medium text-[#00001C]/70 underline-offset-4 transition-colors hover:text-[#00001C] hover:underline">Politique de confidentialité</a>
 			</p>
 			<button
@@ -276,6 +282,14 @@ const whatsappNewsHref = `${SITE.whatsapp}?text=${encodeURIComponent(
 	/* Défilement continu : deux copies de la liste, translation de -50 %. */
 	.blog-marquee {
 		overflow: hidden;
+		/* Fondu progressif : les cartes entrent et sortent en douceur. */
+		mask-image: linear-gradient(
+			90deg,
+			transparent 0,
+			#000 6%,
+			#000 94%,
+			transparent 100%
+		);
 	}
 
 	.blog-marquee__track {
