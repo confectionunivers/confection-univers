@@ -17,6 +17,9 @@ import Picture from './Picture.astro';
  */
 const slides = [
 	{ name: 'cutout-business-suit', width: 1152, height: 2064, label: 'Uniforme scolaire', alt: 'Élève en uniforme scolaire bordeaux et gris, en pied' },
+	{ name: 'uniforme-scolaire-01', width: 1152, height: 2064, label: 'Uniforme scolaire · jupe', alt: 'Élève portant une chemise blanche et une jupe plissée bleu marine' },
+	{ name: 'uniforme-scolaire-02', width: 1152, height: 2064, label: 'Uniforme scolaire · pantalon', alt: 'Élève portant une chemise blanche, une cravate et un pantalon gris' },
+	{ name: 'uniforme-scolaire-03', width: 1152, height: 2064, label: 'Uniforme scolaire · cardigan', alt: 'Élève portant un cardigan beige et un pantalon assorti' },
 	{ name: 'cutout-graduation-gown', width: 1152, height: 2064, label: 'Toges de graduation', alt: 'Diplômée en toge bleu nuit et or, en pied' },
 	{ name: 'cutout-workwear', width: 1152, height: 2064, label: 'Tenues de travail', alt: 'Professionnel en tenue de travail bleu nuit, en pied' },
 	{ name: 'cutout-medical', width: 1152, height: 2064, label: 'Blouses médicales', alt: 'Professionnelle de santé en blouse blanche, en pied' },
@@ -74,10 +77,10 @@ const social = ([
 						<source srcset={s.webp} type="image/webp" />
 						<img
 							src={s.png}
-							alt=""
+							alt={s.alt}
 							width={s.width}
 							height={s.height}
-							loading={idx < 2 ? 'eager' : 'lazy'}
+							loading="eager"
 							fetchpriority={idx === 0 ? 'high' : 'auto'}
 							decoding="async"
 						/>
